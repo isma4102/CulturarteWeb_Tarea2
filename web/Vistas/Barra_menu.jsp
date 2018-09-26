@@ -16,7 +16,7 @@
         </style>
     </head>
     <body>
-        <nav style="background: #2A76B3" class="navbar navbar-inverse navbar-fixed-top">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar" onclick="toggleSidebarEsconder()">
@@ -31,10 +31,11 @@
                                 out.print("<img style=\"margin-top: 7px\" src=\"Imagenes/nadie.png\" class=\"img-circle\" width=\" 40\" height=\"40\">");
                                 out.print("<a style=\"color: white\" href=\"#\">" + ((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickName() + "</a>");
                                 out.print("<div>");
+                                out.print("<a style=\"color: white\" href=\"#\"> Perfil </a>");
+                                out.print("<a style=\"color: white\">  |  </a>");
                                 out.print("<a style=\"color: white\" href=\"#\"> Cerrar Sesion</a>");
                                 out.print("</div>");
                                 out.print("</ul>");
-
                             } else {
                                 out.print("<img style=\"margin-top: 7px\" src=\"Imagenes/nadie.png\" class=\"img-circle\" width=\" 40\" height=\"40\">");
                                 out.print("<a style=\"color: white\" href=\"#\">Invitado</a>");

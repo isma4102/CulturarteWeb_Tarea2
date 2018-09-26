@@ -9,7 +9,7 @@
         <div id="wrapper" >
 
             <!-- Sidebar -->
-            <div id="sidebar-wrapper" style="background: #2A76B3">
+            <div id="sidebar-wrapper">
                 <ul class="sidebar-nav">
                     <li class="sidebar-brand">
                         <a href="/CulturarteWeb/ServletInicio">
