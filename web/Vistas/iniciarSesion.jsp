@@ -52,7 +52,7 @@
                                 <li><span class="fa fa-check text-success"></span>- Colaborar en propuestas</li>
                                 <li><span class="fa fa-check text-success"></span>- Ver propuestas y usuarios</li>
                             </ul>
-                            <p><a style="background-color: #266E69; color : white" href="/CulturarteWeb/altaUsuarioServlet" class="btn btn-info btn-block">Registrarse</a></p>
+                            <p><a style="background-color: #1867F0; color : white" href="/CulturarteWeb/altaUsuarioServlet" class="btn btn-info btn-block">Registrarse</a></p>
                         </div>
                     </div>
                 </div>
