@@ -17,7 +17,7 @@
                         </a>
                     </li>
                     <div class="sidenav">
-                        <button class="dropdown-btn">Alta Usuario
+                        <button class="dropdown-btn">Usuario
                             <i class="fa fa-caret-down"></i>
                               <img src="Imagenes/desplegar.png">
                         </button>

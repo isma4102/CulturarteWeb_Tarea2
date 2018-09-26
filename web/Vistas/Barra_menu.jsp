@@ -37,9 +37,7 @@
                                 out.print("</div>");
                                 out.print("</ul>");
                             } else {
-                                out.print("<img style=\"margin-top: 7px\" src=\"Imagenes/nadie.png\" class=\"img-circle\" width=\" 40\" height=\"40\">");
-                                out.print("<a style=\"color: white\" href=\"#\">Invitado</a>");
-                                out.print("<div>");
+                                out.print("<div style=\"margin-top: 13%;\">");
                                 out.print("<a style=\"color: white\" href=\"Vistas/iniciarSesion.jsp\"> Iniciar </a>");
                                 out.print("<a style=\"color: white\">  |  </a>");
                                 out.print("<a style=\"color: white\" href=\"/CulturarteWeb/altaUsuarioServlet\"> Registrarse </a>");
@@ -52,7 +50,10 @@
                             <li style="margin-top: 1px; color:white "><a href="#">Quiero ver Propuestas</a></li>
                         </ul>
                         <form action="servletBuscador" method="GET" class="navbar-form navbar-right">
-                            <input name="busqueda" type="text" class="form-control" placeholder="Titulo, descripcion, lugar..." required/><input id="btnBuscar" type="submit" value="Buscar"/>
+                            <div style="position: relative;margin-right: 26%;">
+                            <input name="busqueda" type="text" class="form-control" placeholder="Titulo, descripcion, lugar..." required/>
+                            <input style="margin-left: 101%;margin-top: -54px;" class="btn btn-default"  id="btnBuscar" type="submit" value="Buscar"/>
+                            </div>
                         </form>
 
                 </div>
