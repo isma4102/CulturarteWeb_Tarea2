@@ -1,0 +1,25 @@
+.formulario{
+    width: 500px;
+    max-width: 100%;
+    margin: auto;
+    margin-top: 30px;
+    padding: 20px;
+    box-shadow: 0 0 20px 1px rgba(0,0,0,0.3);
+}
+
+.formulario_tabs{
+    width: 1159px;
+    max-width: 113%;
+    margin: auto;
+    margin-top: auto;
+    margin-top: 30px;
+    padding: 18px;
+    box-shadow: 0 0 20px 1px rgba(0,0,0,0.3);
+    height: 553px;
+}
+.center {
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+}
