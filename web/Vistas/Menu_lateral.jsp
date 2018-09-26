@@ -42,7 +42,7 @@
                               <img src="Imagenes/desplegar.png">
                         </button>
                         <div class="dropdown-container">
-                            <a style="color: white" href="ServletRegistroColaboracion">Registrar Colaboración</a>
+                            <a style="color: white" href="/CulturarteWeb/ServletRegistroColaboracion">Registrar Colaboración</a>
                             <a style="color: white" href="/CulturarteWeb/ServletConsultarPropuesta">Consultar colaboracion</a>
                             <a style="color: white" href="#">Cancelar colaboración</a>
                         </div>
