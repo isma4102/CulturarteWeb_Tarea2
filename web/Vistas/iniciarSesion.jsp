@@ -34,23 +34,25 @@
                                         <span class="help-block"></span>
                                     </div>
                                     <div class="checkbox">
+                                        <!--
                                         <label1>
                                             <input type="checkbox" name="checkRecordar" value="">Recordarme
                                         </label1>
+                                        -->
                                     </div>
-                                    <button class="btn btn-success btn-block" onclick="submit()">Iniciar Sesión</button>
+                                    <button style="background-color: #016699; color : white"  class="btn btn-block" onclick="submit()">Iniciar Sesión</button>
                                 </form>
                             </div>
                         </div>
                         <div class="col-xs-6">
-                            <p class="lead">Registrate <span class="text-success">Gratis</span></p>
+                            <p class="lead">Registrate en <span class="text-success">Culturarte</span></p>
                             <ul class="list-unstyled" style="line-height: 2">
                                 <li><span class="fa fa-check text-success"></span>- Crear Propuestas</li>
                                 <li><span class="fa fa-check text-success"></span>- Seguir usuarios</li>
                                 <li><span class="fa fa-check text-success"></span>- Colaborar en propuestas</li>
                                 <li><span class="fa fa-check text-success"></span>- Ver propuestas y usuarios</li>
                             </ul>
-                            <p><a href="/CulturarteWeb/altaUsuarioServlet" class="btn btn-info btn-block">Registrarse</a></p>
+                            <p><a style="background-color: #266E69; color : white" href="/CulturarteWeb/altaUsuarioServlet" class="btn btn-info btn-block">Registrarse</a></p>
                         </div>
                     </div>
                 </div>
