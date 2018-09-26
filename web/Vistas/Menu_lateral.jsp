@@ -1,3 +1,4 @@
+<%@page import="logica.Clases.DtUsuario"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,19 +14,22 @@
                 <ul class="sidebar-nav">
                     <li class="sidebar-brand">
                         <a href="/CulturarteWeb/ServletInicio">
-                            Culturarte
+                            <img style="width: 78%;" src="Imagenes/logo.png" alt="" class="menu-bar">
                         </a>
                     </li>
                     <div class="sidenav">
                         <button class="dropdown-btn">Usuario
                             <i class="fa fa-caret-down"></i>
-                              <img src="Imagenes/desplegar.png">
+                            <img src="Imagenes/desplegar.png">
                         </button>
                         <div style="color: white" class="dropdown-container">
-                            <a style="color: white" href="/CulturarteWeb/altaUsuarioServlet" >Alta Usuario</a>
-                            <a style="color: white" href="/CulturarteWeb/SeguirUsuario" >Seguir usuario</a>
-                            <a style="color: white" href="/CulturarteWeb/ServletConsultarUsuario">Ver usuarios</a>
-                            <a style="color: white" href="#">Ver seguidores</a>
+                            <% if ((DtUsuario) request.getSession().getAttribute("usuario_logueado") != null) {
+                                    out.print("<a  style = \"color: white\" href = \"/CulturarteWeb/SeguirUsuario\" > Seguir usuario</a >");
+                                } else {
+                                    out.print("<a style=\"color: white\" href=\"/CulturarteWeb/altaUsuarioServlet\" >Alta Usuario</a>");
+                                }
+                            %>
+                            <a style="color: white" href="/CulturarteWeb/ServletConsultarUsuario">Consultar Perfiles</a>
                         </div>
 
                         <button class="dropdown-btn">Propuestas
@@ -33,26 +37,39 @@
                             <img src="Imagenes/desplegar.png">
                         </button>
                         <div class="dropdown-container">
-                            <a style="color: white" href="/CulturarteWeb/ServletAltaPropuesta" >Alta Propuestas</a>
+                            <% if ((DtUsuario) request.getSession().getAttribute("usuario_logueado") != null) {
+                                    if (((DtUsuario) request.getSession().getAttribute("usuario_logueado")).Esproponente() != false) {
+                                        out.print("<a style=\"color: white\" href=\"/CulturarteWeb/ServletAltaPropuesta\" >Alta Propuestas</a>");
+                                        out.print("<a style=\"color: white\" href=\"#\">Extender financiación</a>");
+                                        out.print("<a style=\"color: white\" href=\"#\">Cancelar Propuesta</a>");
+                                    } else {
+                                        out.print("<a style=\"color: white\" href=\"#\">Agregar comentario a propuesta</a>");
+                                    }
+                                    out.print("<a style=\"color: white\" href=\"#\">Marcar propuestas como favoritas</a>");
+                                }%>
                             <a style="color: white" href="#">Consultar propuestas</a>
-                            <a style="color: white" href="#">Modificar propuestas</a>
-                        </div>
+                            <a style="color: white" href="#">Consultar propuestas por categoria</a>
+
+
+                        </div>                          
                         <button class="dropdown-btn">Colaboraciones
                             <i class="fa fa-caret-down"></i>
-                              <img src="Imagenes/desplegar.png">
+                            <img src="Imagenes/desplegar.png">
                         </button>
                         <div class="dropdown-container">
-                            <a style="color: white" href="/CulturarteWeb/ServletRegistroColaboracion">Registrar Colaboración</a>
-                            <a style="color: white" href="/CulturarteWeb/ServletConsultarPropuesta">Consultar colaboracion</a>
-                            <a style="color: white" href="#">Cancelar colaboración</a>
+                            <% if ((DtUsuario) request.getSession().getAttribute("usuario_logueado") != null) {
+                                    if (((DtUsuario) request.getSession().getAttribute("usuario_logueado")).Esproponente() == false) {
+                                        out.print("<a style=\"color: white\" href=\"/CulturarteWeb/ServletRegistroColaboracion\">Registrar Colaboración a propuesta</a>");
+                                    }
+                                }
+                            %>
                         </div>
                         <button class="dropdown-btn">Otros
                             <i class="fa fa-caret-down"></i>
-                              <img src="Imagenes/desplegar.png">
+                            <img src="Imagenes/desplegar.png">
                         </button>
                         <div class="dropdown-container">
                             <a style="color: white;" href="#">Cargar datos de prueba</a>
-                            <a style="color: white" href="#">Opciones del administrador</a>
                         </div>
                     </div>
                 </ul>

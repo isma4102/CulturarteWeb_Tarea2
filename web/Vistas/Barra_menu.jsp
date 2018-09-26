@@ -29,32 +29,32 @@
                     <ul class="nav navbar-nav navbar-right">
                         <% if ((DtUsuario) request.getSession().getAttribute("usuario_logueado") != null) {
                                 out.print("<img style=\"margin-top: 7px\" src=\"Imagenes/nadie.png\" class=\"img-circle\" width=\" 40\" height=\"40\">");
-                                out.print("<a style=\"color: white\" href=\"#\">" + ((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickName() + "</a>");
+                                out.print("<a style=\"color: white;margin-left: 8%;\" href=\"#\">" + ((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickName() + "</a>");
                                 out.print("<div>");
                                 out.print("<a style=\"color: white\" href=\"#\"> Perfil </a>");
                                 out.print("<a style=\"color: white\">  |  </a>");
                                 out.print("<a style=\"color: white\" href=\"#\"> Cerrar Sesion</a>");
                                 out.print("</div>");
-                                out.print("</ul>");
                             } else {
                                 out.print("<div style=\"margin-top: 13%;\">");
                                 out.print("<a style=\"color: white\" href=\"Vistas/iniciarSesion.jsp\"> Iniciar </a>");
                                 out.print("<a style=\"color: white\">  |  </a>");
                                 out.print("<a style=\"color: white\" href=\"/CulturarteWeb/altaUsuarioServlet\"> Registrarse </a>");
                                 out.print("</div>");
-                                out.print("</ul>");
+
                             }
                         %>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li style="margin-top: 1px; color:white "><a href="#">Tengo una propuesta</a></li>
-                            <li style="margin-top: 1px; color:white "><a href="#">Quiero ver Propuestas</a></li>
-                        </ul>
-                        <form action="servletBuscador" method="GET" class="navbar-form navbar-right">
-                            <div style="position: relative;margin-right: 26%;">
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li style="margin-top: 1px; color:white "><a href="#">Tengo una propuesta</a></li>
+                        <li style="margin-top: 1px; color:white "><a href="#">Quiero ver Propuestas</a></li>
+                    </ul>
+                    <form action="servletBuscador" method="GET" class="navbar-form navbar-right">
+                        <div style="position: relative;margin-right: 26%;">
                             <input name="busqueda" type="text" class="form-control" placeholder="Titulo, descripcion, lugar..." required/>
                             <input style="margin-left: 101%;margin-top: -54px;" class="btn btn-default"  id="btnBuscar" type="submit" value="Buscar"/>
-                            </div>
-                        </form>
+                        </div>
+                    </form>
 
                 </div>
             </div>
