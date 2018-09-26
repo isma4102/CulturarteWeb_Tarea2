@@ -14,7 +14,7 @@
     </head>
     <body>
         <div id="login-overlay" class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content" style="    margin-top: 18%;">
                 <div class="modal-header">
                     <h4 class="modal-title" id="myModalLabel">Ingrese sus datos</h4>
                 </div>
