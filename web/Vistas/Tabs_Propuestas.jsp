@@ -11,7 +11,6 @@
     <body> 
         </br></br></br></br>
         <div class="container formulario_tabs">
-            <h3>Propuestas</h3>
             <ul class="nav nav-tabs" role="tablist">
                 <li class="active"><a href="#hometab" role="tab" data-toggle="tab">Propuestas Creadas</a></li>
                 <li><a href="#javatab" role="tab" data-toggle="tab">Propuestas en Financiación</a></li>
