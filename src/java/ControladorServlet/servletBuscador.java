@@ -7,10 +7,10 @@ package ControladorServlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
 import javax.servlet.ServletException;
@@ -18,7 +18,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import logica.Clases.DtColaboraciones;
 import logica.Fabrica;
 import logica.Interfaces.IPropCat;
 import logica.Clases.Propuesta;
@@ -56,8 +55,9 @@ public class servletBuscador extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String busqueda = request.getParameter("busqueda").toLowerCase();
         iControlador = Fabrica.getInstance().getControladorPropCat();
+        String busqueda = request.getParameter("busqueda").toLowerCase();
+        String filtro = request.getParameter("filtro");
         List<DtinfoPropuesta> resultado = new ArrayList<>();
         Map<String, Propuesta> propuestas = iControlador.getPropuestas();
         Set set = propuestas.entrySet();
@@ -68,6 +68,20 @@ public class servletBuscador extends HttpServlet {
             if (prop.getTituloP().toLowerCase().contains(busqueda) || prop.getDescripcionP().toLowerCase().contains(busqueda) || prop.getLugar().toLowerCase().contains(busqueda)) {
                 DtinfoPropuesta dtP = new DtinfoPropuesta(prop);
                 resultado.add(dtP);
+            }
+        }
+
+        if (filtro != null) {
+            switch (filtro) {
+                case "alfa":
+                    Collections.sort(resultado, new Comparator<DtinfoPropuesta>() {
+                        public int compare(DtinfoPropuesta o1, DtinfoPropuesta o2) {
+                            return o1.getTitulo().compareTo(o2.getTitulo());
+                        }
+                    });
+                    request.setAttribute("resultado", resultado);
+                    request.getRequestDispatcher("/Vistas/busqueda.jsp").forward(request, response);
+                    break;
             }
         }
         request.setAttribute("resultado", resultado);
@@ -83,6 +97,7 @@ public class servletBuscador extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);

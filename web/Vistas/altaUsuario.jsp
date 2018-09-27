@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">`
         <script src="/script/altaUserJS.js"></script>
-        
+
 
     </script>
     <%
@@ -39,7 +39,12 @@
 
 </head>
 <body>
-    <div style="padding-left: 444px" class="form">
+    <jsp:include page="/Vistas/Barra_menu.jsp" />
+    <br>
+    <br>
+    <br>
+    <br>
+    <div style="width: 800px;padding-left: 444px" class="form">
         <h1>Registrarte</h1>
         <form action="altaUsuarioServlet" method="post">
             <div>
@@ -77,7 +82,7 @@
             <br>
             <div>
                 <label>Tipo de persona</label><br>
-                <input onclick="document.getElementById('otros').style.display = 'none'" name="tipoP"  type="radio"  value="colaborador">Soy un colaborador &nbsp;&nbsp;&nbsp;
+                <input onclick="document.getElementById('otros').style.display = 'none'" name="tipoP"  type="radio"  value="colaborador" checked>Soy un colaborador &nbsp;&nbsp;&nbsp;
                 <input onclick="document.getElementById('otros').style.display = 'block'" name="tipoP"  type="radio"  value="proponente">Soy un proponente<br>
             </div>
             <br>
@@ -95,7 +100,7 @@
                 </p>
             </div>
             <div>
-                <input type="submit" value="Crear cuenta"/>
+                <input class="btn btn-primary btn-block" type="submit" value="Crear cuenta"/>
             </div>
         </form>
     </div>     
