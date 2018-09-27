@@ -33,7 +33,7 @@
                                 out.print("<div>");
                                 out.print("<a style=\"color: white\" href=\"#\"> Perfil </a>");
                                 out.print("<a style=\"color: white\">  |  </a>");
-                                out.print("<a style=\"color: white\" href=\"CerrarSesion\"> Cerrar Sesion</a>");
+                                out.print("<a style=\"color: white\" href=\"/CulturarteWeb/CerrarSesion\"> Cerrar Sesion</a>");
                                 out.print("</div>");
                             } else {
                                 out.print("<div style=\"margin-top: 13%;\">");

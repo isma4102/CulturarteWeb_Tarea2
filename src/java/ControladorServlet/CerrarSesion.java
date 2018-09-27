@@ -33,8 +33,9 @@ public class CerrarSesion extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getSession().removeAttribute("usuario_logueado");
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/index.html");
+             request.getSession().setAttribute("estado_sesion", EstadoSesion.NO_LOGIN);
+        request.getSession().setAttribute("usr_sesion", null);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/CulturarteWeb/ServletInicio");
         dispatcher.forward(request, response);
     }
 
