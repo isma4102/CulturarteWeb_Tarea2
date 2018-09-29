@@ -5,10 +5,8 @@ package ControladorServlet;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import clases.EstadoSesion;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,49 +15,48 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import logica.Clases.DtUsuario;
-import logica.Clases.Usuario;
 import logica.Fabrica;
 import logica.Interfaces.IControladorUsuario;
+import ControladorServlet.codificador;
 
 /**
  *
  * @author PabloDesk
  */
-
 @WebServlet("/iniciar-sesion")
 public class Login extends HttpServlet {
+
     private static final long serialVersionUID = 1L;
-    Fabrica fabrica=Fabrica.getInstance();
-    IControladorUsuario ICU= fabrica.getIControladorUsuario();
+    Fabrica fabrica = Fabrica.getInstance();
+    IControladorUsuario ICU = fabrica.getIControladorUsuario();
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
      * @param request servlet request
      * @param response servlet response
-     * @return 
+     * @return
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    public static DtUsuario getUsuarioSesion(HttpServletRequest request)
-	{
-            Fabrica fabrica=Fabrica.getInstance();
-                        IControladorUsuario ICU= fabrica.getIControladorUsuario();
-		return ICU.ObtenerDTUsuario(
-				(String) request.getSession().getAttribute("usuario_logueado")
-			);
-       
-	}
-    
+    public static DtUsuario getUsuarioSesion(HttpServletRequest request) {
+        Fabrica fabrica = Fabrica.getInstance();
+        IControladorUsuario ICU = fabrica.getIControladorUsuario();
+        return ICU.ObtenerDTUsuario(
+                (String) request.getSession().getAttribute("usuario_logueado")
+        );
+
+    }
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         RequestDispatcher dispatcher = request.getRequestDispatcher("/Vistas/iniciarSesion.jsp");
         dispatcher.forward(request, response);
-        
+
     }
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -91,24 +88,23 @@ public class Login extends HttpServlet {
         String login = request.getParameter("login");
         String password = request.getParameter("pass");
         EstadoSesion nuevoEstado;
-        
+        codificador a = new codificador();
+
         // chequea contraseña
 //		try {
-                      
-
-                        
-			DtUsuario usr = ICU.ObtenerDTUsuario(login);
-			if(usr.getPassword().compareTo(password)!=0)
-				nuevoEstado = EstadoSesion.LOGIN_INCORRECTO;
-			else {
-				nuevoEstado = EstadoSesion.LOGIN_CORRECTO;
+        DtUsuario usr = ICU.ObtenerDTUsuario(login);
+        String hash = a.sha1(password);
+        if (usr.getPassword().compareTo(hash) != 0) {
+            nuevoEstado = EstadoSesion.LOGIN_INCORRECTO;
+        } else {
+            nuevoEstado = EstadoSesion.LOGIN_CORRECTO;
 //				 setea el usuario logueado
-				request.getSession().setAttribute("usuario_logueado", usr);
-			}
+            request.getSession().setAttribute("usuario_logueado", usr);
+        }
 //		} catch(UsuarioNoEncontrado ex){
 //			nuevoEstado = EstadoSesion.LOGIN_INCORRECTO;
 //		}
-		
+
         objSesion.setAttribute("estado_sesion", nuevoEstado);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/index.html");
         dispatcher.forward(request, response);

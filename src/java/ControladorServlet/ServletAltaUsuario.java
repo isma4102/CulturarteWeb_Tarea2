@@ -6,16 +6,11 @@ package ControladorServlet;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,6 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import logica.Fabrica;
 import logica.Interfaces.IControladorUsuario;
+import ControladorServlet.codificador;
+import logica.Clases.DtUsuario;
 
 @WebServlet(name = "ServletAltaUsuario", urlPatterns = {"/altaUsuarioServlet"})
 
@@ -69,7 +66,7 @@ public class ServletAltaUsuario extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        codificador a = new codificador();
         iUsuario = Fabrica.getInstance().getIControladorUsuario();
         Boolean ok = false;
         String nick = request.getParameter("nick");
@@ -92,19 +89,25 @@ public class ServletAltaUsuario extends HttpServlet {
             return;
         }
 
+        String hash = a.sha1(pass);
+
         if (tipoP.equals("proponente")) {
 
-            ok = iUsuario.AgregarUsuarioProponente(nick, nombre, apellido, correo, cal, imagen, direccion, biografia, sitio, pass);
+            ok = iUsuario.AgregarUsuarioProponente(nick, nombre, apellido, correo, cal, imagen, direccion, biografia, sitio, hash);
             if (ok) {
                 request.setAttribute("mensaje", "Se registro exitosamente");
+                DtUsuario user = iUsuario.ObtenerDTUsuario(nombre);
+                request.getSession().setAttribute("usuario_logueado", user);
             } else {
                 request.setAttribute("mensaje", "Error al registrar este usuario");
             }
             request.getRequestDispatcher("/Vistas/altaUsuario.jsp").forward(request, response);
         } else {
-            ok = iUsuario.AgregarUsuarioColaborador(nick, nombre, apellido, correo, cal, imagen, pass);
+            ok = iUsuario.AgregarUsuarioColaborador(nick, nombre, apellido, correo, cal, imagen, hash);
             if (ok) {
                 request.setAttribute("mensaje", "Se registro exitosamente");
+                DtUsuario user = iUsuario.ObtenerDTUsuario(nombre);
+                request.getSession().setAttribute("usuario_logueado", user);
             } else {
                 request.setAttribute("mensaje", "Error al dar registrar este usuario");
             }
