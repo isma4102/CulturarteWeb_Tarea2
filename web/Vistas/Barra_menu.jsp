@@ -31,7 +31,7 @@
                                 out.print("<img style=\"margin-top: 7px\" src=\"Imagenes/nadie.png\" class=\"img-circle\" width=\" 40\" height=\"40\">");
                                 out.print("<a style=\"color: white;margin-left: 8%;\" href=\"#\">" + ((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickName() + "</a>");
                                 out.print("<div>");
-                                out.print("<a style=\"color: white\" href=\"#\"> Perfil </a>");
+                                out.print("<a style=\"color: white\" href=\"\"> Perfil </a>");
                                 out.print("<a style=\"color: white\">  |  </a>");
                                 out.print("<a style=\"color: white\" href=\"/CulturarteWeb/CerrarSesion\"> Cerrar Sesion</a>");
                                 out.print("</div>");

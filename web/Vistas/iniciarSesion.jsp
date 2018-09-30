@@ -34,13 +34,8 @@
                                         <span class="help-block"></span>
                                     </div>
                                     <div class="checkbox">
-                                        <!--
-                                        <label1>
-                                            <input type="checkbox" name="checkRecordar" value="">Recordarme
-                                        </label1>
-                                        -->
                                     </div>
-                                    <button style="background-color: #016699; color : white"  class="btn btn-block" onclick="submit()">Iniciar Sesión</button>
+                                    <button style="background-color: #287AE6; color : white"  class="btn btn-block" onclick="submit()">Iniciar Sesión</button>
                                 </form>
                             </div>
                         </div>
@@ -52,7 +47,7 @@
                                 <li><span class="fa fa-check text-success"></span>- Colaborar en propuestas</li>
                                 <li><span class="fa fa-check text-success"></span>- Ver propuestas y usuarios</li>
                             </ul>
-                            <p><a style="background-color: #1867F0; color : white" href="/CulturarteWeb/altaUsuarioServlet" class="btn btn-info btn-block">Registrarse</a></p>
+                            <p><a style="background-color: #287AE6; color : white" href="/CulturarteWeb/altaUsuarioServlet" class="btn btn-info btn-block">Registrarse</a></p>
                         </div>
                     </div>
                 </div>

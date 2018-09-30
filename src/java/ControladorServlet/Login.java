@@ -17,7 +17,6 @@ import javax.servlet.http.HttpSession;
 import logica.Clases.DtUsuario;
 import logica.Fabrica;
 import logica.Interfaces.IControladorUsuario;
-import ControladorServlet.codificador;
 
 /**
  *
@@ -91,19 +90,23 @@ public class Login extends HttpServlet {
         codificador a = new codificador();
 
         // chequea contraseña
-//		try {
-        DtUsuario usr = ICU.ObtenerDTUsuario(login);
-        String hash = a.sha1(password);
-        if (usr.getPassword().compareTo(hash) != 0) {
-            nuevoEstado = EstadoSesion.LOGIN_INCORRECTO;
-        } else {
-            nuevoEstado = EstadoSesion.LOGIN_CORRECTO;
+        try {
+            DtUsuario usr;
+            usr = ICU.ObtenerDTUsuario(login);
+            if (usr == null){
+                usr = ICU.ObtenerDTUsuario_Correo(login);
+            }
+            String hash = a.sha1(password);
+            if (usr.getPassword().compareTo(hash) != 0) {
+                nuevoEstado = EstadoSesion.LOGIN_INCORRECTO;
+            } else {
+                nuevoEstado = EstadoSesion.LOGIN_CORRECTO;
 //				 setea el usuario logueado
-            request.getSession().setAttribute("usuario_logueado", usr);
+                request.getSession().setAttribute("usuario_logueado", usr);
+            }
+        } catch (Exception ex) {
+            nuevoEstado = EstadoSesion.LOGIN_INCORRECTO;
         }
-//		} catch(UsuarioNoEncontrado ex){
-//			nuevoEstado = EstadoSesion.LOGIN_INCORRECTO;
-//		}
 
         objSesion.setAttribute("estado_sesion", nuevoEstado);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/index.html");
