@@ -6,7 +6,7 @@
 package ControladorServlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import logica.Clases.DtNickTitProp;
 import logica.Clases.DtUsuario;
-import logica.Clases.DtinfoColaborador;
 import logica.Clases.DtinfoPropuesta;
 import logica.Fabrica;
 import logica.Interfaces.IControladorUsuario;
@@ -115,6 +114,21 @@ public class ServletRegistroColaboracion extends HttpServlet {
                         request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
                     }
                 }
+            }
+        } else if (request.getParameter("Buscar") != null) {
+            List<DtNickTitProp> lista = IPC.listarPropuestasR();
+              ArrayList<DtNickTitProp> retorno = new ArrayList<>();
+            for (int i = 0; i < lista.size(); i++) {
+                if (lista.get(i).getTituloP().contains(request.getParameter("Buscar"))) {
+                    retorno.add(new DtNickTitProp(lista.get(i).getTituloP(), lista.get(i).getProponente()));
+                }
+            }
+            if (!retorno.isEmpty()) {
+                request.setAttribute("lista_propuestas", retorno);
+                request.getRequestDispatcher("/Vistas/RegColaboracion.jsp").forward(request, response);
+            } else {
+                request.setAttribute("mensaje", "La propuesta no esta en el sistema");
+                request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
             }
         }
     }
