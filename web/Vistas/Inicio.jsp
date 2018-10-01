@@ -31,8 +31,7 @@
             }
         %>
 
-
-
+<!-- Se muestra un mensaje cuando se cargaron los datos de prueba -->
         <div style="display: none;" id="datos_de_prueba_carga" class="alert alert-success alert-dismissable">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             <strong>¡Exito!</strong> Se cargaron los datos de prueba
@@ -46,5 +45,8 @@
             <%      
               request.getSession().removeAttribute("datos_de_prueba");}%>
         </script>
+        
+        
+        
     </body>
 </html>

@@ -2,11 +2,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="css/simple-sidebar.css" rel="stylesheet">
         <link href="css/Menu_lateral.css" rel="stylesheet">
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript">
-            function getConfirmation(direccion) {
+            function getConfirmation() {
                 var retVal = confirm("¿Desea continuar? todos los datos se perderan");
                 if (retVal == true) {
                     var var2 = document.getElementById('contenedor_carga');
@@ -117,6 +116,8 @@
         <div id="contenedor_carga" style="display: none;">
             <div id="carga">
             </div>
+        <H3 style="color:#287AE6 ;position: absolute; top: 601%;left: 682px;right: 0;bottom: 0;margin: auto;"> Espere Por favor... </H3>   
         </div>
+        
     </body>
 </html>
