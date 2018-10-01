@@ -11,7 +11,7 @@
     <head>        
         <link href="css/Indicador_Carga.css" rel="stylesheet">
         <title>Culturarte</title>
-       
+
     </head>
     <body>
         <% if (request.getSession().getAttribute("estado_sesion") == EstadoSesion.LOGIN_INCORRECTO) {
@@ -34,7 +34,18 @@
 
 
 
-
-
+        <div style="display: none;" id="datos_de_prueba_carga" class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>¡Exito!</strong> Se cargaron los datos de prueba
+        </div>
+        <script>
+            <% if (request.getSession().getAttribute("datos_de_prueba") != null) {
+            %>
+            var var2 = document.getElementById("datos_de_prueba_carga");
+            var2.style = "margin-top: 43%;margin-right: -16%;margin-left: 73%;";
+            var2.style.display = "block";
+            <%      
+              request.getSession().removeAttribute("datos_de_prueba");}%>
+        </script>
     </body>
 </html>

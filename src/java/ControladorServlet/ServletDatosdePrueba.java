@@ -37,6 +37,7 @@ public class ServletDatosdePrueba extends HttpServlet {
         IPropCat IPC = fabrica.getControladorPropCat();
         boolean ok = fabrica.limpiarBaseDeDatos();
         if (ok) {
+            request.getSession().setAttribute("datos_de_prueba", "Exito");
             fabrica.LimpiarLogica();
             fabrica.cargarDatosdePrueba();
             request.getRequestDispatcher("/ServletInicio").forward(request, response);

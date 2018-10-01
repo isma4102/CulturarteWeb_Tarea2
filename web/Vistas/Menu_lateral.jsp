@@ -10,7 +10,6 @@
                 var retVal = confirm("¿Desea continuar? todos los datos se perderan");
                 if (retVal == true) {
                     var var2 = document.getElementById('contenedor_carga');
-            <% request.getSession().setAttribute("datos_de_prueba", "Exito"); %>
                     var2.style.display = "block";
                     location.href = "/CulturarteWeb/ServletDatosdePrueba";
                 } else {
