@@ -9,8 +9,9 @@
 <!DOCTYPE html>
 <html>
     <head>        
+        <link href="css/Indicador_Carga.css" rel="stylesheet">
         <title>Culturarte</title>
-
+       
     </head>
     <body>
         <% if (request.getSession().getAttribute("estado_sesion") == EstadoSesion.LOGIN_INCORRECTO) {
@@ -21,7 +22,6 @@
 
         <jsp:include page="/Vistas/Barra_menu.jsp" />
         <jsp:include page="/Vistas/Tabs_Propuestas.jsp" />
-
         <%
             if (request.getParameter("mensaje") != null) {
                 out.print("</div>");
@@ -31,5 +31,10 @@
                 out.print("</div>");
             }
         %>
+
+
+
+
+
     </body>
 </html>

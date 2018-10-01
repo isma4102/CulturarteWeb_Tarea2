@@ -5,6 +5,20 @@
         <link href="css/simple-sidebar.css" rel="stylesheet">
         <link href="css/Menu_lateral.css" rel="stylesheet">
         <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript">
+            function getConfirmation(direccion) {
+                var retVal = confirm("¿Desea continuar? todos los datos se perderan");
+                if (retVal == true) {
+                    var var2 = document.getElementById('contenedor_carga');
+            <% request.getSession().setAttribute("datos_de_prueba", "Exito"); %>
+                    var2.style.display = "block";
+                    location.href = "/CulturarteWeb/ServletDatosdePrueba";
+                } else {
+                    alert("Operación Cancelada");
+                }
+            }
+
+        </script>
     </head>
     <body> 
         <div id="wrapper" >
@@ -69,7 +83,7 @@
                             <img src="Imagenes/desplegar.png">
                         </button>
                         <div class="dropdown-container">
-                            <a style="color: white;" href="#">Cargar datos de prueba</a>
+                            <a style="color: white;"  onclick="getConfirmation('/CulturarteWeb/SeguirUsuario');" >Cargar datos de prueba</a>
                         </div>
                     </div>
                 </ul>
@@ -101,6 +115,10 @@
                 });
             }
         </script>
+        <div id="contenedor_carga" style="display: none;">
+            <div id="carga">
 
+            </div>
+        </div>
     </body>
 </html>

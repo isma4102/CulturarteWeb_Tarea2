@@ -12,6 +12,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import logica.Fabrica;
+import logica.Interfaces.IPropCat;
 
 /**
  *
@@ -31,18 +33,13 @@ public class ServletDatosdePrueba extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ServletDatosdePrueba</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ServletDatosdePrueba at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        Fabrica fabrica = Fabrica.getInstance();
+        IPropCat IPC = fabrica.getControladorPropCat();
+        boolean ok = fabrica.limpiarBaseDeDatos();
+        if (ok) {
+            fabrica.LimpiarLogica();
+            fabrica.cargarDatosdePrueba();
+            request.getRequestDispatcher("/ServletInicio").forward(request, response);
         }
     }
 
