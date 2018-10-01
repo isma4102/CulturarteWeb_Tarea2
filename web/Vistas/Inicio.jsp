@@ -17,7 +17,6 @@
         <% if (request.getSession().getAttribute("estado_sesion") == EstadoSesion.LOGIN_INCORRECTO) {
                 request.setAttribute("mensaje", "No existe el usuario en el sistema");
                 request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
-
             }%>
 
         <jsp:include page="/Vistas/Barra_menu.jsp" />

@@ -4,19 +4,25 @@
     Author     : PabloDesk
 --%>
 
+<%@page import="clases.EstadoSesion"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-            <link href="/CulturarteWeb/css/bootstrap.css" rel="stylesheet" id="bootstrap-css">
+        <link href="/CulturarteWeb/css/bootstrap.css" rel="stylesheet" id="bootstrap-css">
         <title>Iniciar Sesion:: CulturarteWeb</title>
+
     </head>
     <body>
         <div id="login-overlay" class="modal-dialog">
             <div class="modal-content" style="    margin-top: 18%;">
                 <div class="modal-header">
                     <h4 class="modal-title" id="myModalLabel">Ingrese sus datos</h4>
+                </div>
+                <div id="Error_login" style="display: none;" class="alert alert-danger" role="alert">
+                    <span class="sr-only">Error:</span>
+                    Usuario Incorrecto, reintente o Registrese si aún no tiene una cuenta.
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -53,7 +59,12 @@
                 </div>
             </div>
         </div>	
-
+        <script type="text/javascript">
+            <% if (request.getSession().getAttribute("estado_sesion") == EstadoSesion.LOGIN_INCORRECTO) { %>
+            var var2 = document.getElementById('Error_login');
+            var2.style.display = "block";
+            <% }%>
+        </script>
 
     </body>
 </html>
