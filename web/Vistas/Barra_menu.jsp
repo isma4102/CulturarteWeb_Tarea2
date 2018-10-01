@@ -38,7 +38,7 @@
                                 out.print("</div>");
                             } else {
                                 out.print("<div style=\"margin-top: 13%;\">");
-                                out.print("<a style=\"color: white\" href=\"Vistas/iniciarSesion.jsp\"> Iniciar </a>");
+                                out.print("<a style=\"color: white\" href=\"/CulturarteWeb/iniciar-sesion\"> Iniciar </a>");
                                 out.print("<a style=\"color: white\">  |  </a>");
                                 out.print("<a style=\"color: white\" href=\"/CulturarteWeb/altaUsuarioServlet\"> Registrarse </a>");
                                 out.print("</div>");

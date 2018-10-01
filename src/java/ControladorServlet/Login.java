@@ -42,9 +42,8 @@ public class Login extends HttpServlet {
     public static DtUsuario getUsuarioSesion(HttpServletRequest request) {
         Fabrica fabrica = Fabrica.getInstance();
         IControladorUsuario ICU = fabrica.getIControladorUsuario();
-        return ICU.ObtenerDTUsuario(
-                (String) request.getSession().getAttribute("usuario_logueado")
-        );
+        return 
+                (DtUsuario) request.getSession().getAttribute("usuario_logueado");
 
     }
 
@@ -83,31 +82,47 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession objSesion = request.getSession();
+          HttpSession objSesion = request.getSession();
         String login = request.getParameter("login");
         String password = request.getParameter("pass");
-        EstadoSesion nuevoEstado;
+        EstadoSesion nuevoEstado = null;
         codificador a = new codificador();
 
-        // chequea contraseña
-        try {
-            DtUsuario usr;
-            usr = ICU.ObtenerDTUsuario(login);
-            if (usr == null){
-                usr = ICU.ObtenerDTUsuario_Correo(login);
-            }
-            String hash = a.sha1(password);
-            if (usr.getPassword().compareTo(hash) != 0) {
-                nuevoEstado = EstadoSesion.LOGIN_INCORRECTO;
-            } else {
-                nuevoEstado = EstadoSesion.LOGIN_CORRECTO;
-//				 setea el usuario logueado
-                request.getSession().setAttribute("usuario_logueado", usr);
-            }
-        } catch (Exception ex) {
+ 
+        DtUsuario usrNick = ICU.ObtenerDTUsuario(login);        
+        DtUsuario usrCorreo = ICU.ObtenerDTUsuario_Correo(login);
+        
+        if(usrNick!=null){
+            
+            
+        String hash = a.sha1(password);
+        if (usrNick.getPassword().compareTo(hash) != 0) {
             nuevoEstado = EstadoSesion.LOGIN_INCORRECTO;
+            request.getRequestDispatcher("Vistas/passIncorrecto.jsp").forward(request, response);
+        } else {
+            nuevoEstado = EstadoSesion.LOGIN_CORRECTO;
+            request.getSession().setAttribute("usuario_logueado", usrNick);// setea el usuario logueado
         }
-
+        
+        }else if(usrCorreo!=null){            
+                
+        String hash = a.sha1(password);
+        if (usrCorreo.getPassword().compareTo(hash) != 0) {
+            nuevoEstado = EstadoSesion.LOGIN_INCORRECTO;
+            request.getRequestDispatcher("Vistas/passIncorrecto.jsp").forward(request, response);
+        } else {
+            nuevoEstado = EstadoSesion.LOGIN_CORRECTO;
+            request.getSession().setAttribute("usuario_logueado", usrCorreo);// setea el usuario logueado
+        }
+       
+        }
+        
+        else{
+             request.getRequestDispatcher("Vistas/loginIncorrecto.jsp").forward(request, response);
+            
+        }
+    
+        
         objSesion.setAttribute("estado_sesion", nuevoEstado);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/index.html");
         dispatcher.forward(request, response);

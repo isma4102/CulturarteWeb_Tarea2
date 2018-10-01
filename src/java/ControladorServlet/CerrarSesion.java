@@ -33,7 +33,9 @@ public class CerrarSesion extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getSession().removeAttribute("usuario_logueado");
+         
+        request.getSession().setAttribute("estado_sesion", EstadoSesion.NO_LOGIN);
+        request.getSession().setAttribute("usuario_logueado", null);
         RequestDispatcher dispatcher = request.getRequestDispatcher("ServletInicio");
         dispatcher.forward(request, response);
     }
