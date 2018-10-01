@@ -46,7 +46,7 @@
     <br>
     <div style="width: 800px;padding-left: 444px" class="form">
         <h1>Registrarte</h1>
-        <form action="altaUsuarioServlet" method="post">
+        <form action="altaUsuarioServlet" method="post" enctype="multipart/form-data">
             <div>
                 <label for="name">Nombre de usuario:</label>
                 <input name="nick" class="form-control"placeholder="Escribe tu nombre de usuario" type="text" required/>
@@ -86,6 +86,11 @@
                 <input onclick="document.getElementById('otros').style.display = 'block'" name="tipoP"  type="radio"  value="proponente">Soy un proponente<br>
             </div>
             <br>
+            <div class="btn btn-default image-preview-input">
+                <span>Selecciona imagen para tu perfil</span>
+                <input type="file" accept="image/png, image/jpeg" id="imagen" name="imagen"/> <!-- rename it -->
+            </div>
+            <br>
             <div id="otros" style="display: none">
                 <div>
                     <label for="direccion">Direccion</label>
@@ -93,7 +98,7 @@
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <label for="sitio">Sitio web</label>
                     <input class="form-control"  name="sitio" type="text" />
-                </div><br><br><br>
+                </div><br>
 
                 <p>Biografia:
                     <textarea class="form-control" name="biografia"></textarea>

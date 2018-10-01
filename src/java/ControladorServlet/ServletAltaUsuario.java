@@ -18,11 +18,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import logica.Fabrica;
 import logica.Interfaces.IControladorUsuario;
-import ControladorServlet.codificador;
+import logica.Clases.codificador;
+import java.io.InputStream;
+import javax.servlet.http.Part;
 import logica.Clases.DtUsuario;
+import logica.Clases.DataImagen;
+import java.io.ByteArrayOutputStream;
+import javax.servlet.annotation.MultipartConfig;
 
+@MultipartConfig
 @WebServlet(name = "ServletAltaUsuario", urlPatterns = {"/altaUsuarioServlet"})
-
 public class ServletAltaUsuario extends HttpServlet {
 
     IControladorUsuario iUsuario;
@@ -80,19 +85,34 @@ public class ServletAltaUsuario extends HttpServlet {
         String sitio = request.getParameter("sitio");
         String biografia = request.getParameter("biografia");
         String tipoP = request.getParameter("tipoP");
-        String imagen = "";
         Date nacimiento = ParseFecha(fecha);
         Calendar cal = dateToCalendar(nacimiento);
+
         if (!pass.equals(pass2)) {
             request.setAttribute("malPass", "Sus contraseñas no coinciden");
             request.getRequestDispatcher("/Vistas/altaUsuario.jsp").forward(request, response);
             return;
         }
-
         String hash = a.sha1(pass);
+        DataImagen imagen = null;
+        final Part partImagen = request.getPart("imagen");
+
+        if (partImagen.getSize() != 0) {
+            InputStream data = partImagen.getInputStream();
+            final String fileName = Utils.getFileName(partImagen);
+            String nombreArchivo = nick;
+            String extensionArchivo = Utils.extensionArchivo(fileName);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            int reads = data.read();
+            while (reads != -1) {
+                baos.write(reads);
+                reads = data.read();
+            } // while
+            byte[] bytes = baos.toByteArray();
+            imagen = new DataImagen(bytes, nombreArchivo, extensionArchivo);
+        }
 
         if (tipoP.equals("proponente")) {
-
             ok = iUsuario.AgregarUsuarioProponente(nick, nombre, apellido, correo, cal, imagen, direccion, biografia, sitio, hash);
             if (ok) {
                 request.setAttribute("mensaje", "Se registro exitosamente");
@@ -113,7 +133,6 @@ public class ServletAltaUsuario extends HttpServlet {
             }
             request.getRequestDispatcher("/Vistas/altaUsuario.jsp").forward(request, response);
         }
-
     }
 
     /**
