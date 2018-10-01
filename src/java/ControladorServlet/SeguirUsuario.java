@@ -42,10 +42,10 @@ private static final long serialVersionUID = 1L;
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         ICU.CargarUsuarios(); 
-       List<DtUsuario> lista = ICU.ListarUsuarios();
-       request.setAttribute("usuarios", lista);
+        List<DtUsuario> lista = ICU.ListarUsuarios();
+        request.setAttribute("usuarios", lista);
         
-       List<DtUsuario> lista2 = ICU.ListarProponentes2();
+        List<DtUsuario> lista2 = ICU.ListarProponentes2();
         request.setAttribute("usuarios", lista);
         
         request.getRequestDispatcher("Vistas/SeguirUsuario.jsp").forward(request, response);
@@ -78,8 +78,8 @@ private static final long serialVersionUID = 1L;
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         DtUsuario usuario = Login.getUsuarioSesion(request);   
-
        
+        
        if (usuario != null) {
 			String seguidor = usuario.getNickName();
 			String seguido = request.getParameter("seguido");
@@ -87,17 +87,29 @@ private static final long serialVersionUID = 1L;
                         
 			if (accion.equals("seguir")) {
                             try {
-                                ICU.seguirUsuario(seguidor, seguido);
+                               ICU.seguirUsuario(seguidor, seguido); 
+                               request.setAttribute("solicitudseguir", "Usuario Seguido con Exito!!!");
                             } catch (Exception ex) {
                                 Logger.getLogger(SeguirUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                                request.setAttribute("solicitudseguir", ex.getMessage());
                             }
-			} else {
+                                                     
+                            
+			} 
+                        
+                        else {
                             try {
                                 ICU.dejarseguirUsuario(seguidor, seguido);
+                                request.setAttribute("solicitudseguir", "Finalizacion de Seguimineto realizada con Exito!!!");
                             } catch (Exception ex) {
                                 Logger.getLogger(SeguirUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                                request.setAttribute("solicitudseguir", ex.getMessage());
                             }
+
 			}
+                        
+              
+                        
 		}
         processRequest(request, response);
     }
