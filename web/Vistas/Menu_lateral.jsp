@@ -116,7 +116,6 @@
         </script>
         <div id="contenedor_carga" style="display: none;">
             <div id="carga">
-
             </div>
         </div>
     </body>
