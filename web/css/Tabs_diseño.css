@@ -1,0 +1,24 @@
+.wrapper { 
+    box-shadow: 1px 1px 10px #999;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    height: 93%;
+}
+.scroller{ 
+    overflow-x: scroll;
+    overflow-y: hidden;
+    height: 483px;
+} 
+
+#a,
+#b {
+  float: left;
+  width: 3%;
+  height:3%;
+}
+
+section {
+  width: 75%;
+  margin: 0 auto;
+  display:flex;
+}
