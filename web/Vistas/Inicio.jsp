@@ -21,6 +21,7 @@
 
         <jsp:include page="/Vistas/Barra_menu.jsp" />
         <jsp:include page="/Vistas/Tabs_Propuestas.jsp" />
+        
         <%
             if (request.getParameter("mensaje") != null) {
                 out.print("</div>");
