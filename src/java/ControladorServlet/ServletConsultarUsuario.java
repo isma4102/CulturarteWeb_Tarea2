@@ -90,8 +90,8 @@ public class ServletConsultarUsuario extends HttpServlet {
       request.setAttribute("Propuestas2", propuestasing);
         ICP=Fabrica.getInstance().getControladorPropCat();
         if(dtu.Esproponente()){
-           List<DtinfoPropuesta> propuestas= ICP.ListarPropuestasNoIngresadas(nickname);
-            request.setAttribute("Propuestas",propuestas);
+           //List<DtinfoPropuesta> propuestas= ICP.ListarPropuestasNoIngresadas(nickname);
+            //request.setAttribute("Propuestas",propuestas);
         }else{
             Fabrica.getInstance().getControladorPropCat().CargarColaboraciones();
             List<DtinfoPropuesta> colaboraciones=ICU.verPropuestas(nickname);

@@ -59,7 +59,7 @@
                                     }
                                     out.print("<a style=\"color: white\" href=\"#\">Marcar propuestas como favoritas</a>");
                                 }%>
-                            <a style="color: white" href="#">Consultar propuestas</a>
+                            <a style="color: white" href="/CulturarteWeb/ServletConsultarPropuesta">Consultar propuestas</a>
                             <a style="color: white" href="#">Consultar propuestas por categoria</a>
 
 

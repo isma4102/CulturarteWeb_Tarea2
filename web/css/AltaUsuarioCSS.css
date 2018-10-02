@@ -8,13 +8,16 @@ and open the template in the editor.
     Author     : Lucas
 */
 
-.form{
-    height:  50% ;
-    width: 50%;
-    border: snow 3px solid;
-    border-top-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    background-color: white;
-    alignment-adjust: 60px
-
+.formularioAltaUser{
+position: absolute;
+    padding: 1em;
+    background: #fff;
+    box-shadow: 0 1px 600px rgba(1, 0, 0, 0.3), 0 0 5px rgba(0, 0, 0, 0.1) inset;
+    left:50%;
+    width:550px;
+    margin-left:-200px;
+    height:600px;
+    margin-top:-150;
+    background-color:#fff;
 }
+

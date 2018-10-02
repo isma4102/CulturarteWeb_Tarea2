@@ -8,13 +8,17 @@ package ControladorServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import logica.Clases.DtConsultaPropuesta;
 import logica.Clases.DtNickTitProp;
 import logica.Fabrica;
+import logica.Clases.DtConsultaPropuesta2;
 
 /**
  *
@@ -33,7 +37,9 @@ public class ServletConsultarPropuesta extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        List<DtNickTitProp> listP = Fabrica.getInstance().getControladorPropCat().listarPropuestas();
+        request.setAttribute("listaPropuestas", listP);
+        
         request.getRequestDispatcher("Vistas/ConsultarPropuesta.jsp").forward(request, response);
     }
 
@@ -48,11 +54,7 @@ public class ServletConsultarPropuesta extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        List<DtNickTitProp> listP = Fabrica.getInstance().getControladorPropCat().listarPropuestas();
-
-        request.setAttribute("listaPropuestas", listP);
-
+        processRequest(request, response);
     }
 
     /**
@@ -64,9 +66,23 @@ public class ServletConsultarPropuesta extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+        String titulo = request.getParameter("TituloP");
+        
+        try {
+            DtConsultaPropuesta dtinfo = Fabrica.getInstance().getControladorPropCat().SeleccionarPropuesta(titulo);
+            request.setAttribute("propuesta", dtinfo);
+            
+            List<DtConsultaPropuesta2> listColab = Fabrica.getInstance().getControladorPropCat().ListaColaboradoresProp(titulo);
+            
+            request.setAttribute("listaC", listColab);
+            
+        } catch (Exception ex) {
+            Logger.getLogger(ServletConsultarPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        request.getRequestDispatcher("/Vistas/ConsultarPropuesta2.jsp").forward(request, response);
     }
 
     /**
