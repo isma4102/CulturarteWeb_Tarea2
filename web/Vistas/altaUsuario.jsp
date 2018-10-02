@@ -6,8 +6,12 @@
         <title>Crea tu cuenta</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">`
-        <script src="/script/altaUserJS.js"></script>
-
+        <script src="script/altaUserJS.js"></script>
+        <link  rel="stylesheet" type="text/css" href="css/AltaUsuarioCSS.css">
+        <link type="text/css" href="css/bootstrap.min.css">
+        <link id="bootstrap-css" type="text/css" href="/CulturarteWeb/css/bootstrap.css">
+        
+        
 
     </script>
     <%
@@ -39,12 +43,7 @@
 
 </head>
 <body>
-    <jsp:include page="/Vistas/Barra_menu.jsp" />
-    <br>
-    <br>
-    <br>
-    <br>
-    <div style="width: 800px;padding-left: 444px" class="form">
+    <div class="formularioAltaUser">
         <h1>Registrarte</h1>
         <form action="altaUsuarioServlet" method="post" enctype="multipart/form-data">
             <div>
