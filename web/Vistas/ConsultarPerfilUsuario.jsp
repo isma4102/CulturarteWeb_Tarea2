@@ -33,9 +33,9 @@
                         <td><input name="nick" type="text" value="<%=dtusu.getNickName()%>"/>&nbsp;&nbsp;&nbsp;
                         <td><%=dtusu.getNombre()%>&nbsp;&nbsp;&nbsp;</td>
                         <td><%=dtusu.getApellido()%>&nbsp;&nbsp;&nbsp;</td>
-                        <%if (dtusu.Esproponente() == false) { %>
+                        <%if (dtusu.Esproponente() == false){ %>
                         <td>Colaborador&nbsp;&nbsp;&nbsp;<br/></td>
-                            <%} else { %>
+                            <%} else {%>
                         <td>Proponente&nbsp;&nbsp;&nbsp;<br/></td>
                             <%}%>
                         <td><input type="submit" value="Ver datos" /></td>

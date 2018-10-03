@@ -102,6 +102,7 @@
         </div>
         <% DtUsuario nick = (DtUsuario) request.getSession().getAttribute("usuario_logueado");%>
         <%if (dtu.Esproponente()) {%>
+        <%if (nick != null) {%>
         <%if (dtu.getNickName().equals(nick.getNickName())) {%>
         <div class="usuario" style="margin-bottom: 2%">
             <h3>Propuestas creadas</h3>
@@ -125,7 +126,9 @@
 
             </table>
             <%}%>
+            <%}%>
             <%} else {%>
+            <%if (nick != null) {%>
             <div class="usuario" style="margin-bottom: 2%">
                 <h3>Colaboraciones</h3>
                 <table class="table table-bordered table-hover  formulario" style="margin-right: 200px; width: 88%; margin-top:50px;">
@@ -158,6 +161,27 @@
 
                 </table>  
             </div>
+            <%} else {%>
+            <div class="usuario" style="margin-bottom: 2%">
+                <h3>Colaboraciones</h3>
+                <table class="table table-bordered table-hover  formulario" style="margin-right: 200px; width: 88%; margin-top:50px;">
+
+                    <tr>
+                        <th>Titulo</th>
+                        <th>Nombre</th>     
+                    </tr>
+                    <%List<DtinfoPropuesta> colaboraciones = (List<DtinfoPropuesta>) request.getAttribute("Colaboraciones");
+                        for (DtinfoPropuesta dtp : colaboraciones) {%>
+                    <tr>
+                        <td><input name="nick" type="text" value="<%=dtp.getTitulo()%>"/>&nbsp;&nbsp;&nbsp;
+                        <td><textarea style="width: 300px; height: 100px; overflow-y: scroll;"><%=dtp.getDescripcion()%></textarea>&nbsp;&nbsp;&nbsp;</td>
+                    </tr>
+                    <%}%>
+
+
+                </table>  
+            </div>
+            <%}%>
             <%}%>
         </div>
 
