@@ -69,11 +69,16 @@ IPropCat IPC;
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String titulo=(String)request.getAttribute("TituloP");
+        String titulo=(String)request.getParameter("TituloP");
         DtUsuario nick = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
         Boolean exito=IPC.AgregarFavorita(titulo, nick.getNickName());
-        request.setAttribute("Exito", exito);
-        request.getRequestDispatcher("Vistas/MarcarFavorita2.jsp").forward(request, response);
+        if(exito){
+            request.setAttribute("favorito", "Propuesta marcada como favorita");
+        }else{
+            request.setAttribute("favorito", "No se pudo marcar propuesta como favorita");
+        }
+        processRequest(request, response);
+ 
     }
 
     /**
