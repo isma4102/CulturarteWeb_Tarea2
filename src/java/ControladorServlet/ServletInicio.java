@@ -48,9 +48,9 @@ public class ServletInicio extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<DtPropuestaWeb> listPublicada = Fabrica.getInstance().getControladorPropCat().ListarPropuestasWeb(TipoE.Publicada);
-       // List<DtPropuestaWeb> listFinanciada = Fabrica.getInstance().getControladorPropCat().ListarPropuestasWeb(TipoE.Financiada);
-        List<DtPropuestaWeb> listenFinanciacion = Fabrica.getInstance().getControladorPropCat().ListarPropuestasWeb(TipoE.enFinanciacion);
-        List<DtPropuestaWeb> listnoFinanciada = Fabrica.getInstance().getControladorPropCat().ListarPropuestasWeb(TipoE.noFinanciada);
+        List<DtPropuestaWeb> listFinanciada = Fabrica.getInstance().getControladorPropCat().ListarPropuestasWeb(TipoE.Publicada);
+        List<DtPropuestaWeb> listenFinanciacion = Fabrica.getInstance().getControladorPropCat().ListarPropuestasWeb(TipoE.Publicada);
+        List<DtPropuestaWeb> listnoFinanciada = Fabrica.getInstance().getControladorPropCat().ListarPropuestasWeb(TipoE.Publicada);
         
         request.setAttribute("Publicada", listPublicada);
        //request.setAttribute("Financiada", listFinanciada);
