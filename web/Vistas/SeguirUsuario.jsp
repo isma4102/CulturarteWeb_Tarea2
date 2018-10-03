@@ -35,7 +35,7 @@
         <br> 
         <h3 align="center" >Usuarios de Culturarte</h3>
         <form class="navbar-form navbar-right" action="SeguirUsuario" method="POST">
-                Nickname: <input style="margin-right: 540px;"type="text" name="BuscarUsu" class="form-control" placeholder="Buscar..." />
+                Nickname: <input style="margin-right: 600px;" type="text" name="BuscarUsu" class="form-control" placeholder="Buscar..." />
         </form>
         
         <table class="table table-bordered table-hover  formulario" style="margin-left: 192px; width: 88%;">
