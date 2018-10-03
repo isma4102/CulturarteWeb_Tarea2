@@ -86,9 +86,10 @@ public class ServletConsultarUsuario extends HttpServlet {
         request.setAttribute("Seguidores", seguidores);
         request.setAttribute("Usuario", dtu);
         request.setAttribute("Favoritas", favoritas);
+        ICP=Fabrica.getInstance().getControladorPropCat();
         List<DtinfoPropuesta> propuestasing= ICP.ListarPropuestasDeProponenteX(nickname);
       request.setAttribute("Propuestas2", propuestasing);
-        ICP=Fabrica.getInstance().getControladorPropCat();
+        
         if(dtu.Esproponente()){
            List<DtinfoPropuesta> propuestas= ICP.ListarPropuestasNoIngresadas(nickname);
             request.setAttribute("Propuestas",propuestas);

@@ -16,6 +16,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="css/ConsultarUsuario.css"/>
         <title>Datos del usuario</title>
     </head>
     <body>
@@ -38,9 +40,9 @@
                     out.println("<h3>Es colaborador</h3>");
                 }%>
         </div>
-        <div style="float:left">
-            <h3 style="margin-left: 200px">Seguidores</h3>
-            <table class="table table-bordered table-hover  formulario" style="margin-left: 200px; width: 88%; margin-top:50px;">
+        <div class="seguidores">
+            <h3>Seguidores</h3>
+            <table class="table table-bordered table-hover  formulario">
                 <tr>
                     <th>Nickname</th>
                     <th>Proponente/Colaborador</th>
@@ -58,9 +60,9 @@
                 <% }%>
             </table>
         </div>
-        <div style="float:right">
-            <h3 style="margin-left: 200px">Seguidos</h3>
-            <table class="table table-bordered table-hover  formulario" style="margin-right: 200px; width: 88%; margin-top:50px;">
+        <div class="seguidos">
+            <h3>Seguidos</h3>
+            <table class="table table-bordered table-hover  formulario">
                 <tr>
                     <th>Nickname</th>
                     <th>Proponente/Colaborador</th>
@@ -78,9 +80,9 @@
                 <% }%>
             </table>
         </div>
-        <div style="float:left;margin-top: 350px; margin-bottom: 100px;">
+        <div class="favoritas">
             <h3>Propuestas favoritas</h3>
-            <table class="table table-bordered table-hover  formulario" style="margin-right: 200px; width: 88%;">
+            <table class="table table-bordered table-hover  formulario">
                 <form action="ServletConsultarPropuesta">
                     <tr>
                         <th>Titulo</th>
@@ -100,7 +102,7 @@
         </div>
         <% String nick = (String) request.getSession().getAttribute("usuario_logueado");%>
         <%if (dtu.Esproponente()) {%>
-        <div style="float:right; margin-bottom: 100px;margin-top: 150px">
+        <div class="usuario">
             <h3>Propuestas creadas</h3>
             <table class="table table-bordered table-hover  formulario" style="margin-right: 200px; width: 88%; margin-top:50px;">
                 <form action="ServletConsultarPropuesta">
@@ -110,7 +112,7 @@
                     </tr>
                     <%if (dtu.getNickName().equals(nick)) {%>
                     <%List<DtinfoPropuesta> propuestasdeproponentenoing = (List<DtinfoPropuesta>) request.getAttribute("Propuestas2");
-                            for (DtinfoPropuesta dtp : propuestasdeproponentenoing) {%>
+                        for (DtinfoPropuesta dtp : propuestasdeproponentenoing) {%>
                     <tr>
                         <td><input name="nick" type="text" value="<%=dtp.getTitulo()%>"/>&nbsp;&nbsp;&nbsp;
                         <td><textarea><%=dtp.getDescripcion()%></textarea></td> 
@@ -131,32 +133,32 @@
             </table>
 
             <%} else {%>
-            <div style="float:right;margin-left: 200px;margin-top: 150px;margin-bottom: 100px">
+            <div class="usuario">
                 <h3>Colaboraciones</h3>
                 <table class="table table-bordered table-hover  formulario" style="margin-right: 200px; width: 88%; margin-top:50px;">
-                    <form action="ServletConsultarPropuesta">
-                        <tr>
-                            <th>Titulo</th>
-                            <th>Nombre</th>
-                        </tr>
-                        <%List<DtinfoPropuesta> colaboraciones = (List<DtinfoPropuesta>) request.getAttribute("Colaboraciones");
+
+                    <tr>
+                        <th>Titulo</th>
+                        <th>Nombre</th>
+                    </tr>
+                    <%List<DtinfoPropuesta> colaboraciones = (List<DtinfoPropuesta>) request.getAttribute("Colaboraciones");
                             for (DtinfoPropuesta dtp : colaboraciones) {%>
-                        <tr>
-                            <td><input name="nick" type="text" value="<%=dtp.getTitulo()%>"/>&nbsp;&nbsp;&nbsp;
-                            <td><textarea><%=dtp.getDescripcion()%></textarea>&nbsp;&nbsp;&nbsp;</td>
-                            <%if (dtu.getNickName().equals(nick)) {
-                                    Calendar calen = dtp.getFechaReal();
-                                    int dia2 = calen.get(Calendar.DAY_OF_MONTH);
-                                    int mes2 = calen.get(Calendar.MONTH) + 1;
-                                    int anio2 = calen.get(Calendar.YEAR);
-                                    out.println("<td>Fecha de colaboracion:" + dia2 + "/" + mes2 + "/" + anio2 + "</td>");
-                            %>
-                            <td><input name="monto" type="text" value="<%=dtp.getMonto()%>"/>&nbsp;&nbsp;&nbsp;
-                                <%}%>
-                            <td><input name="consulta" type="submit" value="Ver datos"/></td>
-                        </tr>
-                        <%}%>
-                    </form>
+                    <tr>
+                        <td><input name="nick" type="text" value="<%=dtp.getTitulo()%>"/>&nbsp;&nbsp;&nbsp;
+                        <td><textarea><%=dtp.getDescripcion()%></textarea>&nbsp;&nbsp;&nbsp;</td>
+                        <%if (dtu.getNickName().equals(nick)) {
+                                Calendar calen = dtp.getFechaReal();
+                                int dia2 = calen.get(Calendar.DAY_OF_MONTH);
+                                int mes2 = calen.get(Calendar.MONTH) + 1;
+                                int anio2 = calen.get(Calendar.YEAR);
+                                out.println("<td>Fecha de colaboracion:" + dia2 + "/" + mes2 + "/" + anio2 + "</td>");
+                        %>
+                        <td><input name="monto" type="text" value="<%=dtp.getMonto()%>"/>&nbsp;&nbsp;&nbsp;
+                            <%}%>
+
+                    </tr>
+                    <%}%>
+
                 </table>  
             </div>
             <%}%>

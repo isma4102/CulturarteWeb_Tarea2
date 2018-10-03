@@ -8,15 +8,17 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script type="text/javascript" src="js/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/ConsultarUsuario.css"/>
+        <link href="css/bootstrap.css" rel="stylesheet">
         <title>Consultar perfil de usuario</title>
     </head>
     <body>
         <%List<DtUsuario> usu = (List<DtUsuario>) request.getAttribute("Usuarios");
             if (usu.size() != 0) {%>
         <div style="float:left">
-            <table class="table table-bordered table-hover  formulario" style="margin-left: 300px; width: 88%; margin-top:100px;">
+            <table>
 
-                <h3 style=" position: absolute; top:50px;left: 650px;">Elija un usuario</h3>
+                <h3 style="text-align: center">Elija un usuario</h3>
 
                 <tr>
                     <th class="active">Nickname</th>
