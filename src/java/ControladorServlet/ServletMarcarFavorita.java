@@ -13,16 +13,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import logica.Clases.TipoE;
+import logica.Clases.DtUsuario;
+import logica.Clases.DtinfoPropuesta;
 import logica.Fabrica;
-import logica.Clases.DtPropuestaWeb;
+import logica.Interfaces.IPropCat;
+
 /**
  *
- * @author Martin
+ * @author gabri
  */
-@WebServlet(name = "ServletInicio", urlPatterns = {"/ServletInicio"})
-public class ServletInicio extends HttpServlet {
-
+@WebServlet(name = "ServletMarcarFavorita", urlPatterns = {"/ServletMarcarFavorita"})
+public class ServletMarcarFavorita extends HttpServlet {
+IPropCat IPC;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -32,32 +34,13 @@ public class ServletInicio extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
-    public void init() throws ServletException {
-        try {
-            Fabrica.getInstance().getIControladorUsuario().CargarUsuarios();
-            Fabrica.getInstance().getControladorPropCat().CargarPropuestas();
-            Fabrica.getInstance().getControladorPropCat().CargarColaboraciones();
-            Fabrica.getInstance().getControladorPropCat().comprobarBaseCat();
-            Fabrica.getInstance().getIControladorUsuario().CargarFavoritas();
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<DtPropuestaWeb> listPublicada = Fabrica.getInstance().getControladorPropCat().ListarPropuestasWeb(TipoE.Publicada);
-        List<DtPropuestaWeb> listFinanciada = Fabrica.getInstance().getControladorPropCat().ListarPropuestasWeb(TipoE.Publicada);
-        List<DtPropuestaWeb> listenFinanciacion = Fabrica.getInstance().getControladorPropCat().ListarPropuestasWeb(TipoE.Publicada);
-        List<DtPropuestaWeb> listnoFinanciada = Fabrica.getInstance().getControladorPropCat().ListarPropuestasWeb(TipoE.Publicada);
-        
-        request.setAttribute("Publicada", listPublicada);
-       //request.setAttribute("Financiada", listFinanciada);
-        request.setAttribute("noFinanciada", listnoFinanciada);
-        request.setAttribute("enFinanciacion", listenFinanciacion);
-        
-        request.getRequestDispatcher("Vistas/Inicio.jsp").forward(request, response);
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        IPC=Fabrica.getInstance().getControladorPropCat();
+       List<DtinfoPropuesta> propuestas=IPC.ListarPropuestaNOI();
+       request.setAttribute("Propuestas",propuestas);
+        request.getRequestDispatcher("Vistas/MarcarFavorita.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -72,7 +55,6 @@ public class ServletInicio extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                
         processRequest(request, response);
     }
 
@@ -87,7 +69,11 @@ public class ServletInicio extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String titulo=(String)request.getAttribute("TituloP");
+        DtUsuario nick = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
+        Boolean exito=IPC.AgregarFavorita(titulo, nick.getNickName());
+        request.setAttribute("Exito", exito);
+        request.getRequestDispatcher("Vistas/MarcarFavorita2.jsp").forward(request, response);
     }
 
     /**
