@@ -11,6 +11,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
@@ -20,6 +21,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import logica.Clases.DtConsultaPropuesta;
 import logica.Clases.DtUsuario;
 import logica.Clases.TipoRetorno;
 import logica.Fabrica;
@@ -47,7 +49,7 @@ public class ServletAltaPropuesta extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<String> listCat = Fabrica.getInstance().getControladorPropCat().ListarCategorias();
         request.setAttribute("listCat", listCat);
-        
+
         request.getRequestDispatcher("Vistas/AltaPropuesta.jsp").forward(request, response);
     }
 
@@ -76,42 +78,35 @@ public class ServletAltaPropuesta extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String opcion = "1";  //request.getParameter("opcion");
-        switch (opcion) {
-            case "1":
-                String titulo = request.getParameter("TituloP");
-                String lugar = request.getParameter("LugarP");
-                String desc = request.getParameter("Descripcion");
-                float montoT = Float.parseFloat(request.getParameter("MontoT"));
-                float montoE = Float.parseFloat(request.getParameter("MontoE"));
-                String fechaR = (request.getParameter("FechaR") == null ? "" : request.getParameter("FechaR"));
-                String cat = request.getParameter("Categoria");
+        String titulo = request.getParameter("TituloP");
+        String lugar = request.getParameter("LugarP");
+        String desc = request.getParameter("Descripcion");
+        String cat = request.getParameter("Categoria");
 
-                Calendar fecha = new GregorianCalendar();
-                DateFormat formato = new SimpleDateFormat("yyyy/mm/dd");
+        float montoT = Float.parseFloat(request.getParameter("MontoT"));
+        float montoE = Float.parseFloat(request.getParameter("MontoE"));
 
-                try {
-                    //DtUsuario dtLogeado = (DtUsuario) request.getSession().getAttribute("usuario_logeado");
-                    DtUsuario dtLogeado = new DtUsuario("mbusca", "", "", "", fecha, "","",false);
+        String fechaR = (request.getParameter("FechaR") == null ? "" : request.getParameter("FechaR"));
+        Calendar fecha = this.dateToCalendar(ParseFecha(fechaR));
 
-                    boolean encontrado = Fabrica.getInstance().getControladorPropCat().seleccionarUC(dtLogeado.getNickName(), cat);
+        try {
+            DtUsuario dtLogeado = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
 
-                    if (!encontrado) {
-                        boolean ok = Fabrica.getInstance().getControladorPropCat().crearPropuesta(titulo, desc, lugar, cat, fecha, montoE, montoT, TipoRetorno.EntGan);
-                        MENSAJE = "Se registro exitosamente";
-                        request.setAttribute("mensaje", MENSAJE);
-                        request.getRequestDispatcher("/Vistas/FuncionamientoCorrecto.jsp").forward(request, response);
-                    }
+            boolean encontrado = Fabrica.getInstance().getControladorPropCat().seleccionarUC(dtLogeado.getNickName(), cat);
 
-                } catch (ExceptionInInitializerError | Exception a) {
-                    String mensajeError = "La propuesta no pudo ser dada de alta";
-                    request.setAttribute("mensaje", mensajeError);
-                    request.getRequestDispatcher("/Vistas/FuncionamientoCorrecto.jsp").forward(request, response);
-                }
+            if (!encontrado) {
+                boolean ok = Fabrica.getInstance().getControladorPropCat().crearPropuesta(titulo, desc, lugar, cat, fecha, montoE, montoT, TipoRetorno.EntGan);
+                MENSAJE = "Se registro exitosamente";
+                request.setAttribute("mensaje", MENSAJE);
+                request.getRequestDispatcher("/Vistas/FuncionamientoCorrecto.jsp").forward(request, response);
+            }
 
-                break;
+        } catch (ExceptionInInitializerError | Exception a) {
+            String mensajeError = "La propuesta no pudo ser dada de alta";
+            request.setAttribute("mensaje", mensajeError);
+            request.getRequestDispatcher("/Vistas/FuncionamientoCorrecto.jsp").forward(request, response);
         }
-        processRequest(request, response);
+
     }
 
     /**
@@ -124,4 +119,20 @@ public class ServletAltaPropuesta extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    private Calendar dateToCalendar(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return calendar;
+    }
+
+    public Date ParseFecha(String fecha) {
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        Date fechaDate = new Date();
+        try {
+            fechaDate = formato.parse(fecha);
+        } catch (ParseException ex) {
+            System.out.println(ex);
+        }
+        return fechaDate;
+    }
 }
