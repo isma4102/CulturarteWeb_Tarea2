@@ -43,7 +43,6 @@ public class ServletConsultarUsuario extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         ICU = Fabrica.getInstance().getIControladorUsuario();
-        ICU.CargarUsuarios();
         List<DtUsuario> usuarios = ICU.ListarUsuarios();
         request.setAttribute("Usuarios", usuarios);
         request.getRequestDispatcher("Vistas/ConsultarPerfilUsuario.jsp").forward(request, response);
@@ -80,25 +79,23 @@ public class ServletConsultarUsuario extends HttpServlet {
         DtUsuario dtu = ICU.ObtenerDTUsuario(nickname);
         List<DtUsuario> seguidos = ICU.ObtenerSeguidos(nickname);
         List<DtUsuario> seguidores = ICU.ObtenerSeguidores(nickname);
-        ICU.CargarFavoritas();
         List<DtinfoPropuesta> favoritas = ICU.obtenerfavoritas(nickname);
         request.setAttribute("Seguidos", seguidos);
         request.setAttribute("Seguidores", seguidores);
         request.setAttribute("Usuario", dtu);
         request.setAttribute("Favoritas", favoritas);
-        ICP=Fabrica.getInstance().getControladorPropCat();
-        List<DtinfoPropuesta> propuestasing= ICP.ListarPropuestasDeProponenteX(nickname);
-      request.setAttribute("Propuestas2", propuestasing);
-        
-        if(dtu.Esproponente()){
-           //List<DtinfoPropuesta> propuestas= ICP.ListarPropuestasNoIngresadas(nickname);
-            //request.setAttribute("Propuestas",propuestas);
-        }else{
-            Fabrica.getInstance().getControladorPropCat().CargarColaboraciones();
-            List<DtinfoPropuesta> colaboraciones=ICU.verPropuestas(nickname);
-            request.setAttribute("Colaboraciones",colaboraciones );
+        ICP = Fabrica.getInstance().getControladorPropCat();
+        List<DtinfoPropuesta> propuestasing = ICP.ListarPropuestasDeProponenteX(nickname);
+        request.setAttribute("Propuestas2", propuestasing);
+
+        if (dtu.Esproponente()) {
+            List<DtinfoPropuesta> propuestas = ICP.ListarPropuestasNoIngresadas(nickname);
+            request.setAttribute("Propuestas", propuestas);
+        } else {
+            List<DtinfoPropuesta> colaboraciones = ICU.verPropuestas(nickname);
+            request.setAttribute("Colaboraciones", colaboraciones);
         }
-                
+
         request.getRequestDispatcher("Vistas/ConsultarPerfilUsuario2.jsp").forward(request, response);
     }
 

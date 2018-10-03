@@ -44,8 +44,9 @@
                 <% }%>
             </table>
         </div>
-        <% }%>
-    </form>
+        <% }else{%>
+        <h1>No hay usuarios en el sistema</h1>
+        <%}%>
 </body>
 
 </html>

@@ -1,16 +1,20 @@
 div{
     background: rgba(236,235,235,50);
-    width: 50%;
-    height: 50%; 
+    width: 45%;
+    height: 35%; 
     margin-left: 25%;
+    margin-bottom: 10%;
     border: 2px solid black;
     text-align: center;
+    overflow-y: scroll;
+    
 }
 
 div table{
     padding-left: 15%;
     margin: 0 auto;
     padding-top: 10px;
+    overflow-y: scroll;
 }
 table tr td{
     text-align: center;
@@ -29,6 +33,7 @@ table tr th{
     left:0px;
     bottom:0; 
     float:left;
+
 }
 .seguidos{
     position:absolute;
@@ -42,18 +47,20 @@ table tr th{
 .favoritas{
     margin-left: 2%;
     position:absolute;
-    top:950px;
+    top:900px;
     right:0;
     left:0;
     bottom:0; 
     float:left;
+    margin-bottom: 50px;
 }
 
 .usuario{
     position:absolute;
-    top:950px;
+    top:900px;
     right:0;
     left:500px;
     bottom:0; 
     float:left;
+    margin-bottom: 50px;
 }
