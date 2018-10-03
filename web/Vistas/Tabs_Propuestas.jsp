@@ -32,7 +32,6 @@
                         <div class="container" style="padding-top: 1em;">
                             <div class="row">
                                 <%
-                                    int j = 0, k = 0;
                                     List<DtPropuestaWeb> listP = (List<DtPropuestaWeb>) request.getAttribute("enFinanciacion");
                                     for (int i = 0; i < listP.size(); i++) {
                                         out.print("<div class=\"col-sm-6 col-md-3\">");
@@ -51,8 +50,8 @@
                                         out.print("</div>");
                                         out.print("</div>");
                                         //termina barrita
-                                        out.print("<p> " + listP.get(i).getTiempoR() + " </p>");
-                                        out.print("<p> " + listP.get(i).getColaboradores() + " </p>");
+                                        out.print("<p> Tiempo:" + listP.get(i).getTiempoR() + " </p>");
+                                        out.print("<p> Cantidad Colab: " + listP.get(i).getColaboradores() + " </p>");
                                         out.print("</p>");
                                         out.print("</div>");
                                         out.print("</div>");
