@@ -7,6 +7,7 @@ package ControladorServlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,14 +42,15 @@ private static final long serialVersionUID = 1L;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        ICU.CargarUsuarios(); 
+    
+        if (request.getSession().getAttribute("usuario_logueado") == null) {
+            request.setAttribute("mensaje", "No existe una sesion en el sistema");
+            request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
+        } 
+        else{
         List<DtUsuario> lista = ICU.ListarUsuarios();
         request.setAttribute("usuarios", lista);
-        
-        List<DtUsuario> lista2 = ICU.ListarProponentes2();
-        request.setAttribute("usuarios", lista);
-        
-        request.getRequestDispatcher("Vistas/SeguirUsuario.jsp").forward(request, response);
+        request.getRequestDispatcher("Vistas/SeguirUsuario.jsp").forward(request, response);}
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -85,6 +87,7 @@ private static final long serialVersionUID = 1L;
 			String seguido = request.getParameter("seguido");
                         String accion = request.getParameter("accion");
                         
+                        if(accion!=null){
 			if (accion.equals("seguir")) {
                             try {
                                ICU.seguirUsuario(seguidor, seguido); 
@@ -97,7 +100,7 @@ private static final long serialVersionUID = 1L;
                             
 			} 
                         
-                        else {
+                        else if (accion.equals("dejarseguir")){
                             try {
                                 ICU.dejarseguirUsuario(seguidor, seguido);
                                 request.setAttribute("solicitudseguir", "Finalizacion de Seguimineto realizada con Exito!!!");
@@ -107,11 +110,30 @@ private static final long serialVersionUID = 1L;
                             }
 
 			}
+                                processRequest(request, response);
+                        }
                         
-              
-                        
+                        else if (request.getParameter("BuscarUsu") != null) {
+                        List<DtUsuario> lista = ICU.ListarUsuarios();
+                        ArrayList<DtUsuario> retorno = new ArrayList<>();
+                        for (int i = 0; i < lista.size(); i++) {
+                            if (lista.get(i).getNickName().contains(request.getParameter("BuscarUsu"))) {
+                                retorno.add(new DtUsuario(lista.get(i).getNickName(), lista.get(i).getNombre(),lista.get(i).getApellido()
+                                , lista.get(i).getCorreo(), lista.get(i).getFechaN(), lista.get(i).getImagen(), lista.get(i).getPassword(), lista.get(i).Esproponente()));
+                            }
+                        }
+                        if (!retorno.isEmpty()) {
+                            request.setAttribute("usuarios", retorno);
+                            request.getRequestDispatcher("/Vistas/SeguirUsuario.jsp").forward(request, response);
+                        } else {
+                            request.setAttribute("mensaje", "Ese Usuario no existe en el sistema");
+                            request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
+
+                        }
+                    }               
+  
 		}
-        processRequest(request, response);
+
     }
 
     /**

@@ -6,6 +6,9 @@
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript">
             function getConfirmation() {
+            <% if(request.getSession().getAttribute("usuario_logueado") != null){ %>
+                     alert("Cierre sesion antes de Cargar los datos de prueba");
+                     <% } else {%>    
                 var retVal = confirm("¿Desea continuar? todos los datos se perderan");
                 if (retVal == true) {
                     var var2 = document.getElementById('contenedor_carga');
@@ -14,6 +17,7 @@
                 } else {
                     alert("Operación Cancelada");
                 }
+                <% } %>
             }
 
         </script>
@@ -25,9 +29,6 @@
             <div id="sidebar-wrapper">
                 <ul class="sidebar-nav">
                     <li class="sidebar-brand">
-                        <a href="/CulturarteWeb/ServletInicio">
-                            <img style="width: 78%;" src="Imagenes/logo.png" alt="" class="menu-bar">
-                        </a>
                     </li>
                     <div class="sidenav">
                         <button class="dropdown-btn">Usuario
@@ -57,7 +58,7 @@
                                     } else {
                                         out.print("<a style=\"color: white\" href=\"/CulturarteWeb/Vistas/AgregarComentario.jsp\">Agregar comentario a propuesta</a>");
                                     }
-                                    out.print("<a style=\"color: white\" href=\"#\">Marcar propuestas como favoritas</a>");
+                                    out.print("<a style=\"color: white\" href=\"ServletMarcarFavorita\">Marcar propuestas como favoritas</a>");
                                 }%>
                             <a style="color: white" href="/CulturarteWeb/ServletConsultarPropuesta">Consultar propuestas</a>
                             <a style="color: white" href="#">Consultar propuestas por categoria</a>
@@ -90,7 +91,9 @@
 
             <!-- Page Content -->
             <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">  <img src="Imagenes/menu-icono.png" alt="" class="menu-bar"></a>
-
+            <a href="/CulturarteWeb/ServletInicio">
+                <img src="Imagenes/logo.png" style="width: 38%">
+            </a>
         </div>
         <script>
             $("#menu-toggle").click(function (e) {
@@ -116,8 +119,8 @@
         <div id="contenedor_carga" style="display: none;">
             <div id="carga">
             </div>
-        <H3 style="color:#287AE6 ;position: absolute; top: 601%;left: 682px;right: 0;bottom: 0;margin: auto;"> Espere Por favor... </H3>   
+            <H3 style="color:#287AE6 ;position: absolute; top: 601%;left: 682px;right: 0;bottom: 0;margin: auto;"> Espere Por favor... </H3>   
         </div>
-        
+
     </body>
 </html>

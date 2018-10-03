@@ -8,15 +8,17 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script type="text/javascript" src="js/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/ConsultarUsuario.css"/>
+        <link href="css/bootstrap.css" rel="stylesheet">
         <title>Consultar perfil de usuario</title>
     </head>
     <body>
         <%List<DtUsuario> usu = (List<DtUsuario>) request.getAttribute("Usuarios");
             if (usu.size() != 0) {%>
         <div style="float:left">
-            <table class="table table-bordered table-hover  formulario" style="margin-left: 300px; width: 88%; margin-top:100px;">
+            <table>
 
-                <h3 style=" position: absolute; top:50px;left: 650px;">Elija un usuario</h3>
+                <h3 style="text-align: center">Elija un usuario</h3>
 
                 <tr>
                     <th class="active">Nickname</th>
@@ -31,9 +33,9 @@
                         <td><input name="nick" type="text" value="<%=dtusu.getNickName()%>"/>&nbsp;&nbsp;&nbsp;
                         <td><%=dtusu.getNombre()%>&nbsp;&nbsp;&nbsp;</td>
                         <td><%=dtusu.getApellido()%>&nbsp;&nbsp;&nbsp;</td>
-                        <%if (dtusu.Esproponente() == false) { %>
+                        <%if (dtusu.Esproponente() == false){ %>
                         <td>Colaborador&nbsp;&nbsp;&nbsp;<br/></td>
-                            <%} else { %>
+                            <%} else {%>
                         <td>Proponente&nbsp;&nbsp;&nbsp;<br/></td>
                             <%}%>
                         <td><input type="submit" value="Ver datos" /></td>
@@ -42,8 +44,9 @@
                 <% }%>
             </table>
         </div>
-        <% }%>
-    </form>
+        <% }else{%>
+        <h1>No hay usuarios en el sistema</h1>
+        <%}%>
 </body>
 
 </html>

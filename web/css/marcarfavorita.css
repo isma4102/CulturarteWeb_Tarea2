@@ -1,0 +1,11 @@
+.propuestas{
+    background: rgba(236,235,235,50);
+    width: 45%;
+    height: 35%; 
+    margin-left: 25%;
+    margin-bottom: 10%;
+    border: 2px solid black;
+    text-align: center;
+    overflow-y: scroll;  
+}
+
