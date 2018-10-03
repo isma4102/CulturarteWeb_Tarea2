@@ -8,10 +8,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">`
         <script src="script/altaUserJS.js"></script>
         <link  rel="stylesheet" type="text/css" href="css/AltaUsuarioCSS.css">
+        <link  rel="stylesheet" type="text/css" href="css/RegistrarColaboracion.css">
         <link type="text/css" href="css/bootstrap.min.css">
         <link id="bootstrap-css" type="text/css" href="/CulturarteWeb/css/bootstrap.css">
-        
-        
+
 
     </script>
     <%
@@ -43,7 +43,13 @@
 
 </head>
 <body>
-    <div class="formularioAltaUser">
+    <jsp:include page="/Vistas/Barra_menu.jsp" />
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div id="formR" class="formulario">
         <h1>Registrarte</h1>
         <form action="altaUsuarioServlet" method="post" enctype="multipart/form-data">
             <div>
