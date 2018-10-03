@@ -6,6 +6,9 @@
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript">
             function getConfirmation() {
+            <% if(request.getSession().getAttribute("usuario_logueado") != null){ %>
+                     alert("Cierre sesion antes de Cargar los datos de prueba");
+                     <% } else {%>    
                 var retVal = confirm("¿Desea continuar? todos los datos se perderan");
                 if (retVal == true) {
                     var var2 = document.getElementById('contenedor_carga');
@@ -14,6 +17,7 @@
                 } else {
                     alert("Operación Cancelada");
                 }
+                <% } %>
             }
 
         </script>
