@@ -7,13 +7,15 @@ package ControladorServlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import logica.Clases.TipoE;
 import logica.Fabrica;
-
+import logica.Clases.DtPropuestaWeb;
 /**
  *
  * @author Martin
@@ -45,7 +47,16 @@ public class ServletInicio extends HttpServlet {
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        List<DtPropuestaWeb> listPublicada = Fabrica.getInstance().getControladorPropCat().ListarPropuestasWeb(TipoE.Publicada);
+        List<DtPropuestaWeb> listFinanciada = Fabrica.getInstance().getControladorPropCat().ListarPropuestasWeb(TipoE.Financiada);
+        List<DtPropuestaWeb> listenFinanciacion = Fabrica.getInstance().getControladorPropCat().ListarPropuestasWeb(TipoE.enFinanciacion);
+        List<DtPropuestaWeb> listnoFinanciada = Fabrica.getInstance().getControladorPropCat().ListarPropuestasWeb(TipoE.noFinanciada);
+        
+        request.setAttribute("Publicada", listPublicada);
+        request.setAttribute("Financiada", listFinanciada);
+        request.setAttribute("noFinanciada", listnoFinanciada);
+        request.setAttribute("enFinanciacion", listenFinanciacion);
+        
         request.getRequestDispatcher("Vistas/Inicio.jsp").forward(request, response);
     }
 

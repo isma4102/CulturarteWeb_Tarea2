@@ -14,13 +14,11 @@
 
     </head>
     <body>
-        <% if (request.getSession().getAttribute("estado_sesion") == EstadoSesion.LOGIN_INCORRECTO) {
-                request.setAttribute("mensaje", "No existe el usuario en el sistema");
-                request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
-            }%>
+
 
         <jsp:include page="/Vistas/Barra_menu.jsp" />
         <jsp:include page="/Vistas/Tabs_Propuestas.jsp" />
+        
         <%
             if (request.getParameter("mensaje") != null) {
                 out.print("</div>");

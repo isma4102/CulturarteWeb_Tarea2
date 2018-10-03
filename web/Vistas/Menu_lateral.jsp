@@ -55,11 +55,11 @@
                                         out.print("<a style=\"color: white\" href=\"#\">Extender financiación</a>");
                                         out.print("<a style=\"color: white\" href=\"#\">Cancelar Propuesta</a>");
                                     } else {
-                                        out.print("<a style=\"color: white\" href=\"#\">Agregar comentario a propuesta</a>");
+                                        out.print("<a style=\"color: white\" href=\"/CulturarteWeb/Vistas/AgregarComentario.jsp\">Agregar comentario a propuesta</a>");
                                     }
                                     out.print("<a style=\"color: white\" href=\"#\">Marcar propuestas como favoritas</a>");
                                 }%>
-                            <a style="color: white" href="#">Consultar propuestas</a>
+                            <a style="color: white" href="/CulturarteWeb/ServletConsultarPropuesta">Consultar propuestas</a>
                             <a style="color: white" href="#">Consultar propuestas por categoria</a>
 
 
