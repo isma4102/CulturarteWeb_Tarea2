@@ -22,7 +22,13 @@
                 </div>
                 <div id="Error_login" style="display: none;" class="alert alert-danger" role="alert">
                     <span class="sr-only">Error:</span>
-                    Usuario Incorrecto, reintente o Registrese si aún no tiene una cuenta.
+                    <% if (request.getAttribute("errorContrasenia")!=null)
+                    {%>
+                    Contraseña Incorrecta.
+                    <%}
+                    else{%>                  
+                    Usuario Incorrecto, reintente o Registrese si aun no tiene una cuenta.                  
+                    <%}%>  
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -60,7 +66,8 @@
             </div>
         </div>	
         <script type="text/javascript">
-            <% if (request.getSession().getAttribute("estado_sesion") == EstadoSesion.LOGIN_INCORRECTO) { %>
+            <% if (request.getSession().getAttribute("estado_sesion") == EstadoSesion.LOGIN_INCORRECTO || 
+                    request.getSession().getAttribute("estado_sesion")==EstadoSesion.CONTRASENIA_INCORRECTA) { %>
             var var2 = document.getElementById('Error_login');
             var2.style.display = "block";
             <% }%>

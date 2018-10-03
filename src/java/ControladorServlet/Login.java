@@ -94,7 +94,8 @@ public class Login extends HttpServlet {
 
             String hash = a.sha1(password);
             if (usrNick.getPassword().compareTo(hash) != 0) {
-                nuevoEstado = EstadoSesion.LOGIN_INCORRECTO;
+                request.setAttribute("errorContrasenia", "Contraseña Incorrecta.");
+                nuevoEstado = EstadoSesion.CONTRASENIA_INCORRECTA;
                 objSesion.setAttribute("estado_sesion", nuevoEstado);
                 request.getRequestDispatcher("Vistas/iniciarSesion.jsp").forward(request, response);
             } else {
@@ -106,7 +107,8 @@ public class Login extends HttpServlet {
 
             String hash = a.sha1(password);
             if (usrCorreo.getPassword().compareTo(hash) != 0) {
-                nuevoEstado = EstadoSesion.LOGIN_INCORRECTO;
+                request.setAttribute("errorContrasenia", "Contraseña Incorrecta.");
+                nuevoEstado = EstadoSesion.CONTRASENIA_INCORRECTA;
                 objSesion.setAttribute("estado_sesion", nuevoEstado);
                 request.getRequestDispatcher("Vistas/iniciarSesion.jsp").forward(request, response);
             } else {
