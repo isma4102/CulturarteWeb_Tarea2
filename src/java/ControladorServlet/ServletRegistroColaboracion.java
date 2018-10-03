@@ -36,9 +36,14 @@ public class ServletRegistroColaboracion extends HttpServlet {
             request.setAttribute("mensaje", "No existe una sesion en el sistema");
             request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
         } else {
-            List<DtNickTitProp> lista = IPC.listarPropuestasR();
-            request.setAttribute("lista_propuestas", lista);
-            request.getRequestDispatcher("/Vistas/RegColaboracion.jsp").forward(request, response);
+            if (((DtUsuario) request.getSession().getAttribute("usuario_logueado")).Esproponente() == true) {
+                request.setAttribute("mensaje", "Solo los colaboradores pueden entrar a este sitio");
+                request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
+            } else {
+                List<DtNickTitProp> lista = IPC.listarPropuestasR();
+                request.setAttribute("lista_propuestas", lista);
+                request.getRequestDispatcher("/Vistas/RegColaboracion.jsp").forward(request, response);
+            }
         }
     }
 
@@ -117,7 +122,7 @@ public class ServletRegistroColaboracion extends HttpServlet {
             }
         } else if (request.getParameter("Buscar") != null) {
             List<DtNickTitProp> lista = IPC.listarPropuestasR();
-              ArrayList<DtNickTitProp> retorno = new ArrayList<>();
+            ArrayList<DtNickTitProp> retorno = new ArrayList<>();
             for (int i = 0; i < lista.size(); i++) {
                 if (lista.get(i).getTituloP().contains(request.getParameter("Buscar"))) {
                     retorno.add(new DtNickTitProp(lista.get(i).getTituloP(), lista.get(i).getProponente()));

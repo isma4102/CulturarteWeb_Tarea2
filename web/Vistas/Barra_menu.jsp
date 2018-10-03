@@ -14,7 +14,7 @@
         <style>
             .dev-page{visibility: hidden; }            
         </style>
-      
+
     </head>
     <body>
         <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -22,12 +22,12 @@
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar" onclick="toggleSidebarEsconder()">
                         <img src="Imagenes/menu-icono.png" alt="" class="menu-bar">
-
                     </button>
                     <jsp:include page="/Vistas/Menu_lateral.jsp"/>
                 </div>
                 <div class="navbar-collapse collapse" id="navbar">
                     <ul class="nav navbar-nav navbar-right">
+
                         <% if ((DtUsuario) request.getSession().getAttribute("usuario_logueado") != null) {
                                 out.print("<img style=\"margin-top: 7px\" src=\"Imagenes/nadie.png\" class=\"img-circle\" width=\" 40\" height=\"40\">");
                                 out.print("<a style=\"color: white;margin-left: 8%;\" href=\"#\">" + ((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickName() + "</a>");
@@ -63,6 +63,6 @@
 
 
 
-        
+
     </body>
 </html>
