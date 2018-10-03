@@ -5,6 +5,7 @@
  */
 package ControladorServlet;
 
+import com.google.gson.GsonBuilder;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,7 +41,7 @@ public class servletBuscador extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("script/buscador.js").forward(request, response);
+        //request.getRequestDispatcher("script/filtroBuscador.js").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -74,18 +75,33 @@ public class servletBuscador extends HttpServlet {
         if (filtro != null) {
             switch (filtro) {
                 case "alfa":
-                    Collections.sort(resultado, new Comparator<DtinfoPropuesta>() {
-                        public int compare(DtinfoPropuesta o1, DtinfoPropuesta o2) {
-                            return o1.getTitulo().compareTo(o2.getTitulo());
-                        }
-                    });
-                    request.setAttribute("resultado", resultado);
-                    request.getRequestDispatcher("/Vistas/busqueda.jsp").forward(request, response);
+                    Collections.sort(resultado, (DtinfoPropuesta o1, DtinfoPropuesta o2) -> o1.getTitulo().compareTo(o2.getTitulo()));
+                    //request.setAttribute("resultado", resultado);
+//                    request.setAttribute("busqueda", busqueda);
+//                    request.setAttribute("tipoRetorno", "filtrado");
+                    String json = new GsonBuilder().create().toJson(resultado);
+                    response.setContentType("application/json;charset=UTF-8");
+                    response.getWriter().write(json);
+                    break;
+                case "estado":
+                    Collections.sort(resultado, (DtinfoPropuesta o1, DtinfoPropuesta o2) -> o1.getTitulo().compareTo(o2.getTitulo()));
+                    String json1 = new GsonBuilder().create().toJson(resultado);
+                    response.setContentType("application/json;charset=UTF-8");
+                    response.getWriter().write(json1);
+                    break;
+                case "fecha":
+                    Collections.sort(resultado, (DtinfoPropuesta o1, DtinfoPropuesta o2) -> o1.getFechaReal().compareTo(o2.getFechaReal()));
+                    String json2 = new GsonBuilder().create().toJson(resultado);
+                    response.setContentType("application/json;charset=UTF-8");
+                    response.getWriter().write(json2);
                     break;
             }
+        } else {
+            request.setAttribute("resultado", resultado);
+            request.setAttribute("busqueda", busqueda);
+            request.setAttribute("tipoRetorno", "busqueda");
+            request.getRequestDispatcher("/Vistas/busqueda.jsp").forward(request, response);
         }
-        request.setAttribute("resultado", resultado);
-        request.getRequestDispatcher("/Vistas/busqueda.jsp").forward(request, response);
     }
 
     /**

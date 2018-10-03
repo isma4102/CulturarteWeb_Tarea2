@@ -34,6 +34,9 @@
         <br>
         <br> 
         <h3 align="center" >Usuarios de Culturarte</h3>
+        <form class="navbar-form navbar-right" action="SeguirUsuario" method="POST">
+                Nickname: <input style="margin-right: 600px;" type="text" name="BuscarUsu" class="form-control" placeholder="Buscar..." />
+        </form>
         
         <table class="table table-bordered table-hover  formulario" style="margin-left: 192px; width: 88%;">
            
@@ -66,7 +69,6 @@
                             <input type="hidden" name="accion" value="seguir" />
                             <input type="button" class="btn btn-primary" value="Seguir" onclick="submit()"/>
                         </form>
-                    
                    </td>
                    <td align="center"> 
                         <form action="SeguirUsuario" method="post">
