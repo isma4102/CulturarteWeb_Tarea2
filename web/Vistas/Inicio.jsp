@@ -38,7 +38,7 @@
             <% if (request.getSession().getAttribute("datos_de_prueba") != null) {
             %>
             var var2 = document.getElementById("datos_de_prueba_carga");
-            var2.style = "margin-top: 43%;margin-right: -16%;margin-left: 73%;";
+            var2.style = "margin-top: 2%;margin-right: -16%;margin-left: 73%;";
             var2.style.display = "block";
             <%      
               request.getSession().removeAttribute("datos_de_prueba");}%>
