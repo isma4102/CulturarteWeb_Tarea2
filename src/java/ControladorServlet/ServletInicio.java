@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import logica.Clases.TipoE;
 import logica.Fabrica;
 import logica.Clases.DtPropuestaWeb;
+
 /**
  *
  * @author Martin
@@ -49,14 +50,16 @@ public class ServletInicio extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<DtPropuestaWeb> listPublicada = Fabrica.getInstance().getControladorPropCat().ListarPropuestasWeb(TipoE.Publicada);
         List<DtPropuestaWeb> listFinanciada = Fabrica.getInstance().getControladorPropCat().ListarPropuestasWeb(TipoE.Financiada);
-        List<DtPropuestaWeb> listenFinanciacion = Fabrica.getInstance().getControladorPropCat().ListarPropuestasWeb(TipoE.enFinanciacion);
-        List<DtPropuestaWeb> listnoFinanciada = Fabrica.getInstance().getControladorPropCat().ListarPropuestasWeb(TipoE.noFinanciada);
+        List<DtPropuestaWeb> listEnFinanciacion = Fabrica.getInstance().getControladorPropCat().ListarPropuestasWeb(TipoE.enFinanciacion);
+        List<DtPropuestaWeb> listNoFinanciada = Fabrica.getInstance().getControladorPropCat().ListarPropuestasWeb(TipoE.noFinanciada);
+        List<DtPropuestaWeb> listCancelada = Fabrica.getInstance().getControladorPropCat().ListarPropuestasWeb(TipoE.Cancelada);
         
+        request.setAttribute("Cancelada", listCancelada);
         request.setAttribute("Publicada", listPublicada);
-       //request.setAttribute("Financiada", listFinanciada);
-        request.setAttribute("noFinanciada", listnoFinanciada);
-        request.setAttribute("enFinanciacion", listenFinanciacion);
-        
+        request.setAttribute("Financiada", listFinanciada);
+        request.setAttribute("noFinanciada", listNoFinanciada);
+        request.setAttribute("enFinanciacion", listEnFinanciacion);
+
         request.getRequestDispatcher("Vistas/Inicio.jsp").forward(request, response);
     }
 
@@ -72,7 +75,7 @@ public class ServletInicio extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                
+
         processRequest(request, response);
     }
 
