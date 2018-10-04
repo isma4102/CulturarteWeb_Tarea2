@@ -5,37 +5,40 @@
  */
 package ControladorServlet;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.DateFormat;
+import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import logica.Clases.DtConsultaPropuesta;
+import javax.servlet.http.Part;
+import logica.Clases.DataImagen;
 import logica.Clases.DtUsuario;
 import logica.Clases.TipoRetorno;
 import logica.Fabrica;
+import logica.Interfaces.IPropCat;
 
 /**
  *
  * @author Martin
  */
 @WebServlet(name = "ServletAltaPropuest", urlPatterns = {"/ServletAltaPropuesta"})
+@MultipartConfig
 public class ServletAltaPropuesta extends HttpServlet {
 
     public static final String MENSAJE_ERROR = "mensaje_error";
     public static final String MENSAJE_EXITO = "mensaje_exito";
     private String MENSAJE;
+
+    IPropCat controladorP;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -77,7 +80,7 @@ public class ServletAltaPropuesta extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        controladorP = Fabrica.getInstance().getControladorPropCat();
         String titulo = request.getParameter("TituloP");
         String lugar = request.getParameter("LugarP");
         String desc = request.getParameter("Descripcion");
@@ -89,13 +92,31 @@ public class ServletAltaPropuesta extends HttpServlet {
         String fechaR = (request.getParameter("FechaR") == null ? "" : request.getParameter("FechaR"));
         Calendar fecha = this.dateToCalendar(ParseFecha(fechaR));
 
+        DataImagen imagen = null;
+        final Part partImagen = request.getPart("imagen");
+
+        if (partImagen.getSize() != 0) {
+            InputStream data = partImagen.getInputStream();
+            final String fileName = Utils.getFileName(partImagen);
+            String nombreArchivo = titulo;
+            String extensionArchivo = Utils.extensionArchivo(fileName);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            int reads = data.read();
+            while (reads != -1) {
+                baos.write(reads);
+                reads = data.read();
+            } // while
+            byte[] bytes = baos.toByteArray();
+            imagen = new DataImagen(bytes, nombreArchivo, extensionArchivo);
+        }
+
         try {
             DtUsuario dtLogeado = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
 
             boolean encontrado = Fabrica.getInstance().getControladorPropCat().seleccionarUC(dtLogeado.getNickName(), cat);
 
             if (!encontrado) {
-                boolean ok = Fabrica.getInstance().getControladorPropCat().crearPropuesta(titulo, desc, lugar, cat, fecha, montoE, montoT, TipoRetorno.EntGan);
+                boolean ok = controladorP.crearPropuesta(titulo, desc, lugar, imagen, fecha, montoE, montoT, TipoRetorno.EntGan);
                 MENSAJE = "Se registro exitosamente";
                 request.setAttribute("mensaje", MENSAJE);
                 request.getRequestDispatcher("/Vistas/FuncionamientoCorrecto.jsp").forward(request, response);

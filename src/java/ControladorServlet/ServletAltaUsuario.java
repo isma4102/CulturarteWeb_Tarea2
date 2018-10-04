@@ -96,7 +96,6 @@ public class ServletAltaUsuario extends HttpServlet {
         String hash = a.sha1(pass);
         DataImagen imagen = null;
         final Part partImagen = request.getPart("imagen");
-
         if (partImagen.getSize() != 0) {
             InputStream data = partImagen.getInputStream();
             final String fileName = Utils.getFileName(partImagen);
