@@ -43,44 +43,72 @@
                         <div id="mostrarinfo">
                             <div>
                                 </br>
-                                <div class="input-group input-group-sm">
-                                    <span class="input-group-addon">Titulo</span>
-                                    <input readonly  type="text" class="form-control" placeholder="<% out.print(propuestaSelec.getTitulo()); %>"/>
+
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading" style="padding: 1%">
+                                        <h3 class="panel-title">Titulo</h3>
+                                    </div>
+                                    <div class="panel-body" style="padding: 1%">
+                                        <% out.print(propuestaSelec.getTitulo()); %>
+                                    </div>
                                 </div>
-                                </br>
-                                <div class="input-group input-group-sm">
-                                    <span class="input-group-addon">Descripción</span>
-                                    <textarea readonly style="height: 76px;resize: none" class="form-control rounded-0" rows="20"><%out.print(propuestaSelec.getDescripcion());%></textarea>
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading" style="padding: 1%">
+                                        <h3 class="panel-title">Descripción</h3>
+                                    </div>
+                                    <textarea readonly style="background-color: white; height: 76px;resize: none" class="form-control rounded-0" rows="20"><%out.print(propuestaSelec.getDescripcion());%></textarea>
                                 </div>
-                                </br>
-                                <div class="input-group input-group-sm">
-                                    <span class="input-group-addon">Tipo de espectaculo</span>
-                                    <input readonly type="text" class="form-control" placeholder="<%out.print(propuestaSelec.getTipoEspec());%>"/>
+
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading" style="padding: 1%">
+                                        <h3 class="panel-title">Tipo de espectaculo</h3>
+                                    </div>
+                                    <div class="panel-body" style="padding: 1%">
+                                        <%out.print(propuestaSelec.getTipoEspec());%>
+                                    </div>
                                 </div>
-                                </br>
-                                <div class="input-group input-group-sm">
-                                    <span class="input-group-addon">Lugar</span>
-                                    <input readonly type="text" class="form-control" placeholder="<%out.print(propuestaSelec.getLugar());%>"/>
+
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading" style="padding: 1%">
+                                        <h3 class="panel-title">Lugar</h3>
+                                    </div>
+                                    <div class="panel-body" style="padding: 1%">
+                                        <%out.print(propuestaSelec.getLugar());%>
+                                    </div>
                                 </div>
-                                </br>
-                                <div class="input-group input-group-sm">
-                                    <span class="input-group-addon">Fecha de relizacion</span>
-                                    <%         Date now = new Date();
+
+                                 <div class="panel panel-primary">
+                                    <div class="panel-heading" style="padding: 1%">
+                                        <h3 class="panel-title">Fecha de relizacion</h3>
+                                    </div>
+                                    <div class="panel-body" style="padding: 1%">
+                                      <%         Date now = new Date();
                                         SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy");
-                                        out.print("<input readonly type=\"text\" class=\"form-control\" placeholder=\"" + sf.format(propuestaSelec.getFechaReal().getTime()) + "\"/>");
+                                        out.print(sf.format(propuestaSelec.getFechaReal().getTime()));
                                     %>
+                                    </div>
                                 </div>
-                                </br>
-                                <div class="input-group input-group-sm">
-                                    <span class="input-group-addon">Precio de entrada</span>
-                                    <input readonly type="text" class="form-control" placeholder="<%out.print(propuestaSelec.getPrecio());%>"/>
+
+                               <div class="panel panel-primary">
+                                    <div class="panel-heading" style="padding: 1%">
+                                        <h3 class="panel-title">Precio de entrada</h3>
+                                    </div>
+                                    <div class="panel-body" style="padding: 1%">
+                                       <%out.print(propuestaSelec.getPrecio());%>
+                                    </div>
                                 </div>
-                                </br>
-                                <div class="input-group input-group-sm">
-                                    <span class="input-group-addon">Monto final</span>
-                                    <input readonly type="text" class="form-control" placeholder="<%out.print(propuestaSelec.getMonto());%>"/>
+
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading" style="padding: 1%">
+                                        <h3 class="panel-title">Monto final</h3>
+                                    </div>
+                                    <div class="panel-body" style="padding: 1%">
+                                    <%out.print(propuestaSelec.getMonto());%>
+                                    </div>
                                 </div>
-                                </br>
+
+                               
+
                             </div>
                         </div>
 
