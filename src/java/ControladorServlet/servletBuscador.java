@@ -76,15 +76,12 @@ public class servletBuscador extends HttpServlet {
             switch (filtro) {
                 case "alfa":
                     Collections.sort(resultado, (DtinfoPropuesta o1, DtinfoPropuesta o2) -> o1.getTitulo().compareTo(o2.getTitulo()));
-                    //request.setAttribute("resultado", resultado);
-//                    request.setAttribute("busqueda", busqueda);
-//                    request.setAttribute("tipoRetorno", "filtrado");
                     String json = new GsonBuilder().create().toJson(resultado);
                     response.setContentType("application/json;charset=UTF-8");
                     response.getWriter().write(json);
                     break;
                 case "estado":
-                    Collections.sort(resultado, (DtinfoPropuesta o1, DtinfoPropuesta o2) -> o1.getTitulo().compareTo(o2.getTitulo()));
+                    Collections.sort(resultado, (DtinfoPropuesta o1, DtinfoPropuesta o2) -> o1.getEstado().compareTo(o2.getEstado()));
                     String json1 = new GsonBuilder().create().toJson(resultado);
                     response.setContentType("application/json;charset=UTF-8");
                     response.getWriter().write(json1);
