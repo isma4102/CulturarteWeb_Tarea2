@@ -14,7 +14,14 @@ $('#filtro-estado').click(function () {
         data: {"filtro": tipo,
             "busqueda": busqueda},
         // especifica si será una petición POST o GET
-        type: 'GET'
+        type: 'GET',
+        success: function (data) {
+            for (var i = 0; i < data.length; i++) {
+                document.querySelector("#elemento" + i + " .Titulo").innerHTML = data[i].Titulo;
+                document.querySelector("#elemento" + i + " .Lugar").innerHTML = data[i].Lugar;
+                document.querySelector("#elemento" + i + " .Descripcion").innerHTML = data[i].Descripcion;
+            }
+        }
     });
 });
 $('#filtro-fecha').click(function () {
@@ -30,7 +37,6 @@ $('#filtro-fecha').click(function () {
         type: 'GET',
         success: function (data) {
             for (var i = 0; i < data.length; i++) {
-                console.log(document.querySelector("#elemento" + i + " .Titulo"));
                 document.querySelector("#elemento" + i + " .Titulo").innerHTML = data[i].Titulo;
                 document.querySelector("#elemento" + i + " .Lugar").innerHTML = data[i].Lugar;
                 document.querySelector("#elemento" + i + " .Descripcion").innerHTML = data[i].Descripcion;
@@ -53,7 +59,6 @@ $('#filtro-alfa').click(function () {
         type: 'GET',
         success: function (data) {
             for (var i = 0; i < data.length; i++) {
-                console.log(document.querySelector("#elemento" + i + " .Titulo"));
                 document.querySelector("#elemento" + i + " .Titulo").innerHTML = data[i].Titulo;
                 document.querySelector("#elemento" + i + " .Lugar").innerHTML = data[i].Lugar;
                 document.querySelector("#elemento" + i + " .Descripcion").innerHTML = data[i].Descripcion;
