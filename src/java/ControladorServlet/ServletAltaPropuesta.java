@@ -47,10 +47,16 @@ public class ServletAltaPropuesta extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<String> listCat = Fabrica.getInstance().getControladorPropCat().ListarCategorias();
-        request.setAttribute("listCat", listCat);
 
-        request.getRequestDispatcher("Vistas/AltaPropuesta.jsp").forward(request, response);
+        DtUsuario usuLogeado = (DtUsuario) request.getAttribute("usuario_logueago");
+
+        if (usuLogeado.Esproponente()) {
+            List<String> listCat = Fabrica.getInstance().getControladorPropCat().ListarCategorias();
+            request.setAttribute("listCat", listCat);
+            request.getRequestDispatcher("Vistas/AltaPropuesta.jsp").forward(request, response);
+        }else{
+            request.getRequestDispatcher("Vistas/Inicio.jsp").forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
