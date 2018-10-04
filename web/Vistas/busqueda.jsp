@@ -55,8 +55,12 @@
         <%for (int i = 0; i < lista.size(); i++) {
                 DtinfoPropuesta p = lista.get(i);
         %>
-        <div id="elemento<%=i%>" class="panel panel-primary">
-            <div style="display: inline-block; width: 100%" class="btn btn-info panel-heading" data-toggle="collapse" data-target="#descripcion<%=i%>" ><div class="Titulo"><%=p.getTitulo()%></div><hr class="linea"><div class="Lugar"><%=p.getLugar()%></div></div>
+        <div style="background-color: #444; border-color: #444" id="elemento<%=i%>" class="panel panel-primary">
+            <div style="vertical-align: middle; width: 100%" class="btn btn-info panel-heading" data-toggle="collapse" data-target="#descripcion<%=i%>" >
+                <img style="float: left" src="..." alt="..." class="imagen<%=i%> img-circle">
+                <div><h3 class="Titulo"><%=p.getTitulo()%></h3></div>
+                <div style="float: right" class="Lugar"><%=p.getLugar()%></div>
+            </div>
             <div id="descripcion<%=i%>" class="collapse panel-footer Descripcion"><%=p.getDescripcion()%></div>
         </div>
         <%}
