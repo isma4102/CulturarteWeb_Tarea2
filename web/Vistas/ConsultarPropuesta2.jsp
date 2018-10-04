@@ -44,88 +44,116 @@
                     <div class="modal-body">
                         <div id="mostrarinfo">
                             </br>
-                            <div class="input-group input-group-sm">
-                                <span class="input-group-addon">Titulo</span>
-                                <input readonly  type="text" class="form-control" placeholder="<% out.print(propuestaSelec.getTitulo()); %>"/>
-                            </div>
-                            </br>
-                            <div class="input-group input-group-sm">
-                                <span class="input-group-addon">Descripción</span>
-                                <textarea readonly style="height: 76px;resize: none" class="form-control rounded-0" rows="20"><%out.print(propuestaSelec.getDescripcion());%></textarea>
-                            </div>
-                            </br>
-                            <div class="input-group input-group-sm">
-                                <span class="input-group-addon">Tipo de espectaculo</span>
-                                <input readonly type="text" class="form-control" placeholder="<%out.print(propuestaSelec.getCategoria());%>"/>
-                            </div>
-                            </br>
-                            <div class="input-group input-group-sm">
-                                <span class="input-group-addon">Lugar</span>
-                                <input readonly type="text" class="form-control" placeholder="<%out.print(propuestaSelec.getLugar());%>"/>
-                            </div>
-                            </br>
-                            <div class="input-group input-group-sm">
-                                <span class="input-group-addon">Fecha de relizacion</span>
-                                <input readonly type="text" class="form-control" placeholder=" <% out.print(propuestaSelec.getFechaR());%>">
-                            </div>
-                            </br>
-                            <div class="input-group input-group-sm">
-                                <span class="input-group-addon">Precio de entrada</span>
-                                <input readonly type="text" class="form-control" placeholder="<%out.print(propuestaSelec.getMontoE());%>"/>
-                            </div>
-                            </br>
-                            <div class="input-group input-group-sm">
-                                <span class="input-group-addon">Monto final</span>
-                                <input readonly type="text" class="form-control" placeholder="<%out.print(propuestaSelec.getMontoTot());%>"/>
-                            </div>
-                            </br>
-                            <div class="input-group input-group-sm">
-                                <span class="input-group-addon">Monto Actual</span>
-                                <input readonly type="text" class="form-control" placeholder="<%out.print(propuestaSelec.getMontoActual());%>"/>
-                            </div>
-                            <br>
-                            <div class="input-group input-group-sm">
-                                <span class="input-group-addon">Tipo de retorno</span>
-                                <input readonly type="text" class="form-control" placeholder="<%out.print(propuestaSelec.getTipoRetorno());%>"/>
+                            <div class="panel panel-primary">
+                                <div class="panel-heading" style="padding: 1%">
+                                    <h3 class="panel-title">Titulo</h3>
+                                </div>
+                                <div class="panel-body" style="padding: 1%">
+                                    <% out.print(propuestaSelec.getTitulo()); %>
+                                </div>
                             </div>
 
+                            <div class="panel panel-primary">
+                                <div class="panel-heading" style="padding: 1%">
+                                    <h3 class="panel-title">Descripción</h3>
+                                </div>
+                                <textarea readonly style="background-color: white; height: 76px;resize: none" class="form-control rounded-0" rows="20"><%out.print(propuestaSelec.getDescripcion());%></textarea>
+                            </div>
 
-                            <table class="table  table-bordered table-hover" style="margin-left: 229px;width: 70%;">
-                                <thead>
-                                <h3 align="center" style="position: absolute;top: 76px;left: 657px;">Colaboradores</h3>
-                                <form class="navbar-form navbar-right">
-                                    <br>
-                                    <div class="input-group input-group-sm">
-                                        <input type="text" class="form-control" placeholder="Buscar" />
-                                    </div>
+                            <div class="panel panel-primary">
+                                <div class="panel-heading" style="padding: 1%">
+                                    <h3 class="panel-title">Tipo de espectaculo</h3>
+                                </div>
+                                <div class="panel-body" style="padding: 1%">
+                                    <%out.print(propuestaSelec.getCategoria());%>
+                                </div>
+                            </div>
 
-                                </form>
+                            <div class="panel panel-primary">
+                                <div class="panel-heading" style="padding: 1%">
+                                    <h3 class="panel-title">Lugar</h3>
+                                </div>
+                                <div class="panel-body" style="padding: 1%">
+                                    <%out.print(propuestaSelec.getLugar());%>
+                                </div>
+                            </div>
+                            <div class="panel panel-primary">
+                                <div class="panel-heading" style="padding: 1%">
+                                    <h3 class="panel-title">Fecha de relizacion</h3>
+                                </div>
+                                <div class="panel-body" style="padding: 1%">
+                                    <% out.print(propuestaSelec.getFechaR());%>
+                                </div>
+                            </div>
 
-                                <tr>   
-                                    <th class="active">NickName</th>
-                                    <th class="active">Nombre</th>
-                                    <th class="active">Apellido</th>
-                                    <th class="active">Monto Colab.</th>
-                                    <th class="active">Fecha R.</th>
-                                </tr>
-                                </thead>
-                                <div style="overflow: auto">
-                                    <tbody>
-                                        <%
-                                            List<DtConsultaPropuesta2> lista = (List<DtConsultaPropuesta2>) request.getAttribute("listaC");
-                                            for (int i = 0; i < lista.size(); i++) {
-                                                out.print("<tr>");
-                                                out.print("<td><input style=\"border:none\" type=\"text\" class=\"form-control-plaintext\" name=\"Nick\" value=\"" + lista.get(i).getNickColab() + "\" readonly=\"readonly\"/></td>");
-                                                out.print("<td><input style=\"border:none\" type=\"text\" class=\"form-control-plaintext\" name=\"Nombre\" value=\"" + lista.get(i).getNombreColab() + "\" readonly=\"readonly\"/></td>");
-                                                out.print("<td><input style=\"border:none\" type=\"text\" class=\"form-control-plaintext\" name=\"Apellido\" value=\"" + lista.get(i).getApellidoColab() + "\" readonly=\"readonly\"/></td>");
-                                                out.print("<td><input style=\"border:none\" type=\"text\" class=\"form-control-plaintext\" name=\"MontoC\" value=\"" + lista.get(i).getMontoColab() + "\" readonly=\"readonly\"/></td>");
-                                                out.print("<td><input style=\"border:none\" type=\"text\" class=\"form-control-plaintext\" name=\"FechaR\" value=\"" + lista.get(i).getFechaR() + "\" readonly=\"readonly\"/></td>");
-                                                out.print("</form>");
-                                                out.print("</tr>");
-                                            }
-                                        %>
-                                    </tbody>
-                            </table>
+                            <div class="panel panel-primary">
+                                <div class="panel-heading" style="padding: 1%">
+                                    <h3 class="panel-title">Precio de entrada</h3>
+                                </div>
+                                <div class="panel-body" style="padding: 1%">
+                                    <%out.print(propuestaSelec.getMontoE());%>
+                                </div>
+                            </div>
+
+                            <div class="panel panel-primary">
+                                <div class="panel-heading" style="padding: 1%">
+                                    <h3 class="panel-title">Monto Final</h3>
+                                </div>
+                                <div class="panel-body" style="padding: 1%">
+                                    <%out.print(propuestaSelec.getMontoTot());%>
+                                </div>
+                            </div>
+
+                            <div class="panel panel-primary">
+                                <div class="panel-heading" style="padding: 1%">
+                                    <h3 class="panel-title">Monto Actual</h3>
+                                </div>
+                                <div class="panel-body" style="padding: 1%">
+                                    <%out.print(propuestaSelec.getMontoActual());%>
+                                </div>
+                            </div>
+
+                            <div class="panel panel-primary">
+                                <div class="panel-heading" style="padding: 1%">
+                                    <h3 class="panel-title">Tipo de retorno</h3>
+                                </div>
+                                <div class="panel-body" style="padding: 1%">
+                                    <%out.print(propuestaSelec.getTipoRetorno());%>
+                                </div>
+                            </div>
+                           
+                            <h4 align="center" class="modal-title" id="classModalLabel">
+                                Colaboradores
+                            </h4>
+                            <div style="  overflow-x: auto;">
+                                <table class="table  table-bordered table-hover" style="width: 70%;">
+                                    <thead>
+                                        <tr>   
+                                            <th class="active">NickName</th>
+                                            <th class="active">Nombre</th>
+                                            <th class="active">Apellido</th>
+                                            <th class="active">Monto Colab.</th>
+                                            <th class="active">Fecha R.</th>
+                                        </tr>
+                                    </thead>
+                                    <div style="overflow: auto">
+                                        <tbody>
+                                            <%
+                                                List<DtConsultaPropuesta2> lista = (List<DtConsultaPropuesta2>) request.getAttribute("listaC");
+                                                for (int i = 0; i < lista.size(); i++) {
+                                                    out.print("<tr>");
+                                                    out.print("<td><input style=\"border:none\" type=\"text\" class=\"form-control-plaintext\" name=\"Nick\" value=\"" + lista.get(i).getNickColab() + "\" readonly=\"readonly\"/></td>");
+                                                    out.print("<td><input style=\"border:none\" type=\"text\" class=\"form-control-plaintext\" name=\"Nombre\" value=\"" + lista.get(i).getNombreColab() + "\" readonly=\"readonly\"/></td>");
+                                                    out.print("<td><input style=\"border:none\" type=\"text\" class=\"form-control-plaintext\" name=\"Apellido\" value=\"" + lista.get(i).getApellidoColab() + "\" readonly=\"readonly\"/></td>");
+                                                    out.print("<td><input style=\"border:none\" type=\"text\" class=\"form-control-plaintext\" name=\"MontoC\" value=\"" + lista.get(i).getMontoColab() + "\" readonly=\"readonly\"/></td>");
+                                                    out.print("<td><input style=\"border:none\" type=\"text\" class=\"form-control-plaintext\" name=\"FechaR\" value=\"" + lista.get(i).getFechaR() + "\" readonly=\"readonly\"/></td>");
+                                                    out.print("</form>");
+                                                    out.print("</tr>");
+                                                }
+                                            %>
+                                        </tbody>
+                                </table>
+                            </div>
 
                         </div>
                         <div class="modal-footer">
