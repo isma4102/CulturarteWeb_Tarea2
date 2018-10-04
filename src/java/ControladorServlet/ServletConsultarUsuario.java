@@ -85,12 +85,18 @@ public class ServletConsultarUsuario extends HttpServlet {
         request.setAttribute("Usuario", dtu);
         request.setAttribute("Favoritas", favoritas);
         ICP = Fabrica.getInstance().getControladorPropCat();
-        List<DtinfoPropuesta> propuestasing = ICP.ListarPropuestasDeProponenteX(nickname);
-        request.setAttribute("Propuestas2", propuestasing);
+
+        DtUsuario nick = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
 
         if (dtu.Esproponente()) {
             List<DtinfoPropuesta> propuestas = ICP.ListarPropuestasNoIngresadas(nickname);
             request.setAttribute("Propuestas", propuestas);
+            if (nick != null) {
+                if (dtu.getNickName().equals(nick.getNickName())) {
+                    List<DtinfoPropuesta> propuestasing = ICP.ListarPropuestasDeProponenteX(nickname);
+                    request.setAttribute("Propuestas2", propuestasing);
+                }
+            }
         } else {
             List<DtinfoPropuesta> colaboraciones = ICU.verPropuestas(nickname);
             request.setAttribute("Colaboraciones", colaboraciones);
