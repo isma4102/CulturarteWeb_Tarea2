@@ -24,7 +24,7 @@
     <body>
 
         <h1>Informacion de la propuesta:</h1>
-        <form action="ServletAltaPropuesta" method="post" onsubmit="return validarPropuesta()">
+        <form action="ServletAltaPropuesta" method="post" onsubmit="return validarPropuesta()" enctype="multipart/form-data">
 
             <div >
                 <label for="Categoria">Categoria </label>
@@ -71,6 +71,11 @@
                 <label for="fechaR">Fecha de realizacion:</label>
                 <input id="FechaR" name="FechaR" type="date" size="15" maxlength="30" required/>
                 <span id="error_FechaR" class="error">Debes ingresar una fecha superior a la fecha actual</span>
+            </div>
+            <br>
+            <div class="btn btn-default image-preview-input">
+                <span>Selecciona imagen para tu perfil</span>
+                <input type="file" accept="image/png, image/jpeg" id="imagen" name="imagen"/> <!-- rename it -->
             </div>
             <br>
             <div>
