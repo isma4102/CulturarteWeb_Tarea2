@@ -39,7 +39,7 @@ public class ServletConsultarPropuesta extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<DtNickTitProp> listP = Fabrica.getInstance().getControladorPropCat().listarPropuestas();
         request.setAttribute("listaPropuestas", listP);
-        
+
         request.getRequestDispatcher("Vistas/ConsultarPropuesta.jsp").forward(request, response);
     }
 
@@ -67,21 +67,22 @@ public class ServletConsultarPropuesta extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-        String titulo = request.getParameter("TituloP");
-        
+
+        String tit = request.getParameter("TituloP");
+        String titulo = new String(tit.getBytes("ISO-8859-1"), "UTF-8");
+
         try {
             DtConsultaPropuesta dtinfo = Fabrica.getInstance().getControladorPropCat().SeleccionarPropuesta(titulo);
             request.setAttribute("propuesta", dtinfo);
-            
+
             List<DtConsultaPropuesta2> listColab = Fabrica.getInstance().getControladorPropCat().ListaColaboradoresProp(titulo);
-            
+
             request.setAttribute("listaC", listColab);
-            
+
         } catch (Exception ex) {
             Logger.getLogger(ServletConsultarPropuesta.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         request.getRequestDispatcher("/Vistas/ConsultarPropuesta2.jsp").forward(request, response);
     }
 

@@ -49,11 +49,11 @@ public class ServletInicio extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<DtPropuestaWeb> listPublicada = Fabrica.getInstance().getControladorPropCat().ListarPropuestasWeb(TipoE.Publicada);
-        List<DtPropuestaWeb> listFinanciada = Fabrica.getInstance().getControladorPropCat().ListarPropuestasWeb(TipoE.Publicada);
-        List<DtPropuestaWeb> listEnFinanciacion = Fabrica.getInstance().getControladorPropCat().ListarPropuestasWeb(TipoE.Publicada);
-        List<DtPropuestaWeb> listNoFinanciada = Fabrica.getInstance().getControladorPropCat().ListarPropuestasWeb(TipoE.Publicada);
-        List<DtPropuestaWeb> listCancelada = Fabrica.getInstance().getControladorPropCat().ListarPropuestasWeb(TipoE.Publicada);
-        
+        List<DtPropuestaWeb> listFinanciada = Fabrica.getInstance().getControladorPropCat().ListarPropuestasWeb(TipoE.Financiada);
+        List<DtPropuestaWeb> listEnFinanciacion = Fabrica.getInstance().getControladorPropCat().ListarPropuestasWeb(TipoE.enFinanciacion);
+        List<DtPropuestaWeb> listNoFinanciada = Fabrica.getInstance().getControladorPropCat().ListarPropuestasWeb(TipoE.noFinanciada);
+        List<DtPropuestaWeb> listCancelada = Fabrica.getInstance().getControladorPropCat().ListarPropuestasWeb(TipoE.Cancelada);
+
         request.setAttribute("Cancelada", listCancelada);
         request.setAttribute("Publicada", listPublicada);
         request.setAttribute("Financiada", listFinanciada);

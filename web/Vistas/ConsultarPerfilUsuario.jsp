@@ -8,20 +8,22 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="script/FiltrarTabla.js"></script>
         <link rel="stylesheet" type="text/css" href="css/RegistrarColaboracion.css"/>
         <link href="css/bootstrap.css" rel="stylesheet">
         <title>Consultar perfil de usuario</title>
     </head>
     <body>
-                <jsp:include page="/Vistas/Barra_menu.jsp" />
-                <div class="formulario_ver_propuesta" style="margin-top: 7%;">
+        <jsp:include page="/Vistas/Barra_menu.jsp" />
+        <div class="formulario_ver_propuesta" style="margin-top: 7%;">
             <%List<DtUsuario> usu = (List<DtUsuario>) request.getAttribute("Usuarios");
                 if (usu.size() != 0) {%>
 
-            <table class="table table-bordered table-hover" style="width: 70%;">
+            <table id="tabla" class="table table-bordered table-hover" style="width: 70%;">
                 <thead>
                 <h3 style="text-align: center">Elija un usuario</h3>
-
+                <input id="buscar" type="text" style="text-align: center" placeholder="Buscar" onkeyup="FiltrarTabla()" />
+                <br>
                 <tr>
                     <th >Nickname</th>
                     <th>Nombre</th>
@@ -52,7 +54,7 @@
             <h1>No hay usuarios en el sistema</h1>
             <%}%>
         </div>
-        
+
     </body>
 
 </html>

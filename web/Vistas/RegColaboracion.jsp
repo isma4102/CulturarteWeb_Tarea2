@@ -16,6 +16,7 @@
         <link href="css/RegistrarColaboracion.css" rel="stylesheet">
         <script src="js/bootstrap.js"></script>
         <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="script/FiltrarTabla.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
         <title>Registrar Colaboración</title>
@@ -24,11 +25,11 @@
     <body>
         <jsp:include page="/Vistas/Barra_menu.jsp" />
 
-        <table class="table table-bordered table-hover formulario" style="margin-left: 229px;width: 70%;">
+        <table id="tabla" class="table table-bordered table-hover formulario" style="margin-left: 229px;width: 70%;">
             <thead>
             <h3 style="position: absolute;top: 76px;left: 657px;">Registro de propuestas</h3>
             <form class="navbar-form navbar-right" action="ServletRegistroColaboracion" method="POST">
-                <input style="width: 216px;margin-left: 671px;margin-top: 139px;margin-bottom: -4px;" type="text" name="Buscar" class="form-control" placeholder="Buscar" />
+                <input id="buscar" style="width: 216px;margin-left: 671px;margin-top: 139px;margin-bottom: -4px;" type="text" name="Buscar" class="form-control" placeholder="Buscar" />
             </form>
 
             <tr>

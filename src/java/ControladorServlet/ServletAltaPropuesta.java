@@ -51,7 +51,7 @@ public class ServletAltaPropuesta extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        DtUsuario usuLogeado = (DtUsuario) request.getAttribute("usuario_logueago");
+        DtUsuario usuLogeado = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
 
         if (usuLogeado.Esproponente()) {
             List<String> listCat = Fabrica.getInstance().getControladorPropCat().ListarCategorias();
