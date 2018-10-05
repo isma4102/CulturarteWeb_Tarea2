@@ -114,7 +114,7 @@
 
                     </div>
                     <div class="modal-footer">
-                        <a href="javascript:window.history.back();" class="btn btn-danger"> &laquo; Volver</a>
+                        <a href="javascript:window.history.back();" class="btn btn-primary"> &laquo; Volver</a>
                     </div>
                 </div>
             </div>

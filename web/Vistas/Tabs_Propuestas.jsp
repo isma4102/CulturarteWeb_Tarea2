@@ -144,7 +144,7 @@
                             <div class="row">
                                 <% List<DtPropuestaWeb> listNoF = (List<DtPropuestaWeb>) request.getAttribute("noFinanciada");
                                     for (int i = 0; i < listNoF.size(); i++) {
-                                        out.print("<div class=\"col-sm-6 col-md-3\">");
+                                        out.print("<div class=\"col-xs-6 col-md-3\">");
                                         out.print("<div  class=\"thumbnail\">");
                                         out.print("<div class=\"caption\">");
                                         out.print("<h3 style=\"width: 135%;\">" + listNoF.get(i).getTituloP() + "</h3>");
