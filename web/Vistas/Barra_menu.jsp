@@ -33,7 +33,7 @@
                                     out.print("<input style=\"border:none;background-color:black;color:white\" class=\"form-control-plaintext\" readonly name=\"nick\" type=\"text\" value=\"" + ((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickName() + "\"/>");
 
                                     out.print("<div>");
-                                    out.print("<button type=\"submit\" style=\"border:none;background-color:black;color: white\" P> Ver </button>");
+                                    out.print("<button type=\"submit\" style=\"border:none;background-color:black;color: white\" P> Perfil </button>");
                                     out.print("<a style=\"color: white\">  |  </a>");
                                     out.print("<a style=\"color: white\" href=\"/CulturarteWeb/CerrarSesion\"> Cerrar Sesion</a>");
                                     out.print("</div>");
