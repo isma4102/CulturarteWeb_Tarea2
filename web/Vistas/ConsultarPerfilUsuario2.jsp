@@ -172,8 +172,9 @@
                                         <td><input readonly style="border:none" name="nick" type="text" value="Colaborador"/>&nbsp;&nbsp;&nbsp;
                                             <% }%>
                                     </tr>
+                                     <% }%>  
                                 </table>
-                                <% }%>  
+                               
 
                                 <% } else {%>
                                 <h3>No posee seguidores</h3>

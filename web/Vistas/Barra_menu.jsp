@@ -27,24 +27,26 @@
                 </div>
                 <div class="navbar-collapse collapse" id="navbar">
                     <ul class="nav navbar-nav navbar-right">
+                        <form  action="${pageContext.request.contextPath}/ServletConsultarUsuario" method="POST">
+                            <% if ((DtUsuario) request.getSession().getAttribute("usuario_logueado") != null) {
+                                    out.print("<img style=\"margin-top: 7px\" src=\"Imagenes/nadie.png\" class=\"img-circle\" width=\" 40\" height=\"40\">");
+                                    out.print("<input style=\"border:none;background-color:black;color:white\" class=\"form-control-plaintext\" readonly name=\"nick\" type=\"text\" value=\"" + ((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickName() + "\"/>");
 
-                        <% if ((DtUsuario) request.getSession().getAttribute("usuario_logueado") != null) {
-                                out.print("<img style=\"margin-top: 7px\" src=\"file:///C:/Users/Mehitor/Pictures/Culturarte.png\" class=\"img-circle\" width=\" 40\" height=\"40\">");
-                                out.print("<a style=\"color: white;margin-left: 8%;\" href=\"#\">" + ((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickName() + "</a>");
-                                out.print("<div>");
-                                out.print("<a style=\"color: white\" href=\"\"> Perfil </a>");
-                                out.print("<a style=\"color: white\">  |  </a>");
-                                out.print("<a style=\"color: white\" href=\"/CulturarteWeb/CerrarSesion\"> Cerrar Sesion</a>");
-                                out.print("</div>");
-                            } else {
-                                out.print("<div style=\"margin-top: 13%;\">");
-                                out.print("<a style=\"color: white\" href=\"/CulturarteWeb/iniciar-sesion\"> Iniciar </a>");
-                                out.print("<a style=\"color: white\">  |  </a>");
-                                out.print("<a style=\"color: white\" href=\"/CulturarteWeb/altaUsuarioServlet\"> Registrarse </a>");
-                                out.print("</div>");
+                                    out.print("<div>");
+                                    out.print("<button type=\"submit\" style=\"border:none;background-color:black;color: white\" P> Ver </button>");
+                                    out.print("<a style=\"color: white\">  |  </a>");
+                                    out.print("<a style=\"color: white\" href=\"/CulturarteWeb/CerrarSesion\"> Cerrar Sesion</a>");
+                                    out.print("</div>");
+                                } else {
+                                    out.print("<div style=\"margin-top: 13%;\">");
+                                    out.print("<a style=\"color: white\" href=\"/CulturarteWeb/iniciar-sesion\"> Iniciar </a>");
+                                    out.print("<a style=\"color: white\">  |  </a>");
+                                    out.print("<a style=\"color: white\" href=\"/CulturarteWeb/altaUsuarioServlet\"> Registrarse </a>");
+                                    out.print("</div>");
 
-                            }
-                        %>
+                                }
+                            %>
+                        </form>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li style="margin-top: 1px; color:white "><a href="#">Tengo una propuesta</a></li>

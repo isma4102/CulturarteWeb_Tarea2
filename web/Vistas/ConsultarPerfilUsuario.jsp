@@ -41,7 +41,7 @@
                             <%} else {%>
                         <td>Proponente&nbsp;&nbsp;&nbsp;<br/></td>
                             <%}%>
-                        <td><input style="background:url('/CulturarteWeb/Imagenes/ver.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px" class="btn btn-primary" type="submit" /></td>
+                        <td><button style="background:url('/CulturarteWeb/Imagenes/ver.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px" type="input" name="Ver" class="btn btn-primary"></button></td>
                     </tr>
                 </form>
                 <% }%>

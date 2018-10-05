@@ -75,6 +75,8 @@ public class ServletConsultarUsuario extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        ICU = Fabrica.getInstance().getIControladorUsuario();
+        ICP = Fabrica.getInstance().getControladorPropCat();
         String nickname = request.getParameter("nick");
         DtUsuario dtu = ICU.ObtenerDTUsuario(nickname);
         List<DtUsuario> seguidos = ICU.ObtenerSeguidos(nickname);
