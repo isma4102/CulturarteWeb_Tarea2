@@ -221,7 +221,7 @@
                                     <form action="ServletConsultarPropuesta" method="POST">
                                         <tr>
                                             <th>Titulo</th>
-                                            <th>Nombre</th>
+                                            <th>Descripción</th>
                                             <th>Estado</th>
                                             <th>Accion</th>
                                         </tr>
@@ -258,7 +258,7 @@
                                     <form action="ServletConsultarPropuesta" method="POST">
                                         <tr>
                                             <th>Titulo</th>
-                                            <th>Nombre</th>
+                                            <th>Descripción</th>
                                             <th>Estado</th>
                                             <th>Accion</th>
                                         </tr>
@@ -287,7 +287,7 @@
                                     <form action="ServletConsultarPropuesta" method="POST">
                                         <tr>
                                             <th>Titulo</th>
-                                            <th>Nombre</th>
+                                            <th>Descripción</th>
                                             <th>Estado</th>
                                             <th>Accion</th>
                                         </tr>
@@ -318,7 +318,7 @@
                                     <form action="ServletConsultarPropuesta" method="POST">
                                         <tr>
                                             <th>Titulo</th>
-                                            <th>Nombre</th>
+                                            <th>Descripción</th>
                                             <th>Estado</th>
                                             <th>Accion</th>
                                         </tr>
@@ -349,7 +349,7 @@
 
                                     <tr>
                                         <th>Titulo</th>
-                                        <th>Nombre</th>
+                                        <th>Descripción</th>
                                             <%if (dtu.getNickName().equals(nick.getNickName())) {%>
                                         <th>Fecha de colaboracion:</th>
                                         <th>Monto</th>  
@@ -388,7 +388,7 @@
 
                                     <tr>
                                         <th>Titulo</th>
-                                        <th>Nombre</th>     
+                                        <th>Descripción</th>     
                                     </tr>
 
                                     <% for (DtinfoPropuesta dtp : colaboraciones) {%>
