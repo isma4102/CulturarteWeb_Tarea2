@@ -46,7 +46,7 @@
                 </form>
                 <% }%>
             </table>
-            <a href="javascript:window.history.back();" class="btn btn-danger"> &laquo; Volver</a>
+            <a href="javascript:window.history.back();" class="btn btn-primary"> &laquo; Volver</a>
 
             <% } else {%>
             <h1>No hay usuarios en el sistema</h1>

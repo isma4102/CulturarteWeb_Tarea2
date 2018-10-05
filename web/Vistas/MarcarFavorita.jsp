@@ -11,29 +11,29 @@
 <!DOCTYPE html>
 <html>
     <head>
-         <%
+        <%
             String favorito = (String) request.getAttribute("favorito");
-            if (favorito != null) 
-    {%>
+            if (favorito != null) {%>
         <script type="text/javascript">
-            
-    window.onload = function(){
-      alert("<%= favorito%>");
-    }
-          
+
+            window.onload = function () {
+                alert("<%= favorito%>");
+            }
+
         </script>
         <%
             }
         %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="css/bootstrap.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="css/marcarfavorita.css"/>
+        <link rel="stylesheet" type="text/css" href="css/RegistrarColaboracion.css"/>
         <title>Marcar propuesta como favorita</title>
     </head>
     <body>
-        <div class="propuestas" style="margin-top: 2%">
-            <h3>Propuestas</h3>
-            <table class="table table-bordered table-hover  formulario" style="margin-right: 200px; width: 88%; margin-top:50px;">
+        <jsp:include page="/Vistas/Barra_menu.jsp" />
+        <div class="formulario_ver_propuesta" style="margin-top: 7%">
+            <h3 align="center">Propuestas</h3>
+            <table class="table table-bordered table-hover" style="margin-right: 200px; width: 88%  ">
 
                 <tr>
                     <th>Titulo</th>
@@ -43,12 +43,12 @@
                     for (DtinfoPropuesta dtp : propuestas) {%>
                 <tr>
 
-                    <td><input type="text" value="<%=dtp.getTitulo()%>"/></td>&nbsp;&nbsp;&nbsp;
-                    <td><textarea style="width: 300px; height: 100px;"><%=dtp.getDescripcion()%></textarea></td> 
+                    <td><input readonly style="border:none" type="text" value="<%=dtp.getTitulo()%>"/></td>&nbsp;&nbsp;&nbsp;
+                    <td><textarea style="background-color: white; resize: none;width: 300px; height: 100px;"><%=dtp.getDescripcion()%></textarea></td> 
                     <td>
                         <form action="ServletMarcarFavorita" method="POST">
-                            <input name="TituloP" type="hidden" value="<%=dtp.getTitulo()%>"/>
-                            <input  onclick="submit()" type="button" value="Marcar como favorita"/>
+                            <input  name="TituloP" type="hidden" value="<%=dtp.getTitulo()%>"/>
+                            <input class="btn btn-primary"  onclick="submit()" type="button" value="Marcar como favorita"/>
                         </form>
                     </td>
 
@@ -56,6 +56,9 @@
                 <%}%>
 
             </table>
+
+            <a href="javascript:window.history.back();" class="btn btn-primary"> &laquo; Volver</a>
+
         </div>
     </body>
 </html>

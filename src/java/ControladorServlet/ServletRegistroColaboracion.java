@@ -41,6 +41,10 @@ public class ServletRegistroColaboracion extends HttpServlet {
                 request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
             } else {
                 List<DtNickTitProp> lista = IPC.listarPropuestasR();
+                if (lista.isEmpty()) {
+                    request.setAttribute("mensaje", "No existen propuestas publicadas o en financiación");
+                    request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
+                }
                 request.setAttribute("lista_propuestas", lista);
                 request.getRequestDispatcher("/Vistas/RegColaboracion.jsp").forward(request, response);
             }

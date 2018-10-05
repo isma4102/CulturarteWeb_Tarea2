@@ -29,7 +29,7 @@
                     <ul class="nav navbar-nav navbar-right">
 
                         <% if ((DtUsuario) request.getSession().getAttribute("usuario_logueado") != null) {
-                                out.print("<img style=\"margin-top: 7px\" src=\"Imagenes/nadie.png\" class=\"img-circle\" width=\" 40\" height=\"40\">");
+                                out.print("<img style=\"margin-top: 7px\" src=\"file:///C:/Users/Mehitor/Pictures/Culturarte.png\" class=\"img-circle\" width=\" 40\" height=\"40\">");
                                 out.print("<a style=\"color: white;margin-left: 8%;\" href=\"#\">" + ((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickName() + "</a>");
                                 out.print("<div>");
                                 out.print("<a style=\"color: white\" href=\"\"> Perfil </a>");
