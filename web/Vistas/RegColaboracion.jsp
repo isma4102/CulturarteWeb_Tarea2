@@ -48,8 +48,10 @@
                         out.print("<tr>");
                         out.print("<form class=\"form-signin\" action=\"ServletRegistroColaboracion\" method=\"POST\"> ");
                         out.print("<td><button style=\"background:url('/CulturarteWeb/Imagenes/selecc.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px\"  type=\"input\" name=\"seleccionar\" class=\"btn btn-primary\"></button></td>");
-                        out.print("<td><input style=\"border:none\" type=\"text\" class=\"form-control-plaintext\" name=\"TituloP\" value=\"" + lista.get(i).getTituloP() + "\" readonly=\"readonly\"/></td>");
-                        out.print("<td><input style=\"border:none\" type=\"text\" class=\"form-control-plaintext\" name=\"Proponente\" value=\"" + lista.get(i).getProponente() + "\" readonly=\"readonly\"/></td>");
+                        out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"TituloP\" value=\"" + lista.get(i).getTituloP() + "\" readonly=\"readonly\"/>");
+                        out.print("<td><p> " + lista.get(i).getTituloP() + "</p></td>");
+                        out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"Proponente\" value=\"" + lista.get(i).getProponente() + "\" readonly=\"readonly\"/>");
+                        out.print("<td><p> " + lista.get(i).getProponente() + "</p></td>");
                         out.print("<td><button style=\"background:url('/CulturarteWeb/Imagenes/ver.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px\" type=\"input\" name=\"Ver\" class=\"btn btn-primary\"></button></td>");
                         out.print("</form>");
                         out.print("</tr>");

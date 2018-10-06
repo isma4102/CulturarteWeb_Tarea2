@@ -22,7 +22,7 @@
             <table id="tabla" class="table table-bordered table-hover" style="width: 70%;">
                 <thead>
                 <h3 style="text-align: center">Elija un usuario</h3>
-                <input id="buscar" type="text" style="text-align: center" placeholder="Buscar" onkeyup="FiltrarTabla()" />
+                <input id="buscar" style="width: 24%;margin-left: 38%;" type="text" name="Buscar" class="form-control" placeholder="Buscar" onkeyup="FiltrarTabla()" />
                 <br>
                 <tr>
                     <th >Nickname</th>
@@ -35,7 +35,8 @@
                 <%for (DtUsuario dtusu : usu) {%>
                 <form  action="${pageContext.request.contextPath}/ServletConsultarUsuario" method="POST">
                     <tr>
-                        <td><input style="border:none" class="form-control-plaintext" readonly="" name="nick" type="text" value="<%=dtusu.getNickName()%>"/>&nbsp;&nbsp;&nbsp;
+                        <input style="border:none" class="form-control-plaintext" readonly="" name="nick" type="hidden" value="<%=dtusu.getNickName()%>"/>&nbsp;&nbsp;&nbsp;
+                        <td><%=dtusu.getNickName()%></td>
                         <td><%=dtusu.getNombre()%>&nbsp;&nbsp;&nbsp;</td>
                         <td><%=dtusu.getApellido()%>&nbsp;&nbsp;&nbsp;</td>
                         <%if (dtusu.Esproponente() == false) { %>
