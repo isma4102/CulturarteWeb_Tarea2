@@ -26,7 +26,7 @@
 
         <table id="tabla" class="table table-bordered table-hover formulario" style="margin-left: 229px;width: 70%;">
             <thead>
-            <h3 style="position: absolute;top: 76px;left: 657px;">Consulta de propuestas</h3>
+            <h3 style="position: absolute;top: 76px;left: 657px;">Consulta de propuesta</h3>
             <form class="navbar-form navbar-right" >
                 <input id="buscar" style="width: 216px;margin-left: 671px;margin-top: 139px;margin-bottom: -4px;" type="text" name="Buscar" class="form-control" placeholder="Buscar" onkeyup="FiltrarTabla()" />
             </form>

@@ -21,7 +21,7 @@
 
             <table id="tabla" class="table table-bordered table-hover" style="width: 70%;">
                 <thead>
-                <h3 style="text-align: center">Elije un usuario</h3>
+                <h3 style="text-align: center">Elije un Usuario</h3>
                 <input id="buscar" style="width: 24%;margin-left: 38%;" type="text" name="Buscar" class="form-control" placeholder="Buscar" onkeyup="FiltrarTabla()" />
                 <br>
                 <tr>

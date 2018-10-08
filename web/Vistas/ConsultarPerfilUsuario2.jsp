@@ -21,7 +21,7 @@
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
-        <title>Datos del usuario</title>
+        <title>Datos del Usuario</title>
     </head>
     <body>
         <jsp:include page="/Vistas/Barra_menu.jsp" />
