@@ -36,7 +36,7 @@
                 <div class="col-sm-3"><!--left col-->
                     <%DtUsuario dtu = (DtUsuario) request.getAttribute("Usuario");%>
                     <%configuraciones configuracion = new configuraciones();
-                        String ruta = configuracion.getCarpetaImagenesUsers() + "\\fPerfiles\\" + dtu.getCorreo() + "\\" + dtu.getImagen();
+                        String ruta = configuracion.getCarpetaImagenes()+ "\\fPerfiles\\" + dtu.getCorreo() + "\\" + dtu.getImagen();
                         String rtgfd = "rgfbvc";
                     %>
                     <img src="Imagenes/nadie.png" class="avatar img-circle img-thumbnail" alt="avatar">
