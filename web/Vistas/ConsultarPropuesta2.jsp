@@ -142,12 +142,11 @@
                                                 List<DtConsultaPropuesta2> lista = (List<DtConsultaPropuesta2>) request.getAttribute("listaC");
                                                 for (int i = 0; i < lista.size(); i++) {
                                                     out.print("<tr>");
-                                                    out.print("<td><input style=\"border:none\" type=\"text\" class=\"form-control-plaintext\" name=\"Nick\" value=\"" + lista.get(i).getNickColab() + "\" readonly=\"readonly\"/></td>");
-                                                    out.print("<td><input style=\"border:none\" type=\"text\" class=\"form-control-plaintext\" name=\"Nombre\" value=\"" + lista.get(i).getNombreColab() + "\" readonly=\"readonly\"/></td>");
-                                                    out.print("<td><input style=\"border:none\" type=\"text\" class=\"form-control-plaintext\" name=\"Apellido\" value=\"" + lista.get(i).getApellidoColab() + "\" readonly=\"readonly\"/></td>");
-                                                    out.print("<td><input style=\"border:none\" type=\"text\" class=\"form-control-plaintext\" name=\"MontoC\" value=\"" + lista.get(i).getMontoColab() + "\" readonly=\"readonly\"/></td>");
-                                                    out.print("<td><input style=\"border:none\" type=\"text\" class=\"form-control-plaintext\" name=\"FechaR\" value=\"" + lista.get(i).getFechaR() + "\" readonly=\"readonly\"/></td>");
-                                                    out.print("</form>");
+                                                    out.print("<td><p>" + lista.get(i).getNickColab() + "</p></td>");
+                                                    out.print("<td><p>" + lista.get(i).getNombreColab() + "</p></td>");
+                                                    out.print("<td><p>" + lista.get(i).getApellidoColab() + "</p></td>");
+                                                    out.print("<td><p>" + lista.get(i).getMontoColab() + "</p></td>");
+                                                    out.print("<td><p>" + lista.get(i).getFechaR() + "</p></td>");
                                                     out.print("</tr>");
                                                 }
                                             %>

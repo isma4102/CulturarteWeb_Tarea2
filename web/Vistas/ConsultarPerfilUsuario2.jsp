@@ -18,10 +18,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="css/bootstrap.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <title>Datos del usuario</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <title>Datos del Usuario</title>
     </head>
     <body>
         <jsp:include page="/Vistas/Barra_menu.jsp" />
@@ -165,16 +165,16 @@
 
                                     <%for (DtUsuario dtusu : seguidores) {%>
                                     <tr>
-                                        <td><input readonly style="border:none" name="nick" type="text" value="<%=dtusu.getNickName()%>"/>&nbsp;&nbsp;&nbsp;
+                                        <td><p><%=dtusu.getNickName()%></p></td>&nbsp;&nbsp;&nbsp;
                                             <%if (dtusu.Esproponente()) {%>
-                                        <td><input readonly style="border:none" name="nick" type="text" value="Proponente"/>&nbsp;&nbsp;&nbsp;
+                                            <td><p>Proponente</p></td>&nbsp;&nbsp;&nbsp;
                                             <%} else {%>
-                                        <td><input readonly style="border:none" name="nick" type="text" value="Colaborador"/>&nbsp;&nbsp;&nbsp;
+                                            <td><p>Colaborador</p></td>&nbsp;&nbsp;&nbsp;
                                             <% }%>
                                     </tr>
-                                     <% }%>  
+                                    <% }%>  
                                 </table>
-                               
+
 
                                 <% } else {%>
                                 <h3>No posee seguidores</h3>
@@ -196,11 +196,11 @@
 
                                     <%for (DtUsuario dtusu : seguidos) {%>
                                     <tr>
-                                        <td><input readonly style="border:none" name="nick" type="text" value="<%=dtusu.getNickName()%>"/>&nbsp;&nbsp;&nbsp;
+                                        <td><p><%=dtusu.getNickName()%></p></td>&nbsp;&nbsp;&nbsp;
                                             <%if (dtusu.Esproponente()) {%>
-                                        <td><input readonly style="border:none" name="nick" type="text" value="Proponente"/>&nbsp;&nbsp;&nbsp;
+                                        <td><p>Proponente</p></td>&nbsp;&nbsp;&nbsp;
                                             <%} else {%>
-                                        <td><input readonly style="border:none" name="nick" type="text" value="Colaborador"/>&nbsp;&nbsp;&nbsp;
+                                            <td><p>Colaborador</p></td>&nbsp;&nbsp;&nbsp;
                                             <% }%>
                                     </tr>
                                     <% }%>
@@ -228,9 +228,10 @@
 
                                         <%for (DtinfoPropuesta dtp : favoritas) {%>
                                         <tr>
-                                            <td><input readonly style="border:none" name="TituloP" type="text" value="<%=dtp.getTitulo()%>"/>&nbsp;&nbsp;&nbsp;
+                                            <input readonly style="border:none" name="TituloP" type="hidden" value="<%=dtp.getTitulo()%>"/>&nbsp;&nbsp;&nbsp;
+                                            <td><p><%=dtp.getTitulo()%></p></td>    
                                             <td><textarea style="background-color: white; resize: none;width: 300px; height: 100px;"><%=dtp.getDescripcion()%></textarea></td>
-                                            <td><%=dtp.getEstado()%></td>
+                                            <td><p><%=dtp.getEstado()%></p></td>
                                             <td><button style="background:url('/CulturarteWeb/Imagenes/ver.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px" name="consulta" type="submit" class="btn btn-primary"></button></td>
 
                                         </tr>
@@ -265,9 +266,10 @@
 
                                         <%for (DtinfoPropuesta dtp : propuestasdeproponentenoing) {%>
                                         <tr>
-                                            <td><input readonly style="border:none" name="TituloP" type="text" value="<%=dtp.getTitulo()%>"/>&nbsp;&nbsp;&nbsp;
+                                            <input readonly style="border:none" name="TituloP" type="hidden" value="<%=dtp.getTitulo()%>"/>&nbsp;&nbsp;&nbsp;
+                                            <td><p><%=dtp.getTitulo()%></p></td>
                                             <td><textarea style="background-color: white; resize: none;width: 300px; height: 100px;"><%=dtp.getDescripcion()%></textarea></td> 
-                                            <td><%=dtp.getEstado()%></td>
+                                            <td><p><%=dtp.getEstado()%></p></td>
                                             <td><button style="background:url('/CulturarteWeb/Imagenes/ver.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px" name="consulta" type="submit" class="btn btn-primary"></button></td>
                                         </tr>
                                         <%}%>     
@@ -294,9 +296,10 @@
 
                                         <% for (DtinfoPropuesta dtp : propuestasdeproponente) {%>
                                         <tr>
-                                            <td><input readonly style="border:none" name="TituloP" type="text" value="<%=dtp.getTitulo()%>"/>&nbsp;&nbsp;&nbsp;
+                                            <input readonly style="border:none" name="TituloP" type="hidden" value="<%=dtp.getTitulo()%>"/>&nbsp;&nbsp;&nbsp;
+                                            <td><p><%=dtp.getTitulo()%></p></td>
                                             <td><textarea style="background-color: white; resize: none;width: 300px; height: 100px;"><%=dtp.getDescripcion()%></textarea></td>
-                                            <td><%=dtp.getEstado()%></td>
+                                            <td><p><%=dtp.getEstado()%></p></td>
                                             <td><button style="background:url('/CulturarteWeb/Imagenes/ver.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px" name="consulta" type="submit" class="btn btn-primary"></button></td>
 
                                         </tr>
@@ -325,7 +328,8 @@
 
                                         <%for (DtinfoPropuesta dtp : propuestasdeproponentenoing) {%>
                                         <tr>
-                                            <td><input readonly style="border:none" name="TituloP" type="text" value="<%=dtp.getTitulo()%>"/>&nbsp;&nbsp;&nbsp;
+                                            <input readonly style="border:none" name="TituloP" type="hidden" value="<%=dtp.getTitulo()%>"/>&nbsp;&nbsp;&nbsp;
+                                            <td><p><%=dtp.getTitulo()%></p></td>    
                                             <td><textarea style="background-color: white; resize: none;width: 300px; height: 100px;"><%=dtp.getDescripcion()%></textarea></td>
                                             <td><%=dtp.getEstado()%></td>
                                             <td><button style="background:url('/CulturarteWeb/Imagenes/ver.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px" name="consulta" type="submit" class="btn btn-primary"></button></td>
@@ -358,7 +362,7 @@
 
                                     <% for (DtinfoPropuesta dtp : colaboraciones) {%>
                                     <tr>
-                                        <td><input readonly style="border:none" name="nick" type="text" value="<%=dtp.getTitulo()%>"/>&nbsp;&nbsp;&nbsp;
+                                        <td><p><%=dtp.getTitulo()%></p></td>&nbsp;&nbsp;&nbsp;
                                         <td><textarea style="background-color: white; resize: none;width: 300px; height: 100px; overflow-y: scroll;"><%=dtp.getDescripcion()%></textarea>&nbsp;&nbsp;&nbsp;</td>
                                         <%if (dtu.getNickName().equals(nick.getNickName())) {
                                                 Calendar calen = dtp.getFechaReal();
@@ -367,7 +371,7 @@
                                                 int anio2 = calen.get(Calendar.YEAR);
                                                 out.println("<td>" + dia2 + "/" + mes2 + "/" + anio2 + "</td>");
                                         %>
-                                        <td><input readonly style="border:none" name="monto" type="text" value="<%=dtp.getMonto()%>"/>&nbsp;&nbsp;&nbsp;
+                                        <td><p><%=dtp.getMonto()%></p></td>&nbsp;&nbsp;&nbsp;
                                             <%}%>
 
                                     </tr>
@@ -393,7 +397,7 @@
 
                                     <% for (DtinfoPropuesta dtp : colaboraciones) {%>
                                     <tr>
-                                        <td><input readonly style="border:none" name="nick" type="text" value="<%=dtp.getTitulo()%>"/>&nbsp;&nbsp;&nbsp;
+                                        <td><p><%=dtp.getTitulo()%></p></td>&nbsp;&nbsp;&nbsp;
                                         <td><textarea style="background-color: white; resize: none; width: 300px; height: 100px; overflow-y: scroll;"><%=dtp.getDescripcion()%></textarea>&nbsp;&nbsp;&nbsp;</td>
                                     </tr>
                                     <%}%>
