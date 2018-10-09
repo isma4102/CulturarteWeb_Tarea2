@@ -38,7 +38,7 @@
 
                 <tr>
                     <th>Titulo</th>
-                    <th>DescripciÃ³n</th>
+                    <th>Descripción</th>
                 </tr>
                 <%List<DtinfoPropuesta> propuestas = (List<DtinfoPropuesta>) request.getAttribute("Propuestas");
                     for (DtinfoPropuesta dtp : propuestas) {%>
@@ -49,7 +49,7 @@
                     <td>
                         <form action="ServletMarcarFavorita" method="POST">
                             <input  name="TituloP" type="hidden" value="<%=dtp.getTitulo()%>"/>
-                            <input class="btn btn-primary"  onclick="submit()" type="button" value="Marcar como favorita"/>
+                             <input type="button" class="btn btn-primary" value="Extender Financiacion"/>
                         </form>
                     </td>
 

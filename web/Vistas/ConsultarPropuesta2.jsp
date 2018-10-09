@@ -122,10 +122,14 @@
                                     <%out.print(propuestaSelec.getTipoRetorno());%>
                                 </div>
                             </div>
-
+                            
                             <h4 align="center" class="modal-title" id="classModalLabel">
                                 Colaboradores
                             </h4>
+                                <% if(((List<DtConsultaPropuesta2>)(List<DtConsultaPropuesta2>) request.getAttribute("listaC")).isEmpty()){
+                                  out.print("<h3 align=\"center\" class=\"panel-title\">No existen Colaboradores</h3>");
+                            } else {%>
+                            
                             <div style="  overflow-x: auto;">
                                 <table class="table  table-bordered table-hover" style="width: 70%;">
                                     <thead>
@@ -154,21 +158,22 @@
                                         </tbody>
                                 </table>
                             </div>
-
-                        </div>
+                        <% } %>         
+                        <div class="modal-footer">
                         <% if(((DtUsuario)request.getSession().getAttribute("usuario_logueado")).getNickName().compareTo(propuestaSelec.getNickproponente()) == 0){ %>
                             <% if (propuestaSelec.getExtendible()) {%>
                                   <form class="form-signin" action="ServletExtenderFinanciacion" method="POST">
-                                    <input type="hidden" class="form-control-plaintext" name="TituloP" readonly="readonly" value=" <% propuestaSelec.getTitulo(); %>"/>    
-                                    <a href="ServletExtenderFinanicacion" class="btn btn-primary" > &laquo; Extender Financiación</a>
+                                  <% out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"TituloP\" value=\"" + propuestaSelec.getTitulo() + "\" readonly=\"readonly\"/>"); %>
+                                  <button type="input" name="seleccionar" class="btn btn-primary">Extender Financiación</button>
                                   </form>
-                            <% }%>
-                            <!--
-                            <%// else if (propuestaSelec.Escancelable()){ %>
-                                <a href="ServletCancelarPropuesta" class="btn btn-primary" > &laquo; Cancelar Propuesta</a>
-                            <% //} %>
+                            <% }else if (propuestaSelec.getCancelable()){ %>
+                                 <form class="form-signin" action="ServletCancelarPropuesta" method="POST">
+                                  <% out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"TituloP\" value=\"" + propuestaSelec.getTitulo() + "\" readonly=\"readonly\"/>"); %>
+                                  <button type="input" name="seleccionar" class="btn btn-primary">Cancelar Propuesta</button>
+                                  </form>
+                            <% } %>
                         <% } %>
-                       
+                       <!--
                             <% //if(propuestaSelec.colaboro()){ %>
                                 <a href="ServletExtenderFinanicacion" class="btn btn-primary" > &laquo; Comentar propuesta</a>
                             <%// } %>
@@ -177,7 +182,7 @@
                             <%// } %>
                    
                             -->
-                        <div class="modal-footer">
+                      
                             <a href="javascript:window.history.back();" class="btn btn-danger"> &laquo; Volver</a>
                         </div>
                     </div>
