@@ -7,19 +7,25 @@ package ControladorServlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import logica.Clases.Categoria;
+import logica.Clases.DtinfoPropuesta;
+import logica.Fabrica;
+import logica.Interfaces.IPropCat;
 
 /**
  *
  * @author gabri
  */
-@WebServlet(name = "ServletPropuestaFavorita", urlPatterns = {"/ServletPropuestaFavorita"})
-public class ServletPropuestaFavorita extends HttpServlet {
-
+@WebServlet(name = "ServletPropuestaCategoria", urlPatterns = {"/ServletPropuestaCategoria"})
+public class ServletPropuestaCategoria extends HttpServlet {
+IPropCat IPC;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -32,18 +38,10 @@ public class ServletPropuestaFavorita extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ServletPropuestaFavorita</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ServletPropuestaFavorita at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        IPC=Fabrica.getInstance().getControladorPropCat();
+        List<String> categorias=IPC.ListarCategorias();
+        request.setAttribute("Categorias", categorias);
+        request.getRequestDispatcher("Vistas/PropuestaporCategoria.jsp").forward(request, response);;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -72,7 +70,11 @@ public class ServletPropuestaFavorita extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       String nombre= request.getParameter("cat");
+       request.setAttribute("nombre", nombre);
+       List<DtinfoPropuesta> propuestas=IPC.ListarPropuestasCategoria(nombre);
+       request.setAttribute("Propuestas", propuestas);
+        request.getRequestDispatcher("Vistas/PropuestasporCategoria2.jsp").forward(request, response);
     }
 
     /**
