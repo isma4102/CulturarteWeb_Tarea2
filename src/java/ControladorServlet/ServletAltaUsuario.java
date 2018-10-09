@@ -126,7 +126,7 @@ public class ServletAltaUsuario extends HttpServlet {
                 ok = iUsuario.AgregarUsuarioProponente(nick, nombre, apellido, correo, cal, imagen, direccion, biografia, sitio, hash);
                 if (ok) {
                     request.setAttribute("mensaje", "Se registro exitosamente");
-                    DtUsuario user = iUsuario.ObtenerDTUsuario(nombre);
+                    DtUsuario user = iUsuario.ObtenerDTUsuario(nick);
                     request.getSession().setAttribute("usuario_logueado", user);
                 } else {
                     request.setAttribute("mensaje", "Error al registrar este usuario");
@@ -136,7 +136,7 @@ public class ServletAltaUsuario extends HttpServlet {
                 ok = iUsuario.AgregarUsuarioColaborador(nick, nombre, apellido, correo, cal, imagen, hash);
                 if (ok) {
                     request.setAttribute("mensaje", "Se registro exitosamente");
-                    DtUsuario user = iUsuario.ObtenerDTUsuario(nombre);
+                    DtUsuario user = iUsuario.ObtenerDTUsuario(nick);
                     request.getSession().setAttribute("usuario_logueado", user);
                 } else {
                     request.setAttribute("mensaje", "Error al dar registrar este usuario");
