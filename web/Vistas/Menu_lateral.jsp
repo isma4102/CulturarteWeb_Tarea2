@@ -56,7 +56,7 @@
                                         out.print("<a style=\"color: white\" href=\"/CulturarteWeb/ServletExtenderFinanciacion\">Extender financiación</a>");
                                         out.print("<a style=\"color: white\" href=\"#\">Cancelar Propuesta</a>");
                                     } else {
-                                        out.print("<a style=\"color: white\" href=\"/CulturarteWeb/Vistas/AgregarComentario.jsp\">Agregar comentario a propuesta</a>");
+                                        out.print("<a style=\"color: white\" href=\"/CulturarteWeb/ServletComentarPropuesta\">Agregar comentario a propuesta</a>");
                                     }
                                     out.print("<a style=\"color: white\" href=\"ServletMarcarFavorita\">Marcar propuestas como favoritas</a>");
                                 }%>
