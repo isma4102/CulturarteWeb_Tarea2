@@ -18,7 +18,7 @@
 
         <jsp:include page="/Vistas/Barra_menu.jsp" />
         <jsp:include page="/Vistas/Tabs_Propuestas.jsp" />
-        
+
         <%
             if (request.getParameter("mensaje") != null) {
                 out.print("</div>");
@@ -29,7 +29,7 @@
             }
         %>
 
-<!-- Se muestra un mensaje cuando se cargaron los datos de prueba -->
+        <!-- Se muestra un mensaje cuando se cargaron los datos de prueba -->
         <div style="display: none;" id="datos_de_prueba_carga" class="alert alert-success alert-dismissable">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             <strong>¡Exito!</strong> Se cargaron los datos de prueba
@@ -40,11 +40,15 @@
             var var2 = document.getElementById("datos_de_prueba_carga");
             var2.style = "margin-top: 2%;margin-right: -16%;margin-left: 73%;";
             var2.style.display = "block";
-            <%      
-              request.getSession().removeAttribute("datos_de_prueba");}%>
+            <%
+                    request.getSession().removeAttribute("datos_de_prueba");
+                }%>
         </script>
-        
-        
-        
+        <br>
+        <br>
+        <jsp:include page="/Vistas/footer.jsp"/>   
+
+
+
     </body>
 </html>
