@@ -31,15 +31,7 @@
     </script>
     <%  }
     %>
-    <script type="text/javascript">
-        function habilitar() {
-            this.document.getElementsByName('otros').style.display = "block";
-        }
-
-        function desabilitar() {
-            this.document.getElementsByName('otros').style.display = "none";
-        }
-    </script>
+   
 
 </head>
 <body>

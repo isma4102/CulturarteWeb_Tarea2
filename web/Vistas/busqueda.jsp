@@ -57,7 +57,7 @@
         %>
         <div style="background-color: #444; border-color: #444" id="elemento<%=i%>" class="panel panel-primary">
             <div style="vertical-align: middle; width: 100%" class="btn btn-info panel-heading" data-toggle="collapse" data-target="#descripcion<%=i%>" >
-                <img style="float: left" src="..." alt="..." class="imagen<%=i%> img-circle">
+                <div class="Estado" style="float: left"><h5><%=p.getEstado()%></h5></div>
                 <div><h3 class="Titulo"><%=p.getTitulo()%></h3></div>
                 <div style="float: right" class="Lugar"><%=p.getLugar()%></div>
             </div>
