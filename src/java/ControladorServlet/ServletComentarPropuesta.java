@@ -8,6 +8,8 @@ package ControladorServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,9 +38,9 @@ public class ServletComentarPropuesta extends HttpServlet {
             request.setAttribute("mensaje", "No existe una sesion en el sistema");
             request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
         } else {
-            List<DtNickTitProp> lista = IPC.listarPropuestasR();
-            request.setAttribute("lista_propuestas", lista);
-            request.getRequestDispatcher("/Vistas/RegColaboracion.jsp").forward(request, response);
+            List<DtNickTitProp> lista = IPC.listarPropuestasComentar();
+            request.setAttribute("lista_propuestascomentar", lista);
+            request.getRequestDispatcher("/Vistas/AgregarComentario.jsp").forward(request, response);
         }
     }
 
@@ -68,14 +70,28 @@ public class ServletComentarPropuesta extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (request.getParameter("seleccionar") != null) {
-            String viene = request.getParameter("TituloP");
-            String Opcion = new String(viene.getBytes("ISO-8859-1"), "UTF-8");
-            DtinfoPropuesta propuesta = IPC.SeleccionarPropuestaR(Opcion);
-            ICU.SeleccionarColaborador(((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickName());
-            request.setAttribute("Propuestaseleccionada", propuesta);
-            request.getRequestDispatcher("/Vistas/Mensaje_Confirmacion.jsp").forward(request, response);
-        }
+
+        DtUsuario usuario = Login.getUsuarioSesion(request);   
+       
+        
+       if (usuario != null) {
+            String nickColab = usuario.getNickName();
+            String TituloP = request.getParameter("TituloP");
+            String texto = request.getParameter("texto");
+            
+            
+            try {
+                IPC.ComentarPropuesta(TituloP, nickColab, texto);
+                request.setAttribute("comentarProp", "Propuesta Comentada con Éxito!!!");
+            } catch (Exception ex) {
+                Logger.getLogger(ServletComentarPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+                request.setAttribute("comentarProp", ex.getMessage());
+            }
+            
+            processRequest(request, response);
+            
+       }
+       
     }
 
     /**
