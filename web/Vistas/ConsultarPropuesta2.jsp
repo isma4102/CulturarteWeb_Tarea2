@@ -3,6 +3,7 @@
     Created on : 30/09/2018, 04:19:30 PM
     Author     : Martin
 --%>
+<%@page import="logica.Clases.DtUsuario"%>
 <%@page import="logica.Clases.DtConsultaPropuesta"%>
 <%@page import="logica.Clases.DtConsultaPropuesta2"%>
 <%@page import="java.net.URLEncoder"%>
@@ -121,7 +122,7 @@
                                     <%out.print(propuestaSelec.getTipoRetorno());%>
                                 </div>
                             </div>
-                           
+
                             <h4 align="center" class="modal-title" id="classModalLabel">
                                 Colaboradores
                             </h4>
@@ -155,6 +156,27 @@
                             </div>
 
                         </div>
+                        <% if(((DtUsuario)request.getSession().getAttribute("usuario_logueado")).getNickName().compareTo(propuestaSelec.getNickproponente()) == 0){ %>
+                            <% if (propuestaSelec.getExtendible()) {%>
+                                  <form class="form-signin" action="ServletExtenderFinanciacion" method="POST">
+                                    <input type="hidden" class="form-control-plaintext" name="TituloP" readonly="readonly" value=" <% propuestaSelec.getTitulo(); %>"/>    
+                                    <a href="ServletExtenderFinanicacion" class="btn btn-primary" > &laquo; Extender Financiación</a>
+                                  </form>
+                            <% }%>
+                            <!--
+                            <%// else if (propuestaSelec.Escancelable()){ %>
+                                <a href="ServletCancelarPropuesta" class="btn btn-primary" > &laquo; Cancelar Propuesta</a>
+                            <% //} %>
+                        <% } %>
+                       
+                            <% //if(propuestaSelec.colaboro()){ %>
+                                <a href="ServletExtenderFinanicacion" class="btn btn-primary" > &laquo; Comentar propuesta</a>
+                            <%// } %>
+                            <% //else if(!propuestaSelec.colaboro()){ %>
+                                 <a href="ServletRegistrarColaboracion" class="btn btn-primary" > &laquo; Colaborar con la propuesta</a>
+                            <%// } %>
+                   
+                            -->
                         <div class="modal-footer">
                             <a href="javascript:window.history.back();" class="btn btn-danger"> &laquo; Volver</a>
                         </div>
