@@ -43,7 +43,7 @@
                     for (DtinfoPropuesta dtp : propuestas) {%>
                 <tr>
 
-                    <td><input readonly style="border:none" type="text" value="<%=dtp.getTitulo()%>"/></td>&nbsp;&nbsp;&nbsp;
+                    <td><p><%=dtp.getTitulo()%></p></td>&nbsp;&nbsp;&nbsp;
                     <td><textarea style="background-color: white; resize: none;width: 300px; height: 100px;"><%=dtp.getDescripcion()%></textarea></td> 
                     <td>
                         <form action="ServletMarcarFavorita" method="POST">

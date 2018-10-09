@@ -20,6 +20,7 @@ $('#filtro-estado').click(function () {
                 document.querySelector("#elemento" + i + " .Titulo").innerHTML = data[i].Titulo;
                 document.querySelector("#elemento" + i + " .Lugar").innerHTML = data[i].Lugar;
                 document.querySelector("#elemento" + i + " .Descripcion").innerHTML = data[i].Descripcion;
+                document.querySelector("#elemento" + i + " .Estado").innerHTML = data[i].estado;                
             }
         }
     });
@@ -40,6 +41,7 @@ $('#filtro-fecha').click(function () {
                 document.querySelector("#elemento" + i + " .Titulo").innerHTML = data[i].Titulo;
                 document.querySelector("#elemento" + i + " .Lugar").innerHTML = data[i].Lugar;
                 document.querySelector("#elemento" + i + " .Descripcion").innerHTML = data[i].Descripcion;
+                document.querySelector("#elemento" + i + " .Estado").innerHTML = data[i].estado;
             }
         }
     });
@@ -62,6 +64,7 @@ $('#filtro-alfa').click(function () {
                 document.querySelector("#elemento" + i + " .Titulo").innerHTML = data[i].Titulo;
                 document.querySelector("#elemento" + i + " .Lugar").innerHTML = data[i].Lugar;
                 document.querySelector("#elemento" + i + " .Descripcion").innerHTML = data[i].Descripcion;
+                document.querySelector("#elemento" + i + " .Estado").innerHTML = data[i].estado;
             }
         },
         error: function (error) {
@@ -70,10 +73,4 @@ $('#filtro-alfa').click(function () {
 
     });
 });
-
-function limpiar(cantidad) {
-    for (i = 0; i <= cantidad; i++) {
-        $("#elemento" + i).empty();
-    }
-}
 
