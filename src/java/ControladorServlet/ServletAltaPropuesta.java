@@ -52,17 +52,21 @@ public class ServletAltaPropuesta extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         DtUsuario usuLogeado = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
-
-        if (usuLogeado.Esproponente()) {
-            SimpleDateFormat fechaA = new SimpleDateFormat("yyyy-MM-dd");
-            String fActual = fechaA.format(new Date());
-            request.setAttribute("FechaActual", fActual);
-
-            List<String> listCat = Fabrica.getInstance().getControladorPropCat().ListarCategorias();
-            request.setAttribute("listCat", listCat);
-            request.getRequestDispatcher("Vistas/AltaPropuesta.jsp").forward(request, response);
+        if (usuLogeado == null) {
+            request.getRequestDispatcher("iniciar-sesion").forward(request, response);
         } else {
-            request.getRequestDispatcher("Vistas/Inicio.jsp").forward(request, response);
+            if (usuLogeado.Esproponente()) {
+                SimpleDateFormat fechaA = new SimpleDateFormat("yyyy-MM-dd");
+                String fActual = fechaA.format(new Date());
+                request.setAttribute("FechaActual", fActual);
+
+                List<String> listCat = Fabrica.getInstance().getControladorPropCat().ListarCategorias();
+                request.setAttribute("listCat", listCat);
+                request.getRequestDispatcher("Vistas/AltaPropuesta.jsp").forward(request, response);
+            } else {
+                request.setAttribute("mensaje", "Usted no tiene permiso para crear una propuesta");
+                request.getRequestDispatcher("Vistas/Mensaje_Recibido.jsp").forward(request, response);
+            }
         }
     }
 

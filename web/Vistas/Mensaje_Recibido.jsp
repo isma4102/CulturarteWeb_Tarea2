@@ -33,7 +33,7 @@
                     </div>
                     <div class="modal-footer">
                         <a href="javascript:window.history.back();" class="btn btn-primary"> &laquo; Volver</a>
-                        <button type="button" class="btn btn-primary"> <a style="color:#FFFFFF" href="/CulturarteWeb/ServletInicio">Salir al Inicio</a> </button>
+                       <a style="color:#FFFFFF" class="btn btn-primary" href="/CulturarteWeb/ServletInicio">Salir al Inicio</a> </button>
 
                     </div>
                 </div>

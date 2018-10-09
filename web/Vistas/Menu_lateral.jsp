@@ -6,18 +6,18 @@
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript">
             function getConfirmation() {
-            <% if(request.getSession().getAttribute("usuario_logueado") != null){ %>
-                     alert("Cierre sesion antes de Cargar los datos de prueba");
-                     <% } else {%>    
+            <% if (request.getSession().getAttribute("usuario_logueado") != null) { %>
+                alert("Cierre sesion antes de Cargar los datos de prueba");
+            <% } else {%>
                 var retVal = confirm("¿Desea continuar? todos los datos se perderan");
                 if (retVal == true) {
                     var var2 = document.getElementById('contenedor_carga');
                     var2.style.display = "block";
-                    location.href = "/CulturarteWeb/ServletDatosdePrueba";
+                        location.href = "/CulturarteWeb/ServletDatosdePrueba";
                 } else {
                     alert("Operación Cancelada");
                 }
-                <% } %>
+            <% } %>
             }
 
         </script>
@@ -53,10 +53,10 @@
                             <% if ((DtUsuario) request.getSession().getAttribute("usuario_logueado") != null) {
                                     if (((DtUsuario) request.getSession().getAttribute("usuario_logueado")).Esproponente() != false) {
                                         out.print("<a style=\"color: white\" href=\"/CulturarteWeb/ServletAltaPropuesta\" >Alta Propuestas</a>");
-                                        out.print("<a style=\"color: white\" href=\"#\">Extender financiación</a>");
+                                        out.print("<a style=\"color: white\" href=\"/CulturarteWeb/ServletExtenderFinanciacion\">Extender financiación</a>");
                                         out.print("<a style=\"color: white\" href=\"#\">Cancelar Propuesta</a>");
                                     } else {
-                                        out.print("<a style=\"color: white\" href=\"/CulturarteWeb/Vistas/AgregarComentario.jsp\">Agregar comentario a propuesta</a>");
+                                        out.print("<a style=\"color: white\" href=\"/CulturarteWeb/ServletComentarPropuesta\">Agregar comentario a propuesta</a>");
                                     }
                                     out.print("<a style=\"color: white\" href=\"ServletMarcarFavorita\">Marcar propuestas como favoritas</a>");
                                 }%>
@@ -116,10 +116,10 @@
                 });
             }
         </script>
-        <div id="contenedor_carga" style="display: none;">
-            <div id="carga">
+        <div id="contenedor_carga" style="position: relative; display: none;">
+            <div style="position: absolute;bottom: -704px;right: -742px;">
+                <div class="alert alert-warning"><strong>¡Por Favor!</strong> Espere un momento...                 </div> 
             </div>
-            <H3 style="color:#287AE6 ;position: absolute; top: 601%;left: 682px;right: 0;bottom: 0;margin: auto;"> Espere Por favor... </H3>   
         </div>
 
     </body>
