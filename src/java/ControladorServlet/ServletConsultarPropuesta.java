@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import logica.Clases.DtConsultaPropuesta;
 import logica.Clases.DtNickTitProp;
 import logica.Fabrica;
+import logica.Clases.DtUsuario;
 import logica.Clases.DtConsultaPropuesta2;
 
 /**
@@ -70,9 +71,15 @@ public class ServletConsultarPropuesta extends HttpServlet {
 
         String tit = request.getParameter("TituloP");
         String titulo = new String(tit.getBytes("ISO-8859-1"), "UTF-8");
+        DtUsuario proponente = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
+        String nickProp = null;
+        
+        if (proponente != null) {
+            nickProp = proponente.getNickName();
+        }
 
         try {
-            DtConsultaPropuesta dtinfo = Fabrica.getInstance().getControladorPropCat().SeleccionarPropuesta(titulo);
+            DtConsultaPropuesta dtinfo = Fabrica.getInstance().getControladorPropCat().SeleccionarPropuesta(titulo, nickProp);
             request.setAttribute("propuesta", dtinfo);
 
             List<DtConsultaPropuesta2> listColab = Fabrica.getInstance().getControladorPropCat().ListaColaboradoresProp(titulo);
