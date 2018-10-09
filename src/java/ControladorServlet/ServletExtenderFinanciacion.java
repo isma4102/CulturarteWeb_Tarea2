@@ -8,8 +8,6 @@ package ControladorServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,31 +15,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import logica.Clases.DtNickTitProp;
 import logica.Clases.DtUsuario;
-import logica.Clases.DtinfoPropuesta;
 import logica.Fabrica;
-import logica.Interfaces.IControladorUsuario;
 import logica.Interfaces.IPropCat;
 
 /**
  *
  * @author Santiago.S
  */
-@WebServlet(name = "ServletComentarPropuesta", urlPatterns = {"/ServletComentarPropuesta"})
-public class ServletComentarPropuesta extends HttpServlet {
-
-    IPropCat IPC = Fabrica.getInstance().getControladorPropCat();
-    IControladorUsuario ICU = Fabrica.getInstance().getIControladorUsuario();
+@WebServlet(name = "ServletExtenderFinanciacion", urlPatterns = {"/ServletExtenderFinanciacion"})
+public class ServletExtenderFinanciacion extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (request.getSession().getAttribute("usuario_logueado") == null) {
-            request.setAttribute("mensaje", "No existe una sesion en el sistema");
-            request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
-        } else {
-            List<DtNickTitProp> lista = IPC.listarPropuestasComentar();
-            request.setAttribute("lista_propuestascomentar", lista);
-            request.getRequestDispatcher("/Vistas/AgregarComentario.jsp").forward(request, response);
-        }
+        IPropCat IPC = Fabrica.getInstance().getControladorPropCat();
+        List<DtNickTitProp> lista = IPC.ListarPropuestasX_DeProponenteX(((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickName());
+        request.setAttribute("lista_propuestas", lista);
+        request.getRequestDispatcher("/Vistas/ExtenderFinanciacion.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -70,28 +59,14 @@ public class ServletComentarPropuesta extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        DtUsuario usuario = Login.getUsuarioSesion(request);   
-       
-        
-       if (usuario != null) {
-            String nickColab = usuario.getNickName();
-            String TituloP = request.getParameter("TituloP");
-            String texto = request.getParameter("texto");
-            
-            
-            try {
-                IPC.ComentarPropuesta(TituloP, nickColab, texto);
-                request.setAttribute("comentarProp", "Propuesta Comentada con Éxito!!!");
-            } catch (Exception ex) {
-                Logger.getLogger(ServletComentarPropuesta.class.getName()).log(Level.SEVERE, null, ex);
-                request.setAttribute("comentarProp", ex.getMessage());
-            }
-            
-            processRequest(request, response);
-            
-       }
-       
+        IPropCat IPC = Fabrica.getInstance().getControladorPropCat();
+        if (request.getParameter("TituloP") != null) {
+            String viene = request.getParameter("TituloP");
+            String Opcion = new String(viene.getBytes("ISO-8859-1"), "UTF-8");
+            IPC.ExtenderFinanciacion(((String) request.getParameter("TituloP")));
+            request.setAttribute("mensaje","Se extendio la fecha de la propuesta");
+            request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
+        }
     }
 
     /**

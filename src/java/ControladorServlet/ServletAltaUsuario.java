@@ -30,7 +30,7 @@ import javax.servlet.annotation.MultipartConfig;
 @MultipartConfig
 @WebServlet(name = "ServletAltaUsuario", urlPatterns = {"/altaUsuarioServlet"})
 public class ServletAltaUsuario extends HttpServlet {
-
+    
     IControladorUsuario iUsuario;
 
     /**
@@ -44,7 +44,14 @@ public class ServletAltaUsuario extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("Vistas/altaUsuario.jsp").forward(request, response);
+        DtUsuario usuLogeado = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
+        
+        if (usuLogeado == null) {
+            request.getRequestDispatcher("Vistas/altaUsuario.jsp").forward(request, response);
+        } else {
+            request.getRequestDispatcher("Vistas/Inicio.jsp").forward(request, response);
+        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -156,4 +163,16 @@ public class ServletAltaUsuario extends HttpServlet {
         calendar.setTime(date);
         return calendar;
     }
+    
+    public Date ParseFecha(String fecha) {
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        Date fechaDate = new Date();
+        try {
+            fechaDate = formato.parse(fecha);
+        } catch (ParseException ex) {
+            System.out.println(ex);
+        }
+        return fechaDate;
+    }
+    
 }
