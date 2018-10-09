@@ -37,7 +37,7 @@
 
                 <tr>
                     <th>Titulo</th>
-                    <th>Nombre</th>
+                    <th>Descripción</th>
                 </tr>
                 <%List<DtinfoPropuesta> propuestas = (List<DtinfoPropuesta>) request.getAttribute("Propuestas");
                     for (DtinfoPropuesta dtp : propuestas) {%>
