@@ -46,7 +46,7 @@
         </script>
         <br>
         <br>
-        <jsp:include page="/Vistas/footer.jsp"/>   
+        <jsp:include page="/Vistas/footer.jsp" />
 
 
 
