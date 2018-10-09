@@ -34,7 +34,12 @@
             </div>
             <div class="row">
                 <div class="col-sm-3"><!--left col-->
-                    <%DtUsuario dtu = (DtUsuario) request.getAttribute("Usuario");%>
+                    <%DtUsuario dtu = (DtUsuario) request.getAttribute("Usuario");
+                        DtUsuario nick = (DtUsuario) request.getSession().getAttribute("usuario_logueado");%>
+                    <%configuraciones configuracion = new configuraciones();
+                        String ruta = configuracion.getCarpetaImagenes() + "\\fPerfiles\\" + dtu.getCorreo() + "\\" + dtu.getImagen();
+                        String rtgfd = "rgfbvc";
+                    %>
                     <img src="Imagenes/nadie.png" class="avatar img-circle img-thumbnail" alt="avatar">
                     <br>
 
@@ -48,22 +53,23 @@
                         <li><a data-toggle="tab" href="#Seguidores">Seguidores</a></li>
                         <li><a data-toggle="tab" href="#Seguidos">Seguidos</a></li>
                         <li><a data-toggle="tab" href="#PFavoritas">Propuestas favoritas</a></li>
-                        <li><a data-toggle="tab" href="#PCreadas">Propuestas creadas</a></li>
-                    </ul>
-
-
+                            <%if (dtu.Esproponente()) {%>
+                        <li><a data-toggle = "tab" href = "#PCreadas" > Propuestas creadas</a></li></ul>
+                            <%} else {%>
+                    <li><a data-toggle = "tab" href = "#PCreadas" > Colaboraciones</a></li></ul>
+                        <%}%>
                     <div class="tab-content">
-                        <div style="color:black" class="tab-pane active" id="Informacion">
+                        <div style = "color:black" class="tab-pane active" id = "Informacion"> 
                             <hr>
-
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <div class="panel panel-primary">
-                                        <div class="panel-heading" style="padding: 1%">
-                                            <h3 class="panel-title">NickName</h3>
-                                        </div>
-                                        <div class="panel-body" style="padding: 1%">
-                                            <% out.print(dtu.getNickName()); %>
+                                        <div class="panel-heading" style = "padding: 1%"
+                                             > <h3 
+                                                class="panel-title">NickName</h3
+                                            > </div> 
+                                        <div  class="panel-body" style = "padding: 1%"> 
+                                            <%out.print(dtu.getNickName());%>
                                         </div>
                                     </div>
                                 </div>
@@ -144,7 +150,48 @@
                                     </div>
                                 </div>
                             </div>
+                            <%if (dtu.Esproponente()) {%>       
+                            <div class="form-group">
+                                <div class="col-xs-6">
 
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading" style="padding: 1%">
+                                            <h3 class="panel-title">Biografia</h3>
+                                        </div>
+                                        <div class="panel-body" style="padding: 1%">
+                                            <%out.println(dtu.getBiografia());%>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-xs-6">
+
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading" style="padding: 1%">
+                                            <h3 class="panel-title">Direccion</h3>
+                                        </div>
+                                        <div class="panel-body" style="padding: 1%">
+                                            <%out.println(dtu.getDireccion());%>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                        <div class="form-group">
+                                <div class="col-xs-6">
+
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading" style="padding: 1%">
+                                            <h3 class="panel-title">Sitio</h3>
+                                        </div>
+                                        <div class="panel-body" style="padding: 1%">
+                                            <%out.println(dtu.getSitio());%>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <%}%>
                             <hr>
 
                         </div><!--/tab-pane-->
@@ -152,7 +199,7 @@
                             <div class="seguidores">
                                 <h3>Seguidores</h3>
                                 <%List<DtUsuario> seguidores = (List<DtUsuario>) request.getAttribute("Seguidores");
-                                    if (seguidores.size() > 0) {%>
+                                        if (seguidores.size() > 0) {%>
                                 <table class="table table-bordered table-hover  formulario">
                                     <tr>
                                         <th>Nickname</th>
@@ -162,11 +209,11 @@
                                     <%for (DtUsuario dtusu : seguidores) {%>
                                     <tr>
                                         <td><p><%=dtusu.getNickName()%></p></td>&nbsp;&nbsp;&nbsp;
-                                            <%if (dtusu.Esproponente()) {%>
-                                            <td><p>Proponente</p></td>&nbsp;&nbsp;&nbsp;
-                                            <%} else {%>
-                                            <td><p>Colaborador</p></td>&nbsp;&nbsp;&nbsp;
-                                            <% }%>
+                                        <%if (dtusu.Esproponente()) {%>
+                                        <td><p>Proponente</p></td>&nbsp;&nbsp;&nbsp;
+                                        <%} else {%>
+                                        <td><p>Colaborador</p></td>&nbsp;&nbsp;&nbsp;
+                                        <% }%>
                                     </tr>
                                     <% }%>  
                                 </table>
@@ -183,7 +230,7 @@
                             <div class="seguidos">
                                 <h3>Seguidos</h3>
                                 <%List<DtUsuario> seguidos = (List<DtUsuario>) request.getAttribute("Seguidos");
-                                    if (seguidos.size() > 0) {%>
+                                        if (seguidos.size() > 0) {%>
                                 <table class="table table-bordered table-hover  formulario">
                                     <tr>
                                         <th>Nickname</th>
@@ -193,11 +240,11 @@
                                     <%for (DtUsuario dtusu : seguidos) {%>
                                     <tr>
                                         <td><p><%=dtusu.getNickName()%></p></td>&nbsp;&nbsp;&nbsp;
-                                            <%if (dtusu.Esproponente()) {%>
+                                        <%if (dtusu.Esproponente()) {%>
                                         <td><p>Proponente</p></td>&nbsp;&nbsp;&nbsp;
-                                            <%} else {%>
-                                            <td><p>Colaborador</p></td>&nbsp;&nbsp;&nbsp;
-                                            <% }%>
+                                        <%} else {%>
+                                        <td><p>Colaborador</p></td>&nbsp;&nbsp;&nbsp;
+                                        <% }%>
                                     </tr>
                                     <% }%>
                                 </table>
@@ -212,7 +259,7 @@
                             <div class="favoritas" style="margin-bottom: 2%">
                                 <h3>Propuestas favoritas</h3>
                                 <%List<DtinfoPropuesta> favoritas = (List<DtinfoPropuesta>) request.getAttribute("Favoritas");
-                                    if (favoritas.size() > 0) {%>
+                                        if (favoritas.size() > 0) {%>
                                 <table class="table table-bordered table-hover  formulario">
                                     <form action="ServletConsultarPropuesta" method="POST">
                                         <tr>
@@ -224,11 +271,11 @@
 
                                         <%for (DtinfoPropuesta dtp : favoritas) {%>
                                         <tr>
-                                            <input readonly style="border:none" name="TituloP" type="hidden" value="<%=dtp.getTitulo()%>"/>&nbsp;&nbsp;&nbsp;
-                                            <td><p><%=dtp.getTitulo()%></p></td>    
-                                            <td><textarea style="background-color: white; resize: none;width: 300px; height: 100px;"><%=dtp.getDescripcion()%></textarea></td>
-                                            <td><p><%=dtp.getEstado()%></p></td>
-                                            <td><button style="background:url('/CulturarteWeb/Imagenes/ver.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px" name="consulta" type="submit" class="btn btn-primary"></button></td>
+                                        <input readonly style="border:none" name="TituloP" type="hidden" value="<%=dtp.getTitulo()%>"/>&nbsp;&nbsp;&nbsp;
+                                        <td><p><%=dtp.getTitulo()%></p></td>    
+                                        <td><textarea style="background-color: white; resize: none;width: 300px; height: 100px;"><%=dtp.getDescripcion()%></textarea></td>
+                                        <td><p><%=dtp.getEstado()%></p></td>
+                                        <td><button style="background:url('/CulturarteWeb/Imagenes/ver.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px" name="consulta" type="submit" class="btn btn-primary"></button></td>
 
                                         </tr>
                                         <%}%>
@@ -243,12 +290,12 @@
                         <div style="color:black" class="tab-pane" id="PCreadas">
 
 
-                            <% DtUsuario nick = (DtUsuario) request.getSession().getAttribute("usuario_logueado");%>
+
                             <%if (dtu.Esproponente()) {%>
                             <%if (nick != null) {%>
                             <%if (dtu.getNickName().equals(nick.getNickName())) {%>
                             <%List<DtinfoPropuesta> propuestasdeproponentenoing = (List<DtinfoPropuesta>) request.getAttribute("Propuestas2");
-                                if (propuestasdeproponentenoing.size() > 0) {%>
+                                    if (propuestasdeproponentenoing.size() > 0) {%>
                             <div class="usuario" style="margin-bottom: 2%">
                                 <h3>Propuestas creadas</h3>
                                 <table class="table table-bordered table-hover  formulario" style="margin-right: 200px; width: 88%; margin-top:50px;">
@@ -262,11 +309,11 @@
 
                                         <%for (DtinfoPropuesta dtp : propuestasdeproponentenoing) {%>
                                         <tr>
-                                            <input readonly style="border:none" name="TituloP" type="hidden" value="<%=dtp.getTitulo()%>"/>&nbsp;&nbsp;&nbsp;
-                                            <td><p><%=dtp.getTitulo()%></p></td>
-                                            <td><textarea style="background-color: white; resize: none;width: 300px; height: 100px;"><%=dtp.getDescripcion()%></textarea></td> 
-                                            <td><p><%=dtp.getEstado()%></p></td>
-                                            <td><button style="background:url('/CulturarteWeb/Imagenes/ver.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px" name="consulta" type="submit" class="btn btn-primary"></button></td>
+                                        <input readonly style="border:none" name="TituloP" type="hidden" value="<%=dtp.getTitulo()%>"/>&nbsp;&nbsp;&nbsp;
+                                        <td><p><%=dtp.getTitulo()%></p></td>
+                                        <td><textarea style="background-color: white; resize: none;width: 300px; height: 100px;"><%=dtp.getDescripcion()%></textarea></td> 
+                                        <td><p><%=dtp.getEstado()%></p></td>
+                                        <td><button style="background:url('/CulturarteWeb/Imagenes/ver.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px" name="consulta" type="submit" class="btn btn-primary"></button></td>
                                         </tr>
                                         <%}%>     
                                     </form>
@@ -280,7 +327,7 @@
                             <div class="usuario" style="margin-bottom: 2%">
                                 <h3>Propuestas creadas</h3>
                                 <%List<DtinfoPropuesta> propuestasdeproponente = (List<DtinfoPropuesta>) request.getAttribute("Propuestas");
-                                    if (propuestasdeproponente.size() > 0) {%>
+                                        if (propuestasdeproponente.size() > 0) {%>
                                 <table class="table table-bordered table-hover  formulario" style="margin-right: 200px; width: 88%; margin-top:50px;">
                                     <form action="ServletConsultarPropuesta" method="POST">
                                         <tr>
@@ -292,11 +339,11 @@
 
                                         <% for (DtinfoPropuesta dtp : propuestasdeproponente) {%>
                                         <tr>
-                                            <input readonly style="border:none" name="TituloP" type="hidden" value="<%=dtp.getTitulo()%>"/>&nbsp;&nbsp;&nbsp;
-                                            <td><p><%=dtp.getTitulo()%></p></td>
-                                            <td><textarea style="background-color: white; resize: none;width: 300px; height: 100px;"><%=dtp.getDescripcion()%></textarea></td>
-                                            <td><p><%=dtp.getEstado()%></p></td>
-                                            <td><button style="background:url('/CulturarteWeb/Imagenes/ver.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px" name="consulta" type="submit" class="btn btn-primary"></button></td>
+                                        <input readonly style="border:none" name="TituloP" type="hidden" value="<%=dtp.getTitulo()%>"/>&nbsp;&nbsp;&nbsp;
+                                        <td><p><%=dtp.getTitulo()%></p></td>
+                                        <td><textarea style="background-color: white; resize: none;width: 300px; height: 100px;"><%=dtp.getDescripcion()%></textarea></td>
+                                        <td><p><%=dtp.getEstado()%></p></td>
+                                        <td><button style="background:url('/CulturarteWeb/Imagenes/ver.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px" name="consulta" type="submit" class="btn btn-primary"></button></td>
 
                                         </tr>
                                         <%}%>     
@@ -312,7 +359,7 @@
                             <div class="usuario" style="margin-bottom: 2%">
                                 <h3>Propuestas creadas</h3>
                                 <%List<DtinfoPropuesta> propuestasdeproponentenoing = (List<DtinfoPropuesta>) request.getAttribute("Propuestas");
-                                    if (propuestasdeproponentenoing.size() > 0) {%>
+                                        if (propuestasdeproponentenoing.size() > 0) {%>
                                 <table class="table table-bordered table-hover  formulario" style="margin-right: 200px; width: 88%; margin-top:50px;">
                                     <form action="ServletConsultarPropuesta" method="POST">
                                         <tr>
@@ -324,11 +371,11 @@
 
                                         <%for (DtinfoPropuesta dtp : propuestasdeproponentenoing) {%>
                                         <tr>
-                                            <input readonly style="border:none" name="TituloP" type="hidden" value="<%=dtp.getTitulo()%>"/>&nbsp;&nbsp;&nbsp;
-                                            <td><p><%=dtp.getTitulo()%></p></td>    
-                                            <td><textarea style="background-color: white; resize: none;width: 300px; height: 100px;"><%=dtp.getDescripcion()%></textarea></td>
-                                            <td><%=dtp.getEstado()%></td>
-                                            <td><button style="background:url('/CulturarteWeb/Imagenes/ver.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px" name="consulta" type="submit" class="btn btn-primary"></button></td>
+                                        <input readonly style="border:none" name="TituloP" type="hidden" value="<%=dtp.getTitulo()%>"/>&nbsp;&nbsp;&nbsp;
+                                        <td><p><%=dtp.getTitulo()%></p></td>    
+                                        <td><textarea style="background-color: white; resize: none;width: 300px; height: 100px;"><%=dtp.getDescripcion()%></textarea></td>
+                                        <td><%=dtp.getEstado()%></td>
+                                        <td><button style="background:url('/CulturarteWeb/Imagenes/ver.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px" name="consulta" type="submit" class="btn btn-primary"></button></td>
                                         </tr>
                                         <%}%>   
                                     </form>
@@ -344,7 +391,7 @@
                             <div class="usuario" style="margin-bottom: 2%">
                                 <h3>Colaboraciones</h3>
                                 <%List<DtinfoPropuesta> colaboraciones = (List<DtinfoPropuesta>) request.getAttribute("Colaboraciones");
-                                    if (colaboraciones.size() > 0) {%>
+                                        if (colaboraciones.size() > 0) {%>
                                 <table class="table table-bordered table-hover  formulario" style="margin-right: 200px; width: 88%; margin-top:50px;">
 
                                     <tr>
@@ -368,7 +415,7 @@
                                                 out.println("<td>" + dia2 + "/" + mes2 + "/" + anio2 + "</td>");
                                         %>
                                         <td><p><%=dtp.getMonto()%></p></td>&nbsp;&nbsp;&nbsp;
-                                            <%}%>
+                                        <%}%>
 
                                     </tr>
                                     <%}%>
@@ -383,7 +430,7 @@
                             <div class="usuario" style="margin-bottom: 2%">
                                 <h3>Colaboraciones</h3>
                                 <%List<DtinfoPropuesta> colaboraciones = (List<DtinfoPropuesta>) request.getAttribute("Colaboraciones");
-                                    if (colaboraciones.size() > 0) {%>
+                                        if (colaboraciones.size() > 0) {%>
                                 <table class="table table-bordered table-hover  formulario" style="margin-right: 200px; width: 88%; margin-top:50px;">
 
                                     <tr>

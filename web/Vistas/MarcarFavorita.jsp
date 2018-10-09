@@ -7,7 +7,8 @@
 <%@page import="logica.Clases.DtinfoPropuesta"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.List"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -24,7 +25,7 @@
         <%
             }
         %>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+       <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <link href="css/bootstrap.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="css/RegistrarColaboracion.css"/>
         <title>Marcar propuesta como favorita</title>
