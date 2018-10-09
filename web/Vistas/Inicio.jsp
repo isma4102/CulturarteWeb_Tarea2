@@ -46,9 +46,14 @@
         </script>
         <br>
         <br>
-        <jsp:include page="/Vistas/footer.jsp" />
+        <br>
+        <br>
+        <br>
+        <br>
 
+    </div>
+</body>
 
+<jsp:include page="/Vistas/footer.jsp" />
 
-    </body>
 </html>
