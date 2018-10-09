@@ -43,6 +43,10 @@ public class ServletMarcarFavorita extends HttpServlet {
         if (usuLogeado != null) {
             response.setContentType("text/html;charset=UTF-8");
             IPC = Fabrica.getInstance().getControladorPropCat();
+            if(IPC.getPropuestas().isEmpty()){
+                request.setAttribute("mensaje", "No existen propuestas en el sistema");
+            request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
+            }
             List<DtinfoPropuesta> propuestas = IPC.ListarPropuestaNOI();
             request.setAttribute("Propuestas", propuestas);
             request.getRequestDispatcher("Vistas/MarcarFavorita.jsp").forward(request, response);
