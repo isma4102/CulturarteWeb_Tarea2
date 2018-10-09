@@ -31,6 +31,6 @@ function validarPropuesta() {
     } else {
         $('#error_MontoE').hide();
     }
-    
+
     return correcto;
 }

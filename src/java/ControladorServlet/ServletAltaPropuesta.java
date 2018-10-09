@@ -54,10 +54,14 @@ public class ServletAltaPropuesta extends HttpServlet {
         DtUsuario usuLogeado = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
 
         if (usuLogeado.Esproponente()) {
+            SimpleDateFormat fechaA = new SimpleDateFormat("yyyy-MM-dd");
+            String fActual = fechaA.format(new Date());
+            request.setAttribute("FechaActual", fActual);
+
             List<String> listCat = Fabrica.getInstance().getControladorPropCat().ListarCategorias();
             request.setAttribute("listCat", listCat);
             request.getRequestDispatcher("Vistas/AltaPropuesta.jsp").forward(request, response);
-        }else{
+        } else {
             request.getRequestDispatcher("Vistas/Inicio.jsp").forward(request, response);
         }
     }
