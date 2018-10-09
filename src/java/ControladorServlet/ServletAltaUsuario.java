@@ -29,7 +29,7 @@ import javax.servlet.annotation.MultipartConfig;
 @MultipartConfig
 @WebServlet(name = "ServletAltaUsuario", urlPatterns = {"/altaUsuarioServlet"})
 public class ServletAltaUsuario extends HttpServlet {
-
+    
     IControladorUsuario iUsuario;
 
     /**
@@ -43,7 +43,14 @@ public class ServletAltaUsuario extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("Vistas/altaUsuario.jsp").forward(request, response);
+        DtUsuario usuLogeado = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
+        
+        if (usuLogeado == null) {
+            request.getRequestDispatcher("Vistas/altaUsuario.jsp").forward(request, response);
+        } else {
+            request.getRequestDispatcher("Vistas/Inicio.jsp").forward(request, response);
+        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -87,7 +94,7 @@ public class ServletAltaUsuario extends HttpServlet {
         String tipoP = request.getParameter("tipoP");
         Date nacimiento = ParseFecha(fecha);
         Calendar cal = dateToCalendar(nacimiento);
-
+        
         if (!pass.equals(pass2)) {
             request.setAttribute("malPass", "Sus contraseñas no coinciden");
             request.getRequestDispatcher("/Vistas/altaUsuario.jsp").forward(request, response);
@@ -110,7 +117,7 @@ public class ServletAltaUsuario extends HttpServlet {
             byte[] bytes = baos.toByteArray();
             imagen = new DataImagen(bytes, nombreArchivo, extensionArchivo);
         }
-
+        
         if (tipoP.equals("proponente")) {
             ok = iUsuario.AgregarUsuarioProponente(nick, nombre, apellido, correo, cal, imagen, direccion, biografia, sitio, hash);
             if (ok) {
@@ -149,7 +156,7 @@ public class ServletAltaUsuario extends HttpServlet {
         calendar.setTime(date);
         return calendar;
     }
-
+    
     public Date ParseFecha(String fecha) {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         Date fechaDate = new Date();
@@ -160,5 +167,5 @@ public class ServletAltaUsuario extends HttpServlet {
         }
         return fechaDate;
     }
-
+    
 }

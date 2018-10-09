@@ -24,7 +24,9 @@ import logica.Interfaces.IPropCat;
  */
 @WebServlet(name = "ServletMarcarFavorita", urlPatterns = {"/ServletMarcarFavorita"})
 public class ServletMarcarFavorita extends HttpServlet {
-IPropCat IPC;
+
+    IPropCat IPC;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -36,11 +38,17 @@ IPropCat IPC;
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        IPC=Fabrica.getInstance().getControladorPropCat();
-       List<DtinfoPropuesta> propuestas=IPC.ListarPropuestaNOI();
-       request.setAttribute("Propuestas",propuestas);
-        request.getRequestDispatcher("Vistas/MarcarFavorita.jsp").forward(request, response);
+
+        DtUsuario usuLogeado = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
+        if (usuLogeado != null) {
+            response.setContentType("text/html;charset=UTF-8");
+            IPC = Fabrica.getInstance().getControladorPropCat();
+            List<DtinfoPropuesta> propuestas = IPC.ListarPropuestaNOI();
+            request.setAttribute("Propuestas", propuestas);
+            request.getRequestDispatcher("Vistas/MarcarFavorita.jsp").forward(request, response);
+        }else{
+            request.getRequestDispatcher("Vistas/Inicio.jsp").forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -69,16 +77,16 @@ IPropCat IPC;
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String titulo=(String)request.getParameter("TituloP");
+        String titulo = (String) request.getParameter("TituloP");
         DtUsuario nick = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
-        Boolean exito=IPC.AgregarFavorita(titulo, nick.getNickName());
-        if(exito){
+        Boolean exito = IPC.AgregarFavorita(titulo, nick.getNickName());
+        if (exito) {
             request.setAttribute("favorito", "Propuesta marcada como favorita");
-        }else{
+        } else {
             request.setAttribute("favorito", "No se pudo marcar propuesta como favorita");
         }
         processRequest(request, response);
- 
+
     }
 
     /**

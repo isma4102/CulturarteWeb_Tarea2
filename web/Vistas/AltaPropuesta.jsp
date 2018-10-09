@@ -71,7 +71,9 @@
                 <br>
                 <div>
                     <label for="fechaR">Fecha de realizacion:</label>
-                    <input class="form-control" id="FechaR" name="FechaR" type="date" size="15" maxlength="30" required/>
+                    <br>
+                    <label for="fechaR">Dia:</label>
+                    <input class="form-control" id="FechaR" name="FechaR" type="date" min="2018-10-10" required/>
                     <span id="error_FechaR" class="error">Debes ingresar una fecha superior a la fecha actual</span>
                 </div>
                 <br>
