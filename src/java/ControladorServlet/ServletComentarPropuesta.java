@@ -38,9 +38,14 @@ public class ServletComentarPropuesta extends HttpServlet {
             request.setAttribute("mensaje", "No existe una sesion en el sistema");
             request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
         } else {
-            List<DtNickTitProp> lista = IPC.listarPropuestasComentar();
-            request.setAttribute("lista_propuestascomentar", lista);
-            request.getRequestDispatcher("/Vistas/AgregarComentario.jsp").forward(request, response);
+            if (((DtUsuario) request.getSession().getAttribute("usuario_logueado")).Esproponente() == false) {
+                List<DtNickTitProp> lista = IPC.listarPropuestasComentar();
+                request.setAttribute("lista_propuestascomentar", lista);
+                request.getRequestDispatcher("/Vistas/AgregarComentario.jsp").forward(request, response);
+            } else {
+                request.setAttribute("mensaje", "Solo los colaboradores pueden entrar");
+                request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
+            }
         }
     }
 
@@ -71,15 +76,13 @@ public class ServletComentarPropuesta extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        DtUsuario usuario = Login.getUsuarioSesion(request);   
-       
-        
-       if (usuario != null) {
+        DtUsuario usuario = Login.getUsuarioSesion(request);
+
+        if (usuario != null) {
             String nickColab = usuario.getNickName();
             String TituloP = request.getParameter("TituloP");
             String texto = request.getParameter("texto");
-            
-            
+
             try {
                 IPC.ComentarPropuesta(TituloP, nickColab, texto);
                 request.setAttribute("comentarProp", "Propuesta Comentada con Éxito!!!");
@@ -87,11 +90,11 @@ public class ServletComentarPropuesta extends HttpServlet {
                 Logger.getLogger(ServletComentarPropuesta.class.getName()).log(Level.SEVERE, null, ex);
                 request.setAttribute("comentarProp", ex.getMessage());
             }
-            
+
             processRequest(request, response);
-            
-       }
-       
+
+        }
+
     }
 
     /**

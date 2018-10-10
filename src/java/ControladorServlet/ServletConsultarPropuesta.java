@@ -43,7 +43,7 @@ public class ServletConsultarPropuesta extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<DtNickTitProp> listP = Fabrica.getInstance().getControladorPropCat().listarPropuestas();
-      
+        
         request.setAttribute("listaPropuestas", listP);
         request.getRequestDispatcher("Vistas/ConsultarPropuesta.jsp").forward(request, response);
     }

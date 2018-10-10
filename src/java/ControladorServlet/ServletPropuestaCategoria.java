@@ -25,7 +25,9 @@ import logica.Interfaces.IPropCat;
  */
 @WebServlet(name = "ServletPropuestaCategoria", urlPatterns = {"/ServletPropuestaCategoria"})
 public class ServletPropuestaCategoria extends HttpServlet {
-IPropCat IPC;
+
+    IPropCat IPC;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -38,8 +40,8 @@ IPropCat IPC;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        IPC=Fabrica.getInstance().getControladorPropCat();
-        List<String> categorias=IPC.ListarCategorias();
+        IPC = Fabrica.getInstance().getControladorPropCat();
+        List<String> categorias = IPC.ListarCategorias();
         request.setAttribute("Categorias", categorias);
         request.getRequestDispatcher("Vistas/PropuestaporCategoria.jsp").forward(request, response);;
     }
@@ -70,10 +72,10 @@ IPropCat IPC;
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       String nombre= request.getParameter("cat");
-       request.setAttribute("nombre", nombre);
-       List<DtinfoPropuesta> propuestas=IPC.ListarPropuestasCategoria(nombre);
-       request.setAttribute("Propuestas", propuestas);
+        String nombre = request.getParameter("cat");
+        request.setAttribute("nombre", nombre);
+        List<DtinfoPropuesta> propuestas = IPC.ListarPropuestasCategoria(nombre);
+        request.setAttribute("Propuestas", propuestas);
         request.getRequestDispatcher("Vistas/PropuestasporCategoria2.jsp").forward(request, response);
     }
 

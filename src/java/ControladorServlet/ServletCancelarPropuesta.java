@@ -45,7 +45,8 @@ public class ServletCancelarPropuesta extends HttpServlet {
                 request.setAttribute("Lista", list);
                 request.getRequestDispatcher("Vistas/CancelarPropuesta.jsp").forward(request, response);
             } else {
-                request.getRequestDispatcher("Vistas/Inicio.jsp").forward(request, response);
+                request.setAttribute("mensaje", "Solo los proponentes pueden entrar");
+                 request.getRequestDispatcher("Vistas/Mensaje_Recibido.jsp").forward(request, response);
             }
         }
     }
