@@ -28,7 +28,7 @@
                 $("#mostrarmodal").modal("show");
             });
         </script>
-       
+
     </head>
     <body>
 
@@ -46,8 +46,8 @@
                     <div class="modal-body">
                         <div id="mostrarinfo">
                             <div style="width: 41%;margin: 0 auto">
-                            <% out.print("<img style=\"width: 139%;margin-left: -15%;\" src=\"/CulturarteWeb/ServletImagenes?TituloP="+ propuestaSelec.getTitulo()+"\" class=\"img-rounded\" alt=\"avatar\">");
-                            %>
+                                <% out.print("<img style=\"width: 139%;margin-left: -15%;\" src=\"/CulturarteWeb/ServletImagenes?TituloP=" + propuestaSelec.getTitulo() + "\" class=\"img-rounded\" alt=\"avatar\">");
+                                %>
                             </div>
                             </br>
                             </br>
@@ -175,14 +175,39 @@
                             </div>
                             <% } %>         
                             <div class="modal-footer">
-                              
+                                <%if (request.getSession().getAttribute("usuario_logueado") != null) {
+                                        if (((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickName().compareTo(propuestaSelec.getNickproponente()) == 0) {
+                                            if (propuestaSelec.getExtendible()) {
+                                                out.print("<form class=\"form-signin\" action=\"ServletExtenderFinanciacion\" method=\"POST\">");
+                                                out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"TituloP\" value=\"" + propuestaSelec.getTitulo() + "\" readonly=\"readonly\"/>");
+                                                out.print("<button type=\"input\" name=\"seleccionar\" class=\"btn btn-primary\">Extender Financiación</button>");
+                                                out.print("</form>");
+                                            } else if (propuestaSelec.getCancelable()) {
+                                                out.print("<form class=\"form-signin\" action=\"ServletCancelarPropuesta\" method=\"POST\">");
+                                                out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"TituloP\" value=\"" + propuestaSelec.getTitulo() + "\" readonly=\"readonly\"/>");
+                                                out.print("<button type=\"input\" name=\"seleccionar\" class=\"btn btn-primary\">Cancelar Propuesta</button>");
+                                                out.print("</form>");
+                                            }
+                                        } else {
+                                            if (propuestaSelec.getComentable()) {
+                                                out.print("<form class=\"form-signin\" action=\"ServletComentarPropuesta\" method=\"POST\">");
+                                                out.print("<textarea name=\"texto\" placeholder=\"Escriba un Comentario...\"  required style=\"background-color: white; resize: none;width: 300px; height: 100px;\" ></textarea>");
+                                                out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"TituloP\" value=\"" + propuestaSelec.getTitulo() + "\" readonly=\"readonly\"/>");
+                                                out.print("<button style=\"margin-top: -17%;margin-left: 12%;\" type=\"input\" name=\"seleccionar\" class=\"btn btn-primary\">Comentar propuesta</button>");
+                                                out.print("</form>");
+                                            } else if (!propuestaSelec.getCancelable()) {
+                                                out.print("<a href=\"ServletRegistrarColaboracion\" class=\"btn btn-primary\" >Colaborar con la propuesta</a>");
+                                            }
+                                        }
+                                    }%>
+
                                 <a href="javascript:window.history.back();" class="btn btn-danger"> &laquo; Volver</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                </div>
-                <br><br><br><br>
-                <jsp:include page="/Vistas/footer.jsp" />
-                </body>
-                </html>
+            </div>
+            <br><br><br><br>
+            <jsp:include page="/Vistas/footer.jsp" />
+            </body>
+            </html>
