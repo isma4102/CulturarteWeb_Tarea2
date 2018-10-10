@@ -48,9 +48,9 @@
         <ul class="dropdown-menu">
             <form action="servletBuscador" method="GET">
                 <input style="display: none" type="text" name="busqueda" value="<%= busqueda %>"/>
-                <input type="submit" name="filtro" value="Estado"></input><br>
-                <input type="submit" name="filtro" value="Alfabeticamente"></input><br>
-                <input type="submit" name="filtro" value="Fecha"></input>
+                <input class="btn" type="submit" name="filtro" value="Estado"></input><br>
+                <input class="btn" type="submit" name="filtro" value="Alfabeticamente"></input><br>
+                <input class="btn" type="submit" name="filtro" value="Fecha"></input>
             </form>
         </ul>
     </div> 
@@ -71,7 +71,7 @@
                 <% SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");%>
                 <div style="font-weight: bold;float: right" class="Lugar"><%=formato.format(p.getFechaReal().getTime())%></div>
             </div>
-            <div id="descripcion<%=i%>" class="collapse panel-footer Descripcion"><%=p.getDescripcion()%></div>
+            <div id="descripcion<%=i%>" class="collapse panel-footer Descripcion"><h4 style="font-weight: bold">Descripcion</h4><%=p.getDescripcion()%></div>
         </div>
         <%}
         %>   

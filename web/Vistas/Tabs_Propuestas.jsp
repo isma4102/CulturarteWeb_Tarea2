@@ -36,7 +36,7 @@
                                         <%
                                             List<DtPropuestaWeb> listP = (List<DtPropuestaWeb>) request.getAttribute("Publicada");
                                             for (int i = 0; i < listP.size(); i++) {
-                                                out.print("<div class=\"contenedor-columna\">");
+                                                out.print("<div style=\"margin-left: 30px;\" class=\"contenedor-columna\">");
                                                 out.print("<div  class=\"thumbnail\">");
                                                 out.print("<div style=\"margin-left: 16%;\">");
                                                 out.print("<img width=\"100\" height=\"100\" src=\"/CulturarteWeb/ServletImagenes?TituloP=" + listP.get(i).getTituloP() + "\" >");
@@ -81,7 +81,7 @@
                                             for (int i = 0; i < listEnF.size(); i++) {
                                                 out.print("<div class=\"contenedor-columna\">");
                                                 out.print("<div  class=\"thumbnail\">");
-                                                out.print("<div style=\"margin-left: 16%;\">");
+                                                out.print("<div style=\"margin-left: 25%;\">");
                                                 out.print("<img width=\"100\" height=\"100\" src=\"/CulturarteWeb/ServletImagenes?TituloP=" + listEnF.get(i).getTituloP() + "\" >");
                                                 out.print("</div>");
                                                 out.print("<div class=\"caption\">");
@@ -167,7 +167,7 @@
                                     <div class="row">
                                         <% List<DtPropuestaWeb> listNoF = (List<DtPropuestaWeb>) request.getAttribute("noFinanciada");
                                             for (int i = 0; i < listNoF.size(); i++) {
-                                                out.print("<div flex-direction: row class=\"contenedor-columna\">");
+                                                out.print("<div style=\"padding-left: 30px;\" flex-direction: row class=\"contenedor-columna\">");
                                                 out.print("<div  class=\"thumbnail\">");
                                                 out.print("<div style=\"margin-left: 16%;\">");
                                                 out.print("<img width=\"100\" height=\"100\" src=\"/CulturarteWeb/ServletImagenes?TituloP=" + listNoF.get(i).getTituloP() + "\" >");
