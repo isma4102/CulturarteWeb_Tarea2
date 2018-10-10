@@ -28,6 +28,7 @@
                 $("#mostrarmodal").modal("show");
             });
         </script>
+       
     </head>
     <body>
 
@@ -44,6 +45,11 @@
                     </div>
                     <div class="modal-body">
                         <div id="mostrarinfo">
+                            <div style="width: 41%;margin: 0 auto">
+                            <% out.print("<img style=\"width: 139%;margin-left: -15%;\" src=\"/CulturarteWeb/ServletImagenes?TituloP="+ propuestaSelec.getTitulo()+"\" class=\"img-rounded\" alt=\"avatar\">");
+                            %>
+                            </div>
+                            </br>
                             </br>
                             <div class="panel panel-primary">
                                 <div class="panel-heading" style="padding: 1%">
@@ -136,8 +142,8 @@
                                 Colaboradores
                             </h4>
                             <% if (((List<DtConsultaPropuesta2>) (List<DtConsultaPropuesta2>) request.getAttribute("listaC")).isEmpty()) {
-                                        out.print("<h3 align=\"center\" class=\"panel-title\">No existen Colaboradores</h3>");
-                                    } else {%>
+                                    out.print("<h3 align=\"center\" class=\"panel-title\">No existen Colaboradores</h3>");
+                                } else {%>
 
                             <div style="  overflow-x: auto;">
                                 <table class="table  table-bordered table-hover" style="width: 70%;">
@@ -169,6 +175,7 @@
                             </div>
                             <% } %>         
                             <div class="modal-footer">
+                              
                                 <a href="javascript:window.history.back();" class="btn btn-danger"> &laquo; Volver</a>
                             </div>
                         </div>
