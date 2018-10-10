@@ -67,5 +67,7 @@
     <a href="javascript:window.history.back();" class="btn btn-primary" > &laquo; Volver</a>
     <a href="ServletInicio" class="btn btn-primary" > &laquo; Volver a inicio</a>
             </div>
+                <jsp:include page="/Vistas/footer.jsp" /> 
+
 </body>
 </html>

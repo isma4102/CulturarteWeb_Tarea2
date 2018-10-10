@@ -49,6 +49,8 @@
             </tbody>
     </table>
     <br><br><br><br>
+    <div style="margin-top: 21%;">
     <jsp:include page="/Vistas/footer.jsp" />
+    </div>
 </body>
 </html>

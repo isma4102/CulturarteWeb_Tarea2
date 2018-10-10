@@ -117,6 +117,7 @@
                         <a href="javascript:window.history.back();" class="btn btn-primary"> &laquo; Volver</a>
                     </div>
                 </div>
-          
+              <jsp:include page="/Vistas/footer.jsp" /> 
+
     </body>
 </html>

@@ -32,7 +32,10 @@
                        <a style="color:#FFFFFF" class="btn btn-primary" href="/CulturarteWeb/ServletInicio">Salir al Inicio</a> </button>
 
                     </div>
-              
+               </div>
+                    <div style="margin-top: 26%;">
+    <jsp:include page="/Vistas/footer.jsp" /> 
+                    </div>
 
     </body>
 </html>
