@@ -142,11 +142,11 @@
                             <table class="table  table-bordered table-hover" style="width: 70%;">
                                 <thead>
                                     <tr>   
-                                        <th class="active">NickName</th>
-                                        <th class="active">Nombre</th>
-                                        <th class="active">Apellido</th>
-                                        <th class="active">Monto Colab.</th>
-                                        <th class="active">Fecha R.</th>
+                                        <th class="active" style = "color: black" >NickName</th>
+                                        <th class="active" style = "color: black" >Nombre</th>
+                                        <th class="active" style = "color: black" >Apellido</th>
+                                        <th class="active" style = "color: black" >Monto Colab.</th>
+                                        <th class="active" style = "color: black" >Fecha R.</th>
                                     </tr>
                                 </thead>
                                 <div style="overflow: auto">
