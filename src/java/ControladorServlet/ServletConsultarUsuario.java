@@ -18,7 +18,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import logica.Clases.DtColaboraciones;
 import logica.Clases.DtUsuario;
+import logica.Clases.DtinfoColaborador;
 import logica.Clases.DtinfoPropuesta;
 import logica.Fabrica;
 import logica.Interfaces.IControladorUsuario;
@@ -108,7 +110,11 @@ public class ServletConsultarUsuario extends HttpServlet {
                 }
             }
         } else {
+            
             List<DtinfoPropuesta> colaboraciones = ICU.verPropuestas(nickname);
+            DtinfoColaborador dtc=ICU.getDtColaborador(nickname);
+            List<DtColaboraciones> monto=ICU.getMontoColaboracion(dtc);
+            request.setAttribute("Colaborador", monto);
             request.setAttribute("Colaboraciones", colaboraciones);
         }
 

@@ -76,7 +76,7 @@ public class ServletPropuestaCategoria extends HttpServlet {
         request.setAttribute("nombre", nombre);
         List<DtinfoPropuesta> propuestas = IPC.ListarPropuestasCategoria(nombre);
         if(propuestas.isEmpty()){
-            request.setAttribute("mensaje", "No existen propuestas de esa categotia");
+            request.setAttribute("mensaje", "No existen propuestas de esa categoria");
             request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
         }
         request.setAttribute("Propuestas", propuestas);

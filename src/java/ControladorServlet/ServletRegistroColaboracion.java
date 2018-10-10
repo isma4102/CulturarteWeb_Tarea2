@@ -102,7 +102,7 @@ public class ServletRegistroColaboracion extends HttpServlet {
             if (request.getSession().getAttribute("usuario_logueado") != null) {
                 String Tipo_entrada = request.getParameter("Tipo_Retorno");
                 String monto = request.getParameter("Monto");
-                float monto_final = Float.parseFloat(monto);
+                float monto_final = Float.parseFloat(monto);                
                 boolean OK = false;
                 if (Tipo_entrada.compareTo("Entradas") == 0) {
                     try {

@@ -55,7 +55,7 @@
                     </div>
                     <div class="modal-footer">
                         <a href="javascript:window.history.back();" class="btn btn-danger"> &laquo; Volver</a>
-                        <button type="button" class="btn btn-primary"> <a style="color:#FFFFFF" href="/CulturarteWeb/ServletInicio">Salir al Inicio</a> </button>
+                         <a href="ServletInicio" class="btn btn-primary" > &laquo; Salir a inicio</a>
                       <button type="input" name="Registrar" class="btn btn-primary">Registrar</button>
                     </div>
                     </form>

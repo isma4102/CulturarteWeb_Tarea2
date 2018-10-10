@@ -6,6 +6,8 @@
 
 
 
+<%@page import="logica.Clases.DtColaboraciones"%>
+<%@page import="logica.Clases.DtinfoColaborador"%>
 <%@page import="logica.Controladores.configuraciones"%>
 <%@page import="logica.Clases.DtinfoPropuesta"%>
 <%@page import="java.util.List"%>
@@ -396,30 +398,31 @@
                             <div class="usuario" style="margin-bottom: 2%">
                                 <h3>Colaboraciones</h3>
                                 <%List<DtinfoPropuesta> colaboraciones = (List<DtinfoPropuesta>) request.getAttribute("Colaboraciones");
-                                    if (colaboraciones.size() > 0) {%>
+                                    if (colaboraciones.size() > 0) {
+                                List<DtColaboraciones> dtc=(List<DtColaboraciones>)request.getAttribute("Colaborador"); %>
                                 <table class="table table-bordered table-hover  formulario" style="margin-right: 200px; width: 88%; margin-top:50px;">
 
                                     <tr>
                                         <th>Titulo</th>
-                                        <th>Descripción</th>
+                                        
                                             <%if (dtu.getNickName().equals(nick.getNickName())) {%>
                                         <th>Fecha de colaboracion:</th>
                                         <th>Monto</th>  
                                             <% }%>
                                     </tr>
 
-                                    <% for (DtinfoPropuesta dtp : colaboraciones) {%>
+                                    <% for (DtColaboraciones dtp : dtc) {%>
                                     <tr>
-                                        <td><p><%=dtp.getTitulo()%></p></td>&nbsp;&nbsp;&nbsp;
-                                        <td><textarea readonly style="background-color: white; resize: none;width: 300px; height: 100px; overflow-y: scroll;"><%=dtp.getDescripcion()%></textarea>&nbsp;&nbsp;&nbsp;</td>
+                                        <td><p><%=dtp.getPropuesta()%></p></td>&nbsp;&nbsp;&nbsp;                                       
                                         <%if (dtu.getNickName().equals(nick.getNickName())) {
-                                                Calendar calen = dtp.getFechaReal();
+                                                Calendar calen = dtp.getFechaRealiz();
                                                 int dia2 = calen.get(Calendar.DAY_OF_MONTH);
                                                 int mes2 = calen.get(Calendar.MONTH) + 1;
                                                 int anio2 = calen.get(Calendar.YEAR);
                                                 out.println("<td>" + dia2 + "/" + mes2 + "/" + anio2 + "</td>");
+                                                Float monto=dtp.getMontoC();
                                         %>
-                                        <td><p><%=dtp.getMonto()%></p></td>&nbsp;&nbsp;&nbsp;
+                                        <td><p><%=monto%></p></td>&nbsp;&nbsp;&nbsp;
                                         <%}%>
 
                                     </tr>
