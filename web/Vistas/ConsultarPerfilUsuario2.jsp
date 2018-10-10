@@ -312,7 +312,7 @@
                                     <form action="ServletConsultarPropuesta" method="POST">
                                         <tr>
                                         <input readonly style="border:none" name="TituloP" type="hidden" value="<%=dtp.getTitulo()%>"/>&nbsp;&nbsp;&nbsp;
-                                        <td><p><%=dtp.getTitulo()%></p></td>
+                                        <td><p>Titulo de Prueba</p></td>
                                         <td><textarea readonly style="background-color: white; resize: none;width: 300px; height: 100px;"><%=dtp.getDescripcion()%></textarea></td> 
                                         <td><p><%=dtp.getEstado()%></p></td>
                                         <td><button style="background:url('/CulturarteWeb/Imagenes/ver.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px" name="consulta" type="submit" class="btn btn-primary"></button></td>
@@ -344,7 +344,7 @@
                                     <form action="ServletConsultarPropuesta" method="POST">
                                         <tr>
                                         <input readonly style="border:none" name="TituloP" type="hidden" value="<%=dtp.getTitulo()%>"/>&nbsp;&nbsp;&nbsp;
-                                        <td><p><%=dtp.getTitulo()%></p></td>
+                                        <td><p>Titulo de Prueba</p></td>
                                         <td><textarea readonly style="background-color: white; resize: none;width: 300px; height: 100px;"><%=dtp.getDescripcion()%></textarea></td>
                                         <td><p><%=dtp.getEstado()%></p></td>
                                         <td><button style="background:url('/CulturarteWeb/Imagenes/ver.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px" name="consulta" type="submit" class="btn btn-primary"></button></td>
@@ -378,7 +378,7 @@
                                     <form action="ServletConsultarPropuesta" method="POST">
                                         <tr>
                                         <input readonly style="border:none" name="TituloP" type="hidden" value="<%=dtp.getTitulo()%>"/>&nbsp;&nbsp;&nbsp;
-                                        <td><p><%=dtp.getTitulo()%></p></td>    
+                                        <td><p>Titulo de Prueba</p></td>    
                                         <td><textarea readonly style="background-color: white; resize: none;width: 300px; height: 100px;"><%=dtp.getDescripcion()%></textarea></td>
                                         <td><%=dtp.getEstado()%></td>
                                         <td><button style="background:url('/CulturarteWeb/Imagenes/ver.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px" name="consulta" type="submit" class="btn btn-primary"></button></td>

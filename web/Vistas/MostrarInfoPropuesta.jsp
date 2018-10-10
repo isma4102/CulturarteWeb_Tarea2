@@ -18,6 +18,7 @@
         <title>Información de Propuesta</title>
         <script type="text/javascript" src="js/jquery.js"></script> 
         <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="css/RegistrarColaboracion.css" rel="stylesheet">
         <script src="js/bootstrap.js"></script>
         <script>
             $(document).ready(function ()
@@ -28,14 +29,14 @@
     </head>
     <body>
 
+        <jsp:include page="/Vistas/Barra_menu.jsp" />
         <%
             DtinfoPropuesta propuestaSelec = (DtinfoPropuesta) request.getAttribute("Propuestaseleccionada");
 
         %>
 
-        <div class="modal fade" id="mostrarmodal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-            <div class="modal-dialog">
-                <div class="modal-content">
+  
+        <div class="modal-content formulario" style="margin-top: 8%;">
                     <div class="modal-header">
                         <h3 align="center">Información de la Propuesta</h3>
                     </div>
@@ -43,7 +44,7 @@
                         <div id="mostrarinfo">
                             <div>
                                 <div  style="width: 38%;margin: 0 auto">
-                            <% out.print("<img style=\"width: 139%;margin-left: -15%;\" src=\"/CulturarteWeb/ServletImagenes?TituloP="+ propuestaSelec.getTitulo()+"\" class=\"img-rounded\" alt=\"avatar\">");
+                                    <% out.print("<img style=\"width: 139%;margin-left: -15%;\" src=\"/CulturarteWeb/ServletImagenes?TituloP=" + propuestaSelec.getTitulo() + "\" class=\"img-rounded\" alt=\"avatar\">");
                                     %>
                                 </div>
                                 </br>
@@ -109,18 +110,13 @@
                                         <%out.print(propuestaSelec.getMonto());%>
                                     </div>
                                 </div>
-
-
-
                             </div>
                         </div>
-
                     </div>
                     <div class="modal-footer">
                         <a href="javascript:window.history.back();" class="btn btn-primary"> &laquo; Volver</a>
                     </div>
                 </div>
-            </div>
-        </div>
+          
     </body>
 </html>

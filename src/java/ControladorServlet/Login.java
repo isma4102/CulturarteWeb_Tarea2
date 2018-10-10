@@ -88,8 +88,8 @@ public class Login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession objSesion = request.getSession();
-        String login = request.getParameter("login");
-        String password = request.getParameter("pass");
+         String login = request.getParameter("login");
+String password = request.getParameter("pass");
         EstadoSesion nuevoEstado = null;
         codificador a = new codificador();
         
