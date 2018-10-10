@@ -271,7 +271,7 @@
                                         <tr>
                                         <input readonly style="border:none" name="TituloP" type="hidden" value="<%=dtp.getTitulo()%>"/>&nbsp;&nbsp;&nbsp;
                                         <td><p><%=dtp.getTitulo()%></p></td>    
-                                        <td><p readonly style="background-color: white; resize: none;width: 300px; height: 100px;" ><%=dtp.getDescripcion()%></p></td>
+                                        <td><textarea readonly style="background-color: white; resize: none;width: 300px; height: 100px;" ><%=dtp.getDescripcion()%></textarea></td>
                                         <td><p><%=dtp.getEstado()%></p></td>
                                         <td><button style="background:url('/CulturarteWeb/Imagenes/ver.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px" name="consulta" type="submit" class="btn btn-primary"></button></td>
 
@@ -311,7 +311,7 @@
                                         <tr>
                                         <input readonly style="border:none" name="TituloP" type="hidden" value="<%=dtp.getTitulo()%>"/>&nbsp;&nbsp;&nbsp;
                                         <td><p><%=dtp.getTitulo()%></p></td>
-                                        <td><p readonly style="background-color: white; resize: none;width: 300px; height: 100px;"><%=dtp.getDescripcion()%></p></td> 
+                                        <td><textarea readonly style="background-color: white; resize: none;width: 300px; height: 100px;"><%=dtp.getDescripcion()%></textarea></td> 
                                         <td><p><%=dtp.getEstado()%></p></td>
                                         <td><button style="background:url('/CulturarteWeb/Imagenes/ver.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px" name="consulta" type="submit" class="btn btn-primary"></button></td>
                                         </tr>
@@ -343,7 +343,7 @@
                                         <tr>
                                         <input readonly style="border:none" name="TituloP" type="hidden" value="<%=dtp.getTitulo()%>"/>&nbsp;&nbsp;&nbsp;
                                         <td><p><%=dtp.getTitulo()%></p></td>
-                                        <td><p readonly style="background-color: white; resize: none;width: 300px; height: 100px;"><%=dtp.getDescripcion()%></p></td>
+                                        <td><textarea readonly style="background-color: white; resize: none;width: 300px; height: 100px;"><%=dtp.getDescripcion()%></textarea></td>
                                         <td><p><%=dtp.getEstado()%></p></td>
                                         <td><button style="background:url('/CulturarteWeb/Imagenes/ver.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px" name="consulta" type="submit" class="btn btn-primary"></button></td>
 
@@ -377,7 +377,7 @@
                                         <tr>
                                         <input readonly style="border:none" name="TituloP" type="hidden" value="<%=dtp.getTitulo()%>"/>&nbsp;&nbsp;&nbsp;
                                         <td><p><%=dtp.getTitulo()%></p></td>    
-                                        <td><p readonly style="background-color: white; resize: none;width: 300px; height: 100px;"><%=dtp.getDescripcion()%></p></td>
+                                        <td><textarea readonly style="background-color: white; resize: none;width: 300px; height: 100px;"><%=dtp.getDescripcion()%></textarea></td>
                                         <td><%=dtp.getEstado()%></td>
                                         <td><button style="background:url('/CulturarteWeb/Imagenes/ver.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px" name="consulta" type="submit" class="btn btn-primary"></button></td>
                                         </tr>
@@ -411,7 +411,7 @@
                                     <% for (DtinfoPropuesta dtp : colaboraciones) {%>
                                     <tr>
                                         <td><p><%=dtp.getTitulo()%></p></td>&nbsp;&nbsp;&nbsp;
-                                        <td><p readonly style="background-color: white; resize: none;width: 300px; height: 100px; overflow-y: scroll;"><%=dtp.getDescripcion()%></p>&nbsp;&nbsp;&nbsp;</td>
+                                        <td><textarea readonly style="background-color: white; resize: none;width: 300px; height: 100px; overflow-y: scroll;"><%=dtp.getDescripcion()%></textarea>&nbsp;&nbsp;&nbsp;</td>
                                         <%if (dtu.getNickName().equals(nick.getNickName())) {
                                                 Calendar calen = dtp.getFechaReal();
                                                 int dia2 = calen.get(Calendar.DAY_OF_MONTH);
@@ -446,7 +446,7 @@
                                     <% for (DtinfoPropuesta dtp : colaboraciones) {%>
                                     <tr>
                                         <td><p><%=dtp.getTitulo()%></p></td>&nbsp;&nbsp;&nbsp;
-                                        <td><p readonly style="background-color: white; resize: none; width: 300px; height: 100px; overflow-y: scroll;"><%=dtp.getDescripcion()%></p>&nbsp;&nbsp;&nbsp;</td>
+                                        <td><textarea readonly style="background-color: white; resize: none; width: 300px; height: 100px; overflow-y: scroll;"><%=dtp.getDescripcion()%></textarea>&nbsp;&nbsp;&nbsp;</td>
                                     </tr>
                                     <%}%>
 
