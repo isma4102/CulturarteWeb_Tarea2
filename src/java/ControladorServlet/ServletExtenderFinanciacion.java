@@ -34,8 +34,13 @@ public class ServletExtenderFinanciacion extends HttpServlet {
             if (((DtUsuario) request.getSession().getAttribute("usuario_logueado")).Esproponente() == true) {
                 IPropCat IPC = Fabrica.getInstance().getControladorPropCat();
                 List<DtNickTitProp> lista = IPC.ListarPropuestasX_DeProponenteX(((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickName());
-                request.setAttribute("lista_propuestas", lista);
-                request.getRequestDispatcher("/Vistas/ExtenderFinanciacion.jsp").forward(request, response);
+                if (lista.isEmpty()) {
+                    request.setAttribute("mensaje", "No existen propuestas para extender");
+                    request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
+                } else {
+                    request.setAttribute("lista_propuestas", lista);
+                    request.getRequestDispatcher("/Vistas/ExtenderFinanciacion.jsp").forward(request, response);
+                }
             } else {
                 request.setAttribute("mensaje", "Solo los proponentes pueden entrar");
                 request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
