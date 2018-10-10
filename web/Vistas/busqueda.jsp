@@ -54,7 +54,7 @@
             </form>
         </ul>
     </div> 
-    <div id="resultado" style=" margin-left: 225px; width: 700px">
+    <div id="resultado" style=" margin-left: 25%; width: 700px">
         <h1>Resultado de la busqueda</h1>
         <h3>Se encontraron <%=lista.size()%> resultados</h3>
         <%for (int i = 0; i < lista.size(); i++) {

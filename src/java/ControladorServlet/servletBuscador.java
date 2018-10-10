@@ -75,7 +75,7 @@ public class servletBuscador extends HttpServlet {
         if (filtro != null) {
             switch (filtro) {
                 case "Alfabeticamente":
-                    Collections.sort(resultado, (DtinfoPropuesta o1, DtinfoPropuesta o2) -> o1.getTitulo().compareTo(o2.getTitulo()));
+                    Collections.sort(resultado, (DtinfoPropuesta o1, DtinfoPropuesta o2) -> o1.getTitulo().toLowerCase().compareTo(o2.getTitulo().toLowerCase()));
                     request.setAttribute("resultado", resultado);
                     request.setAttribute("busqueda", busqueda);
                     request.setAttribute("tipoRetorno", "busqueda");
