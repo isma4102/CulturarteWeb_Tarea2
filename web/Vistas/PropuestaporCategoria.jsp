@@ -35,7 +35,30 @@
                 </select>
             </form>
         </div>
-       
-        <a href="ServletInicio" class="btn btn-primary" style="margin-left: 45%; margin-top: 5%"> &laquo; Volver a inicio</a>
+        <%String nom = (String) request.getAttribute("nombre");
+    if (nom != null) {%>
+        <div class="formulario_ver_propuesta" style="margin-top: 3%">
+
+            <h3 align="center">Propuestas con categoria <%=nom%></h3>
+            <table class="table table-bordered table-hover" style="margin-left: 32%; width: 35%  ">
+                <tr>
+                    <th>Titulo</th>
+                    <th>Nombre</th>
+                </tr>
+                <%List<DtinfoPropuesta> propuestas = (List<DtinfoPropuesta>) request.getAttribute("Propuestas");
+                    for (DtinfoPropuesta dtp : propuestas) {%>
+                <tr>
+                    <td><p><%=dtp.getTitulo()%></p></td>&nbsp;&nbsp;&nbsp;
+                    <td><textarea style="background-color: white; resize: none;width: 500px; height: 100px;"><%=dtp.getDescripcion()%></textarea></td> 
+                </tr>
+                <%}%>
+
+            </table>
+        </div>
+        <%}%>
+        <div style="text-align: center;margin-left: -1%; margin-top: 3%;">
+                <a href="javascript:window.history.back();" class="btn btn-primary" > &laquo; Volver</a>
+                <a href="ServletInicio" class="btn btn-primary" > &laquo; Volver a inicio</a>
+            </div>
     </body>
 </html>

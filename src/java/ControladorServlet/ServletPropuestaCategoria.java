@@ -74,7 +74,7 @@ IPropCat IPC;
        request.setAttribute("nombre", nombre);
        List<DtinfoPropuesta> propuestas=IPC.ListarPropuestasCategoria(nombre);
        request.setAttribute("Propuestas", propuestas);
-        request.getRequestDispatcher("Vistas/PropuestasporCategoria2.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
