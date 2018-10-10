@@ -4,6 +4,8 @@
     Author     : Lucas
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.logging.SimpleFormatter"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="logica.Clases.DtinfoPropuesta"%>
@@ -44,9 +46,12 @@
     <div class="dropdown">
         <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Ordenar<span class="caret"></span></button>
         <ul class="dropdown-menu">
-            <li id="filtro-estado" value="estado"><a>Estado</a></li>
-            <li id="filtro-alfa" value="alfa"><a>Alfabeticamente A-Z</a></li>
-            <li id="filtro-fecha" value="fecha"><a>Fecha creacion(decendiente)</a></li>
+            <form action="servletBuscador" method="GET">
+                <input style="display: none" type="text" name="busqueda" value="<%= busqueda %>"/>
+                <input type="submit" name="filtro" value="Estado"></input><br>
+                <input type="submit" name="filtro" value="Alfabeticamente"></input><br>
+                <input type="submit" name="filtro" value="Fecha"></input>
+            </form>
         </ul>
     </div> 
     <div id="resultado" style=" margin-left: 225px; width: 700px">
@@ -56,10 +61,15 @@
                 DtinfoPropuesta p = lista.get(i);
         %>
         <div style="background-color: #444; border-color: #444" id="elemento<%=i%>" class="panel panel-primary">
-            <div style="vertical-align: middle; width: 100%" class="btn btn-info panel-heading" data-toggle="collapse" data-target="#descripcion<%=i%>" >
-                <div class="Estado" style="float: left"><h5><%=p.getEstado()%></h5></div>
-                <div><h3 class="Titulo"><%=p.getTitulo()%></h3></div>
-                <div style="float: right" class="Lugar"><%=p.getLugar()%></div>
+            <div style="height: 30%;width: 100%" class="btn btn-info panel-heading" data-toggle="collapse" data-target="#descripcion<%=i%>" >
+                <div style="float: left;width: 30% ; height: 30%" class="img-thumbnail">
+                    <% out.print("<img style=\"width: 100%; height:100%\" src=\"/CulturarteWeb/ServletImagenes?TituloP=" + p.getTitulo() + "\" >");%><br>
+                    <div class="Estado" style="float: left"><h5 style="color: black;font-weight: bold" ><%=p.getEstado()%></h5></div>
+                </div>
+                <div><h3 class="Titulo"><%=p.getTitulo()%></h3></div><br><br>
+                <div style="font-weight: bold;float: right" class="Lugar"><%=p.getLugar()%></div><br>
+                <% SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");%>
+                <div style="font-weight: bold;float: right" class="Lugar"><%=formato.format(p.getFechaReal().getTime())%></div>
             </div>
             <div id="descripcion<%=i%>" class="collapse panel-footer Descripcion"><%=p.getDescripcion()%></div>
         </div>
@@ -70,6 +80,6 @@
 <script src="js/jquery.min.js"></script>
 <script src="script/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="script/filtroBusqueda.js"></script>        
+<%--<script src="script/filtroBusqueda.js"></script>--%>
 
 

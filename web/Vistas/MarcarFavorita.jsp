@@ -45,7 +45,7 @@
                 <tr>
 
                     <td><p><%=dtp.getTitulo()%></p></td>&nbsp;&nbsp;&nbsp;
-                    <td><textarea style="background-color: white; resize: none;width: 300px; height: 100px;"><%=dtp.getDescripcion()%></textarea></td> 
+                    <td><text style="background-color: white; resize: none;width: 300px; height: 100px;"><%=dtp.getDescripcion()%></text></td> 
                     <td>
                         <form action="ServletMarcarFavorita" method="POST">
                             <input  name="TituloP" type="hidden" value="<%=dtp.getTitulo()%>"/>
