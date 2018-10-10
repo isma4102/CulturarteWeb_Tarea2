@@ -55,7 +55,8 @@ public class Login extends HttpServlet {
             RequestDispatcher dispatcher = request.getRequestDispatcher("/Vistas/iniciarSesion.jsp");
             dispatcher.forward(request, response);
         } else {
-            request.getRequestDispatcher("/Vistas/Inicio.jsp").forward(request, response);
+            request.setAttribute("mensaje", "Ya existe una sesion en el sistema");
+            request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp.jsp").forward(request, response);
         }
         
     }

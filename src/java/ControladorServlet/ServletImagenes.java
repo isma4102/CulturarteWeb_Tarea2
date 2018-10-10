@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import logica.Clases.DtUsuario;
 import logica.Clases.DtinfoPropuesta;
+import logica.Controladores.configuraciones;
 import logica.Fabrica;
 import logica.Interfaces.IControladorUsuario;
 import logica.Interfaces.IPropCat;
@@ -44,29 +45,25 @@ public class ServletImagenes extends HttpServlet {
         IControladorUsuario ICU = Fabrica.getInstance().getIControladorUsuario();
         IPropCat IPC = Fabrica.getInstance().getControladorPropCat();
         if (request.getParameter("TituloP") != null) {
-            String ruta = getServletContext().getRealPath("/");
-            String[] parte = ruta.split("CulturarteWeb_Tarea2");
-            String tarea1 = parte[0] + "culturarte" + File.separator;
+            configuraciones con = new configuraciones();
             BufferedImage bi = null;
             DtinfoPropuesta propuesta = IPC.RetornarPropuestaR(request.getParameter("TituloP"));
             try {
-                bi = ImageIO.read(new File(tarea1 + "fPropuestas\\" + request.getParameter("TituloP") + "\\" + propuesta.getImagen()));
+                bi = ImageIO.read(new File(con.getCarpetaImagenes() + "\\" +  "fPropuestas\\" + request.getParameter("TituloP") + "\\" + propuesta.getImagen()));
             } catch (IOException e) {
-                bi = ImageIO.read(new File(tarea1 + "fPropuestas" + "\\" + "Culturarte.png"));
+                bi = ImageIO.read(new File(con.getCarpetaImagenes() + "\\" +  "fPropuestas" + "\\" + "Culturarte.png"));
             }
             OutputStream out = response.getOutputStream();
             ImageIO.write(bi, "png", out);
             out.close();
         } else if (request.getParameter("nickname") != null) {
-            String ruta = getServletContext().getRealPath("/");
-            String[] parte = ruta.split("CulturarteWeb_Tarea2");
-            String tarea1 = parte[0] + "culturarte" + File.separator;
+             configuraciones con = new configuraciones();
             BufferedImage bi = null;
             DtUsuario usuario = ICU.ObtenerDTUsuario(request.getParameter("nickname"));
             try {
-                bi = ImageIO.read(new File(tarea1 + "fPerfiles\\" + usuario.getCorreo() + "\\" + usuario.getImagen()));
+                bi = ImageIO.read(new File(con.getCarpetaImagenes() + "\\"  + "fPerfiles\\" + usuario.getCorreo() + "\\" + usuario.getImagen()));
             } catch (IOException e) {
-                bi = ImageIO.read(new File(tarea1 + "fPerfiles" + "\\" + "nadie.png"));
+                bi = ImageIO.read(new File(con.getCarpetaImagenes() + "\\" +  "fPerfiles" + "\\" + "nadie.png"));
             }
             OutputStream out = response.getOutputStream();
             ImageIO.write(bi, "png", out);

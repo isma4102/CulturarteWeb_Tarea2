@@ -195,8 +195,12 @@
                                                 out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"TituloP\" value=\"" + propuestaSelec.getTitulo() + "\" readonly=\"readonly\"/>");
                                                 out.print("<button style=\"margin-top: -17%;margin-left: 12%;\" type=\"input\" name=\"seleccionar\" class=\"btn btn-primary\">Comentar propuesta</button>");
                                                 out.print("</form>");
-                                            } else if (!propuestaSelec.getCancelable()) {
-                                                out.print("<a href=\"ServletRegistrarColaboracion\" class=\"btn btn-primary\" >Colaborar con la propuesta</a>");
+                                            } else if (propuestaSelec.getColaborable()) {
+                                                 out.print("<form class=\"form-signin\" action=\"ServletRegistroColaboracion\" method=\"POST\">");
+                                                out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"TituloP\" value=\"" + propuestaSelec.getTitulo() + "\" readonly=\"readonly\"/>");
+                                                out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"Estado\" value=\"" + propuestaSelec.getEstadoActual() + "\" readonly=\"readonly\"/>");
+                                                out.print("<button  type=\"input\" name=\"seleccionar\" class=\"btn btn-primary\">Colaborar en la propuesta</button>");
+                                                out.print("</form>");
                                             }
                                         }
                                     }%>

@@ -13,23 +13,34 @@
         <script src="js/bootstrap.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-        <title>JSP Page</title>
+        <script>
+            $(document).ready(function ()
+            {
+                $("#mostrarmodal").modal("show");
+            });
+        </script>
     </head>
     <body>
-        <jsp:include page="/Vistas/Barra_menu.jsp" />
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
+        <div class="modal fade" id="mostrarmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 align="center" class="modal-title" id="exampleModalLabel">Resultado de la operacion realizada</h5>
 
-        <div style="text-align: center" class="panel panel-default">
-            <div class="panel-heading">Resultado de la operacion realizada</div>
-            <div class="panel-body">
-                <a class="alert-info"> <%= request.getAttribute("mensaje")%></a>
-                <a class="alert-link" href="/CulturarteWeb/ServletAltaPropuesta" >Generar una nueva Propuesta</a>
-                <a class="alert-link" href="/CulturarteWeb/ServletInicio" >Regresar al inicio</a>
+                    </div>
+                    <div class="modal-body">
+                        <%out.print(request.getAttribute("mensaje"));%>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="/CulturarteWeb/ServletAltaPropuesta" class="btn btn-primary"> &laquo; Generar una nueva propuesta</a>
+                       <a style="color:#FFFFFF" class="btn btn-primary" href="/CulturarteWeb/ServletInicio">Regresar al Inicio</a> </button>
+
+                    </div>
+                </div>
             </div>
         </div>
+       
+                
+                
     </body>
 </html>

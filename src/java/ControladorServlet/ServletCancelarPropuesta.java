@@ -36,13 +36,17 @@ public class ServletCancelarPropuesta extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         DtUsuario usuLogueado = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
-
-        if (usuLogueado.Esproponente()) {
-            List<DtNickTitProp> list = Fabrica.getInstance().getControladorPropCat().ListarPropuestasCancelar(usuLogueado.getNickName());
-            request.setAttribute("Lista", list);
-            request.getRequestDispatcher("Vistas/CancelarPropuesta.jsp").forward(request, response);
+        if (usuLogueado == null) {
+            request.setAttribute("mensaje", "No existe una sesion en el sistema");
+            request.getRequestDispatcher("Vistas/Mensaje_Recibido.jsp").forward(request, response);
         } else {
-            request.getRequestDispatcher("Vistas/Inicio.jsp").forward(request, response);
+            if (usuLogueado.Esproponente()) {
+                List<DtNickTitProp> list = Fabrica.getInstance().getControladorPropCat().ListarPropuestasCancelar(usuLogueado.getNickName());
+                request.setAttribute("Lista", list);
+                request.getRequestDispatcher("Vistas/CancelarPropuesta.jsp").forward(request, response);
+            } else {
+                request.getRequestDispatcher("Vistas/Inicio.jsp").forward(request, response);
+            }
         }
     }
 
