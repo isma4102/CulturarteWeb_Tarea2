@@ -169,12 +169,11 @@
                             </div>
                             <% } %>         
                             <div class="modal-footer">
-                                
-
                                 <a href="javascript:window.history.back();" class="btn btn-danger"> &laquo; Volver</a>
                             </div>
                         </div>
                     </div>
+                </div>
                 </div>
                 <br><br><br><br>
                 <jsp:include page="/Vistas/footer.jsp" />

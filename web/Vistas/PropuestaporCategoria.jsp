@@ -1,13 +1,9 @@
 <%-- 
-    Document   : PropuestaporCategoria
-    Created on : 8/10/2018, 02:04:10 PM
+    Document   : PropuestasporCategoria2
+    Created on : 8/10/2018, 11:44:12 PM
     Author     : gabri
 --%>
 
-<%@page import="java.util.HashMap"%>
-<%@page import="logica.Clases.Categoria"%>
-<%@page import="java.lang.String"%>
-<%@page import="java.util.Map"%>
 <%@page import="logica.Clases.DtinfoPropuesta"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
