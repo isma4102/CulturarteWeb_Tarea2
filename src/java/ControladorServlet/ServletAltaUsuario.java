@@ -49,7 +49,8 @@ public class ServletAltaUsuario extends HttpServlet {
         if (usuLogeado == null) {
             request.getRequestDispatcher("Vistas/altaUsuario.jsp").forward(request, response);
         } else {
-            request.getRequestDispatcher("Vistas/Inicio.jsp").forward(request, response);
+            request.setAttribute("mensaje", "Ya existe una sesion en el sistema");
+            request.getRequestDispatcher("Vistas/Mensaje_Recibido.jsp").forward(request, response);
         }
         
     }

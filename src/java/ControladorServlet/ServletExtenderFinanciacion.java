@@ -27,10 +27,20 @@ public class ServletExtenderFinanciacion extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        IPropCat IPC = Fabrica.getInstance().getControladorPropCat();
-        List<DtNickTitProp> lista = IPC.ListarPropuestasX_DeProponenteX(((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickName());
-        request.setAttribute("lista_propuestas", lista);
-        request.getRequestDispatcher("/Vistas/ExtenderFinanciacion.jsp").forward(request, response);
+        if (request.getSession().getAttribute("usuario_logueado") == null) {
+            request.setAttribute("mensaje", "No existe una sesión en el sistema");
+            request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
+        } else {
+            if (((DtUsuario) request.getSession().getAttribute("usuario_logueado")).Esproponente() == true) {
+                IPropCat IPC = Fabrica.getInstance().getControladorPropCat();
+                List<DtNickTitProp> lista = IPC.ListarPropuestasX_DeProponenteX(((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickName());
+                request.setAttribute("lista_propuestas", lista);
+                request.getRequestDispatcher("/Vistas/ExtenderFinanciacion.jsp").forward(request, response);
+            } else {
+                request.setAttribute("mensaje", "Solo los proponentes pueden entrar");
+                request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
+            }
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -64,7 +74,7 @@ public class ServletExtenderFinanciacion extends HttpServlet {
             String viene = request.getParameter("TituloP");
             String Opcion = new String(viene.getBytes("ISO-8859-1"), "UTF-8");
             IPC.ExtenderFinanciacion(((String) request.getParameter("TituloP")));
-            request.setAttribute("mensaje","Se extendio la fecha de la propuesta");
+            request.setAttribute("mensaje", "Se extendio la fecha de la propuesta");
             request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
         }
     }
