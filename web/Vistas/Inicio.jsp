@@ -10,6 +10,7 @@
 <html>
     <head>        
         <link href="css/Indicador_Carga.css" rel="stylesheet">
+        <link rel="icon" type="image/png" href="Imagenes/icono.png"/>
         <title>Culturarte</title>
 
     </head>
@@ -44,11 +45,9 @@
                     request.getSession().removeAttribute("datos_de_prueba");
                 }%>
         </script>
-        <br>
-        <br>
-        <jsp:include page="/Vistas/footer.jsp" />
+    </div>
+    <br><br><br><br><br>        
+    <jsp:include page="/Vistas/footer.jsp" />
+</body>
 
-
-
-    </body>
 </html>

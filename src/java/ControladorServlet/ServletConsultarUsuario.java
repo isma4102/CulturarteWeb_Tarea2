@@ -46,11 +46,14 @@ public class ServletConsultarUsuario extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-            ICU = Fabrica.getInstance().getIControladorUsuario();
-            List<DtUsuario> usuarios = ICU.ListarUsuarios();
-            request.setAttribute("Usuarios", usuarios);
-            request.getRequestDispatcher("Vistas/ConsultarPerfilUsuario.jsp").forward(request, response);
-        
+        ICU = Fabrica.getInstance().getIControladorUsuario();
+        if(ICU.getUsuarios().isEmpty()){
+            request.setAttribute("mensaje", "No existen usuarios en el sistema");
+            request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
+        }
+        List<DtUsuario> usuarios = ICU.ListarUsuarios();
+        request.setAttribute("Usuarios", usuarios);
+        request.getRequestDispatcher("Vistas/ConsultarPerfilUsuario.jsp").forward(request, response);
 
     }
 

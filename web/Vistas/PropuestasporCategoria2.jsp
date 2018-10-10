@@ -18,29 +18,34 @@
         <title>Consultar propuestas por categoria</title>
     </head>
     <body> 
+        <jsp:include page="/Vistas/Barra_menu.jsp"/>
+        <br><br><br>
         <div class="formulario_ver_propuesta" style="margin-top: 7%">
             <%String nom = (String) request.getAttribute("nombre");%>
             <h3 align="center">Propuestas con categoria <%=nom%></h3>
             <table class="table table-bordered table-hover" style="margin-left: 30%; width: 35%  ">
                 <tr>
+                    <th>Portada</th>
                     <th>Titulo</th>
-                    <th>Nombre</th>
+                    <th>Descripcion</th>
                 </tr>
                 <%List<DtinfoPropuesta> propuestas = (List<DtinfoPropuesta>) request.getAttribute("Propuestas");
                     for (DtinfoPropuesta dtp : propuestas) {%>
                 <tr>
+                    <td><img src=""></img></td>&nbsp;&nbsp;&nbsp;
                     <td><p><%=dtp.getTitulo()%></p></td>&nbsp;&nbsp;&nbsp;
-                    <td><textarea style="background-color: white; resize: none;width: 500px; height: 100px;"><%=dtp.getDescripcion()%></textarea></td> 
+                    <td><p style="background-color: white; resize: none;width: 500px; height: 100px;"><%=dtp.getDescripcion()%></p></td> 
                 </tr>
                 <%}%>
-
             </table>
 
             <div style="text-align: center;margin-left: -1%;">
 
-            <a href="javascript:window.history.back();" class="btn btn-primary" > &laquo; Volver</a>
-            <a href="ServletInicio" class="btn btn-primary" > &laquo; Volver a inicio</a>
+                <a href="javascript:window.history.back();" class="btn btn-primary" > &laquo; Volver</a>
+                <a href="ServletInicio" class="btn btn-primary" > &laquo; Volver a inicio</a>
+            </div>
         </div>
-        </div>
+        <br><br><br><br>
+        <jsp:include page="/Vistas/footer.jsp" />
     </body>
 </html>

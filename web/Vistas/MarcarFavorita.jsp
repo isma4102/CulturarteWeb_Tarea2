@@ -25,7 +25,7 @@
         <%
             }
         %>
-       <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <link href="css/bootstrap.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="css/RegistrarColaboracion.css"/>
         <title>Marcar propuesta como favorita</title>
@@ -49,7 +49,7 @@
                     <td>
                         <form action="ServletMarcarFavorita" method="POST">
                             <input  name="TituloP" type="hidden" value="<%=dtp.getTitulo()%>"/>
-                             <input type="button" class="btn btn-primary" value="Extender Financiacion"/>
+                            <input class="btn btn-primary"  onclick="submit()" type="button" value="Marcar como favorita"/>
                         </form>
                     </td>
 
@@ -61,5 +61,8 @@
             <a href="javascript:window.history.back();" class="btn btn-primary"> &laquo; Volver</a>
 
         </div>
+
+        <br><br><br><br><br>        
+        <jsp:include page="/Vistas/footer.jsp" />
     </body>
 </html>

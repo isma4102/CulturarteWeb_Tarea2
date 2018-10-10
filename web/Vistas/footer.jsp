@@ -19,10 +19,10 @@
                 <h5 style="font-size: 20px"  class="text-uppercase"><b>Culturarte</b></h5>
                 <p style=" font:sans-serif; font-size:18px">"Las oportunidades no pasan, las creas"</p>
 
-                <hr style="width: 100% ; color: white">
+                <hr style="width: 100% ; color: white;margin-top: 0px;margin-bottom: 0px;">
             </div><br>
 
-            <div style="align-content: center" id="myCarousel" class="carousel slide" data-ride="carousel">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
                 <!-- Indicators -->
                 <ol class="carousel-indicators">
                     <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -31,15 +31,15 @@
                 </ol>
 
                 <!-- Wrapper for slides -->
-                <div  style="align-self: center;width: 30%;height:30%;margin-left: 0px;margin-right: 0px;left: 400px;right: 37px;" class="carousel-inner">
+                <div style="width: 25%;right: -38%;" class="carousel-inner">
                     <div class="item active">
-                        <img  style="width: 100%; height: 100%;"  class="img-thumbnail" src="Imagenes/foto1.jpg" alt="">
+                        <img   style="vertical-align: central; width: 100%; height: 100%;"  class="img-responsive img-thumbnail" src="Imagenes/foto1.jpg" alt="">
                     </div>
                     <div class="item">
-                        <img  style="width: 100%; height: 100%;" class="img-thumbnail" src="Imagenes/foto2.jpg" alt="">
+                        <img  style="width: 100%; height: 100%;" class="img-responsive img-thumbnail" src="Imagenes/foto2.jpg" alt="">
                     </div>
                     <div class="item">
-                        <img  style="width: 100%; height: 100%;" class="img-thumbnail" src="Imagenes/foto3.jpg" alt="">
+                        <img  style="width: 100%; height: 100%;" class="img-responsive img-thumbnail" src="Imagenes/foto3.jpg" alt="">
                     </div>
                 </div><br>
 
@@ -61,7 +61,7 @@
     <!-- Footer Links -->
 
     <!-- Copyright -->
-    <div style="background-color: #444" class="footer-copyright text-center py-3">© 2018 Copyright:
+    <div style=" color: white; background-color: #444" class="footer-copyright text-center py-3">© 2018 Copyright:
         <a href="/CulturarteWeb/ServletInicio"> www.culturarte.com</a>
     </div>
     <!-- Copyright -->

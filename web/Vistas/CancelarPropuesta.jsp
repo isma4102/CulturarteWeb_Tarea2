@@ -1,6 +1,6 @@
 <%-- 
-    Document   : ConsultarPropuesta
-    Created on : 16/09/2018, 11:20:12 PM
+    Document   : CancelarPropuesta
+    Created on : 10/10/2018, 01:26:15 AM
     Author     : Martin
 --%>
 
@@ -34,27 +34,25 @@
             <tr>
                 <th style="color:black" class="active">Titulo</th>
                 <th style="color:black" class="active">Categoria</th>
-                <th style="color:black" class="active">Ver informacion</th>
+                <th style="color:black" class="active">Cancelar Propuesta</th>
             </tr>
         </thead>
         <div style="overflow: auto">
             <tbody>
                 <%
-                    List<DtNickTitProp> lista = (List<DtNickTitProp>) request.getAttribute("listaPropuestas");
+                    List<DtNickTitProp> lista = (List<DtNickTitProp>) request.getAttribute("Lista");
                     for (int i = 0; i < lista.size(); i++) {
                         out.print("<tr>");
-                        out.print("<form class=\"form-signin\" action=\"ServletConsultarPropuesta\" method=\"POST\"> ");
+                        out.print("<form class=\"form-signin\" action=\"ServletCancelarPropuesta\" method=\"POST\"> ");
                         out.print("<input style=\"border:none\" type=\"hidden\" class=\"form-control-plaintext\" name=\"TituloP\" value=\"" + lista.get(i).getTituloP() + "\" readonly=\"readonly\"/>");
                         out.print("<td><p>" + lista.get(i).getTituloP() + " </p></td>");
                         out.print("<td><p>" + lista.get(i).getProponente() + "</p></td>");
-                        out.print("<td><button style=\"background:url('/CulturarteWeb/Imagenes/ver.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px\" type=\"input\" name=\"Ver\" class=\"btn btn-primary\"></button></td>");
+                        out.print("<td><button style=\"background:url('/CulturarteWeb/Imagenes/cancelar.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px\" type=\"input\" name=\"Ver\" class=\"btn btn-primary\"></button></td>");
                         out.print("</form>");
                         out.print("</tr>");
                     }
                 %>
             </tbody>
     </table>
-    <br><br><br><br>
-    <jsp:include page="/Vistas/footer.jsp" />
 </body>
 </html>

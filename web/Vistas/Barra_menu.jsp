@@ -52,7 +52,7 @@
                         <li style="margin-top: 1px; color:white "><a href="/CulturarteWeb/ServletConsultarPropuesta">Quiero ver Propuestas</a></li>
                     </ul>
                     <form action="servletBuscador" method="GET" class="navbar-form navbar-right">
-                        <div style="position: relative;margin-right: 26%;">
+                        <div style="margin-right: 26%;">
                             <input name="busqueda" type="text" class="form-control" placeholder="Titulo, descripcion, lugar..." required/>
                             <input style="margin-left: 101%;margin-top: -54px;" class="btn btn-default"  id="btnBuscar" type="submit" value="Buscar"/>
                         </div>

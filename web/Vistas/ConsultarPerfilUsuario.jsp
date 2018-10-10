@@ -35,16 +35,16 @@
                 <%for (DtUsuario dtusu : usu) {%>
                 <form  action="${pageContext.request.contextPath}/ServletConsultarUsuario" method="POST">
                     <tr>
-                        <input style="border:none" class="form-control-plaintext" readonly="" name="nick" type="hidden" value="<%=dtusu.getNickName()%>"/>&nbsp;&nbsp;&nbsp;
-                        <td><%=dtusu.getNickName()%></td>
-                        <td><%=dtusu.getNombre()%>&nbsp;&nbsp;&nbsp;</td>
-                        <td><%=dtusu.getApellido()%>&nbsp;&nbsp;&nbsp;</td>
-                        <%if (dtusu.Esproponente() == false) { %>
-                        <td>Colaborador&nbsp;&nbsp;&nbsp;<br/></td>
-                            <%} else {%>
-                        <td>Proponente&nbsp;&nbsp;&nbsp;<br/></td>
-                            <%}%>
-                        <td><button style="background:url('/CulturarteWeb/Imagenes/ver.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px" type="input" name="Ver" class="btn btn-primary"></button></td>
+                    <input style="border:none" class="form-control-plaintext" readonly="" name="nick" type="hidden" value="<%=dtusu.getNickName()%>"/>&nbsp;&nbsp;&nbsp;
+                    <td><%=dtusu.getNickName()%></td>
+                    <td><%=dtusu.getNombre()%>&nbsp;&nbsp;&nbsp;</td>
+                    <td><%=dtusu.getApellido()%>&nbsp;&nbsp;&nbsp;</td>
+                    <%if (dtusu.Esproponente() == false) { %>
+                    <td>Colaborador&nbsp;&nbsp;&nbsp;<br/></td>
+                        <%} else {%>
+                    <td>Proponente&nbsp;&nbsp;&nbsp;<br/></td>
+                        <%}%>
+                    <td><button style="background:url('/CulturarteWeb/Imagenes/ver.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px" type="input" name="Ver" class="btn btn-primary"></button></td>
                     </tr>
                 </form>
                 <% }%>
@@ -55,7 +55,7 @@
             <h1>No hay usuarios en el sistema</h1>
             <%}%>
         </div>
-
+        <br><br><br><br><br>        
+        <jsp:include page="/Vistas/footer.jsp"/>
     </body>
-
 </html>

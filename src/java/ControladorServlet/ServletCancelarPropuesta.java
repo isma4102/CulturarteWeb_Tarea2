@@ -13,19 +13,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import logica.Clases.DtNickTitProp;
 import logica.Clases.DtUsuario;
-import logica.Clases.DtinfoPropuesta;
 import logica.Fabrica;
-import logica.Interfaces.IPropCat;
 
 /**
  *
- * @author gabri
+ * @author Martin
  */
-@WebServlet(name = "ServletMarcarFavorita", urlPatterns = {"/ServletMarcarFavorita"})
-public class ServletMarcarFavorita extends HttpServlet {
-
-    IPropCat IPC;
+@WebServlet(name = "ServletCancelarPropuesta", urlPatterns = {"/ServletCancelarPropuesta"})
+public class ServletCancelarPropuesta extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,21 +33,15 @@ public class ServletMarcarFavorita extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        DtUsuario usuLogeado = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
-        if (usuLogeado != null) {
-            response.setContentType("text/html;charset=UTF-8");
-            IPC = Fabrica.getInstance().getControladorPropCat();
-            if(IPC.getPropuestas().isEmpty()){
-                request.setAttribute("mensaje", "No existen propuestas en el sistema");
-            request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
-            }
-            List<DtinfoPropuesta> propuestas = IPC.ListarPropuestaNOI();
-            request.setAttribute("Propuestas", propuestas);
-            request.getRequestDispatcher("Vistas/MarcarFavorita.jsp").forward(request, response);
-        }else{
+        DtUsuario usuLogueado = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
+
+        if (usuLogueado.Esproponente()) {
+            List<DtNickTitProp> list = Fabrica.getInstance().getControladorPropCat().ListarPropuestasCancelar(usuLogueado.getNickName());
+            request.setAttribute("Lista", list);
+            request.getRequestDispatcher("Vistas/CancelarPropuesta.jsp").forward(request, response);
+        } else {
             request.getRequestDispatcher("Vistas/Inicio.jsp").forward(request, response);
         }
     }
@@ -79,17 +70,21 @@ public class ServletMarcarFavorita extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String titulo = (String) request.getParameter("TituloP");
-        DtUsuario nick = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
-        Boolean exito = IPC.AgregarFavorita(titulo, nick.getNickName());
-        if (exito) {
-            request.setAttribute("favorito", "Propuesta marcada como favorita");
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String tit = request.getParameter("TituloP");
+        String titulo = new String(tit.getBytes("ISO-8859-1"), "UTF-8");
+        DtUsuario proponente = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
+
+        boolean ok = Fabrica.getInstance().getControladorPropCat().CancelarPropuesta(tit, proponente.getNickName());
+
+        if (ok) {
+            request.setAttribute("mensaje", "Se cancelo con exito la propuesta");
         } else {
-            request.setAttribute("favorito", "No se pudo marcar propuesta como favorita");
+            request.setAttribute("mensaje", "La propuesta no pudo ser cancelada");
         }
-        processRequest(request, response);
+
+        request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
 
     }
 

@@ -50,7 +50,6 @@
 
             <th bgcolor="white">Titulo de Propuesta</th>
             <th bgcolor="white">Nombre del Proponente</th>
-            <th bgcolor="white">Comentario</th>
             <th bgcolor="white" style="text-align:center">Comentar</th>
 
         </thead>
@@ -67,13 +66,14 @@
 
         <td align="center">   
             <form action="ServletComentarPropuesta" method="post">
-                <input type="hidden" name="TituloP" value="<%= lista.get(i).getTituloP()%>" />
-                <textarea style="width: 100%;background-color: white; resize: none;" name="texto" placeholder="Escriba un Comentario..."  required></textarea>
-            </form>
-        </td>
-        <td  align="center"> <input type="button" class="btn btn-primary" value="Comentar" onclick="submit()"/></td>
+                <input type="hidden" name="TituloP" value="<%= lista.get(i).getTituloP()%>">
+                <textarea name="texto" placeholder="Escriba un Comentario..."  required></textarea>
+                <input type="button" class="btn btn-primary" value="Comentar" onclick="submit()"/>
+            </form>    
 
-        
+        </td>
+
+
         <%
 
                 out.print("</tr>");
@@ -81,6 +81,8 @@
             }
         %>
     </tbody>
-</table>         
+</table>
+<br><br><br><br><br>        
+<jsp:include page="/Vistas/footer.jsp" />    
 </body>
 </html>
