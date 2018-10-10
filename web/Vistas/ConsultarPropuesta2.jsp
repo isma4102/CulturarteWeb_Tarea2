@@ -3,6 +3,7 @@
     Created on : 30/09/2018, 04:19:30 PM
     Author     : Martin
 --%>
+<%@page import="logica.Clases.TipoE"%>
 <%@page import="logica.Clases.DtUsuario"%>
 <%@page import="logica.Clases.DtConsultaPropuesta"%>
 <%@page import="logica.Clases.DtConsultaPropuesta2"%>
@@ -82,7 +83,13 @@
                                 <h3 class="panel-title">Estado Actual</h3>
                             </div>
                             <div class="panel-body" style="padding: 1%">
-                                <%out.print(propuestaSelec.getEstadoActual());%>
+                                <%if (propuestaSelec.getEstadoActual()== TipoE.enFinanciacion.toString())
+                                        out.print("En Financiacion");
+                                    else if (propuestaSelec.getEstadoActual()== TipoE.noFinanciada.toString())
+                                        out.print("No Financiada");
+                                    else
+                                        out.print(propuestaSelec.getEstadoActual());
+                                    %>
                             </div>
                         </div>
 
@@ -142,11 +149,11 @@
                             <table class="table  table-bordered table-hover" style="width: 70%;">
                                 <thead>
                                     <tr>   
-                                        <th class="active">NickName</th>
-                                        <th class="active">Nombre</th>
-                                        <th class="active">Apellido</th>
-                                        <th class="active">Monto Colab.</th>
-                                        <th class="active">Fecha R.</th>
+                                        <th class="active" style = "color: black" >NickName</th>
+                                        <th class="active" style = "color: black" >Nombre</th>
+                                        <th class="active" style = "color: black" >Apellido</th>
+                                        <th class="active" style = "color: black" >Monto Colab.</th>
+                                        <th class="active" style = "color: black" >Fecha R.</th>
                                     </tr>
                                 </thead>
                                 <div style="overflow: auto">
