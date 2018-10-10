@@ -35,12 +35,9 @@
             <div class="row">
                 <div class="col-sm-3"><!--left col-->
                     <%DtUsuario dtu = (DtUsuario) request.getAttribute("Usuario");
-                        DtUsuario nick = (DtUsuario) request.getSession().getAttribute("usuario_logueado");%>
-                    <%configuraciones configuracion = new configuraciones();
-                        String ruta = configuracion.getCarpetaImagenes() + "\\fPerfiles\\" + dtu.getCorreo() + "\\" + dtu.getImagen();
-                        String rtgfd = "rgfbvc";
-                    %>
-                    <img src="Imagenes/nadie.png" class="avatar img-circle img-thumbnail" alt="avatar">
+                        DtUsuario nick = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
+                    out.print("<img src=\"/CulturarteWeb/ServletImagenes?nickname="+ dtu.getNickName() +"\" class=\"avatar img-circle img-thumbnail\" alt=\"avatar\">");
+                            %>
                     <br>
 
 
