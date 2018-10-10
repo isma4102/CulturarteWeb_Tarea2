@@ -28,17 +28,19 @@
         <div class="tab-content">
             <div  style = 'color: black' class='tab-pane active' id = 'hometab'>
                 <div class="wrapper">
-                    <div class="scroller">
+                    <div class="scroller" style="overflow-y: scroll;">
                         <div class="contenedor-tabla">
                             <div class="contenedor-fila">
                                 <div class="container" style="padding-top: 1em;">
-                                    <div class="row">
+                                    <div class="row" >
                                         <%
                                             List<DtPropuestaWeb> listP = (List<DtPropuestaWeb>) request.getAttribute("Publicada");
                                             for (int i = 0; i < listP.size(); i++) {
-                                                out.print("<div class=\"contenedor-columna\">");
+                                                out.print("<div style=\"margin-left: 30px;\" class=\"contenedor-columna\">");
                                                 out.print("<div  class=\"thumbnail\">");
-                                                out.print("<img src=\"/CulturarteWeb/ServletImagenes?TituloP=" + listP.get(i).getTituloP() + "\" >");
+                                                out.print("<div style=\"margin-left: 16%;\">");
+                                                out.print("<img width=\"100\" height=\"100\" src=\"/CulturarteWeb/ServletImagenes?TituloP=" + listP.get(i).getTituloP() + "\" >");
+                                                out.print("</div>");
                                                 out.print("<div class=\"caption\">");
                                                 out.print("<h3 style=\"width: 135%;\">" + listP.get(i).getTituloP() + "</h3>");
                                                 out.print("<textarea readonly style=\"height: 160px;resize: none\" class=\"form-control rounded-0\" rows=\"20\">" + listP.get(i).getDescrip() + "</textarea>");
@@ -70,7 +72,7 @@
             </div>
             <div style="color: black" class="tab-pane" id="javatab">
                 <div class="wrapper">
-                    <div class="scroller">
+                    <div class="scroller" style="overflow-y: scroll;">
                         <div class="contenedor-tabla">
                             <div class="contenedor-fila">
                                 <div class="container" style="padding-top: 1em;">
@@ -79,10 +81,12 @@
                                             for (int i = 0; i < listEnF.size(); i++) {
                                                 out.print("<div class=\"contenedor-columna\">");
                                                 out.print("<div  class=\"thumbnail\">");
-                                                out.print("<img src=\"/CulturarteWeb/ServletImagenes?TituloP=" + listEnF.get(i).getTituloP() + "\" >");
+                                                out.print("<div style=\"margin-left: 25%;\">");
+                                                out.print("<img width=\"100\" height=\"100\" src=\"/CulturarteWeb/ServletImagenes?TituloP=" + listEnF.get(i).getTituloP() + "\" >");
+                                                out.print("</div>");
                                                 out.print("<div class=\"caption\">");
                                                 out.print("<h3 style=\"width: 135%;\">" + listEnF.get(i).getTituloP() + "</h3>");
-                                                //out.print("<textarea readonly style=\"height: 160px;resize: none\" class=\"form-control rounded-0\" rows=\"20\">" + listP.get(i).getTituloP() + "</textarea>");
+                                                out.print("<textarea readonly style=\"height: 160px;resize: none\" class=\"form-control rounded-0\" rows=\"20\">" + listEnF.get(i).getDescrip() + "</textarea>");
                                                 out.print("<p>");
                                                 out.print("<p> Recaudacion: " + listEnF.get(i).getRecaudacion() + " </p>");
                                                 //arranca barrita
@@ -111,7 +115,7 @@
             </div>
             <div style="color: black" class="tab-pane" id="csharptab">
                 <div class="wrapper">
-                    <div class="scroller">
+                    <div class="scroller" style="overflow-y: scroll;">
                         <div class="contenedor-tabla">
                             <div class="contenedor-fila">
                                 <div class="container" style="padding-top: 1em;">
@@ -122,10 +126,12 @@
                                             for (int i = 0; i < listF.size(); i++) {
                                                 out.print("<div class=\"contenedor-columna\">");
                                                 out.print("<div class=\"thumbnail\">");
-                                                out.print("<img src=\"/CulturarteWeb/ServletImagenes?TituloP=" + listF.get(i).getTituloP() + "\" >");
+                                                out.print("<div style=\"margin-left: 16%;\">");
+                                                out.print("<img width=\"100\" height=\"100\" src=\"/CulturarteWeb/ServletImagenes?TituloP=" + listF.get(i).getTituloP() + "\" >");
+                                                out.print("</div>");
                                                 out.print("<div class=\"caption\">");
                                                 out.print("<h3 style=\"width: 135%;\">" + listF.get(i).getTituloP() + "</h3>");
-                                                //out.print("<textarea readonly style=\"height: 160px;resize: none\" class=\"form-control rounded-0\" rows=\"20\">" + listP.get(i).getTituloP() + "</textarea>");
+                                                out.print("<textarea readonly style=\"height: 160px;resize: none\" class=\"form-control rounded-0\" rows=\"20\">" + listF.get(i).getDescrip() + "</textarea>");
                                                 out.print("<p>");
                                                 out.print("<p> Recaudacion: " + listF.get(i).getRecaudacion() + " </p>");
                                                 //arranca barrita
@@ -154,19 +160,21 @@
             </div>
             <div style="color: black" class="tab-pane" id="mysqltab">
                 <div class="wrapper">
-                    <div class="scroller">
+                    <div class="scroller" style="overflow-y: scroll;">
                         <div class="contenedor-tabla">
                             <div class="contenedor-fila">
                                 <div class="container" style="padding-top: 1em;">
                                     <div class="row">
                                         <% List<DtPropuestaWeb> listNoF = (List<DtPropuestaWeb>) request.getAttribute("noFinanciada");
                                             for (int i = 0; i < listNoF.size(); i++) {
-                                                out.print("<div flex-direction: row class=\"contenedor-columna\">");
+                                                out.print("<div style=\"padding-left: 30px;\" flex-direction: row class=\"contenedor-columna\">");
                                                 out.print("<div  class=\"thumbnail\">");
-                                                out.print("<img style=\"max-width: 171px;max-height: 176px;\" src=\"/CulturarteWeb/ServletImagenes?TituloP=" + listNoF.get(i).getTituloP() + "\" >");
+                                                out.print("<div style=\"margin-left: 16%;\">");
+                                                out.print("<img width=\"100\" height=\"100\" src=\"/CulturarteWeb/ServletImagenes?TituloP=" + listNoF.get(i).getTituloP() + "\" >");
+                                                out.print("</div>");
                                                 out.print("<div class=\"caption\">");
                                                 out.print("<h3 style=\"width: 135%;\">" + listNoF.get(i).getTituloP() + "</h3>");
-                                                //out.print("<textarea readonly style=\"height: 160px;resize: none\" class=\"form-control rounded-0\" rows=\"20\">" + listP.get(i).getTituloP() + "</textarea>");
+                                                out.print("<textarea readonly style=\"height: 160px;resize: none\" class=\"form-control rounded-0\" rows=\"20\">" + listNoF.get(i).getDescrip() + "</textarea>");
                                                 out.print("<p>");
                                                 out.print("<p> Recaudacion: " + listNoF.get(i).getRecaudacion() + " </p>");
                                                 //arranca barrita
@@ -195,17 +203,19 @@
             </div>
             <div style="color: black" class="tab-pane" id="jquerytab">
                 <div class="wrapper">
-                    <div class="scroller">
+                    <div class="scroller" style="overflow-y: scroll;">
                         <div class="container" style="padding-top: 1em;">
                             <div class="row">
                                 <% List<DtPropuestaWeb> listC = (List<DtPropuestaWeb>) request.getAttribute("Cancelada");
                                     for (int i = 0; i < listC.size(); i++) {
                                         out.print("<div class=\"contenedor-columna\">");
                                         out.print("<div  class=\"thumbnail\">");
-                                        out.print("<img src=\"/CulturarteWeb/ServletImagenes?TituloP=" + listC.get(i).getTituloP() + "\" >");
+                                        out.print("<div style=\"margin-left: 16%;\">");
+                                        out.print("<img width=\"100\" height=\"100\" src=\"/CulturarteWeb/ServletImagenes?TituloP=" + listC.get(i).getTituloP() + "\" >");
+                                        out.print("</div>");
                                         out.print("<div class=\"caption\">");
                                         out.print("<h3 style=\"width: 135%;\">" + listC.get(i).getTituloP() + "</h3>");
-                                        //out.print("<textarea readonly style=\"height: 160px;resize: none\" class=\"form-control rounded-0\" rows=\"20\">" + listP.get(i).getTituloP() + "</textarea>");
+                                        out.print("<textarea readonly style=\"height: 160px;resize: none\" class=\"form-control rounded-0\" rows=\"20\">" + listC.get(i).getDescrip() + "</textarea>");
                                         out.print("<p>");
                                         out.print("<p> Recaudacion: " + listC.get(i).getRecaudacion() + " </p>");
                                         //arranca barrita

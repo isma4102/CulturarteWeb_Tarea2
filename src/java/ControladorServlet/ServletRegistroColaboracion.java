@@ -13,9 +13,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import logica.Clases.DTListaPropuestasR;
 import logica.Clases.DtNickTitProp;
 import logica.Clases.DtUsuario;
 import logica.Clases.DtinfoPropuesta;
+import logica.Clases.TipoE;
 import logica.Fabrica;
 import logica.Interfaces.IControladorUsuario;
 import logica.Interfaces.IPropCat;
@@ -40,9 +42,9 @@ public class ServletRegistroColaboracion extends HttpServlet {
                 request.setAttribute("mensaje", "Solo los colaboradores pueden entrar a este sitio");
                 request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
             } else {
-                List<DtNickTitProp> lista = IPC.listarPropuestasR();
+                List<DTListaPropuestasR> lista = IPC.listarPropuestasRWEB();
                 if (lista.isEmpty()) {
-                    request.setAttribute("mensaje", "No existen propuestas publicadas o en financiación");
+                    request.setAttribute("mensaje", "No existen propuestas en el sistema");
                     request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
                 }
                 request.setAttribute("lista_propuestas", lista);
@@ -84,12 +86,18 @@ public class ServletRegistroColaboracion extends HttpServlet {
             request.setAttribute("Propuestaseleccionada", propuesta);
             request.getRequestDispatcher("/Vistas/MostrarInfoPropuesta.jsp").forward(request, response);
         } else if (request.getParameter("seleccionar") != null) {
-            String viene = request.getParameter("TituloP");
-            String Opcion = new String(viene.getBytes("ISO-8859-1"), "UTF-8");
-            DtinfoPropuesta propuesta = IPC.SeleccionarPropuestaR(Opcion);
-            ICU.SeleccionarColaborador(((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickName());
-            request.setAttribute("Propuestaseleccionada", propuesta);
-            request.getRequestDispatcher("/Vistas/Mensaje_Confirmacion.jsp").forward(request, response);
+            if (request.getParameter("Estado").compareTo(TipoE.Publicada.toString()) == 0 || request.getParameter("Estado").compareTo(TipoE.enFinanciacion.toString()) == 0) {
+                String viene = request.getParameter("TituloP");
+                String Opcion = new String(viene.getBytes("ISO-8859-1"), "UTF-8");
+                DtinfoPropuesta propuesta = IPC.SeleccionarPropuestaR(Opcion);
+                ICU.SeleccionarColaborador(((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickName());
+                request.setAttribute("Propuestaseleccionada", propuesta);
+                request.getRequestDispatcher("/Vistas/Mensaje_Confirmacion.jsp").forward(request, response);
+            }
+            else{
+                 request.setAttribute("mensaje", "Usted no puede colaborar en esta propuesta");
+                request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
+            }
         } else if (request.getParameter("Registrar") != null) {
             if (request.getSession().getAttribute("usuario_logueado") != null) {
                 String Tipo_entrada = request.getParameter("Tipo_Retorno");
@@ -124,7 +132,7 @@ public class ServletRegistroColaboracion extends HttpServlet {
                     }
                 }
             }
-        } 
+        }
     }
 
     /**

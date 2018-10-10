@@ -72,6 +72,7 @@
                         <div class="dropdown-container">
                             <% if ((DtUsuario) request.getSession().getAttribute("usuario_logueado") != null) {
                                     if (((DtUsuario) request.getSession().getAttribute("usuario_logueado")).Esproponente() == false) {
+                                        
                                         out.print("<a style=\"color: white\" href=\"/CulturarteWeb/ServletRegistroColaboracion\">Registrar Colaboración a propuesta</a>");
                                     }
                                 }

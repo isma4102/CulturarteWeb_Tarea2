@@ -51,6 +51,7 @@
             <th bgcolor="white">Titulo de Propuesta</th>
             <th bgcolor="white">Nombre del Proponente</th>
             <th bgcolor="white" style="text-align:center">Comentar</th>
+            <th bgcolor="white" style="text-align:center">Confirmar</th>
 
         </thead>
 
@@ -64,14 +65,16 @@
                     out.print("<td>" + lista.get(i).getProponente() + "</td>");
             %>
 
-        <td align="center">   
-            <form action="ServletComentarPropuesta" method="post">
-                <input type="hidden" name="TituloP" value="<%= lista.get(i).getTituloP()%>">
-                <textarea name="texto" placeholder="Escriba un Comentario..."  required></textarea>
-                <input type="button" class="btn btn-primary" value="Comentar" onclick="submit()"/>
-            </form>    
 
-        </td>
+        <form action="ServletComentarPropuesta" method="post">
+            <td align="center">   
+                <input type="hidden" name="TituloP" value="<%= lista.get(i).getTituloP()%>">
+                <textarea name="texto" placeholder="Escriba un Comentario..."  required style="background-color: white; resize: none;width: 300px; height: 100px;" ></textarea>
+            </td>
+            <td><input type="button" class="btn btn-primary" value="Comentar" onclick="submit()"/></td>
+        </form>    
+
+
 
 
         <%

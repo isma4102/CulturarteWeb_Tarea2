@@ -57,8 +57,8 @@ public class servletBuscador extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         iControlador = Fabrica.getInstance().getControladorPropCat();
-        String busqueda = request.getParameter("busqueda").toLowerCase();
         String filtro = request.getParameter("filtro");
+        String busqueda = request.getParameter("busqueda");
         List<DtinfoPropuesta> resultado = new ArrayList<>();
         Map<String, Propuesta> propuestas = iControlador.getPropuestas();
         Set set = propuestas.entrySet();
@@ -74,23 +74,26 @@ public class servletBuscador extends HttpServlet {
 
         if (filtro != null) {
             switch (filtro) {
-                case "alfa":
-                    Collections.sort(resultado, (DtinfoPropuesta o1, DtinfoPropuesta o2) -> o1.getTitulo().compareTo(o2.getTitulo()));
-                    String json = new GsonBuilder().create().toJson(resultado);
-                    response.setContentType("application/json;charset=UTF-8");
-                    response.getWriter().write(json);
+                case "Alfabeticamente":
+                    Collections.sort(resultado, (DtinfoPropuesta o1, DtinfoPropuesta o2) -> o1.getTitulo().toLowerCase().compareTo(o2.getTitulo().toLowerCase()));
+                    request.setAttribute("resultado", resultado);
+                    request.setAttribute("busqueda", busqueda);
+                    request.setAttribute("tipoRetorno", "busqueda");
+                    request.getRequestDispatcher("/Vistas/busqueda.jsp").forward(request, response);
                     break;
-                case "estado":
+                case "Estado":
                     Collections.sort(resultado, (DtinfoPropuesta o1, DtinfoPropuesta o2) -> o1.getEstado().compareTo(o2.getEstado()));
-                    String json1 = new GsonBuilder().create().toJson(resultado);
-                    response.setContentType("application/json;charset=UTF-8");
-                    response.getWriter().write(json1);
+                    request.setAttribute("resultado", resultado);
+                    request.setAttribute("busqueda", busqueda);
+                    request.setAttribute("tipoRetorno", "busqueda");
+                    request.getRequestDispatcher("/Vistas/busqueda.jsp").forward(request, response);
                     break;
-                case "fecha":
+                case "Fecha":
                     Collections.sort(resultado, (DtinfoPropuesta o1, DtinfoPropuesta o2) -> o1.getFechaReal().compareTo(o2.getFechaReal()));
-                    String json2 = new GsonBuilder().create().toJson(resultado);
-                    response.setContentType("application/json;charset=UTF-8");
-                    response.getWriter().write(json2);
+                    request.setAttribute("resultado", resultado);
+                    request.setAttribute("busqueda", busqueda);
+                    request.setAttribute("tipoRetorno", "busqueda");
+                    request.getRequestDispatcher("/Vistas/busqueda.jsp").forward(request, response);
                     break;
             }
         } else {
