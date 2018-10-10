@@ -53,7 +53,7 @@ public class ServletInicio extends HttpServlet {
         List<DtPropuestaWeb> listEnFinanciacion = Fabrica.getInstance().getControladorPropCat().ListarPropuestasWeb(TipoE.enFinanciacion);
         List<DtPropuestaWeb> listNoFinanciada = Fabrica.getInstance().getControladorPropCat().ListarPropuestasWeb(TipoE.noFinanciada);
         List<DtPropuestaWeb> listCancelada = Fabrica.getInstance().getControladorPropCat().ListarPropuestasWeb(TipoE.Cancelada);
-
+      
         request.setAttribute("Cancelada", listCancelada);
         request.setAttribute("Publicada", listPublicada);
         request.setAttribute("Financiada", listFinanciada);

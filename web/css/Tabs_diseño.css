@@ -22,3 +22,21 @@ section {
   margin: 0 auto;
   display:flex;
 }
+
+.contenedor-tabla{
+
+display: table;
+
+}
+
+.contenedor-fila{
+
+display: table-row;
+
+}
+
+.contenedor-columna{
+
+display: table-cell;
+
+}

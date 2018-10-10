@@ -29,7 +29,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <form  action="${pageContext.request.contextPath}/ServletConsultarUsuario" method="POST">
                             <% if ((DtUsuario) request.getSession().getAttribute("usuario_logueado") != null) {
-                                    out.print("<img style=\"margin-top: 7px\" src=\"Imagenes/nadie.png\" class=\"img-circle\" width=\" 40\" height=\"40\">");
+                                    out.print("<img style=\"margin-top: 7px\" src=\"/CulturarteWeb/ServletImagenes?nickname=" + ((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickName() + "\" class=\"img-circle\" width=\" 40\" height=\"40\">");
                                     out.print("<input style=\"border:none;background-color:#222222;color:white\" class=\"form-control-plaintext\" readonly name=\"nick\" type=\"text\" value=\"" + ((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickName() + "\"/>");
                                     out.print("<div>");
                                     out.print("<button type=\"submit\" style=\"border:none;background-color:black;color: white\" P> Perfil </button>");
@@ -52,7 +52,7 @@
                         <li style="margin-top: 1px; color:white "><a href="/CulturarteWeb/ServletConsultarPropuesta">Quiero ver Propuestas</a></li>
                     </ul>
                     <form action="servletBuscador" method="GET" class="navbar-form navbar-right">
-                        <div style="position: relative;margin-right: 26%;">
+                        <div style="margin-right: 26%;">
                             <input name="busqueda" type="text" class="form-control" placeholder="Titulo, descripcion, lugar..." required/>
                             <input style="margin-left: 101%;margin-top: -54px;" class="btn btn-default"  id="btnBuscar" type="submit" value="Buscar"/>
                         </div>

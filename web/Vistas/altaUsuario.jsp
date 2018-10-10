@@ -31,7 +31,7 @@
     </script>
     <%  }
     %>
-   
+
 
 </head>
 <body>
@@ -105,6 +105,8 @@
                 <input class="btn btn-primary btn-block" type="submit" value="Crear cuenta"/>
             </div>
         </form>
-    </div>     
+    </div> 
+    <br><br><br><br>
+    <jsp:include page="/Vistas/footer.jsp" />    
 </body>
 </html>

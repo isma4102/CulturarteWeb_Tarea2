@@ -42,8 +42,11 @@
                     <div class="modal-body">
                         <div id="mostrarinfo">
                             <div>
+                                <div  style="width: 38%;margin: 0 auto">
+                            <% out.print("<img style=\"width: 139%;margin-left: -15%;\" src=\"/CulturarteWeb/ServletImagenes?TituloP="+ propuestaSelec.getTitulo()+"\" class=\"img-rounded\" alt=\"avatar\">");
+                                    %>
+                                </div>
                                 </br>
-
                                 <div class="panel panel-primary">
                                     <div class="panel-heading" style="padding: 1%">
                                         <h3 class="panel-title">Titulo</h3>
@@ -77,24 +80,24 @@
                                     </div>
                                 </div>
 
-                                 <div class="panel panel-primary">
+                                <div class="panel panel-primary">
                                     <div class="panel-heading" style="padding: 1%">
                                         <h3 class="panel-title">Fecha de relización</h3>
                                     </div>
                                     <div class="panel-body" style="padding: 1%">
-                                      <%         Date now = new Date();
-                                        SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy");
-                                        out.print(sf.format(propuestaSelec.getFechaReal().getTime()));
-                                    %>
+                                        <%         Date now = new Date();
+                                            SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy");
+                                            out.print(sf.format(propuestaSelec.getFechaReal().getTime()));
+                                        %>
                                     </div>
                                 </div>
 
-                               <div class="panel panel-primary">
+                                <div class="panel panel-primary">
                                     <div class="panel-heading" style="padding: 1%">
                                         <h3 class="panel-title">Precio de entrada</h3>
                                     </div>
                                     <div class="panel-body" style="padding: 1%">
-                                       <%out.print(propuestaSelec.getPrecio());%>
+                                        <%out.print(propuestaSelec.getPrecio());%>
                                     </div>
                                 </div>
 
@@ -103,11 +106,11 @@
                                         <h3 class="panel-title">Monto final</h3>
                                     </div>
                                     <div class="panel-body" style="padding: 1%">
-                                    <%out.print(propuestaSelec.getMonto());%>
+                                        <%out.print(propuestaSelec.getMonto());%>
                                     </div>
                                 </div>
 
-                               
+
 
                             </div>
                         </div>

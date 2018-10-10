@@ -54,7 +54,7 @@
                                     if (((DtUsuario) request.getSession().getAttribute("usuario_logueado")).Esproponente() != false) {
                                         out.print("<a style=\"color: white\" href=\"/CulturarteWeb/ServletAltaPropuesta\" >Alta Propuestas</a>");
                                         out.print("<a style=\"color: white\" href=\"/CulturarteWeb/ServletExtenderFinanciacion\">Extender financiación</a>");
-                                        out.print("<a style=\"color: white\" href=\"#\">Cancelar Propuesta</a>");
+                                        out.print("<a style=\"color: white\" href=\"/CulturarteWeb/ServletCancelarPropuesta\">Cancelar Propuesta</a>");
                                     } else {
                                         out.print("<a style=\"color: white\" href=\"/CulturarteWeb/ServletComentarPropuesta\">Agregar comentario a propuesta</a>");
                                     }

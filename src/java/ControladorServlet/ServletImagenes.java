@@ -5,27 +5,30 @@
  */
 package ControladorServlet;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.util.List;
-import java.util.Map;
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import logica.Clases.Categoria;
+import logica.Clases.DtUsuario;
 import logica.Clases.DtinfoPropuesta;
 import logica.Fabrica;
+import logica.Interfaces.IControladorUsuario;
 import logica.Interfaces.IPropCat;
 
 /**
  *
- * @author gabri
+ * @author Santiago.S
  */
-@WebServlet(name = "ServletPropuestaCategoria", urlPatterns = {"/ServletPropuestaCategoria"})
-public class ServletPropuestaCategoria extends HttpServlet {
-IPropCat IPC;
+@WebServlet(name = "ServletImagenes", urlPatterns = {"/ServletImagenes"})
+public class ServletImagenes extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -38,10 +41,37 @@ IPropCat IPC;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        IPC=Fabrica.getInstance().getControladorPropCat();
-        List<String> categorias=IPC.ListarCategorias();
-        request.setAttribute("Categorias", categorias);
-        request.getRequestDispatcher("Vistas/PropuestaporCategoria.jsp").forward(request, response);;
+        IControladorUsuario ICU = Fabrica.getInstance().getIControladorUsuario();
+        IPropCat IPC = Fabrica.getInstance().getControladorPropCat();
+        if (request.getParameter("TituloP") != null) {
+            String ruta = getServletContext().getRealPath("/");
+            String[] parte = ruta.split("CulturarteWeb_Tarea2");
+            String tarea1 = parte[0] + "culturarte" + File.separator;
+            BufferedImage bi = null;
+            DtinfoPropuesta propuesta = IPC.RetornarPropuestaR(request.getParameter("TituloP"));
+            try {
+                bi = ImageIO.read(new File(tarea1 + "fPropuestas\\" + request.getParameter("TituloP") + "\\" + propuesta.getImagen()));
+            } catch (IOException e) {
+                bi = ImageIO.read(new File(tarea1 + "fPropuestas" + "\\" + "Culturarte.png"));
+            }
+            OutputStream out = response.getOutputStream();
+            ImageIO.write(bi, "png", out);
+            out.close();
+        } else if (request.getParameter("nickname") != null) {
+            String ruta = getServletContext().getRealPath("/");
+            String[] parte = ruta.split("CulturarteWeb_Tarea2");
+            String tarea1 = parte[0] + "culturarte" + File.separator;
+            BufferedImage bi = null;
+            DtUsuario usuario = ICU.ObtenerDTUsuario(request.getParameter("nickname"));
+            try {
+                bi = ImageIO.read(new File(tarea1 + "fPerfiles\\" + usuario.getCorreo() + "\\" + usuario.getImagen()));
+            } catch (IOException e) {
+                bi = ImageIO.read(new File(tarea1 + "fPerfiles" + "\\" + "nadie.png"));
+            }
+            OutputStream out = response.getOutputStream();
+            ImageIO.write(bi, "png", out);
+            out.close();
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -70,11 +100,7 @@ IPropCat IPC;
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       String nombre= request.getParameter("cat");
-       request.setAttribute("nombre", nombre);
-       List<DtinfoPropuesta> propuestas=IPC.ListarPropuestasCategoria(nombre);
-       request.setAttribute("Propuestas", propuestas);
-        request.getRequestDispatcher("Vistas/PropuestasporCategoria2.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
