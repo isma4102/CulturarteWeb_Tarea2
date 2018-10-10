@@ -66,6 +66,7 @@ public class servletBuscador extends HttpServlet {
         while (iter.hasNext()) {
             Map.Entry mentry = (Map.Entry) iter.next();
             Propuesta prop = (Propuesta) mentry.getValue();
+            busqueda= busqueda.toLowerCase();
             if (prop.getTituloP().toLowerCase().contains(busqueda) || prop.getDescripcionP().toLowerCase().contains(busqueda) || prop.getLugar().toLowerCase().contains(busqueda)) {
                 DtinfoPropuesta dtP = new DtinfoPropuesta(prop);
                 resultado.add(dtP);

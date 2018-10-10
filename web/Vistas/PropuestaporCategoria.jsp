@@ -42,14 +42,12 @@
             <h3 align="center">Propuestas con categoria <%=nom%></h3>
             <table class="table table-bordered table-hover" style="margin-left: 30%; width: 35%  ">
                 <tr>
-                    <th>Portada</th>
                     <th>Titulo</th>
                     <th>Descripcion</th>
                 </tr>
                 <%List<DtinfoPropuesta> propuestas = (List<DtinfoPropuesta>) request.getAttribute("Propuestas");
                 for (DtinfoPropuesta dtp : propuestas) {%>
                 <tr>
-                    <td><img src=""></img></td>&nbsp;&nbsp;&nbsp;
                     <td><p><%=dtp.getTitulo()%></p></td>&nbsp;&nbsp;&nbsp;
                     <td><p style="background-color: white; resize: none;width: 500px; height: 100px;"><%=dtp.getDescripcion()%></p></td> 
                 </tr>

@@ -57,7 +57,6 @@
                             <input style="margin-left: 101%;margin-top: -54px;" class="btn btn-default"  id="btnBuscar" type="submit" value="Buscar"/>
                         </div>
                     </form>
-
                 </div>
             </div>
         </nav>
