@@ -8,24 +8,22 @@ package ControladorServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import logica.Clases.Categoria;
-import logica.Clases.DtinfoPropuesta;
+import logica.Clases.DtNickTitProp;
+import logica.Clases.DtUsuario;
 import logica.Fabrica;
-import logica.Interfaces.IPropCat;
 
 /**
  *
- * @author gabri
+ * @author Martin
  */
-@WebServlet(name = "ServletPropuestaCategoria", urlPatterns = {"/ServletPropuestaCategoria"})
-public class ServletPropuestaCategoria extends HttpServlet {
-IPropCat IPC;
+@WebServlet(name = "ServletCancelarPropuesta", urlPatterns = {"/ServletCancelarPropuesta"})
+public class ServletCancelarPropuesta extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -35,13 +33,17 @@ IPropCat IPC;
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        IPC=Fabrica.getInstance().getControladorPropCat();
-        List<String> categorias=IPC.ListarCategorias();
-        request.setAttribute("Categorias", categorias);
-        request.getRequestDispatcher("Vistas/PropuestaporCategoria.jsp").forward(request, response);;
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        DtUsuario usuLogueado = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
+
+        if (usuLogueado.Esproponente()) {
+            List<DtNickTitProp> list = Fabrica.getInstance().getControladorPropCat().ListarPropuestasCancelar(usuLogueado.getNickName());
+            request.setAttribute("Lista", list);
+            request.getRequestDispatcher("Vistas/CancelarPropuesta.jsp").forward(request, response);
+        } else {
+            request.getRequestDispatcher("Vistas/Inicio.jsp").forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -68,13 +70,22 @@ IPropCat IPC;
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-       String nombre= request.getParameter("cat");
-       request.setAttribute("nombre", nombre);
-       List<DtinfoPropuesta> propuestas=IPC.ListarPropuestasCategoria(nombre);
-       request.setAttribute("Propuestas", propuestas);
-        processRequest(request, response);
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String tit = request.getParameter("TituloP");
+        String titulo = new String(tit.getBytes("ISO-8859-1"), "UTF-8");
+        DtUsuario proponente = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
+
+        boolean ok = Fabrica.getInstance().getControladorPropCat().CancelarPropuesta(tit, proponente.getNickName());
+
+        if (ok) {
+            request.setAttribute("mensaje", "Se cancelo con exito la propuesta");
+        } else {
+            request.setAttribute("mensaje", "La propuesta no pudo ser cancelada");
+        }
+
+        request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
+
     }
 
     /**
