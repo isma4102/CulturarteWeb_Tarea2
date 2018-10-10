@@ -49,7 +49,7 @@ public class ServletConsultarUsuario extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         ICU = Fabrica.getInstance().getIControladorUsuario();
-        if(ICU.getUsuarios().isEmpty()){
+        if (ICU.getUsuarios().isEmpty()) {
             request.setAttribute("mensaje", "No existen usuarios en el sistema");
             request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
         }
@@ -110,10 +110,10 @@ public class ServletConsultarUsuario extends HttpServlet {
                 }
             }
         } else {
-            
+
             List<DtinfoPropuesta> colaboraciones = ICU.verPropuestas(nickname);
-            DtinfoColaborador dtc=ICU.getDtColaborador(nickname);
-            List<DtColaboraciones> monto=ICU.getMontoColaboracion(dtc);
+            DtinfoColaborador dtc = Fabrica.getInstance().getIControladorUsuario().getDtColaborador(nickname);
+            List<DtColaboraciones> monto = ICU.getMontoColaboracion(dtc);
             request.setAttribute("Colaborador", monto);
             request.setAttribute("Colaboraciones", colaboraciones);
         }
