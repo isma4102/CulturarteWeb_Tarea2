@@ -36,7 +36,7 @@
                 <div class="col-sm-3"><!--left col-->
                     <%DtUsuario dtu = (DtUsuario) request.getAttribute("Usuario");
                         DtUsuario nick = (DtUsuario) request.getSession().getAttribute("usuario_logueado");%>
-                        
+
                     <%configuraciones conf = new configuraciones();
                         String ruta = conf.getCarpetaImagenes() + "\\fPerfiles\\" + dtu.getCorreo() + "\\" + dtu.getImagen();
                     %>
@@ -178,7 +178,7 @@
                                     </div>
                                 </div>
                             </div>
-                                        <div class="form-group">
+                            <div class="form-group">
                                 <div class="col-xs-6">
 
                                     <div class="panel panel-primary">
@@ -199,7 +199,7 @@
                             <div class="seguidores">
                                 <h3>Seguidores</h3>
                                 <%List<DtUsuario> seguidores = (List<DtUsuario>) request.getAttribute("Seguidores");
-                                        if (seguidores.size() > 0) {%>
+                                    if (seguidores.size() > 0) {%>
                                 <table class="table table-bordered table-hover  formulario">
                                     <tr>
                                         <th>Nickname</th>
@@ -230,7 +230,7 @@
                             <div class="seguidos">
                                 <h3>Seguidos</h3>
                                 <%List<DtUsuario> seguidos = (List<DtUsuario>) request.getAttribute("Seguidos");
-                                        if (seguidos.size() > 0) {%>
+                                    if (seguidos.size() > 0) {%>
                                 <table class="table table-bordered table-hover  formulario">
                                     <tr>
                                         <th>Nickname</th>
@@ -259,7 +259,7 @@
                             <div class="favoritas" style="margin-bottom: 2%">
                                 <h3>Propuestas favoritas</h3>
                                 <%List<DtinfoPropuesta> favoritas = (List<DtinfoPropuesta>) request.getAttribute("Favoritas");
-                                        if (favoritas.size() > 0) {%>
+                                    if (favoritas.size() > 0) {%>
                                 <table class="table table-bordered table-hover  formulario">
                                     <form action="ServletConsultarPropuesta" method="POST">
                                         <tr>
@@ -295,7 +295,7 @@
                             <%if (nick != null) {%>
                             <%if (dtu.getNickName().equals(nick.getNickName())) {%>
                             <%List<DtinfoPropuesta> propuestasdeproponentenoing = (List<DtinfoPropuesta>) request.getAttribute("Propuestas2");
-                                    if (propuestasdeproponentenoing.size() > 0) {%>
+                                if (propuestasdeproponentenoing.size() > 0) {%>
                             <div class="usuario" style="margin-bottom: 2%">
                                 <h3>Propuestas creadas</h3>
                                 <table class="table table-bordered table-hover  formulario" style="margin-right: 200px; width: 88%; margin-top:50px;">
@@ -327,7 +327,7 @@
                             <div class="usuario" style="margin-bottom: 2%">
                                 <h3>Propuestas creadas</h3>
                                 <%List<DtinfoPropuesta> propuestasdeproponente = (List<DtinfoPropuesta>) request.getAttribute("Propuestas");
-                                        if (propuestasdeproponente.size() > 0) {%>
+                                    if (propuestasdeproponente.size() > 0) {%>
                                 <table class="table table-bordered table-hover  formulario" style="margin-right: 200px; width: 88%; margin-top:50px;">
                                     <form action="ServletConsultarPropuesta" method="POST">
                                         <tr>
@@ -359,7 +359,7 @@
                             <div class="usuario" style="margin-bottom: 2%">
                                 <h3>Propuestas creadas</h3>
                                 <%List<DtinfoPropuesta> propuestasdeproponentenoing = (List<DtinfoPropuesta>) request.getAttribute("Propuestas");
-                                        if (propuestasdeproponentenoing.size() > 0) {%>
+                                    if (propuestasdeproponentenoing.size() > 0) {%>
                                 <table class="table table-bordered table-hover  formulario" style="margin-right: 200px; width: 88%; margin-top:50px;">
                                     <form action="ServletConsultarPropuesta" method="POST">
                                         <tr>
@@ -391,7 +391,7 @@
                             <div class="usuario" style="margin-bottom: 2%">
                                 <h3>Colaboraciones</h3>
                                 <%List<DtinfoPropuesta> colaboraciones = (List<DtinfoPropuesta>) request.getAttribute("Colaboraciones");
-                                        if (colaboraciones.size() > 0) {%>
+                                    if (colaboraciones.size() > 0) {%>
                                 <table class="table table-bordered table-hover  formulario" style="margin-right: 200px; width: 88%; margin-top:50px;">
 
                                     <tr>
@@ -430,7 +430,7 @@
                             <div class="usuario" style="margin-bottom: 2%">
                                 <h3>Colaboraciones</h3>
                                 <%List<DtinfoPropuesta> colaboraciones = (List<DtinfoPropuesta>) request.getAttribute("Colaboraciones");
-                                        if (colaboraciones.size() > 0) {%>
+                                    if (colaboraciones.size() > 0) {%>
                                 <table class="table table-bordered table-hover  formulario" style="margin-right: 200px; width: 88%; margin-top:50px;">
 
                                     <tr>
@@ -460,18 +460,14 @@
 
             </div><!--/col-9-->
         </div><!--/row-->
-
-
-
-
-
-
         <div style="text-align: center;margin-left: -21%;">
 
             <a href="javascript:window.history.back();" class="btn btn-primary" > &laquo; Volver</a>
             <a href="ServletInicio" class="btn btn-primary" > &laquo; Volver a inicio</a>
         </div>
 
+        <br><br><br><br><br>        
+        <jsp:include page="/Vistas/footer.jsp" />
 
 
 

@@ -22,20 +22,27 @@
         <title>Consultar propuestas por categoria</title>
     </head>
     <body>
-
-        <jsp:include page="/Vistas/Barra_menu.jsp" />
-        <div class="formulario_ver_propuesta" style="margin-top: 7%; margin-left:45% ">
+        <jsp:include page="/Vistas/Barra_menu.jsp"/>
+        <br><br><br>
+        <div style="align-content: center;width: 100%">
+            <h1>Selecciona la categoria a filtrar...</h1>
+        </div>
+        <div style=" right: -40%;width: 40%;height: 30%" class="dropdown formulario_ver_propuesta">
+            <br><br>
             <form action="${pageContext.request.contextPath}/ServletPropuestaCategoria" method="POST">
-                <input  type="submit"  value="Buscar"/>
-                <select name="cat">
+                <select class="btn btn-default dropdown-toggle" name="cat">
                     <%List<String> categorias = (List<String>) request.getAttribute("Categorias");
                         for (String cat : categorias) {%>
                     <option><%=cat%></option>
                     <%}%>
                 </select>
+                <input class="oi btn" type="submit"  value="Buscar"/><br>
             </form>
         </div>
-       
-        <a href="ServletInicio" class="btn btn-primary" style="margin-left: 45%; margin-top: 5%"> &laquo; Volver a inicio</a>
+        <div>
+            <a href="ServletInicio" class="btn btn-primary" style="margin-left: 45%; margin-top: 5%"> &laquo; Volver a inicio</a>
+        </div>
+        <br><br><br><br>
+        <jsp:include page="/Vistas/footer.jsp" />
     </body>
 </html>

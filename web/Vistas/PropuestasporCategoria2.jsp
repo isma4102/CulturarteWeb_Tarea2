@@ -17,7 +17,9 @@
         <script src="js/bootstrap.min.js"></script>
         <title>Consultar propuestas por categoria</title>
     </head>
-    <body> 
+    <body>        
+        <jsp:include page="/Vistas/Barra_menu.jsp" />
+        <br><br><br>
         <div class="formulario_ver_propuesta" style="margin-top: 7%">
             <%String nom = (String) request.getAttribute("nombre");%>
             <h3 align="center">Propuestas con categoria <%=nom%></h3>
@@ -38,9 +40,10 @@
 
             <div style="text-align: center;margin-left: -1%;">
 
-            <a href="javascript:window.history.back();" class="btn btn-primary" > &laquo; Volver</a>
-            <a href="ServletInicio" class="btn btn-primary" > &laquo; Volver a inicio</a>
-        </div>
-        </div>
+                <a href="javascript:window.history.back();" class="btn btn-primary" > &laquo; Volver</a>
+                <a href="ServletInicio" class="btn btn-primary" > &laquo; Volver a inicio</a>
+            </div>
+        </div><br><br><br><br>
+        <jsp:include page="/Vistas/footer.jsp" />
     </body>
 </html>

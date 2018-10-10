@@ -31,7 +31,7 @@
                 </ol>
 
                 <!-- Wrapper for slides -->
-                <div style="width: 30%;right: -35%;" class="carousel-inner">
+                <div style="width: 25%;right: -38%;" class="carousel-inner">
                     <div class="item active">
                         <img   style="vertical-align: central; width: 100%; height: 100%;"  class="img-responsive img-thumbnail" src="Imagenes/foto1.jpg" alt="">
                     </div>

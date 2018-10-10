@@ -15,6 +15,7 @@
 
     </head>
     <body>
+        <jsp:include page="/Vistas/Barra_menu.jsp" />
         <div id="login-overlay" class="modal-dialog">
             <div class="modal-content" style="    margin-top: 18%;">
                 <div class="modal-header">
@@ -71,7 +72,10 @@
             var var2 = document.getElementById('Error_login');
             var2.style.display = "block";
             <% }%>
-        </script>
+        </script>        
+    <br><br><br><br><br>        
+<jsp:include page="/Vistas/footer.jsp" />
+
 
     </body>
 </html>

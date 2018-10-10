@@ -54,5 +54,7 @@
                 %>
             </tbody>
     </table>
+    <br><br><br><br>
+    <jsp:include page="/Vistas/footer.jsp" />
 </body>
 </html>

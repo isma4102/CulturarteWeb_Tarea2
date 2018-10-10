@@ -70,10 +70,10 @@
                 <textarea name="texto" placeholder="Escriba un Comentario..."  required></textarea>
                 <input type="button" class="btn btn-primary" value="Comentar" onclick="submit()"/>
             </form>    
-                
+
         </td>
-            
-        
+
+
         <%
 
                 out.print("</tr>");
@@ -81,6 +81,8 @@
             }
         %>
     </tbody>
-</table>         
+</table>
+<br><br><br><br><br>        
+<jsp:include page="/Vistas/footer.jsp" />    
 </body>
 </html>
