@@ -36,8 +36,8 @@
                 <div class="col-sm-3"><!--left col-->
                     <%DtUsuario dtu = (DtUsuario) request.getAttribute("Usuario");
                         DtUsuario nick = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
-                    out.print("<img src=\"/CulturarteWeb/ServletImagenes?nickname="+ dtu.getNickName() +"\" class=\"avatar img-circle img-thumbnail\" alt=\"avatar\">");
-                            %>
+                        out.print("<img src=\"/CulturarteWeb/ServletImagenes?nickname=" + dtu.getNickName() + "\" class=\"avatar img-circle img-thumbnail\" alt=\"avatar\">");
+                    %>
                     <br>
 
 
@@ -258,15 +258,16 @@
                                 <%List<DtinfoPropuesta> favoritas = (List<DtinfoPropuesta>) request.getAttribute("Favoritas");
                                     if (favoritas.size() > 0) {%>
                                 <table class="table table-bordered table-hover  formulario">
-                                    <form action="ServletConsultarPropuesta" method="POST">
-                                        <tr>
-                                            <th>Titulo</th>
-                                            <th>Descripción</th>
-                                            <th>Estado</th>
-                                            <th>Accion</th>
-                                        </tr>
 
-                                        <%for (DtinfoPropuesta dtp : favoritas) {%>
+                                    <tr>
+                                        <th>Titulo</th>
+                                        <th>Descripción</th>
+                                        <th>Estado</th>
+                                        <th>Accion</th>
+                                    </tr>
+
+                                    <%for (DtinfoPropuesta dtp : favoritas) {%>
+                                    <form action="ServletConsultarPropuesta" method="POST">
                                         <tr>
                                         <input readonly style="border:none" name="TituloP" type="hidden" value="<%=dtp.getTitulo()%>"/>&nbsp;&nbsp;&nbsp;
                                         <td><p><%=dtp.getTitulo()%></p></td>    
@@ -275,8 +276,9 @@
                                         <td><button style="background:url('/CulturarteWeb/Imagenes/ver.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px" name="consulta" type="submit" class="btn btn-primary"></button></td>
 
                                         </tr>
-                                        <%}%>
                                     </form>
+                                    <%}%>
+
                                 </table>
                                 <% } else {%>
                                 <h3>No posee propuestas favoritas</h3>
@@ -296,15 +298,16 @@
                             <div class="usuario" style="margin-bottom: 2%">
                                 <h3>Propuestas creadas</h3>
                                 <table class="table table-bordered table-hover  formulario" style="margin-right: 200px; width: 88%; margin-top:50px;">
-                                    <form action="ServletConsultarPropuesta" method="POST">
-                                        <tr>
-                                            <th>Titulo</th>
-                                            <th>Descripción</th>
-                                            <th>Estado</th>
-                                            <th>Accion</th>
-                                        </tr>
 
-                                        <%for (DtinfoPropuesta dtp : propuestasdeproponentenoing) {%>
+                                    <tr>
+                                        <th>Titulo</th>
+                                        <th>Descripción</th>
+                                        <th>Estado</th>
+                                        <th>Accion</th>
+                                    </tr>
+
+                                    <%for (DtinfoPropuesta dtp : propuestasdeproponentenoing) {%>
+                                    <form action="ServletConsultarPropuesta" method="POST">
                                         <tr>
                                         <input readonly style="border:none" name="TituloP" type="hidden" value="<%=dtp.getTitulo()%>"/>&nbsp;&nbsp;&nbsp;
                                         <td><p><%=dtp.getTitulo()%></p></td>
@@ -312,8 +315,9 @@
                                         <td><p><%=dtp.getEstado()%></p></td>
                                         <td><button style="background:url('/CulturarteWeb/Imagenes/ver.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px" name="consulta" type="submit" class="btn btn-primary"></button></td>
                                         </tr>
-                                        <%}%>     
                                     </form>
+                                    <%}%>     
+
                                 </table>
                                 <% } else {%>
                                 <h3>No posee propuestas creadas</h3>
@@ -326,15 +330,16 @@
                                 <%List<DtinfoPropuesta> propuestasdeproponente = (List<DtinfoPropuesta>) request.getAttribute("Propuestas");
                                     if (propuestasdeproponente.size() > 0) {%>
                                 <table class="table table-bordered table-hover  formulario" style="margin-right: 200px; width: 88%; margin-top:50px;">
-                                    <form action="ServletConsultarPropuesta" method="POST">
-                                        <tr>
-                                            <th>Titulo</th>
-                                            <th>Descripción</th>
-                                            <th>Estado</th>
-                                            <th>Accion</th>
-                                        </tr>
 
-                                        <% for (DtinfoPropuesta dtp : propuestasdeproponente) {%>
+                                    <tr>
+                                        <th>Titulo</th>
+                                        <th>Descripción</th>
+                                        <th>Estado</th>
+                                        <th>Accion</th>
+                                    </tr>
+
+                                    <% for (DtinfoPropuesta dtp : propuestasdeproponente) {%>
+                                    <form action="ServletConsultarPropuesta" method="POST">
                                         <tr>
                                         <input readonly style="border:none" name="TituloP" type="hidden" value="<%=dtp.getTitulo()%>"/>&nbsp;&nbsp;&nbsp;
                                         <td><p><%=dtp.getTitulo()%></p></td>
@@ -343,8 +348,9 @@
                                         <td><button style="background:url('/CulturarteWeb/Imagenes/ver.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px" name="consulta" type="submit" class="btn btn-primary"></button></td>
 
                                         </tr>
-                                        <%}%>     
                                     </form>
+                                    <%}%>     
+
                                 </table>
                                 <% } else {%>
                                 <h3>No posee propuestas creadas</h3>
@@ -358,15 +364,16 @@
                                 <%List<DtinfoPropuesta> propuestasdeproponentenoing = (List<DtinfoPropuesta>) request.getAttribute("Propuestas");
                                     if (propuestasdeproponentenoing.size() > 0) {%>
                                 <table class="table table-bordered table-hover  formulario" style="margin-right: 200px; width: 88%; margin-top:50px;">
-                                    <form action="ServletConsultarPropuesta" method="POST">
-                                        <tr>
-                                            <th>Titulo</th>
-                                            <th>Descripción</th>
-                                            <th>Estado</th>
-                                            <th>Accion</th>
-                                        </tr>
 
-                                        <%for (DtinfoPropuesta dtp : propuestasdeproponentenoing) {%>
+                                    <tr>
+                                        <th>Titulo</th>
+                                        <th>Descripción</th>
+                                        <th>Estado</th>
+                                        <th>Accion</th>
+                                    </tr>
+
+                                    <%for (DtinfoPropuesta dtp : propuestasdeproponentenoing) {%>
+                                    <form action="ServletConsultarPropuesta" method="POST">
                                         <tr>
                                         <input readonly style="border:none" name="TituloP" type="hidden" value="<%=dtp.getTitulo()%>"/>&nbsp;&nbsp;&nbsp;
                                         <td><p><%=dtp.getTitulo()%></p></td>    
@@ -374,8 +381,9 @@
                                         <td><%=dtp.getEstado()%></td>
                                         <td><button style="background:url('/CulturarteWeb/Imagenes/ver.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px" name="consulta" type="submit" class="btn btn-primary"></button></td>
                                         </tr>
-                                        <%}%>   
                                     </form>
+                                    <%}%>   
+
                                 </table>
                                 <% } else {%>
                                 <h3>No posee propuestas creadas</h3>

@@ -33,11 +33,16 @@ public class CerrarSesion extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         
-        request.getSession().setAttribute("estado_sesion", null);
-        request.getSession().setAttribute("usuario_logueado", null);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("ServletInicio");
-        dispatcher.forward(request, response);
+
+        if (request.getSession().getAttribute("usuario_logueado") == null) {
+            request.setAttribute("mensaje", "No existe una sesión en el sistema");
+            request.getRequestDispatcher("Vistas/Mensaje_Recibido.jsp").forward(request, response);
+        } else {
+            request.getSession().setAttribute("estado_sesion", null);
+            request.getSession().setAttribute("usuario_logueado", null);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("ServletInicio");
+            dispatcher.forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
