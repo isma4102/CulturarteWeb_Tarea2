@@ -201,13 +201,15 @@
                                     if (seguidores.size() > 0) {%>
                                 <table class="table table-bordered table-hover  formulario">
                                     <tr>
-                                        <th>Nickname</th>
+                                        <th>Nombre</th>
+                                        <th>Apellido</th>
                                         <th>Proponente/Colaborador</th>
                                     </tr>
 
                                     <%for (DtUsuario dtusu : seguidores) {%>
                                     <tr>
-                                        <td><p><%=dtusu.getNickName()%></p></td>&nbsp;&nbsp;&nbsp;
+                                        <td><p><%=dtusu.getNombre()%></p></td>&nbsp;&nbsp;&nbsp;
+                                        <td><p><%=dtusu.getApellido()%></p></td>&nbsp;&nbsp;&nbsp;
                                         <%if (dtusu.Esproponente()) {%>
                                         <td><p>Proponente</p></td>&nbsp;&nbsp;&nbsp;
                                         <%} else {%>
@@ -232,13 +234,15 @@
                                     if (seguidos.size() > 0) {%>
                                 <table class="table table-bordered table-hover  formulario">
                                     <tr>
-                                        <th>Nickname</th>
+                                        <th>Nombre</th>
+                                        <th>Apellido</th>
                                         <th>Proponente/Colaborador</th>
                                     </tr>
 
                                     <%for (DtUsuario dtusu : seguidos) {%>
                                     <tr>
-                                        <td><p><%=dtusu.getNickName()%></p></td>&nbsp;&nbsp;&nbsp;
+                                        <td><p><%=dtusu.getNombre()%></p></td>&nbsp;&nbsp;&nbsp;
+                                        <td><p><%=dtusu.getApellido()%></p></td>&nbsp;&nbsp;&nbsp;
                                         <%if (dtusu.Esproponente()) {%>
                                         <td><p>Proponente</p></td>&nbsp;&nbsp;&nbsp;
                                         <%} else {%>
