@@ -49,7 +49,7 @@
                     <td>
                         <form action="ServletMarcarFavorita" method="POST">
                             <input  name="TituloP" type="hidden" value="<%=dtp.getTitulo()%>"/>
-                             <input type="button" class="btn btn-primary" value="Extender Financiacion"/>
+                             <input class="btn btn-primary"  onclick="submit()" type="button" value="Marcar como favorita"/>
                         </form>
                     </td>
 
