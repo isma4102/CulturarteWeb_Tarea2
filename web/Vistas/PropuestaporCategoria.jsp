@@ -36,7 +36,7 @@
             </form>
         </div>
         <%String nom = (String) request.getAttribute("nombre");
-        if(nom!=null){%>
+            if (nom != null) {%>
         <div class="formulario_ver_propuesta" style="margin-top: 7%;margin-left: 3%;">
 
             <h3 align="center">Propuestas con categoria <%=nom%></h3>
@@ -44,17 +44,26 @@
                 <tr>
                     <th>Titulo</th>
                     <th>Descripcion</th>
+                    <th>Ver Info</th>
                 </tr>
-                <%List<DtinfoPropuesta> propuestas = (List<DtinfoPropuesta>) request.getAttribute("Propuestas");
-                for (DtinfoPropuesta dtp : propuestas) {%>
-                <tr>
-                    <td><p><%=dtp.getTitulo()%></p></td>&nbsp;&nbsp;&nbsp;
-                    <td><p style="background-color: white; resize: none;width: 500px; height: 100px;"><%=dtp.getDescripcion()%></p></td> 
-                </tr>
-                <%}%>
+                <tbody>
+                    <% List<DtinfoPropuesta> propuestas = (List<DtinfoPropuesta>) request.getAttribute("Propuestas");
+                        for (int i = 0; i < propuestas.size(); i++) {
+
+                            out.print("<form class=\"form-signin\" action=\"ServletConsultarPropuesta\" method=\"POST\"> ");
+                            out.print("<input style=\"border:none\" type=\"hidden\" class=\"form-control-plaintext\" name=\"TituloP\" value=\"" + propuestas.get(i).getTitulo() + "\" readonly=\"readonly\"/>");
+                            out.print("<td><p>" + propuestas.get(i).getTitulo() + " </p></td>");
+                            out.print("<td><p>" + propuestas.get(i).getDescripcion() + "</p></td>");
+                            out.print("<td><button style=\"background:url('/CulturarteWeb/Imagenes/ver.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px\" type=\"input\" name=\"Ver\" class=\"btn btn-primary\"></button></td>");
+                            out.print("</form>");
+                            out.print("</tr>");
+
+                        }
+                    %>
+                </tbody>
             </table>
         </div>
-            <%}%>
+        <%}%>
         <div style="text-align: center;margin-left: -1%; margin-top: 3%;">
 
             <a href="javascript:window.history.back();" class="btn btn-primary" > &laquo; Volver</a>
