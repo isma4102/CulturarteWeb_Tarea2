@@ -80,6 +80,15 @@
                             </div>
                             <div class="panel panel-primary">
                                 <div class="panel-heading" style="padding: 1%">
+                                    <h3 class="panel-title">Estado Actual</h3>
+                                </div>
+                                <div class="panel-body" style="padding: 1%">
+                                    <%out.print(propuestaSelec.getEstadoActual());%>
+                                </div>
+                            </div>
+
+                            <div class="panel panel-primary">
+                                <div class="panel-heading" style="padding: 1%">
                                     <h3 class="panel-title">Fecha de relizacion</h3>
                                 </div>
                                 <div class="panel-body" style="padding: 1%">
@@ -122,7 +131,7 @@
                                     <%out.print(propuestaSelec.getTipoRetorno());%>
                                 </div>
                             </div>
-                            
+
                             <h4 align="center" class="modal-title" id="classModalLabel">
                                 Colaboradores
                             </h4>
