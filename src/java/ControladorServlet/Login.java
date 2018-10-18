@@ -24,7 +24,7 @@ import logica.Interfaces.IControladorUsuario;
  */
 @WebServlet("/iniciar-sesion")
 public class Login extends HttpServlet {
-    
+
     private static final long serialVersionUID = 1L;
     Fabrica fabrica = Fabrica.getInstance();
     IControladorUsuario ICU = fabrica.getIControladorUsuario();
@@ -43,12 +43,12 @@ public class Login extends HttpServlet {
         Fabrica fabrica = Fabrica.getInstance();
         IControladorUsuario ICU = fabrica.getIControladorUsuario();
         return (DtUsuario) request.getSession().getAttribute("usuario_logueado");
-        
+
     }
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         DtUsuario usuLogeado = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
         if (usuLogeado == null) {
             response.setContentType("text/html;charset=UTF-8");
@@ -58,7 +58,7 @@ public class Login extends HttpServlet {
             request.setAttribute("mensaje", "Ya existe una sesion en el sistema");
             request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp.jsp").forward(request, response);
         }
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -88,16 +88,16 @@ public class Login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession objSesion = request.getSession();
-         String login = request.getParameter("login");
-String password = request.getParameter("pass");
+        String login = request.getParameter("login");
+        String password = request.getParameter("pass");
         EstadoSesion nuevoEstado = null;
         codificador a = new codificador();
-        
+
         DtUsuario usrNick = ICU.ObtenerDTUsuario(login);
         DtUsuario usrCorreo = ICU.ObtenerDTUsuario_Correo(login);
-        
+
         if (usrNick != null) {
-            
+
             String hash = a.sha1(password);
             if (usrNick.getPassword().compareTo(hash) != 0) {
                 request.setAttribute("errorContrasenia", "Contraseña Incorrecta.");
@@ -108,9 +108,9 @@ String password = request.getParameter("pass");
                 nuevoEstado = EstadoSesion.LOGIN_CORRECTO;
                 request.getSession().setAttribute("usuario_logueado", usrNick);// setea el usuario logueado
             }
-            
+
         } else if (usrCorreo != null) {
-            
+
             String hash = a.sha1(password);
             if (usrCorreo.getPassword().compareTo(hash) != 0) {
                 request.setAttribute("errorContrasenia", "Contraseña Incorrecta.");
@@ -121,14 +121,14 @@ String password = request.getParameter("pass");
                 nuevoEstado = EstadoSesion.LOGIN_CORRECTO;
                 request.getSession().setAttribute("usuario_logueado", usrCorreo);// setea el usuario logueado
             }
-            
+
         } else {
             nuevoEstado = EstadoSesion.LOGIN_INCORRECTO;
             objSesion.setAttribute("estado_sesion", nuevoEstado);
             request.getRequestDispatcher("Vistas/iniciarSesion.jsp").forward(request, response);
-            
+
         }
-        
+
         objSesion.setAttribute("estado_sesion", nuevoEstado);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/index.html");
         dispatcher.forward(request, response);

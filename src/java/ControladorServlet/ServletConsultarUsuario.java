@@ -113,7 +113,7 @@ public class ServletConsultarUsuario extends HttpServlet {
 
             List<DtinfoPropuesta> colaboraciones = ICU.verPropuestas(nickname);
             DtinfoColaborador dtc = Fabrica.getInstance().getIControladorUsuario().getDtColaborador(nickname);
-            List<DtColaboraciones> monto = ICU.getMontoColaboracion(dtc);
+            List<DtColaboraciones> monto = ICU.getMontoColaboracion(dtc.getNickname());
             request.setAttribute("Colaborador", monto);
             request.setAttribute("Colaboraciones", colaboraciones);
         }

@@ -8,6 +8,7 @@ package ControladorServlet;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -20,11 +21,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import logica.Clases.DataImagen;
-import logica.Clases.DtUsuario;
-import logica.Clases.TipoRetorno;
-import logica.Fabrica;
-import logica.Interfaces.IPropCat;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
+import servicios.DtUsuario;
+import servicios.PublicadorAltaPropuesta;
+import servicios.PublicadorAltaPropuestaService;
 
 /**
  *
@@ -37,8 +38,6 @@ public class ServletAltaPropuesta extends HttpServlet {
     public static final String MENSAJE_ERROR = "mensaje_error";
     public static final String MENSAJE_EXITO = "mensaje_exito";
     private String MENSAJE;
-
-    IPropCat controladorP;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -95,6 +94,11 @@ public class ServletAltaPropuesta extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         controladorP = Fabrica.getInstance().getControladorPropCat();
+
+        URL url = new URL("http://127.0.0.1:8280/servicioAltaP");
+        PublicadorAltaPropuestaService webService = new PublicadorAltaPropuestaService(url);
+        PublicadorAltaPropuesta port = webService.getPublicadorAltaPropuestaPort();
+
         String titulo = request.getParameter("TituloP");
         String lugar = request.getParameter("LugarP");
         String desc = request.getParameter("Descripcion");
@@ -127,10 +131,11 @@ public class ServletAltaPropuesta extends HttpServlet {
         try {
             DtUsuario dtLogeado = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
 
-            boolean encontrado = Fabrica.getInstance().getControladorPropCat().seleccionarUC(dtLogeado.getNickName(), cat);
+            boolean encontrado = port.seleccionarUC(dtLogeado.getNickName(), cat);
 
             if (!encontrado) {
-                boolean ok = controladorP.crearPropuesta(titulo, desc, lugar, imagen, fecha, montoE, montoT, TipoRetorno.EntGan);
+                XMLGregorianCalendar fechaXML = DatatypeFactory.newInstance().newXMLGregorianCalendar(0, 0, 0, 0, 0, 0, 0, 0);
+                boolean ok = port.crearPropuesta(titulo, desc, lugar, imagen, fecha, montoE, montoT, TipoRetorno.EntGan);
                 MENSAJE = "Se registro exitosamente";
                 request.setAttribute("mensaje", MENSAJE);
                 request.getRequestDispatcher("/Vistas/FuncionamientoCorrecto.jsp").forward(request, response);
