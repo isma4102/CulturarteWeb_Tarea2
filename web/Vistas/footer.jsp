@@ -5,7 +5,7 @@
 
 <!-- Footer -->
 <div style="width: 100%">
-<footer class=" page-footer font-small blue pt-4">
+<footer class=" page-footer responsive-utilities-test font-small blue pt-4">
 
     <!-- Footer Links -->
     <div style="background-color: #333" class="footerO container-fluid text-center text-md-left">
