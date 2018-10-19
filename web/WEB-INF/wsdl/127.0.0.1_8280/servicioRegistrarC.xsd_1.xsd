@@ -121,7 +121,11 @@
 </xs:complexType>
 
 <xs:complexType name="dtListaPropuestasR">
-<xs:sequence></xs:sequence>
+<xs:sequence>
+<xs:element name="Titulo" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="Proponente" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="Estado" type="tns:tipoE" minOccurs="0"></xs:element>
+</xs:sequence>
 </xs:complexType>
 
 <xs:simpleType name="tipoRetorno">

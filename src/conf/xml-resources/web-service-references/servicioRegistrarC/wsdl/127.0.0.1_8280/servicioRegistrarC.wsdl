@@ -4,22 +4,22 @@
 <xsd:import namespace="http://Servicios/" schemaLocation="http://127.0.0.1:8280/servicioRegistrarC?xsd=1"></xsd:import>
 </xsd:schema>
 </types>
-<message name="publicarRegistrarColaboracion">
-<part name="arg0" type="xsd:string"></part>
-</message>
-<message name="publicarRegistrarColaboracionResponse"></message>
-<message name="SeleccionarColaborador">
-<part name="nickName" type="xsd:string"></part>
-</message>
-<message name="SeleccionarColaboradorResponse">
-<part name="return" type="tns:dtinfoColaborador"></part>
-</message>
 <message name="SeleccionarPropuestaR">
 <part name="opcion" type="xsd:string"></part>
 </message>
 <message name="SeleccionarPropuestaRResponse">
 <part name="return" type="tns:dtinfoPropuesta"></part>
 </message>
+<message name="SeleccionarColaborador">
+<part name="nickName" type="xsd:string"></part>
+</message>
+<message name="SeleccionarColaboradorResponse">
+<part name="return" type="tns:dtinfoColaborador"></part>
+</message>
+<message name="publicarRegistrarColaboracion">
+<part name="arg0" type="xsd:string"></part>
+</message>
+<message name="publicarRegistrarColaboracionResponse"></message>
 <message name="listarPropuestasRWEB"></message>
 <message name="listarPropuestasRWEBResponse">
 <part name="return" type="tns:dtListPropuestasRWEB"></part>
@@ -35,17 +35,17 @@
 <part name="fault" element="tns:Exception"></part>
 </message>
 <portType name="PublicadorRegistrarColaboracion">
-<operation name="publicarRegistrarColaboracion">
-<input wsam:Action="http://Servicios/PublicadorRegistrarColaboracion/publicarRegistrarColaboracionRequest" message="tns:publicarRegistrarColaboracion"></input>
-<output wsam:Action="http://Servicios/PublicadorRegistrarColaboracion/publicarRegistrarColaboracionResponse" message="tns:publicarRegistrarColaboracionResponse"></output>
+<operation name="SeleccionarPropuestaR">
+<input wsam:Action="http://Servicios/PublicadorRegistrarColaboracion/SeleccionarPropuestaRRequest" message="tns:SeleccionarPropuestaR"></input>
+<output wsam:Action="http://Servicios/PublicadorRegistrarColaboracion/SeleccionarPropuestaRResponse" message="tns:SeleccionarPropuestaRResponse"></output>
 </operation>
 <operation name="SeleccionarColaborador">
 <input wsam:Action="http://Servicios/PublicadorRegistrarColaboracion/SeleccionarColaboradorRequest" message="tns:SeleccionarColaborador"></input>
 <output wsam:Action="http://Servicios/PublicadorRegistrarColaboracion/SeleccionarColaboradorResponse" message="tns:SeleccionarColaboradorResponse"></output>
 </operation>
-<operation name="SeleccionarPropuestaR">
-<input wsam:Action="http://Servicios/PublicadorRegistrarColaboracion/SeleccionarPropuestaRRequest" message="tns:SeleccionarPropuestaR"></input>
-<output wsam:Action="http://Servicios/PublicadorRegistrarColaboracion/SeleccionarPropuestaRResponse" message="tns:SeleccionarPropuestaRResponse"></output>
+<operation name="publicarRegistrarColaboracion">
+<input wsam:Action="http://Servicios/PublicadorRegistrarColaboracion/publicarRegistrarColaboracionRequest" message="tns:publicarRegistrarColaboracion"></input>
+<output wsam:Action="http://Servicios/PublicadorRegistrarColaboracion/publicarRegistrarColaboracionResponse" message="tns:publicarRegistrarColaboracionResponse"></output>
 </operation>
 <operation name="listarPropuestasRWEB">
 <input wsam:Action="http://Servicios/PublicadorRegistrarColaboracion/listarPropuestasRWEBRequest" message="tns:listarPropuestasRWEB"></input>
@@ -59,7 +59,7 @@
 </portType>
 <binding name="PublicadorRegistrarColaboracionPortBinding" type="tns:PublicadorRegistrarColaboracion">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc"></soap:binding>
-<operation name="publicarRegistrarColaboracion">
+<operation name="SeleccionarPropuestaR">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
@@ -77,7 +77,7 @@
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
 </operation>
-<operation name="SeleccionarPropuestaR">
+<operation name="publicarRegistrarColaboracion">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>

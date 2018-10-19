@@ -7,15 +7,18 @@ package ControladorServlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import logica.Clases.TipoE;
-import logica.Fabrica;
-import logica.Clases.DtPropuestaWeb;
+import servicios.DtListPropuestaWeb;
+import servicios.DtPropuestaWeb;
+import servicios.PublicadorInicio;
+import servicios.PublicadorInicioService;
 
 /**
  *
@@ -23,6 +26,8 @@ import logica.Clases.DtPropuestaWeb;
  */
 @WebServlet(name = "ServletInicio", urlPatterns = {"/ServletInicio"})
 public class ServletInicio extends HttpServlet {
+
+    private PublicadorInicio port;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,24 +41,23 @@ public class ServletInicio extends HttpServlet {
     @Override
     public void init() throws ServletException {
         try {
-            Fabrica.getInstance().getIControladorUsuario().CargarUsuarios();
-            Fabrica.getInstance().getControladorPropCat().CargarPropuestas();
-            Fabrica.getInstance().getControladorPropCat().CargarColaboraciones();
-            Fabrica.getInstance().getControladorPropCat().comprobarBaseCat();
-            Fabrica.getInstance().getIControladorUsuario().CargarFavoritas();
-            Fabrica.getInstance().getControladorPropCat().CargarComentarios();
-        } catch (Exception ex) {
+            URL url = new URL("http://127.0.0.1:8280/servicioInicio");
+            PublicadorInicioService webService = new PublicadorInicioService(url);
+            this.port = webService.getPublicadorInicioPort();
+
+        } catch (MalformedURLException ex) {
             ex.printStackTrace();
         }
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<DtPropuestaWeb> listPublicada = Fabrica.getInstance().getControladorPropCat().ListarPropuestasWeb(TipoE.Publicada);
-        List<DtPropuestaWeb> listFinanciada = Fabrica.getInstance().getControladorPropCat().ListarPropuestasWeb(TipoE.Financiada);
-        List<DtPropuestaWeb> listEnFinanciacion = Fabrica.getInstance().getControladorPropCat().ListarPropuestasWeb(TipoE.enFinanciacion);
-        List<DtPropuestaWeb> listNoFinanciada = Fabrica.getInstance().getControladorPropCat().ListarPropuestasWeb(TipoE.noFinanciada);
-        List<DtPropuestaWeb> listCancelada = Fabrica.getInstance().getControladorPropCat().ListarPropuestasWeb(TipoE.Cancelada);
-      
+        DtListPropuestaWeb ListaProp = this.port.listarPropuestasWeb();
+        List<DtPropuestaWeb> listPublicada = ListaProp.getPublicadas();
+        List<DtPropuestaWeb> listFinanciada = ListaProp.getNoFinanciadas();
+        List<DtPropuestaWeb> listEnFinanciacion = ListaProp.getEnFinanciacion();
+        List<DtPropuestaWeb> listNoFinanciada = ListaProp.getNoFinanciadas();
+        List<DtPropuestaWeb> listCancelada = ListaProp.getCanceladas();
+
         request.setAttribute("Cancelada", listCancelada);
         request.setAttribute("Publicada", listPublicada);
         request.setAttribute("Financiada", listFinanciada);

@@ -2,39 +2,6 @@
 
 <xs:element name="Exception" type="tns:Exception"></xs:element>
 
-<xs:complexType name="dtListInfoPropuesta">
-<xs:sequence>
-<xs:element name="lista" type="tns:dtinfoPropuesta" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="dtinfoPropuesta">
-<xs:sequence>
-<xs:element name="Titulo" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="Descripcion" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="imagen" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="TipoEspec" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="Lugar" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="FechaReal" type="xs:dateTime" minOccurs="0"></xs:element>
-<xs:element name="Precio" type="xs:float"></xs:element>
-<xs:element name="Monto" type="xs:float"></xs:element>
-<xs:element name="estado" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="tipoRetorno" type="tns:tipoRetorno" minOccurs="0"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="Exception">
-<xs:sequence>
-<xs:element name="message" type="xs:string" minOccurs="0"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="dtListUsuario">
-<xs:sequence>
-<xs:element name="lista" type="tns:dtUsuario" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="dtUsuario">
 <xs:sequence>
 <xs:element name="nickname" type="xs:string" minOccurs="0"></xs:element>
@@ -45,6 +12,12 @@
 <xs:element name="imagen" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="password" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="esproponente" type="xs:boolean"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Exception">
+<xs:sequence>
+<xs:element name="message" type="xs:string" minOccurs="0"></xs:element>
 </xs:sequence>
 </xs:complexType>
 
@@ -155,13 +128,32 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:simpleType name="tipoRetorno">
-<xs:restriction base="xs:string">
-<xs:enumeration value="Entradas"></xs:enumeration>
-<xs:enumeration value="porGanancias"></xs:enumeration>
-<xs:enumeration value="EntGan"></xs:enumeration>
-</xs:restriction>
-</xs:simpleType>
+<xs:complexType name="dtListUsuario">
+<xs:sequence>
+<xs:element name="lista" type="tns:dtUsuario" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtListInfoPropuesta">
+<xs:sequence>
+<xs:element name="lista" type="tns:dtinfoPropuesta" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtinfoPropuesta">
+<xs:sequence>
+<xs:element name="Titulo" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="Descripcion" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="imagen" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="TipoEspec" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="Lugar" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="FechaReal" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="Precio" type="xs:float"></xs:element>
+<xs:element name="Monto" type="xs:float"></xs:element>
+<xs:element name="estado" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="tipoRetorno" type="tns:tipoRetorno" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
 
 <xs:simpleType name="tipoE">
 <xs:restriction base="xs:string">
@@ -171,6 +163,14 @@
 <xs:enumeration value="Financiada"></xs:enumeration>
 <xs:enumeration value="noFinanciada"></xs:enumeration>
 <xs:enumeration value="Cancelada"></xs:enumeration>
+</xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="tipoRetorno">
+<xs:restriction base="xs:string">
+<xs:enumeration value="Entradas"></xs:enumeration>
+<xs:enumeration value="porGanancias"></xs:enumeration>
+<xs:enumeration value="EntGan"></xs:enumeration>
 </xs:restriction>
 </xs:simpleType>
 </xs:schema>

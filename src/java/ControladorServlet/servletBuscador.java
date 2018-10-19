@@ -7,28 +7,27 @@ package ControladorServlet;
 
 import com.google.gson.GsonBuilder;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import logica.Fabrica;
-import logica.Interfaces.IPropCat;
-import logica.Clases.Propuesta;
-import logica.Clases.DtinfoPropuesta;
+import servicios.DtConsultaPropuesta;
+import servicios.PublicadorConsultarPropuesta;
+import servicios.PublicadorConsultarPropuestaService;
 
 @WebServlet(name = "servletBuscador", urlPatterns = {"/servletBuscador"})
-
 public class servletBuscador extends HttpServlet {
 
-    IPropCat iControlador;
+    private PublicadorConsultarPropuesta port;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,69 +38,73 @@ public class servletBuscador extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        //request.getRequestDispatcher("script/filtroBuscador.js").forward(request, response);
+    @Override
+    public void init() throws ServletException {
+        try {
+            URL url = new URL("http://127.0.0.1:8280/servicioConsultaP");
+
+            PublicadorConsultarPropuestaService webService = new PublicadorConsultarPropuestaService(url);
+            this.port = webService.getPublicadorConsultarPropuestaPort();
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ServletCancelarPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        iControlador = Fabrica.getInstance().getControladorPropCat();
-        String filtro = request.getParameter("filtro");
-        String busqueda = request.getParameter("busqueda");
-        List<DtinfoPropuesta> resultado = new ArrayList<>();
-        Map<String, Propuesta> propuestas = iControlador.getPropuestas();
-        Set set = propuestas.entrySet();
-        Iterator iter = set.iterator();
-        while (iter.hasNext()) {
-            Map.Entry mentry = (Map.Entry) iter.next();
-            Propuesta prop = (Propuesta) mentry.getValue();
-            busqueda= busqueda.toLowerCase();
-            if (prop.getTituloP().toLowerCase().contains(busqueda) || prop.getDescripcionP().toLowerCase().contains(busqueda) || prop.getLugar().toLowerCase().contains(busqueda)) {
-                DtinfoPropuesta dtP = new DtinfoPropuesta(prop);
-                resultado.add(dtP);
-            }
-        }
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        if (filtro != null) {
-            switch (filtro) {
-                case "Alfabeticamente":
-                    Collections.sort(resultado, (DtinfoPropuesta o1, DtinfoPropuesta o2) -> o1.getTitulo().toLowerCase().compareTo(o2.getTitulo().toLowerCase()));
-                    request.setAttribute("resultado", resultado);
-                    request.setAttribute("busqueda", busqueda);
-                    request.setAttribute("tipoRetorno", "busqueda");
-                    request.getRequestDispatcher("/Vistas/busqueda.jsp").forward(request, response);
-                    break;
-                case "Estado":
-                    Collections.sort(resultado, (DtinfoPropuesta o1, DtinfoPropuesta o2) -> o1.getEstado().compareTo(o2.getEstado()));
-                    request.setAttribute("resultado", resultado);
-                    request.setAttribute("busqueda", busqueda);
-                    request.setAttribute("tipoRetorno", "busqueda");
-                    request.getRequestDispatcher("/Vistas/busqueda.jsp").forward(request, response);
-                    break;
-                case "Fecha":
-                    Collections.sort(resultado, (DtinfoPropuesta o1, DtinfoPropuesta o2) -> o1.getFechaReal().compareTo(o2.getFechaReal()));
-                    request.setAttribute("resultado", resultado);
-                    request.setAttribute("busqueda", busqueda);
-                    request.setAttribute("tipoRetorno", "busqueda");
-                    request.getRequestDispatcher("/Vistas/busqueda.jsp").forward(request, response);
-                    break;
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        try {
+            String filtro = request.getParameter("filtro");
+
+            String busqueda = request.getParameter("busqueda");
+            List<DtConsultaPropuesta> resultado = new ArrayList<>();
+            List<DtConsultaPropuesta> propuestas = this.port.getDtPropuestas().getLista();
+            Iterator iter = propuestas.iterator();
+            while (iter.hasNext()) {
+                DtConsultaPropuesta prop = (DtConsultaPropuesta) iter.next();
+                busqueda = busqueda.toLowerCase();
+                if (prop.getTitulo().toLowerCase().contains(busqueda) || prop.getDescripcion().toLowerCase().contains(busqueda) || prop.getLugar().toLowerCase().contains(busqueda)) {
+                    resultado.add(prop);
+                }
             }
-        } else {
-            request.setAttribute("resultado", resultado);
-            request.setAttribute("busqueda", busqueda);
-            request.setAttribute("tipoRetorno", "busqueda");
-            request.getRequestDispatcher("/Vistas/busqueda.jsp").forward(request, response);
+
+            if (filtro != null) {
+                switch (filtro) {
+                    case "Alfabeticamente":
+                        Collections.sort(resultado, (DtConsultaPropuesta o1, DtConsultaPropuesta o2) -> o1.getTitulo().toLowerCase().compareTo(o2.getTitulo().toLowerCase()));
+                        request.setAttribute("resultado", resultado);
+                        request.setAttribute("busqueda", busqueda);
+                        request.setAttribute("tipoRetorno", "busqueda");
+                        request.getRequestDispatcher("/Vistas/busqueda.jsp").forward(request, response);
+                        break;
+                    case "Estado":
+                        Collections.sort(resultado, (DtConsultaPropuesta o1, DtConsultaPropuesta o2) -> o1.getEstadoActual().compareTo(o2.getEstadoActual()));
+                        request.setAttribute("resultado", resultado);
+                        request.setAttribute("busqueda", busqueda);
+                        request.setAttribute("tipoRetorno", "busqueda");
+                        request.getRequestDispatcher("/Vistas/busqueda.jsp").forward(request, response);
+                        break;
+                    case "Fecha":
+                        Collections.sort(resultado, (DtConsultaPropuesta o1, DtConsultaPropuesta o2) -> o1.getFechaR().compareTo(o2.getFechaR()));
+                        request.setAttribute("resultado", resultado);
+                        request.setAttribute("busqueda", busqueda);
+                        request.setAttribute("tipoRetorno", "busqueda");
+                        request.getRequestDispatcher("/Vistas/busqueda.jsp").forward(request, response);
+                        break;
+                }
+            } else {
+                request.setAttribute("resultado", resultado);
+                request.setAttribute("busqueda", busqueda);
+                request.setAttribute("tipoRetorno", "busqueda");
+                request.getRequestDispatcher("/Vistas/busqueda.jsp").forward(request, response);
+            }
+
+        } catch (Exception ex) {
+
         }
     }
 

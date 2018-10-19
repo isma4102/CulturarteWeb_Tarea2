@@ -6,16 +6,20 @@
 package ControladorServlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import logica.Clases.DtNickTitProp;
-import logica.Clases.DtUsuario;
-import logica.Fabrica;
+import servicios.DtNickTitProp;
+import servicios.DtUsuario;
+import servicios.PublicadorConsultarPropuesta;
+import servicios.PublicadorConsultarPropuestaService;
 
 /**
  *
@@ -23,6 +27,8 @@ import logica.Fabrica;
  */
 @WebServlet(name = "ServletCancelarPropuesta", urlPatterns = {"/ServletCancelarPropuesta"})
 public class ServletCancelarPropuesta extends HttpServlet {
+
+    private PublicadorConsultarPropuesta port;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,6 +39,18 @@ public class ServletCancelarPropuesta extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    @Override
+    public void init() throws ServletException {
+        try {
+            URL url = new URL("http://127.0.0.1:8280/servicioConsultaP");
+
+            PublicadorConsultarPropuestaService webService = new PublicadorConsultarPropuestaService(url);
+            this.port = webService.getPublicadorConsultarPropuestaPort();
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ServletCancelarPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         DtUsuario usuLogueado = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
@@ -40,13 +58,13 @@ public class ServletCancelarPropuesta extends HttpServlet {
             request.setAttribute("mensaje", "No existe una sesion en el sistema");
             request.getRequestDispatcher("Vistas/Mensaje_Recibido.jsp").forward(request, response);
         } else {
-            if (usuLogueado.Esproponente()) {
-                List<DtNickTitProp> list = Fabrica.getInstance().getControladorPropCat().ListarPropuestasCancelar(usuLogueado.getNickName());
+            if (usuLogueado.isEsproponente()) {
+                List<DtNickTitProp> list = port.listarPropuestasCancelar(usuLogueado.getNickname()).getListPropuestas();
                 request.setAttribute("Lista", list);
                 request.getRequestDispatcher("Vistas/CancelarPropuesta.jsp").forward(request, response);
             } else {
                 request.setAttribute("mensaje", "Solo los proponentes pueden entrar");
-                 request.getRequestDispatcher("Vistas/Mensaje_Recibido.jsp").forward(request, response);
+                request.getRequestDispatcher("Vistas/Mensaje_Recibido.jsp").forward(request, response);
             }
         }
     }
@@ -81,14 +99,20 @@ public class ServletCancelarPropuesta extends HttpServlet {
         String titulo = new String(tit.getBytes("ISO-8859-1"), "UTF-8");
         DtUsuario proponente = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
 
-        boolean ok = Fabrica.getInstance().getControladorPropCat().CancelarPropuesta(tit, proponente.getNickName());
+        try {
+            boolean ok = port.cancelarPropuesta(titulo, proponente.getNickname());
 
-        if (ok) {
-            request.setAttribute("mensaje", "Se cancelo con exito la propuesta");
-        } else {
-            request.setAttribute("mensaje", "La propuesta no pudo ser cancelada");
+            if (ok) {
+                request.setAttribute("mensaje", "Se cancelo con exito la propuesta");
+            } else {
+                request.setAttribute("mensaje", "La propuesta no pudo ser cancelada");
+            }
+        } catch (ExceptionInInitializerError | Exception a) {
+            String mensajeError = "La propuesta no pudo ser cancelada";
+            request.setAttribute("mensaje", mensajeError);
+            request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
+
         }
-
         request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
 
     }

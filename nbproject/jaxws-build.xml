@@ -90,22 +90,6 @@
         <delete dir="${build.generated.sources.dir}/jax-ws/servicios"/>
         <delete dir="${build.generated.dir}/jax-wsCache/servicioAltaUsuario"/>
     </target>
-    <target name="wsimport-client-serviciologin" depends="wsimport-init">
-        <mkdir dir="${build.generated.dir}/jax-wsCache/serviciologin"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/serviciologin" destdir="${build.generated.dir}/jax-wsCache/serviciologin" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/serviciologin/wsdl/127.0.0.1_8280/serviciologin.wsdl" catalog="catalog.xml" extension="true" verbose="true" fork="false" wsdlLocation="http://127.0.0.1:8280/serviciologin?wsdl" xnocompile="true" xendorsed="true">
-            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/serviciologin/wsdl/127.0.0.1_8280/serviciologin.wsdl"/>
-            <produces dir="${build.generated.dir}/jax-wsCache/serviciologin"/>
-        </wsimport>
-        <copy todir="${build.generated.sources.dir}/jax-ws">
-            <fileset dir="${build.generated.dir}/jax-wsCache/serviciologin">
-                <include name="**/*.java"/>
-            </fileset>
-        </copy>
-    </target>
-    <target name="wsimport-client-clean-serviciologin" depends="-init-project">
-        <delete dir="${build.generated.sources.dir}/jax-ws/servicios"/>
-        <delete dir="${build.generated.dir}/jax-wsCache/serviciologin"/>
-    </target>
     <target name="wsimport-client-servicioInicio" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/servicioInicio"/>
         <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/servicioInicio" destdir="${build.generated.dir}/jax-wsCache/servicioInicio" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/servicioInicio/wsdl/127.0.0.1_8280/servicioInicio.wsdl" catalog="catalog.xml" extension="true" verbose="true" fork="false" wsdlLocation="http://127.0.0.1:8280/servicioInicio?wsdl" xnocompile="true" xendorsed="true">
@@ -121,22 +105,6 @@
     <target name="wsimport-client-clean-servicioInicio" depends="-init-project">
         <delete dir="${build.generated.sources.dir}/jax-ws/servicios"/>
         <delete dir="${build.generated.dir}/jax-wsCache/servicioInicio"/>
-    </target>
-    <target name="wsimport-client-servicioECC" depends="wsimport-init">
-        <mkdir dir="${build.generated.dir}/jax-wsCache/servicioECC"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/servicioECC" destdir="${build.generated.dir}/jax-wsCache/servicioECC" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/servicioECC/wsdl/127.0.0.1_8280/servicioECC.wsdl" catalog="catalog.xml" extension="true" verbose="true" fork="false" wsdlLocation="http://127.0.0.1:8280/servicioECC?wsdl" xnocompile="true" xendorsed="true">
-            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/servicioECC/wsdl/127.0.0.1_8280/servicioECC.wsdl"/>
-            <produces dir="${build.generated.dir}/jax-wsCache/servicioECC"/>
-        </wsimport>
-        <copy todir="${build.generated.sources.dir}/jax-ws">
-            <fileset dir="${build.generated.dir}/jax-wsCache/servicioECC">
-                <include name="**/*.java"/>
-            </fileset>
-        </copy>
-    </target>
-    <target name="wsimport-client-clean-servicioECC" depends="-init-project">
-        <delete dir="${build.generated.sources.dir}/jax-ws/servicios"/>
-        <delete dir="${build.generated.dir}/jax-wsCache/servicioECC"/>
     </target>
     <target name="wsimport-client-servicioRegistrarC" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/servicioRegistrarC"/>
@@ -154,5 +122,5 @@
         <delete dir="${build.generated.sources.dir}/jax-ws/servicios"/>
         <delete dir="${build.generated.dir}/jax-wsCache/servicioRegistrarC"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-servicioAltaP, wsimport-client-servicioConsultaP, wsimport-client-servicioConsultaU, wsimport-client-servicioAltaUsuario, wsimport-client-serviciologin, wsimport-client-servicioInicio, wsimport-client-servicioECC, wsimport-client-servicioRegistrarC"/>
+    <target name="wsimport-client-generate" depends="wsimport-client-servicioAltaP, wsimport-client-servicioConsultaP, wsimport-client-servicioConsultaU, wsimport-client-servicioAltaUsuario, wsimport-client-servicioInicio, wsimport-client-servicioRegistrarC"/>
 </project>

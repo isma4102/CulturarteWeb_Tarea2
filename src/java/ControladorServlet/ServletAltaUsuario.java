@@ -12,26 +12,33 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import logica.Fabrica;
-import logica.Interfaces.IControladorUsuario;
-import logica.Clases.codificador;
 import java.io.InputStream;
 import javax.servlet.http.Part;
-import logica.Clases.DtUsuario;
-import logica.Clases.DataImagen;
 import java.io.ByteArrayOutputStream;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.annotation.MultipartConfig;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
+import servicios.DataImagen;
+import servicios.DtUsuario;
+import servicios.PublicadorAltaUsuario;
+import servicios.PublicadorAltaUsuarioService;
+import servicios.PublicadorConsultarUsuario;
+import servicios.PublicadorConsultarUsuarioService;
+
 @MultipartConfig
 @WebServlet(name = "ServletAltaUsuario", urlPatterns = {"/altaUsuarioServlet"})
 public class ServletAltaUsuario extends HttpServlet {
-    
-    IControladorUsuario iUsuario;
+
+    private PublicadorAltaUsuario port;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,17 +49,20 @@ public class ServletAltaUsuario extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        URL url = new URL("http://127.0.0.1:8280/servicioAltaUsuario");
+        PublicadorAltaUsuarioService webService = new PublicadorAltaUsuarioService(url);
+        this.port = webService.getPublicadorAltaUsuarioPort();
+
         DtUsuario usuLogeado = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
-        
+
         if (usuLogeado == null) {
             request.getRequestDispatcher("Vistas/altaUsuario.jsp").forward(request, response);
         } else {
             request.setAttribute("mensaje", "Ya existe una sesion en el sistema");
             request.getRequestDispatcher("Vistas/Mensaje_Recibido.jsp").forward(request, response);
         }
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -81,8 +91,12 @@ public class ServletAltaUsuario extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
+            URL url = new URL("http://127.0.0.1:8280/servicioConsultarU");
+            PublicadorConsultarUsuarioService webService = new PublicadorConsultarUsuarioService(url);
+            PublicadorConsultarUsuario portCU = webService.getPublicadorConsultarUsuarioPort();
+
             codificador a = new codificador();
-            iUsuario = Fabrica.getInstance().getIControladorUsuario();
+
             Boolean ok = false;
             String nick = request.getParameter("nick");
             String nombre = request.getParameter("nombre");
@@ -95,12 +109,11 @@ public class ServletAltaUsuario extends HttpServlet {
             String sitio = request.getParameter("sitio");
             String biografia = request.getParameter("biografia");
             String tipoP = request.getParameter("tipoP");
-            
-            SimpleDateFormat formato = new SimpleDateFormat("yyy-MM-dd");
-            Date nacimineto;
-            Date nacimiento = formato.parse(fecha);
-            
-            Calendar cal = dateToCalendar(nacimiento);
+
+            GregorianCalendar cal = new GregorianCalendar();
+            cal.setTime(ParseFecha(fecha));
+            XMLGregorianCalendar fechaxml = DatatypeFactory.newInstance().newXMLGregorianCalendar(cal);
+
             if (!pass.equals(pass2)) {
                 request.setAttribute("malPass", "Sus contraseñas no coinciden");
                 request.getRequestDispatcher("/Vistas/altaUsuario.jsp").forward(request, response);
@@ -121,30 +134,33 @@ public class ServletAltaUsuario extends HttpServlet {
                     reads = data.read();
                 } // while
                 byte[] bytes = baos.toByteArray();
-                imagen = new DataImagen(bytes, nombreArchivo, extensionArchivo);
+                imagen = new DataImagen();
+                imagen.setStream(bytes);
+                imagen.setExtensionArchivo(extensionArchivo);
+                imagen.setNombreArchivo(nombreArchivo);
             }
             if (tipoP.equals("proponente")) {
-                ok = iUsuario.AgregarUsuarioProponente(nick, nombre, apellido, correo, cal, imagen, direccion, biografia, sitio, hash);
+                ok = this.port.agregarUsuarioProponente(nick, nombre, apellido, correo, fechaxml, imagen, direccion, biografia, sitio, hash);
                 if (ok) {
                     request.setAttribute("mensaje", "Se registro exitosamente");
-                    DtUsuario user = iUsuario.ObtenerDTUsuario(nick);
+                    DtUsuario user = portCU.obtenerDtUsuario(nick);
                     request.getSession().setAttribute("usuario_logueado", user);
                 } else {
                     request.setAttribute("mensaje", "Error al registrar este usuario");
                 }
                 request.getRequestDispatcher("/Vistas/altaUsuario.jsp").forward(request, response);
             } else {
-                ok = iUsuario.AgregarUsuarioColaborador(nick, nombre, apellido, correo, cal, imagen, hash);
+                ok = this.port.agregarUsuarioColaborador(nick, nombre, apellido, correo, fechaxml, imagen, hash);
                 if (ok) {
                     request.setAttribute("mensaje", "Se registro exitosamente");
-                    DtUsuario user = iUsuario.ObtenerDTUsuario(nick);
+                    DtUsuario user = portCU.obtenerDtUsuario(nick);
                     request.getSession().setAttribute("usuario_logueado", user);
                 } else {
                     request.setAttribute("mensaje", "Error al dar registrar este usuario");
                 }
                 request.getRequestDispatcher("/Vistas/altaUsuario.jsp").forward(request, response);
             }
-        } catch (ParseException ex) {
+        } catch (DatatypeConfigurationException ex) {
             Logger.getLogger(ServletAltaUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -159,12 +175,6 @@ public class ServletAltaUsuario extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private Calendar dateToCalendar(Date date) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        return calendar;
-    }
-    
     public Date ParseFecha(String fecha) {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         Date fechaDate = new Date();
@@ -175,5 +185,5 @@ public class ServletAltaUsuario extends HttpServlet {
         }
         return fechaDate;
     }
-    
+
 }

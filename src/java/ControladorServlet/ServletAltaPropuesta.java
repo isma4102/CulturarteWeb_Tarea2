@@ -13,6 +13,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -23,9 +24,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
+import servicios.DataImagen;
 import servicios.DtUsuario;
 import servicios.PublicadorAltaPropuesta;
 import servicios.PublicadorAltaPropuestaService;
+import servicios.TipoRetorno;
 
 /**
  *
@@ -38,6 +41,7 @@ public class ServletAltaPropuesta extends HttpServlet {
     public static final String MENSAJE_ERROR = "mensaje_error";
     public static final String MENSAJE_EXITO = "mensaje_exito";
     private String MENSAJE;
+    private PublicadorAltaPropuesta port;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -49,17 +53,20 @@ public class ServletAltaPropuesta extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        URL url = new URL("http://127.0.0.1:8280/servicioAltaP");
+        PublicadorAltaPropuestaService webService = new PublicadorAltaPropuestaService(url);
+        this.port = webService.getPublicadorAltaPropuestaPort();
 
         DtUsuario usuLogeado = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
         if (usuLogeado == null) {
             request.getRequestDispatcher("iniciar-sesion").forward(request, response);
         } else {
-            if (usuLogeado.Esproponente()) {
+            if (usuLogeado.isEsproponente()) {
                 SimpleDateFormat fechaA = new SimpleDateFormat("yyyy-MM-dd");
                 String fActual = fechaA.format(new Date());
                 request.setAttribute("FechaActual", fActual);
 
-                List<String> listCat = Fabrica.getInstance().getControladorPropCat().ListarCategorias();
+                List<String> listCat = this.port.listarCategorias().getListCategoria();
                 request.setAttribute("listCat", listCat);
                 request.getRequestDispatcher("Vistas/AltaPropuesta.jsp").forward(request, response);
             } else {
@@ -93,11 +100,6 @@ public class ServletAltaPropuesta extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        controladorP = Fabrica.getInstance().getControladorPropCat();
-
-        URL url = new URL("http://127.0.0.1:8280/servicioAltaP");
-        PublicadorAltaPropuestaService webService = new PublicadorAltaPropuestaService(url);
-        PublicadorAltaPropuesta port = webService.getPublicadorAltaPropuestaPort();
 
         String titulo = request.getParameter("TituloP");
         String lugar = request.getParameter("LugarP");
@@ -106,9 +108,7 @@ public class ServletAltaPropuesta extends HttpServlet {
 
         float montoT = Float.parseFloat(request.getParameter("MontoT"));
         float montoE = Float.parseFloat(request.getParameter("MontoE"));
-
         String fechaR = (request.getParameter("FechaR") == null ? "" : request.getParameter("FechaR"));
-        Calendar fecha = this.dateToCalendar(ParseFecha(fechaR));
 
         DataImagen imagen = null;
         final Part partImagen = request.getPart("imagen");
@@ -125,17 +125,24 @@ public class ServletAltaPropuesta extends HttpServlet {
                 reads = data.read();
             } // while
             byte[] bytes = baos.toByteArray();
-            imagen = new DataImagen(bytes, nombreArchivo, extensionArchivo);
+            imagen = new DataImagen();
+            imagen.setStream(bytes);
+            imagen.setExtensionArchivo(extensionArchivo);
+            imagen.setNombreArchivo(nombreArchivo);
         }
 
         try {
             DtUsuario dtLogeado = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
 
-            boolean encontrado = port.seleccionarUC(dtLogeado.getNickName(), cat);
+            boolean encontrado = port.seleccionarUC(dtLogeado.getNickname(), cat);
+            
+            GregorianCalendar cal = new GregorianCalendar();
+            cal.setTime(ParseFecha(fechaR));
+            XMLGregorianCalendar fecha = DatatypeFactory.newInstance().newXMLGregorianCalendar(cal);
 
             if (!encontrado) {
-                XMLGregorianCalendar fechaXML = DatatypeFactory.newInstance().newXMLGregorianCalendar(0, 0, 0, 0, 0, 0, 0, 0);
-                boolean ok = port.crearPropuesta(titulo, desc, lugar, imagen, fecha, montoE, montoT, TipoRetorno.EntGan);
+                //XMLGregorianCalendar fechaXML =
+                boolean ok = port.crearPropuesta(titulo, desc, lugar, imagen, fecha, montoE, montoT, TipoRetorno.fromValue(cat));
                 MENSAJE = "Se registro exitosamente";
                 request.setAttribute("mensaje", MENSAJE);
                 request.getRequestDispatcher("/Vistas/FuncionamientoCorrecto.jsp").forward(request, response);

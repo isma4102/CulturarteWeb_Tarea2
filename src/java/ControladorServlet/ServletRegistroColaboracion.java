@@ -6,21 +6,23 @@
 package ControladorServlet;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import logica.Clases.DTListaPropuestasR;
-import logica.Clases.DtNickTitProp;
-import logica.Clases.DtUsuario;
-import logica.Clases.DtinfoPropuesta;
-import logica.Clases.TipoE;
-import logica.Fabrica;
-import logica.Interfaces.IControladorUsuario;
-import logica.Interfaces.IPropCat;
+import servicios.DtListaPropuestasR;
+import servicios.PublicadorRegistrarColaboracion;
+import servicios.PublicadorRegistrarColaboracionService;
+import servicios.DtUsuario;
+import servicios.DtinfoPropuesta;
+import servicios.TipoE;
 
 /**
  *
@@ -29,20 +31,30 @@ import logica.Interfaces.IPropCat;
 @WebServlet("/ServletRegistroColaboracion")
 public class ServletRegistroColaboracion extends HttpServlet {
 
-    IPropCat IPC = Fabrica.getInstance().getControladorPropCat();
-    IControladorUsuario ICU = Fabrica.getInstance().getIControladorUsuario();
+    private PublicadorRegistrarColaboracion port;
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    @Override
+    public void init() throws ServletException {
+        try {
+            URL url = new URL("http://127.0.0.1:8280/servicioRegistrarC");
+
+            PublicadorRegistrarColaboracionService webService = new PublicadorRegistrarColaboracionService(url);
+            this.port = webService.getPublicadorRegistrarColaboracionPort();
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ServletCancelarPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getSession().getAttribute("usuario_logueado") == null) {
             request.setAttribute("mensaje", "No existe una sesion en el sistema");
             request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
         } else {
-            if (((DtUsuario) request.getSession().getAttribute("usuario_logueado")).Esproponente() == true) {
+            if (((DtUsuario) request.getSession().getAttribute("usuario_logueado")).isEsproponente() == true) {
                 request.setAttribute("mensaje", "Solo los colaboradores pueden entrar a este sitio");
                 request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
             } else {
-                List<DTListaPropuestasR> lista = IPC.listarPropuestasRWEB();
+                List<DtListaPropuestasR> lista = this.port.listarPropuestasRWEB().getLista();
                 if (lista.isEmpty()) {
                     request.setAttribute("mensaje", "No existen propuestas en el sistema");
                     request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
@@ -77,56 +89,55 @@ public class ServletRegistroColaboracion extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String Opcion = null;
         if (request.getParameter("Ver") != null) {
             String viene = request.getParameter("TituloP");
-            String Opcion = new String(viene.getBytes("ISO-8859-1"), "UTF-8");
-            DtinfoPropuesta propuesta = IPC.RetornarPropuestaR(Opcion);
+            Opcion = new String(viene.getBytes("ISO-8859-1"), "UTF-8");
+            DtinfoPropuesta propuesta = this.port.seleccionarPropuestaR(Opcion);
             request.setAttribute("Propuestaseleccionada", propuesta);
             request.getRequestDispatcher("/Vistas/MostrarInfoPropuesta.jsp").forward(request, response);
         } else if (request.getParameter("seleccionar") != null) {
-            if (request.getParameter("Estado").compareTo(TipoE.Publicada.toString()) == 0 || request.getParameter("Estado").compareTo(TipoE.enFinanciacion.toString()) == 0) {
+            if (request.getParameter("Estado").compareTo(TipoE.PUBLICADA.toString()) == 0 || request.getParameter("Estado").compareTo(TipoE.EN_FINANCIACION.toString()) == 0) {
                 String viene = request.getParameter("TituloP");
-                String Opcion = new String(viene.getBytes("ISO-8859-1"), "UTF-8");
-                DtinfoPropuesta propuesta = IPC.SeleccionarPropuestaR(Opcion);
-                ICU.SeleccionarColaborador(((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickName());
+                Opcion = new String(viene.getBytes("ISO-8859-1"), "UTF-8");
+                DtinfoPropuesta propuesta = this.port.seleccionarPropuestaR(Opcion);
+                this.port.seleccionarColaborador(((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickname());
                 request.setAttribute("Propuestaseleccionada", propuesta);
                 request.getRequestDispatcher("/Vistas/Mensaje_Confirmacion.jsp").forward(request, response);
-            }
-            else{
-                 request.setAttribute("mensaje", "Usted no puede colaborar en esta propuesta");
+            } else {
+                request.setAttribute("mensaje", "Usted no puede colaborar en esta propuesta");
                 request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
             }
         } else if (request.getParameter("Registrar") != null) {
             if (request.getSession().getAttribute("usuario_logueado") != null) {
                 String Tipo_entrada = request.getParameter("Tipo_Retorno");
                 String monto = request.getParameter("Monto");
-                float monto_final = Float.parseFloat(monto);                
+                float monto_final = Float.parseFloat(monto);
                 boolean OK = false;
                 if (Tipo_entrada.compareTo("Entradas") == 0) {
                     try {
-                        OK = IPC.agregarColaboracion(true, monto_final);
+                        OK = this.port.agregarColaboracion(true, monto_final);
                     } catch (Exception ex) {
                         String MENSAJE = ex.getMessage();
                         request.setAttribute("mensaje", MENSAJE);
                         request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
                     }
                     if (OK == true) {
-                        String MENSAJE = "La colaboración con la propuesta " + IPC.getPropuesta().getTituloP() + " se registró correctamente";
+                        String MENSAJE = "La colaboración con la propuesta " + Opcion + " se registró correctamente";
                         request.setAttribute("mensaje", MENSAJE);
                         request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
                     }
                 } else if (Tipo_entrada.compareTo("Por_ganancias") == 0) {
                     try {
-                        OK = IPC.agregarColaboracion(false, monto_final);
+                        OK = this.port.agregarColaboracion(false, monto_final);
                     } catch (Exception ex) {
                         String MENSAJE = ex.getMessage();
                         request.setAttribute("mensaje", MENSAJE);
                         request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
                     }
                     if (OK == true) {
-                        String MENSAJE = "La colaboración con la propuesta " + IPC.getPropuesta().getTituloP() + " se registró correctamente";
+                        String MENSAJE = "La colaboración con la propuesta " + Opcion + " se registró correctamente";
                         request.setAttribute("mensaje", MENSAJE);
                         request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
                     }

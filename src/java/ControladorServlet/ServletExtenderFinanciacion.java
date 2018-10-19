@@ -7,16 +7,20 @@ package ControladorServlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import logica.Clases.DtNickTitProp;
-import logica.Clases.DtUsuario;
-import logica.Fabrica;
-import logica.Interfaces.IPropCat;
+import servicios.DtNickTitProp;
+import servicios.DtUsuario;
+import servicios.PublicadorConsultarPropuesta;
+import servicios.PublicadorConsultarPropuestaService;
 
 /**
  *
@@ -25,15 +29,29 @@ import logica.Interfaces.IPropCat;
 @WebServlet(name = "ServletExtenderFinanciacion", urlPatterns = {"/ServletExtenderFinanciacion"})
 public class ServletExtenderFinanciacion extends HttpServlet {
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    private PublicadorConsultarPropuesta port;
+
+    @Override
+    public void init() throws ServletException {
+        try {
+            URL url = new URL("http://127.0.0.1:8280/servicioConsultaP");
+
+            PublicadorConsultarPropuestaService webService = new PublicadorConsultarPropuestaService(url);
+            this.port = webService.getPublicadorConsultarPropuestaPort();
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ServletCancelarPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         if (request.getSession().getAttribute("usuario_logueado") == null) {
             request.setAttribute("mensaje", "No existe una sesión en el sistema");
             request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
         } else {
-            if (((DtUsuario) request.getSession().getAttribute("usuario_logueado")).Esproponente() == true) {
-                IPropCat IPC = Fabrica.getInstance().getControladorPropCat();
-                List<DtNickTitProp> lista = IPC.ListarPropuestasX_DeProponenteX(((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickName());
+            if (((DtUsuario) request.getSession().getAttribute("usuario_logueado")).isEsproponente() == true) {
+
+                List<DtNickTitProp> lista = this.port.listarPropuestasXDeProponenteX(((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickname()).getListPropuestas();
                 if (lista.isEmpty()) {
                     request.setAttribute("mensaje", "No existen propuestas para extender");
                     request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
@@ -72,13 +90,11 @@ public class ServletExtenderFinanciacion extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        IPropCat IPC = Fabrica.getInstance().getControladorPropCat();
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getParameter("TituloP") != null) {
             String viene = request.getParameter("TituloP");
             String Opcion = new String(viene.getBytes("ISO-8859-1"), "UTF-8");
-            IPC.ExtenderFinanciacion(((String) request.getParameter("TituloP")));
+            this.port.extenderFinanciacion(((String) request.getParameter("TituloP")));
             request.setAttribute("mensaje", "Se extendio la fecha de la propuesta");
             request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
         }

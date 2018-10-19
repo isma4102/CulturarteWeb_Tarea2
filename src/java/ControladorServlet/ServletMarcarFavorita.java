@@ -6,17 +6,22 @@
 package ControladorServlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import logica.Clases.DtUsuario;
-import logica.Clases.DtinfoPropuesta;
-import logica.Fabrica;
-import logica.Interfaces.IPropCat;
+import servicios.DtUsuario;
+import servicios.DtinfoPropuesta;
+import servicios.PublicadorConsultarPropuesta;
+import servicios.PublicadorConsultarPropuestaService;
+import servicios.PublicadorConsultarUsuario;
+import servicios.PublicadorConsultarUsuarioService;
 
 /**
  *
@@ -25,7 +30,8 @@ import logica.Interfaces.IPropCat;
 @WebServlet(name = "ServletMarcarFavorita", urlPatterns = {"/ServletMarcarFavorita"})
 public class ServletMarcarFavorita extends HttpServlet {
 
-    IPropCat IPC;
+    private PublicadorConsultarUsuario portU;
+    private PublicadorConsultarPropuesta portP;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,23 +42,43 @@ public class ServletMarcarFavorita extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    @Override
+    public void init() throws ServletException {
+        try {
+            URL urlP = new URL("http://127.0.0.1:8280/servicioConsultaP");
 
-        DtUsuario usuLogeado = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
-        if (usuLogeado != null) {
-            response.setContentType("text/html;charset=UTF-8");
-            IPC = Fabrica.getInstance().getControladorPropCat();
-            if (IPC.getPropuestas().isEmpty()) {
-                request.setAttribute("mensaje", "No existen propuestas en el sistema");
+            PublicadorConsultarPropuestaService webServiceP = new PublicadorConsultarPropuestaService(urlP);
+            this.portP = webServiceP.getPublicadorConsultarPropuestaPort();
+
+            URL url = new URL("http://127.0.0.1:8280/servicioConsultarU");
+            PublicadorConsultarUsuarioService webService = new PublicadorConsultarUsuarioService(url);
+            this.portU = webService.getPublicadorConsultarUsuarioPort();
+
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ServletCancelarPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            DtUsuario usuLogeado = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
+            if (usuLogeado != null) {
+                response.setContentType("text/html;charset=UTF-8");
+
+                if (this.portP.getDtPropuestas().getLista().isEmpty()) {
+                    request.setAttribute("mensaje", "No existen propuestas en el sistema");
+                    request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
+                }
+                List<DtinfoPropuesta> propuestas = this.portP.listarPropuestasNoI().getLista();
+                request.setAttribute("Propuestas", propuestas);
+                request.getRequestDispatcher("Vistas/MarcarFavorita.jsp").forward(request, response);
+            } else {
+                request.setAttribute("mensaje", "No existe una sesion en el sistema");
                 request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
             }
-            List<DtinfoPropuesta> propuestas = IPC.ListarPropuestaNOI();
-            request.setAttribute("Propuestas", propuestas);
-            request.getRequestDispatcher("Vistas/MarcarFavorita.jsp").forward(request, response);
-        } else {
-            request.setAttribute("mensaje", "No existe una sesion en el sistema");
-            request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
+
+        } catch (Exception a) {
+            
         }
     }
 
@@ -84,7 +110,7 @@ public class ServletMarcarFavorita extends HttpServlet {
             throws ServletException, IOException {
         String titulo = (String) request.getParameter("TituloP");
         DtUsuario nick = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
-        Boolean exito = IPC.AgregarFavorita(titulo, nick.getNickName());
+        Boolean exito = this.portU.agregarFavortio(titulo, nick.getNickname());
         if (exito) {
             request.setAttribute("favorito", "Propuesta marcada como favorita");
         } else {

@@ -6,7 +6,8 @@
 package ControladorServlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,12 +16,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import logica.Clases.DtNickTitProp;
-import logica.Clases.DtUsuario;
-import logica.Clases.DtinfoPropuesta;
-import logica.Fabrica;
-import logica.Interfaces.IControladorUsuario;
-import logica.Interfaces.IPropCat;
+import servicios.DtNickTitProp;
+import servicios.DtUsuario;
+import servicios.PublicadorConsultarPropuesta;
+import servicios.PublicadorConsultarPropuestaService;
 
 /**
  *
@@ -29,17 +28,28 @@ import logica.Interfaces.IPropCat;
 @WebServlet(name = "ServletComentarPropuesta", urlPatterns = {"/ServletComentarPropuesta"})
 public class ServletComentarPropuesta extends HttpServlet {
 
-    IPropCat IPC = Fabrica.getInstance().getControladorPropCat();
-    IControladorUsuario ICU = Fabrica.getInstance().getIControladorUsuario();
+    private PublicadorConsultarPropuesta port;
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    @Override
+    public void init() throws ServletException {
+        try {
+            URL url = new URL("http://127.0.0.1:8280/servicioConsultaP");
+
+            PublicadorConsultarPropuestaService webService = new PublicadorConsultarPropuestaService(url);
+            this.port = webService.getPublicadorConsultarPropuestaPort();
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ServletCancelarPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         if (request.getSession().getAttribute("usuario_logueado") == null) {
             request.setAttribute("mensaje", "No existe una sesion en el sistema");
             request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
         } else {
-            if (((DtUsuario) request.getSession().getAttribute("usuario_logueado")).Esproponente() == false) {
-                List<DtNickTitProp> lista = IPC.listarPropuestasComentar();
+            if (((DtUsuario) request.getSession().getAttribute("usuario_logueado")).isEsproponente() == false) {
+                List<DtNickTitProp> lista = port.listarPropuestasComentar().getListPropuestas();
                 request.setAttribute("lista_propuestascomentar", lista);
                 request.getRequestDispatcher("/Vistas/AgregarComentario.jsp").forward(request, response);
             } else {
@@ -76,15 +86,15 @@ public class ServletComentarPropuesta extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        DtUsuario usuario = Login.getUsuarioSesion(request);
+        DtUsuario usuario = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
 
         if (usuario != null) {
-            String nickColab = usuario.getNickName();
+            String nickColab = usuario.getNickname();
             String TituloP = request.getParameter("TituloP");
             String texto = request.getParameter("texto");
 
             try {
-                IPC.ComentarPropuesta(TituloP, nickColab, texto);
+                this.port.comentarPropuesta(TituloP, texto, texto);
                 request.setAttribute("comentarProp", "Propuesta Comentada con Éxito!!!");
             } catch (Exception ex) {
                 Logger.getLogger(ServletComentarPropuesta.class.getName()).log(Level.SEVERE, null, ex);

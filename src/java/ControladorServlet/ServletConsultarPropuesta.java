@@ -5,32 +5,30 @@
  */
 package ControladorServlet;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintWriter;
+import java.net.URL;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import logica.Clases.DtConsultaPropuesta;
-import logica.Clases.DtNickTitProp;
-import logica.Fabrica;
-import logica.Clases.DtUsuario;
-import logica.Clases.DtConsultaPropuesta2;
-
+import servicios.DtConsultaPropuesta;
+import servicios.DtConsultaPropuesta2;
+import servicios.DtNickTitProp;
+import servicios.PublicadorConsultarPropuesta;
+import servicios.PublicadorConsultarPropuestaService;
+import servicios.DtUsuario;
 /**
  *
  * @author Martin
  */
 @WebServlet(name = "ServletConsultarPropuesta", urlPatterns = {"/ServletConsultarPropuesta"})
 public class ServletConsultarPropuesta extends HttpServlet {
+
+    private PublicadorConsultarPropuesta port;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,8 +40,12 @@ public class ServletConsultarPropuesta extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<DtNickTitProp> listP = Fabrica.getInstance().getControladorPropCat().listarPropuestas();
-        
+        URL url = new URL("http://127.0.0.1:8280/servicioECC");
+        PublicadorConsultarPropuestaService webService = new PublicadorConsultarPropuestaService(url);
+        this.port = webService.getPublicadorConsultarPropuestaPort();
+
+        List<DtNickTitProp> listP = this.port.listarPropuestas().getListPropuestas();
+
         request.setAttribute("listaPropuestas", listP);
         request.getRequestDispatcher("Vistas/ConsultarPropuesta.jsp").forward(request, response);
     }
@@ -77,16 +79,16 @@ public class ServletConsultarPropuesta extends HttpServlet {
         String titulo = new String(tit.getBytes("ISO-8859-1"), "UTF-8");
         DtUsuario proponente = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
         String nickProp = null;
-        
+
         if (proponente != null) {
-            nickProp = proponente.getNickName();
+            nickProp = proponente.getNickname();
         }
 
         try {
-            DtConsultaPropuesta dtinfo = Fabrica.getInstance().getControladorPropCat().SeleccionarPropuesta(titulo, nickProp);
+            DtConsultaPropuesta dtinfo = this.port.seleccionarPropuesta(titulo, nickProp);
             request.setAttribute("propuesta", dtinfo);
 
-            List<DtConsultaPropuesta2> listColab = Fabrica.getInstance().getControladorPropCat().ListaColaboradoresProp(titulo);
+            List<DtConsultaPropuesta2> listColab = this.port.listarColaboradoresProp(titulo).getLista();
 
             request.setAttribute("listaC", listColab);
 

@@ -7,6 +7,7 @@ package ControladorServlet;
  */
 import clases.EstadoSesion;
 import java.io.IOException;
+import java.net.URL;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,9 +15,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import logica.Clases.DtUsuario;
-import logica.Fabrica;
-import logica.Interfaces.IControladorUsuario;
+import servicios.DtUsuario;
+import servicios.PublicadorConsultarUsuario;
+import servicios.PublicadorConsultarUsuarioService;
 
 /**
  *
@@ -26,8 +27,7 @@ import logica.Interfaces.IControladorUsuario;
 public class Login extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    Fabrica fabrica = Fabrica.getInstance();
-    IControladorUsuario ICU = fabrica.getIControladorUsuario();
+    private PublicadorConsultarUsuario port;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,14 +40,14 @@ public class Login extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     public static DtUsuario getUsuarioSesion(HttpServletRequest request) {
-        Fabrica fabrica = Fabrica.getInstance();
-        IControladorUsuario ICU = fabrica.getIControladorUsuario();
         return (DtUsuario) request.getSession().getAttribute("usuario_logueado");
 
     }
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        URL url = new URL("http://127.0.0.1:8280/servicioConsultarU");
+        PublicadorConsultarUsuarioService webService = new PublicadorConsultarUsuarioService(url);
+        this.port = webService.getPublicadorConsultarUsuarioPort();
 
         DtUsuario usuLogeado = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
         if (usuLogeado == null) {
@@ -85,16 +85,15 @@ public class Login extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession objSesion = request.getSession();
         String login = request.getParameter("login");
         String password = request.getParameter("pass");
         EstadoSesion nuevoEstado = null;
         codificador a = new codificador();
 
-        DtUsuario usrNick = ICU.ObtenerDTUsuario(login);
-        DtUsuario usrCorreo = ICU.ObtenerDTUsuario_Correo(login);
+        DtUsuario usrNick = this.port.obtenerDtUsuario(login);
+        DtUsuario usrCorreo = this.port.obtenerDtUsuarioCorreo(login);
 
         if (usrNick != null) {
 

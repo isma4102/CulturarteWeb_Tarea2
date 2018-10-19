@@ -16,9 +16,9 @@
 
 <xs:complexType name="dataImagen">
 <xs:sequence>
-<xs:element name="extensionArchivo" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="nombreArchivo" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="stream" type="xs:base64Binary" minOccurs="0"></xs:element>
+<xs:element name="nombreArchivo" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="extensionArchivo" type="xs:string" minOccurs="0"></xs:element>
 </xs:sequence>
 </xs:complexType>
 
