@@ -4,21 +4,6 @@
 <xsd:import namespace="http://Servicios/" schemaLocation="http://127.0.0.1:8280/servicioAltaUsuario?xsd=1"></xsd:import>
 </xsd:schema>
 </types>
-<message name="AgregarUsuarioProponente">
-<part name="nick" type="xsd:string"></part>
-<part name="nombre" type="xsd:string"></part>
-<part name="apellido" type="xsd:string"></part>
-<part name="correo" type="xsd:string"></part>
-<part name="cal" type="xsd:dateTime"></part>
-<part name="imagen" type="tns:dataImagen"></part>
-<part name="direccion" type="xsd:string"></part>
-<part name="biografia" type="xsd:string"></part>
-<part name="sitio" type="xsd:string"></part>
-<part name="hash" type="xsd:string"></part>
-</message>
-<message name="AgregarUsuarioProponenteResponse">
-<part name="return" type="xsd:boolean"></part>
-</message>
 <message name="publicarAltaUsuario">
 <part name="arg0" type="xsd:string"></part>
 </message>
@@ -35,11 +20,22 @@
 <message name="AgregarUsuarioColaboradorResponse">
 <part name="return" type="xsd:boolean"></part>
 </message>
+<message name="AgregarUsuarioProponente">
+<part name="nick" type="xsd:string"></part>
+<part name="nombre" type="xsd:string"></part>
+<part name="apellido" type="xsd:string"></part>
+<part name="correo" type="xsd:string"></part>
+<part name="cal" type="xsd:dateTime"></part>
+<part name="imagen" type="tns:dataImagen"></part>
+<part name="direccion" type="xsd:string"></part>
+<part name="biografia" type="xsd:string"></part>
+<part name="sitio" type="xsd:string"></part>
+<part name="hash" type="xsd:string"></part>
+</message>
+<message name="AgregarUsuarioProponenteResponse">
+<part name="return" type="xsd:boolean"></part>
+</message>
 <portType name="PublicadorAltaUsuario">
-<operation name="AgregarUsuarioProponente" parameterOrder="nick nombre apellido correo cal imagen direccion biografia sitio hash">
-<input wsam:Action="http://Servicios/PublicadorAltaUsuario/AgregarUsuarioProponenteRequest" message="tns:AgregarUsuarioProponente"></input>
-<output wsam:Action="http://Servicios/PublicadorAltaUsuario/AgregarUsuarioProponenteResponse" message="tns:AgregarUsuarioProponenteResponse"></output>
-</operation>
 <operation name="publicarAltaUsuario">
 <input wsam:Action="http://Servicios/PublicadorAltaUsuario/publicarAltaUsuarioRequest" message="tns:publicarAltaUsuario"></input>
 <output wsam:Action="http://Servicios/PublicadorAltaUsuario/publicarAltaUsuarioResponse" message="tns:publicarAltaUsuarioResponse"></output>
@@ -48,18 +44,13 @@
 <input wsam:Action="http://Servicios/PublicadorAltaUsuario/AgregarUsuarioColaboradorRequest" message="tns:AgregarUsuarioColaborador"></input>
 <output wsam:Action="http://Servicios/PublicadorAltaUsuario/AgregarUsuarioColaboradorResponse" message="tns:AgregarUsuarioColaboradorResponse"></output>
 </operation>
+<operation name="AgregarUsuarioProponente" parameterOrder="nick nombre apellido correo cal imagen direccion biografia sitio hash">
+<input wsam:Action="http://Servicios/PublicadorAltaUsuario/AgregarUsuarioProponenteRequest" message="tns:AgregarUsuarioProponente"></input>
+<output wsam:Action="http://Servicios/PublicadorAltaUsuario/AgregarUsuarioProponenteResponse" message="tns:AgregarUsuarioProponenteResponse"></output>
+</operation>
 </portType>
 <binding name="PublicadorAltaUsuarioPortBinding" type="tns:PublicadorAltaUsuario">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc"></soap:binding>
-<operation name="AgregarUsuarioProponente">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</output>
-</operation>
 <operation name="publicarAltaUsuario">
 <soap:operation soapAction=""></soap:operation>
 <input>
@@ -70,6 +61,15 @@
 </output>
 </operation>
 <operation name="AgregarUsuarioColaborador">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
+</operation>
+<operation name="AgregarUsuarioProponente">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>

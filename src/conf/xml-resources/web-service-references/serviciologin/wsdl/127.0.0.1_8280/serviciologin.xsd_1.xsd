@@ -2,7 +2,14 @@
 
 <xs:complexType name="dtUsuario">
 <xs:sequence>
+<xs:element name="nickname" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="apellido" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="correo" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="fechaN" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="imagen" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="password" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="esproponente" type="xs:boolean"></xs:element>
 </xs:sequence>
 </xs:complexType>
 </xs:schema>

@@ -9,6 +9,15 @@
 </xs:complexType>
 
 <xs:complexType name="dtListNickTitProp">
-<xs:sequence></xs:sequence>
+<xs:sequence>
+<xs:element name="ListPropuestas" type="tns:dtNickTitProp" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtNickTitProp">
+<xs:sequence>
+<xs:element name="Titulo" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="Proponente" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
 </xs:complexType>
 </xs:schema>

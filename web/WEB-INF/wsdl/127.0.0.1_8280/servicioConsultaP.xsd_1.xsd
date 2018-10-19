@@ -3,11 +3,34 @@
 <xs:element name="Exception" type="tns:Exception"></xs:element>
 
 <xs:complexType name="dtListInfoPropuesta">
+<xs:sequence>
+<xs:element name="lista" type="tns:dtinfoPropuesta" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtinfoPropuesta">
 <xs:sequence></xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="dtConsultaPropuesta">
-<xs:sequence></xs:sequence>
+<xs:sequence>
+<xs:element name="titulo" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="descripcion" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="categoria" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="lugar" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="fechaR" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="imagen" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="montoActual" type="xs:float"></xs:element>
+<xs:element name="EstadoActual" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="montoE" type="xs:float"></xs:element>
+<xs:element name="montoTot" type="xs:float"></xs:element>
+<xs:element name="tipoRet" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nickproponente" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="esExtendible" type="xs:boolean"></xs:element>
+<xs:element name="esCancelable" type="xs:boolean"></xs:element>
+<xs:element name="esComentable" type="xs:boolean"></xs:element>
+<xs:element name="esColaborable" type="xs:boolean"></xs:element>
+</xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="Exception">
@@ -17,10 +40,28 @@
 </xs:complexType>
 
 <xs:complexType name="dtListConsultaPropuesta2">
-<xs:sequence></xs:sequence>
+<xs:sequence>
+<xs:element name="lista" type="tns:dtConsultaPropuesta2" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtConsultaPropuesta2">
+<xs:sequence>
+<xs:element name="nickColab" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nombreColab" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="apellidoColab" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="montoColab" type="xs:float"></xs:element>
+<xs:element name="fechaR" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="dtListNickTitProp">
+<xs:sequence>
+<xs:element name="ListPropuestas" type="tns:dtNickTitProp" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtNickTitProp">
 <xs:sequence></xs:sequence>
 </xs:complexType>
 </xs:schema>

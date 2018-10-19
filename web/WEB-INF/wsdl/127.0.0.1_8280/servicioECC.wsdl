@@ -8,32 +8,32 @@
 <part name="arg0" type="xsd:string"></part>
 </message>
 <message name="publicarExtenderCancelarComentarPropuestaResponse"></message>
-<message name="ComentarPropuesta">
-<part name="titulo" type="xsd:string"></part>
-<part name="nick" type="xsd:string"></part>
-<part name="texto" type="xsd:string"></part>
-</message>
-<message name="ComentarPropuestaResponse"></message>
-<message name="Exception">
-<part name="fault" element="tns:Exception"></part>
-</message>
 <message name="ListarPropuestasCancelar">
 <part name="nick" type="xsd:string"></part>
 </message>
 <message name="ListarPropuestasCancelarResponse">
 <part name="return" type="tns:dtListNickTitProp"></part>
 </message>
-<message name="ExtenderFinanciacion">
-<part name="titulo" type="xsd:string"></part>
-</message>
-<message name="ExtenderFinanciacionResponse">
-<part name="return" type="xsd:boolean"></part>
-</message>
 <message name="CancelarPropuesta">
 <part name="titulo" type="xsd:string"></part>
 <part name="nick" type="xsd:string"></part>
 </message>
 <message name="CancelarPropuestaResponse">
+<part name="return" type="xsd:boolean"></part>
+</message>
+<message name="Exception">
+<part name="fault" element="tns:Exception"></part>
+</message>
+<message name="ComentarPropuesta">
+<part name="titulo" type="xsd:string"></part>
+<part name="nick" type="xsd:string"></part>
+<part name="texto" type="xsd:string"></part>
+</message>
+<message name="ComentarPropuestaResponse"></message>
+<message name="ExtenderFinanciacion">
+<part name="titulo" type="xsd:string"></part>
+</message>
+<message name="ExtenderFinanciacionResponse">
 <part name="return" type="xsd:boolean"></part>
 </message>
 <message name="ListarPropuestasX_deProponenteX">
@@ -51,23 +51,23 @@
 <input wsam:Action="http://Servicios/PublicadorExtenderCancelarComentarPropuesta/publicarExtenderCancelarComentarPropuestaRequest" message="tns:publicarExtenderCancelarComentarPropuesta"></input>
 <output wsam:Action="http://Servicios/PublicadorExtenderCancelarComentarPropuesta/publicarExtenderCancelarComentarPropuestaResponse" message="tns:publicarExtenderCancelarComentarPropuestaResponse"></output>
 </operation>
-<operation name="ComentarPropuesta" parameterOrder="titulo nick texto">
-<input wsam:Action="http://Servicios/PublicadorExtenderCancelarComentarPropuesta/ComentarPropuestaRequest" message="tns:ComentarPropuesta"></input>
-<output wsam:Action="http://Servicios/PublicadorExtenderCancelarComentarPropuesta/ComentarPropuestaResponse" message="tns:ComentarPropuestaResponse"></output>
-<fault message="tns:Exception" name="Exception" wsam:Action="http://Servicios/PublicadorExtenderCancelarComentarPropuesta/ComentarPropuesta/Fault/Exception"></fault>
-</operation>
 <operation name="ListarPropuestasCancelar">
 <input wsam:Action="http://Servicios/PublicadorExtenderCancelarComentarPropuesta/ListarPropuestasCancelarRequest" message="tns:ListarPropuestasCancelar"></input>
 <output wsam:Action="http://Servicios/PublicadorExtenderCancelarComentarPropuesta/ListarPropuestasCancelarResponse" message="tns:ListarPropuestasCancelarResponse"></output>
-</operation>
-<operation name="ExtenderFinanciacion">
-<input wsam:Action="http://Servicios/PublicadorExtenderCancelarComentarPropuesta/ExtenderFinanciacionRequest" message="tns:ExtenderFinanciacion"></input>
-<output wsam:Action="http://Servicios/PublicadorExtenderCancelarComentarPropuesta/ExtenderFinanciacionResponse" message="tns:ExtenderFinanciacionResponse"></output>
 </operation>
 <operation name="CancelarPropuesta" parameterOrder="titulo nick">
 <input wsam:Action="http://Servicios/PublicadorExtenderCancelarComentarPropuesta/CancelarPropuestaRequest" message="tns:CancelarPropuesta"></input>
 <output wsam:Action="http://Servicios/PublicadorExtenderCancelarComentarPropuesta/CancelarPropuestaResponse" message="tns:CancelarPropuestaResponse"></output>
 <fault message="tns:Exception" name="Exception" wsam:Action="http://Servicios/PublicadorExtenderCancelarComentarPropuesta/CancelarPropuesta/Fault/Exception"></fault>
+</operation>
+<operation name="ComentarPropuesta" parameterOrder="titulo nick texto">
+<input wsam:Action="http://Servicios/PublicadorExtenderCancelarComentarPropuesta/ComentarPropuestaRequest" message="tns:ComentarPropuesta"></input>
+<output wsam:Action="http://Servicios/PublicadorExtenderCancelarComentarPropuesta/ComentarPropuestaResponse" message="tns:ComentarPropuestaResponse"></output>
+<fault message="tns:Exception" name="Exception" wsam:Action="http://Servicios/PublicadorExtenderCancelarComentarPropuesta/ComentarPropuesta/Fault/Exception"></fault>
+</operation>
+<operation name="ExtenderFinanciacion">
+<input wsam:Action="http://Servicios/PublicadorExtenderCancelarComentarPropuesta/ExtenderFinanciacionRequest" message="tns:ExtenderFinanciacion"></input>
+<output wsam:Action="http://Servicios/PublicadorExtenderCancelarComentarPropuesta/ExtenderFinanciacionResponse" message="tns:ExtenderFinanciacionResponse"></output>
 </operation>
 <operation name="ListarPropuestasX_deProponenteX">
 <input wsam:Action="http://Servicios/PublicadorExtenderCancelarComentarPropuesta/ListarPropuestasX_deProponenteXRequest" message="tns:ListarPropuestasX_deProponenteX"></input>
@@ -89,28 +89,7 @@
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
 </operation>
-<operation name="ComentarPropuesta">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</output>
-<fault name="Exception">
-<soap:fault name="Exception" use="literal"></soap:fault>
-</fault>
-</operation>
 <operation name="ListarPropuestasCancelar">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</output>
-</operation>
-<operation name="ExtenderFinanciacion">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
@@ -130,6 +109,27 @@
 <fault name="Exception">
 <soap:fault name="Exception" use="literal"></soap:fault>
 </fault>
+</operation>
+<operation name="ComentarPropuesta">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
+<fault name="Exception">
+<soap:fault name="Exception" use="literal"></soap:fault>
+</fault>
+</operation>
+<operation name="ExtenderFinanciacion">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
 </operation>
 <operation name="ListarPropuestasX_deProponenteX">
 <soap:operation soapAction=""></soap:operation>
