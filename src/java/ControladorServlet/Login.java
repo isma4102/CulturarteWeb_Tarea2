@@ -87,6 +87,7 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession objSesion = request.getSession();
+        
         String login = request.getParameter("login");
         String password = request.getParameter("pass");
         EstadoSesion nuevoEstado = null;

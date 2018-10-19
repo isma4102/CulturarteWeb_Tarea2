@@ -94,12 +94,11 @@ public class ServletCancelarPropuesta extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        String tit = request.getParameter("TituloP");
-        String titulo = new String(tit.getBytes("ISO-8859-1"), "UTF-8");
-        DtUsuario proponente = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
-
         try {
+            String tit = request.getParameter("TituloP");
+            String titulo = new String(tit.getBytes("ISO-8859-1"), "UTF-8");
+            DtUsuario proponente = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
+
             boolean ok = port.cancelarPropuesta(titulo, proponente.getNickname());
 
             if (ok) {

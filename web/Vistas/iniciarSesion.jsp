@@ -23,11 +23,9 @@
                 </div>
                 <div id="Error_login" style="display: none;" class="alert alert-danger" role="alert">
                     <span class="sr-only">Error:</span>
-                    <% if (request.getAttribute("errorContrasenia")!=null)
-                    {%>
+                    <% if (request.getAttribute("errorContrasenia") != null) {%>
                     Contraseña Incorrecta.
-                    <%}
-                    else{%>                  
+                    <%} else {%>                  
                     Usuario Incorrecto, reintente o Registrese si aun no tiene una cuenta.                  
                     <%}%>  
                 </div>
@@ -67,15 +65,13 @@
             </div>
         </div>	
         <script type="text/javascript">
-            <% if (request.getSession().getAttribute("estado_sesion") == EstadoSesion.LOGIN_INCORRECTO || 
-                    request.getSession().getAttribute("estado_sesion")==EstadoSesion.CONTRASENIA_INCORRECTA) { %>
+            <% if (request.getSession().getAttribute("estado_sesion") == EstadoSesion.LOGIN_INCORRECTO
+                        || request.getSession().getAttribute("estado_sesion") == EstadoSesion.CONTRASENIA_INCORRECTA) { %>
             var var2 = document.getElementById('Error_login');
             var2.style.display = "block";
             <% }%>
         </script>        
-    <br><br><br><br><br>        
-<jsp:include page="/Vistas/footer.jsp" />
-
-
+        <br><br><br><br><br>        
+        <jsp:include page="/Vistas/footer.jsp" />
     </body>
 </html>
