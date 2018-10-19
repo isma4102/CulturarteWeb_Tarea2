@@ -6,32 +6,35 @@ package ControladorServlet;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import logica.Fabrica;
-import logica.Interfaces.IControladorUsuario;
-import logica.Clases.codificador;
 import java.io.InputStream;
 import javax.servlet.http.Part;
-import logica.Clases.DtUsuario;
-import logica.Clases.DataImagen;
+import servicios.DtUsuario;
 import java.io.ByteArrayOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.annotation.MultipartConfig;
+import javax.xml.datatype.XMLGregorianCalendar;
+import servicios.DataImagen;
+import servicios.PublicadorAltaUsuario;
+import servicios.PublicadorAltaUsuarioService;
+import servicios.PublicadorLogin;
+import servicios.PublicadorLoginService;
+
 @MultipartConfig
 @WebServlet(name = "ServletAltaUsuario", urlPatterns = {"/altaUsuarioServlet"})
 public class ServletAltaUsuario extends HttpServlet {
-    
-    IControladorUsuario iUsuario;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -81,8 +84,13 @@ public class ServletAltaUsuario extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
+            PublicadorAltaUsuarioService publicador = new PublicadorAltaUsuarioService();
+            PublicadorAltaUsuario port = publicador.getPublicadorAltaUsuarioPort();
+            
+            PublicadorLoginService publicador1 = new PublicadorLoginService();
+            PublicadorLogin port1 = publicador1.getPublicadorLoginPort();
+            
             codificador a = new codificador();
-            iUsuario = Fabrica.getInstance().getIControladorUsuario();
             Boolean ok = false;
             String nick = request.getParameter("nick");
             String nombre = request.getParameter("nombre");
@@ -101,6 +109,8 @@ public class ServletAltaUsuario extends HttpServlet {
             Date nacimiento = formato.parse(fecha);
             
             Calendar cal = dateToCalendar(nacimiento);
+            GregorianCalendar cal1 = new GregorianCalendar(cal.getTime().getYear(), cal.getTime().getMonth(), cal.getTime().getDay());
+            XMLGregorianCalendar cal2 = new XMLGregorianCalendarImpl(cal1);
             if (!pass.equals(pass2)) {
                 request.setAttribute("malPass", "Sus contraseñas no coinciden");
                 request.getRequestDispatcher("/Vistas/altaUsuario.jsp").forward(request, response);
@@ -124,20 +134,20 @@ public class ServletAltaUsuario extends HttpServlet {
                 imagen = new DataImagen(bytes, nombreArchivo, extensionArchivo);
             }
             if (tipoP.equals("proponente")) {
-                ok = iUsuario.AgregarUsuarioProponente(nick, nombre, apellido, correo, cal, imagen, direccion, biografia, sitio, hash);
+                ok = port.agregarUsuarioProponente(nick, nombre, apellido, correo, cal2, imagen, direccion, biografia, sitio, hash);
                 if (ok) {
                     request.setAttribute("mensaje", "Se registro exitosamente");
-                    DtUsuario user = iUsuario.ObtenerDTUsuario(nick);
+                    DtUsuario user = port1.obtenerDtUsuario(nick);
                     request.getSession().setAttribute("usuario_logueado", user);
                 } else {
                     request.setAttribute("mensaje", "Error al registrar este usuario");
                 }
                 request.getRequestDispatcher("/Vistas/altaUsuario.jsp").forward(request, response);
             } else {
-                ok = iUsuario.AgregarUsuarioColaborador(nick, nombre, apellido, correo, cal, imagen, hash);
+                ok = port.agregarUsuarioColaborador(nick, nombre, apellido, correo, cal2, imagen, hash);
                 if (ok) {
                     request.setAttribute("mensaje", "Se registro exitosamente");
-                    DtUsuario user = iUsuario.ObtenerDTUsuario(nick);
+                    DtUsuario user = port1.obtenerDtUsuario(nick);
                     request.getSession().setAttribute("usuario_logueado", user);
                 } else {
                     request.setAttribute("mensaje", "Error al dar registrar este usuario");
