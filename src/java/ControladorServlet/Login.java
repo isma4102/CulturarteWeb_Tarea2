@@ -14,9 +14,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import logica.Clases.DtUsuario;
-import logica.Fabrica;
-import logica.Interfaces.IControladorUsuario;
+import servicios.DtUsuario;
+import servicios.PublicadorLogin;
+import servicios.PublicadorLoginService;
+
 
 /**
  *
@@ -26,9 +27,8 @@ import logica.Interfaces.IControladorUsuario;
 public class Login extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    Fabrica fabrica = Fabrica.getInstance();
-    IControladorUsuario ICU = fabrica.getIControladorUsuario();
-
+ 
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,15 +40,28 @@ public class Login extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     public static DtUsuario getUsuarioSesion(HttpServletRequest request) {
-        Fabrica fabrica = Fabrica.getInstance();
-        IControladorUsuario ICU = fabrica.getIControladorUsuario();
-        return (DtUsuario) request.getSession().getAttribute("usuario_logueado");
+        
+        
+        PublicadorLoginService service = new PublicadorLoginService();
+        PublicadorLogin port = service.getPublicadorLoginPort();
+        
+        HttpSession session = request.getSession(); 
+        
+        if (session.getAttribute("usuario_logueado") == null) 
+        {
+            return null; 
+        }
+        else{
+            return (DtUsuario) request.getSession().getAttribute("usuario_logueado");
+        }
+            
 
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
+              
         DtUsuario usuLogeado = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
         if (usuLogeado == null) {
             response.setContentType("text/html;charset=UTF-8");
@@ -87,14 +100,19 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        PublicadorLoginService service = new PublicadorLoginService();
+        PublicadorLogin port = service.getPublicadorLoginPort();
+        
         HttpSession objSesion = request.getSession();
+        
         String login = request.getParameter("login");
         String password = request.getParameter("pass");
         EstadoSesion nuevoEstado = null;
         codificador a = new codificador();
 
-        DtUsuario usrNick = ICU.ObtenerDTUsuario(login);
-        DtUsuario usrCorreo = ICU.ObtenerDTUsuario_Correo(login);
+        DtUsuario usrNick = port.obtenerDtUsuario(login);
+        DtUsuario usrCorreo = port.obtenerDtUsuarioCorreo(login);
 
         if (usrNick != null) {
 
