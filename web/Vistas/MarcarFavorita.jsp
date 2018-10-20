@@ -4,7 +4,7 @@
     Author     : gabri
 --%>
 
-<%@page import="logica.Clases.DtinfoPropuesta"%>
+<%@page import="servicios.DtinfoPropuesta"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>

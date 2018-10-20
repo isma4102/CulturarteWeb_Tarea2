@@ -5,8 +5,8 @@
 --%>
 
 <%@page import="java.net.URLEncoder"%>
-<%@page import="logica.Clases.TipoRetorno"%>
-<%@page import="logica.Clases.DtinfoPropuesta"%>
+<%@page import="servicios.TipoRetorno"%>
+<%@page import="servicios.DtinfoPropuesta"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -36,9 +36,9 @@
                         <input name="Monto" type="text" class="form-control" id="recipient-name" required>
                     </div>
                     <select name="Tipo_Retorno" class="form-control" style="width: 26%;">
-                        <% if (propuestaSelec.getTipoRetorno().compareTo(TipoRetorno.Entradas) == 0) {
+                        <% if (propuestaSelec.getTipoRetorno().compareTo(TipoRetorno.ENTRADAS) == 0) {
                                 out.print("<option>Entradas</option>");
-                            } else if (propuestaSelec.getTipoRetorno().compareTo(TipoRetorno.porGanancias) == 0) {
+                            } else if (propuestaSelec.getTipoRetorno().compareTo(TipoRetorno.POR_GANANCIAS) == 0) {
                                 out.print("<option>Por_ganancias</option>");
                             } else {
                                 out.print("<option>Entradas</option>");

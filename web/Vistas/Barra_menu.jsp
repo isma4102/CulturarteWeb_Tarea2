@@ -1,4 +1,4 @@
-<%@page import="logica.Clases.DtUsuario"%>
+<%@page import="servicios.DtUsuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -29,8 +29,8 @@
                     <ul class="nav navbar-nav navbar-right">
                         <form  action="${pageContext.request.contextPath}/ServletConsultarUsuario" method="POST">
                             <% if ((DtUsuario) request.getSession().getAttribute("usuario_logueado") != null) {
-                                    out.print("<img style=\"margin-top: 7px\" src=\"/CulturarteWeb/ServletImagenes?nickname=" + ((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickName() + "\" class=\"img-circle\" width=\" 40\" height=\"40\">");
-                                    out.print("<input style=\"border:none;background-color:#222222;color:white\" class=\"form-control-plaintext\" readonly name=\"nick\" type=\"text\" value=\"" + ((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickName() + "\"/>");
+                                    out.print("<img style=\"margin-top: 7px\" src=\"/CulturarteWeb/ServletImagenes?nickname=" + ((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickname() + "\" class=\"img-circle\" width=\" 40\" height=\"40\">");
+                                    out.print("<input style=\"border:none;background-color:#222222;color:white\" class=\"form-control-plaintext\" readonly name=\"nick\" type=\"text\" value=\"" + ((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickname() + "\"/>");
                                     out.print("<div>");
                                     out.print("<button type=\"submit\" style=\"border:none;background-color:black;color: white\" P> Perfil </button>");
                                     out.print("<a style=\"color: white\">  |  </a>");

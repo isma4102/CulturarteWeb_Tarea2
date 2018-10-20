@@ -6,14 +6,13 @@
 
 
 
-<%@page import="logica.Clases.DtColaboraciones"%>
-<%@page import="logica.Clases.DtinfoColaborador"%>
-<%@page import="logica.Controladores.configuraciones"%>
-<%@page import="logica.Clases.DtinfoPropuesta"%>
+<%@page import="servicios.DtColaboraciones"%>
+<%@page import="servicios.DtinfoColaborador"%>
+<%@page import="servicios.DtinfoPropuesta"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.util.Date"%>
-<%@page import="logica.Clases.DtUsuario"%>
+<%@page import="servicios.DtUsuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -38,7 +37,7 @@
                 <div class="col-sm-3"><!--left col-->
                     <%DtUsuario dtu = (DtUsuario) request.getAttribute("Usuario");
                         DtUsuario nick = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
-                        out.print("<img src=\"/CulturarteWeb/ServletImagenes?nickname=" + dtu.getNickName() + "\" class=\"avatar img-circle img-thumbnail\" alt=\"avatar\">");
+                        out.print("<img src=\"/CulturarteWeb/ServletImagenes?nickname=" + dtu.getNickname() + "\" class=\"avatar img-circle img-thumbnail\" alt=\"avatar\">");
                     %>
                     <br>
 
@@ -52,7 +51,7 @@
                         <li><a data-toggle="tab" href="#Seguidores">Seguidores</a></li>
                         <li><a data-toggle="tab" href="#Seguidos">Seguidos</a></li>
                         <li><a data-toggle="tab" href="#PFavoritas">Propuestas favoritas</a></li>
-                            <%if (dtu.Esproponente()) {%>
+                            <%if (dtu.isEsproponente()) {%>
                         <li><a data-toggle = "tab" href = "#PCreadas" > Propuestas creadas</a></li></ul>
                             <%} else {%>
                     <li><a data-toggle = "tab" href = "#PCreadas" > Colaboraciones</a></li></ul>
@@ -68,7 +67,7 @@
                                                 class="panel-title">NickName</h3
                                             > </div> 
                                         <div  class="panel-body" style = "padding: 1%"> 
-                                            <%out.print(dtu.getNickName());%>
+                                            <%out.print(dtu.getNickname());%>
                                         </div>
                                     </div>
                                 </div>
@@ -140,7 +139,7 @@
                                         </div>
                                         <div class="panel-body" style="padding: 1%">
                                             <%
-                                                if (dtu.Esproponente()) {
+                                                if (dtu.isEsproponente()) {
                                                     out.println("Proponente");
                                                 } else {
                                                     out.println("Colaborador");
@@ -149,7 +148,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <%if (dtu.Esproponente()) {%>       
+                            <%if (dtu.isEsproponente()) {%>       
                             <div class="form-group">
                                 <div class="col-xs-6">
 
@@ -210,7 +209,7 @@
                                     <tr>
                                         <td><p><%=dtusu.getNombre()%></p></td>&nbsp;&nbsp;&nbsp;
                                         <td><p><%=dtusu.getApellido()%></p></td>&nbsp;&nbsp;&nbsp;
-                                        <%if (dtusu.Esproponente()) {%>
+                                        <%if (dtusu.isEsproponente()) {%>
                                         <td><p>Proponente</p></td>&nbsp;&nbsp;&nbsp;
                                         <%} else {%>
                                         <td><p>Colaborador</p></td>&nbsp;&nbsp;&nbsp;
@@ -243,7 +242,7 @@
                                     <tr>
                                         <td><p><%=dtusu.getNombre()%></p></td>&nbsp;&nbsp;&nbsp;
                                         <td><p><%=dtusu.getApellido()%></p></td>&nbsp;&nbsp;&nbsp;
-                                        <%if (dtusu.Esproponente()) {%>
+                                        <%if (dtusu.isEsproponente()) {%>
                                         <td><p>Proponente</p></td>&nbsp;&nbsp;&nbsp;
                                         <%} else {%>
                                         <td><p>Colaborador</p></td>&nbsp;&nbsp;&nbsp;
@@ -296,9 +295,9 @@
 
 
 
-                            <%if (dtu.Esproponente()) {%>
+                            <%if (dtu.isEsproponente()) {%>
                             <%if (nick != null) {%>
-                            <%if (dtu.getNickName().equals(nick.getNickName())) {%>
+                            <%if (dtu.getNickname().equals(nick.getNickname())) {%>
                             <%List<DtinfoPropuesta> propuestasdeproponentenoing = (List<DtinfoPropuesta>) request.getAttribute("Propuestas2");
                                 if (propuestasdeproponentenoing.size() > 0) {%>
                             <div class="usuario" style="margin-bottom: 2%">
@@ -409,7 +408,7 @@
                                     <tr>
                                         <th>Titulo</th>
                                         
-                                            <%if (dtu.getNickName().equals(nick.getNickName())) {%>
+                                            <%if (dtu.getNickname().equals(nick.getNickname())) {%>
                                         <th>Fecha de colaboracion:</th>
                                         <th>Monto</th>  
                                             <% }%>
@@ -418,7 +417,7 @@
                                     <% for (DtColaboraciones dtp : dtc) {%>
                                     <tr>
                                         <td><p><%=dtp.getPropuesta()%></p></td>&nbsp;&nbsp;&nbsp;                                       
-                                        <%if (dtu.getNickName().equals(nick.getNickName())) {
+                                        <%if (dtu.getNickname().equals(nick.getNickname())) {
                                                 Calendar calen = dtp.getFechaRealiz();
                                                 int dia2 = calen.get(Calendar.DAY_OF_MONTH);
                                                 int mes2 = calen.get(Calendar.MONTH) + 1;
