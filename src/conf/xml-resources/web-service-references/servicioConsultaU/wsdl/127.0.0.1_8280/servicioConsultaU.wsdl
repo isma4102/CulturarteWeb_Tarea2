@@ -4,6 +4,16 @@
 <xsd:import namespace="http://Servicios/" schemaLocation="http://127.0.0.1:8280/servicioConsultaU?xsd=1"></xsd:import>
 </xsd:schema>
 </types>
+<message name="getDtColaborador">
+<part name="nickname" type="xsd:string"></part>
+</message>
+<message name="getDtColaboradorResponse">
+<part name="return" type="tns:dtinfoColaborador"></part>
+</message>
+<message name="ListarUsuarios"></message>
+<message name="ListarUsuariosResponse">
+<part name="return" type="tns:dtListUsuario"></part>
+</message>
 <message name="DesactivarProponente">
 <part name="nick" type="xsd:string"></part>
 </message>
@@ -17,39 +27,11 @@
 <part name="arg0" type="xsd:string"></part>
 </message>
 <message name="publicarConsultarUsuarioResponse"></message>
-<message name="ListarUsuarios"></message>
-<message name="ListarUsuariosResponse">
-<part name="return" type="tns:dtListUsuario"></part>
-</message>
 <message name="ListarPropuestasDeProponenteX">
 <part name="nickname" type="xsd:string"></part>
 </message>
 <message name="ListarPropuestasDeProponenteXResponse">
 <part name="return" type="tns:dtListInfoPropuesta"></part>
-</message>
-<message name="getDtColaborador">
-<part name="nickname" type="xsd:string"></part>
-</message>
-<message name="getDtColaboradorResponse">
-<part name="return" type="tns:dtinfoColaborador"></part>
-</message>
-<message name="ListarPropuestasNoIngresadas">
-<part name="nickname" type="xsd:string"></part>
-</message>
-<message name="ListarPropuestasNoIngresadasResponse">
-<part name="return" type="tns:dtListInfoPropuesta"></part>
-</message>
-<message name="ObtenerSeguidos">
-<part name="nickname" type="xsd:string"></part>
-</message>
-<message name="ObtenerSeguidosResponse">
-<part name="return" type="tns:dtListUsuario"></part>
-</message>
-<message name="ObtenerSeguidores">
-<part name="nickname" type="xsd:string"></part>
-</message>
-<message name="ObtenerSeguidoresResponse">
-<part name="return" type="tns:dtListUsuario"></part>
 </message>
 <message name="getMontoColaboracion">
 <part name="colaborador" type="xsd:string"></part>
@@ -57,18 +39,23 @@
 <message name="getMontoColaboracionResponse">
 <part name="return" type="tns:dtListColaboraciones"></part>
 </message>
-<message name="ObtenerDtUsuario">
-<part name="login" type="xsd:string"></part>
+<message name="ListarPropuestasNoIngresadas">
+<part name="nickname" type="xsd:string"></part>
 </message>
-<message name="ObtenerDtUsuarioResponse">
-<part name="return" type="tns:dtUsuario"></part>
+<message name="ListarPropuestasNoIngresadasResponse">
+<part name="return" type="tns:dtListInfoPropuesta"></part>
 </message>
-<message name="AgregarFavortio">
-<part name="titulo" type="xsd:string"></part>
-<part name="nick" type="xsd:string"></part>
+<message name="ObtenerSeguidores">
+<part name="nickname" type="xsd:string"></part>
 </message>
-<message name="AgregarFavortioResponse">
-<part name="return" type="xsd:boolean"></part>
+<message name="ObtenerSeguidoresResponse">
+<part name="return" type="tns:dtListUsuario"></part>
+</message>
+<message name="ObtenerSeguidos">
+<part name="nickname" type="xsd:string"></part>
+</message>
+<message name="ObtenerSeguidosResponse">
+<part name="return" type="tns:dtListUsuario"></part>
 </message>
 <message name="VerPropuestas">
 <part name="nickname" type="xsd:string"></part>
@@ -82,6 +69,13 @@
 <message name="ObtenerFavoritasResponse">
 <part name="return" type="tns:dtListInfoPropuesta"></part>
 </message>
+<message name="AgregarFavortio">
+<part name="titulo" type="xsd:string"></part>
+<part name="nick" type="xsd:string"></part>
+</message>
+<message name="AgregarFavortioResponse">
+<part name="return" type="xsd:boolean"></part>
+</message>
 <message name="SeguirUsuario">
 <part name="nick1" type="xsd:string"></part>
 <part name="nick2" type="xsd:string"></part>
@@ -89,9 +83,11 @@
 <message name="SeguirUsuarioResponse">
 <part name="return" type="xsd:boolean"></part>
 </message>
-<message name="ListarPropuestasNoI"></message>
-<message name="ListarPropuestasNoIResponse">
-<part name="return" type="tns:dtListInfoPropuesta"></part>
+<message name="ObtenerDtUsuario">
+<part name="login" type="xsd:string"></part>
+</message>
+<message name="ObtenerDtUsuarioResponse">
+<part name="return" type="tns:dtUsuario"></part>
 </message>
 <message name="ObtenerDtUsuario_Correo">
 <part name="login" type="xsd:string"></part>
@@ -107,6 +103,14 @@
 <part name="return" type="xsd:boolean"></part>
 </message>
 <portType name="PublicadorConsultarUsuario">
+<operation name="getDtColaborador">
+<input wsam:Action="http://Servicios/PublicadorConsultarUsuario/getDtColaboradorRequest" message="tns:getDtColaborador"></input>
+<output wsam:Action="http://Servicios/PublicadorConsultarUsuario/getDtColaboradorResponse" message="tns:getDtColaboradorResponse"></output>
+</operation>
+<operation name="ListarUsuarios">
+<input wsam:Action="http://Servicios/PublicadorConsultarUsuario/ListarUsuariosRequest" message="tns:ListarUsuarios"></input>
+<output wsam:Action="http://Servicios/PublicadorConsultarUsuario/ListarUsuariosResponse" message="tns:ListarUsuariosResponse"></output>
+</operation>
 <operation name="DesactivarProponente">
 <input wsam:Action="http://Servicios/PublicadorConsultarUsuario/DesactivarProponenteRequest" message="tns:DesactivarProponente"></input>
 <output wsam:Action="http://Servicios/PublicadorConsultarUsuario/DesactivarProponenteResponse" message="tns:DesactivarProponenteResponse"></output>
@@ -116,42 +120,26 @@
 <input wsam:Action="http://Servicios/PublicadorConsultarUsuario/publicarConsultarUsuarioRequest" message="tns:publicarConsultarUsuario"></input>
 <output wsam:Action="http://Servicios/PublicadorConsultarUsuario/publicarConsultarUsuarioResponse" message="tns:publicarConsultarUsuarioResponse"></output>
 </operation>
-<operation name="ListarUsuarios">
-<input wsam:Action="http://Servicios/PublicadorConsultarUsuario/ListarUsuariosRequest" message="tns:ListarUsuarios"></input>
-<output wsam:Action="http://Servicios/PublicadorConsultarUsuario/ListarUsuariosResponse" message="tns:ListarUsuariosResponse"></output>
-</operation>
 <operation name="ListarPropuestasDeProponenteX">
 <input wsam:Action="http://Servicios/PublicadorConsultarUsuario/ListarPropuestasDeProponenteXRequest" message="tns:ListarPropuestasDeProponenteX"></input>
 <output wsam:Action="http://Servicios/PublicadorConsultarUsuario/ListarPropuestasDeProponenteXResponse" message="tns:ListarPropuestasDeProponenteXResponse"></output>
 <fault message="tns:Exception" name="Exception" wsam:Action="http://Servicios/PublicadorConsultarUsuario/ListarPropuestasDeProponenteX/Fault/Exception"></fault>
 </operation>
-<operation name="getDtColaborador">
-<input wsam:Action="http://Servicios/PublicadorConsultarUsuario/getDtColaboradorRequest" message="tns:getDtColaborador"></input>
-<output wsam:Action="http://Servicios/PublicadorConsultarUsuario/getDtColaboradorResponse" message="tns:getDtColaboradorResponse"></output>
+<operation name="getMontoColaboracion">
+<input wsam:Action="http://Servicios/PublicadorConsultarUsuario/getMontoColaboracionRequest" message="tns:getMontoColaboracion"></input>
+<output wsam:Action="http://Servicios/PublicadorConsultarUsuario/getMontoColaboracionResponse" message="tns:getMontoColaboracionResponse"></output>
 </operation>
 <operation name="ListarPropuestasNoIngresadas">
 <input wsam:Action="http://Servicios/PublicadorConsultarUsuario/ListarPropuestasNoIngresadasRequest" message="tns:ListarPropuestasNoIngresadas"></input>
 <output wsam:Action="http://Servicios/PublicadorConsultarUsuario/ListarPropuestasNoIngresadasResponse" message="tns:ListarPropuestasNoIngresadasResponse"></output>
 </operation>
-<operation name="ObtenerSeguidos">
-<input wsam:Action="http://Servicios/PublicadorConsultarUsuario/ObtenerSeguidosRequest" message="tns:ObtenerSeguidos"></input>
-<output wsam:Action="http://Servicios/PublicadorConsultarUsuario/ObtenerSeguidosResponse" message="tns:ObtenerSeguidosResponse"></output>
-</operation>
 <operation name="ObtenerSeguidores">
 <input wsam:Action="http://Servicios/PublicadorConsultarUsuario/ObtenerSeguidoresRequest" message="tns:ObtenerSeguidores"></input>
 <output wsam:Action="http://Servicios/PublicadorConsultarUsuario/ObtenerSeguidoresResponse" message="tns:ObtenerSeguidoresResponse"></output>
 </operation>
-<operation name="getMontoColaboracion">
-<input wsam:Action="http://Servicios/PublicadorConsultarUsuario/getMontoColaboracionRequest" message="tns:getMontoColaboracion"></input>
-<output wsam:Action="http://Servicios/PublicadorConsultarUsuario/getMontoColaboracionResponse" message="tns:getMontoColaboracionResponse"></output>
-</operation>
-<operation name="ObtenerDtUsuario">
-<input wsam:Action="http://Servicios/PublicadorConsultarUsuario/ObtenerDtUsuarioRequest" message="tns:ObtenerDtUsuario"></input>
-<output wsam:Action="http://Servicios/PublicadorConsultarUsuario/ObtenerDtUsuarioResponse" message="tns:ObtenerDtUsuarioResponse"></output>
-</operation>
-<operation name="AgregarFavortio" parameterOrder="titulo nick">
-<input wsam:Action="http://Servicios/PublicadorConsultarUsuario/AgregarFavortioRequest" message="tns:AgregarFavortio"></input>
-<output wsam:Action="http://Servicios/PublicadorConsultarUsuario/AgregarFavortioResponse" message="tns:AgregarFavortioResponse"></output>
+<operation name="ObtenerSeguidos">
+<input wsam:Action="http://Servicios/PublicadorConsultarUsuario/ObtenerSeguidosRequest" message="tns:ObtenerSeguidos"></input>
+<output wsam:Action="http://Servicios/PublicadorConsultarUsuario/ObtenerSeguidosResponse" message="tns:ObtenerSeguidosResponse"></output>
 </operation>
 <operation name="VerPropuestas">
 <input wsam:Action="http://Servicios/PublicadorConsultarUsuario/VerPropuestasRequest" message="tns:VerPropuestas"></input>
@@ -161,14 +149,18 @@
 <input wsam:Action="http://Servicios/PublicadorConsultarUsuario/ObtenerFavoritasRequest" message="tns:ObtenerFavoritas"></input>
 <output wsam:Action="http://Servicios/PublicadorConsultarUsuario/ObtenerFavoritasResponse" message="tns:ObtenerFavoritasResponse"></output>
 </operation>
+<operation name="AgregarFavortio" parameterOrder="titulo nick">
+<input wsam:Action="http://Servicios/PublicadorConsultarUsuario/AgregarFavortioRequest" message="tns:AgregarFavortio"></input>
+<output wsam:Action="http://Servicios/PublicadorConsultarUsuario/AgregarFavortioResponse" message="tns:AgregarFavortioResponse"></output>
+</operation>
 <operation name="SeguirUsuario" parameterOrder="nick1 nick2">
 <input wsam:Action="http://Servicios/PublicadorConsultarUsuario/SeguirUsuarioRequest" message="tns:SeguirUsuario"></input>
 <output wsam:Action="http://Servicios/PublicadorConsultarUsuario/SeguirUsuarioResponse" message="tns:SeguirUsuarioResponse"></output>
 <fault message="tns:Exception" name="Exception" wsam:Action="http://Servicios/PublicadorConsultarUsuario/SeguirUsuario/Fault/Exception"></fault>
 </operation>
-<operation name="ListarPropuestasNoI">
-<input wsam:Action="http://Servicios/PublicadorConsultarUsuario/ListarPropuestasNoIRequest" message="tns:ListarPropuestasNoI"></input>
-<output wsam:Action="http://Servicios/PublicadorConsultarUsuario/ListarPropuestasNoIResponse" message="tns:ListarPropuestasNoIResponse"></output>
+<operation name="ObtenerDtUsuario">
+<input wsam:Action="http://Servicios/PublicadorConsultarUsuario/ObtenerDtUsuarioRequest" message="tns:ObtenerDtUsuario"></input>
+<output wsam:Action="http://Servicios/PublicadorConsultarUsuario/ObtenerDtUsuarioResponse" message="tns:ObtenerDtUsuarioResponse"></output>
 </operation>
 <operation name="ObtenerDtUsuario_Correo">
 <input wsam:Action="http://Servicios/PublicadorConsultarUsuario/ObtenerDtUsuario_CorreoRequest" message="tns:ObtenerDtUsuario_Correo"></input>
@@ -182,6 +174,24 @@
 </portType>
 <binding name="PublicadorConsultarUsuarioPortBinding" type="tns:PublicadorConsultarUsuario">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc"></soap:binding>
+<operation name="getDtColaborador">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
+</operation>
+<operation name="ListarUsuarios">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
+</operation>
 <operation name="DesactivarProponente">
 <soap:operation soapAction=""></soap:operation>
 <input>
@@ -203,15 +213,6 @@
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
 </operation>
-<operation name="ListarUsuarios">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</output>
-</operation>
 <operation name="ListarPropuestasDeProponenteX">
 <soap:operation soapAction=""></soap:operation>
 <input>
@@ -224,7 +225,7 @@
 <soap:fault name="Exception" use="literal"></soap:fault>
 </fault>
 </operation>
-<operation name="getDtColaborador">
+<operation name="getMontoColaboracion">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
@@ -242,15 +243,6 @@
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
 </operation>
-<operation name="ObtenerSeguidos">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</output>
-</operation>
 <operation name="ObtenerSeguidores">
 <soap:operation soapAction=""></soap:operation>
 <input>
@@ -260,25 +252,7 @@
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
 </operation>
-<operation name="getMontoColaboracion">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</output>
-</operation>
-<operation name="ObtenerDtUsuario">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</output>
-</operation>
-<operation name="AgregarFavortio">
+<operation name="ObtenerSeguidos">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
@@ -297,6 +271,15 @@
 </output>
 </operation>
 <operation name="ObtenerFavoritas">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
+</operation>
+<operation name="AgregarFavortio">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
@@ -317,7 +300,7 @@
 <soap:fault name="Exception" use="literal"></soap:fault>
 </fault>
 </operation>
-<operation name="ListarPropuestasNoI">
+<operation name="ObtenerDtUsuario">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>

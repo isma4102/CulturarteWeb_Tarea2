@@ -1,5 +1,5 @@
 <%@page import="java.util.List"%>
-<%@page import="logica.Clases.DtPropuestaWeb"%>
+<%@page import="servicios.DtPropuestaWeb"%>
 
 <!DOCTYPE html>
 <html>

@@ -1,4 +1,4 @@
-<%@page import="logica.Clases.DtUsuario"%>
+<%@page import="servicios.DtUsuario"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -51,7 +51,7 @@
                         </button>
                         <div class="dropdown-container">
                             <% if ((DtUsuario) request.getSession().getAttribute("usuario_logueado") != null) {
-                                    if (((DtUsuario) request.getSession().getAttribute("usuario_logueado")).Esproponente() != false) {
+                                    if (((DtUsuario) request.getSession().getAttribute("usuario_logueado")).isEsproponente() != false) {
                                         out.print("<a style=\"color: white\" href=\"/CulturarteWeb/ServletAltaPropuesta\" >Alta Propuestas</a>");
                                         out.print("<a style=\"color: white\" href=\"/CulturarteWeb/ServletExtenderFinanciacion\">Extender financiación</a>");
                                         out.print("<a style=\"color: white\" href=\"/CulturarteWeb/ServletCancelarPropuesta\">Cancelar Propuesta</a>");
@@ -71,7 +71,7 @@
                         </button>
                         <div class="dropdown-container">
                             <% if ((DtUsuario) request.getSession().getAttribute("usuario_logueado") != null) {
-                                    if (((DtUsuario) request.getSession().getAttribute("usuario_logueado")).Esproponente() == false) {
+                                    if (((DtUsuario) request.getSession().getAttribute("usuario_logueado")).isEsproponente() == false) {
                                         
                                         out.print("<a style=\"color: white\" href=\"/CulturarteWeb/ServletRegistroColaboracion\">Registrar Colaboración a propuesta</a>");
                                     }
