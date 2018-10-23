@@ -106,41 +106,41 @@ public class Login extends HttpServlet {
         try {
             usrNick = this.port.obtenerDtUsuario(login);
         } catch (Exception error) {
-
-            if (usrNick != null) {
-
+            try {
+                usrCorreo = this.port.obtenerDtUsuarioCorreo(login);
+            } catch (Exception e) {
+                nuevoEstado = EstadoSesion.LOGIN_INCORRECTO;
+                objSesion.setAttribute("estado_sesion", nuevoEstado);
+                request.getRequestDispatcher("Vistas/iniciarSesion.jsp").forward(request, response);
+            }
+            if (usrCorreo != null) {
                 String hash = a.sha1(password);
-                if (usrNick.getPassword().compareTo(hash) != 0) {
+                if (usrCorreo.getPassword().compareTo(hash) != 0) {
                     request.setAttribute("errorContrasenia", "Contraseña Incorrecta.");
                     nuevoEstado = EstadoSesion.CONTRASENIA_INCORRECTA;
                     objSesion.setAttribute("estado_sesion", nuevoEstado);
                     request.getRequestDispatcher("Vistas/iniciarSesion.jsp").forward(request, response);
                 } else {
                     nuevoEstado = EstadoSesion.LOGIN_CORRECTO;
-                    request.getSession().setAttribute("usuario_logueado", usrNick);// setea el usuario logueado
+                    request.getSession().setAttribute("usuario_logueado", usrCorreo);// setea el usuario logueado
                 }
 
+            }
+            objSesion.setAttribute("estado_sesion", nuevoEstado);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/index.html");
+            dispatcher.forward(request, response);
+        }
+
+        if (usrNick != null) {
+            String hash = a.sha1(password);
+            if (usrNick.getPassword().compareTo(hash) != 0) {
+                request.setAttribute("errorContrasenia", "Contraseña Incorrecta.");
+                nuevoEstado = EstadoSesion.CONTRASENIA_INCORRECTA;
+                objSesion.setAttribute("estado_sesion", nuevoEstado);
+                request.getRequestDispatcher("Vistas/iniciarSesion.jsp").forward(request, response);
             } else {
-                usrCorreo = this.port.obtenerDtUsuarioCorreo(login);
-                if (usrCorreo != null) {
-
-                    String hash = a.sha1(password);
-                    if (usrCorreo.getPassword().compareTo(hash) != 0) {
-                        request.setAttribute("errorContrasenia", "Contraseña Incorrecta.");
-                        nuevoEstado = EstadoSesion.CONTRASENIA_INCORRECTA;
-                        objSesion.setAttribute("estado_sesion", nuevoEstado);
-                        request.getRequestDispatcher("Vistas/iniciarSesion.jsp").forward(request, response);
-                    } else {
-                        nuevoEstado = EstadoSesion.LOGIN_CORRECTO;
-                        request.getSession().setAttribute("usuario_logueado", usrCorreo);// setea el usuario logueado
-                    }
-
-                } else {
-                    nuevoEstado = EstadoSesion.LOGIN_INCORRECTO;
-                    objSesion.setAttribute("estado_sesion", nuevoEstado);
-                    request.getRequestDispatcher("Vistas/iniciarSesion.jsp").forward(request, response);
-
-                }
+                nuevoEstado = EstadoSesion.LOGIN_CORRECTO;
+                request.getSession().setAttribute("usuario_logueado", usrNick);// setea el usuario logueado
             }
             objSesion.setAttribute("estado_sesion", nuevoEstado);
             RequestDispatcher dispatcher = request.getRequestDispatcher("/index.html");
