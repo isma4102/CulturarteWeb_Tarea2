@@ -27,11 +27,11 @@
 
             <!-- Sidebar -->
             <div id="sidebar-wrapper">
+                
                 <ul class="sidebar-nav">
-                    <li class="sidebar-brand">
-                    </li>
                     <div class="sidenav">
-                        <button class="dropdown-btn">Usuario
+                          
+                        <button  class="dropdown-btn"> <img style="margin-right: 4%;" src="Imagenes/Usuarios.png">Usuario
                             <i class="fa fa-caret-down"></i>
                             <img src="Imagenes/desplegar.png">
                         </button>
@@ -45,7 +45,7 @@
                             <a style="color: white" href="/CulturarteWeb/ServletConsultarUsuario">Consultar Perfiles</a>
                         </div>
 
-                        <button class="dropdown-btn">Propuestas
+                        <button class="dropdown-btn"> <img style="margin-right: 4%;" src="Imagenes/Propuestas.png">Propuestas
                             <i class="fa fa-caret-down"></i>
                             <img src="Imagenes/desplegar.png">
                         </button>
@@ -65,9 +65,9 @@
 
 
                         </div>                          
-                        <button class="dropdown-btn">Colaboraciones
+                        <button class="dropdown-btn"><img style="margin-right: 4%;" src="Imagenes/Colaboracion.png">Colaboraciones
                             <i class="fa fa-caret-down"></i>
-                            <img src="Imagenes/desplegar.png">
+                            <img style="margin-left: -5%;" src="Imagenes/desplegar.png">
                         </button>
                         <div class="dropdown-container">
                             <% if ((DtUsuario) request.getSession().getAttribute("usuario_logueado") != null) {
@@ -111,11 +111,7 @@
                 });
             }
         </script>
-        <div id="contenedor_carga" style="position: relative; display: none;">
-            <div style="position: absolute;bottom: -704px;right: -742px;">
-                <div class="alert alert-warning"><strong>¡Por Favor!</strong> Espere un momento...                 </div> 
-            </div>
-        </div>
+        
 
     </body>
 </html>
