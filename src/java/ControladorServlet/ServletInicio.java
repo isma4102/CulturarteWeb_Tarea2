@@ -36,7 +36,6 @@ public class ServletInicio extends HttpServlet {
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
      */
     @Override
     public void init() throws ServletException {
@@ -52,6 +51,7 @@ public class ServletInicio extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         DtListPropuestaWeb ListaProp = this.port.listarPropuestasWeb();
+        
         List<DtPropuestaWeb> listPublicada = ListaProp.getPublicadas();
         List<DtPropuestaWeb> listFinanciada = ListaProp.getNoFinanciadas();
         List<DtPropuestaWeb> listEnFinanciacion = ListaProp.getEnFinanciacion();

@@ -1,5 +1,5 @@
 <%@page import="java.util.Iterator"%>
-<%@page import="logica.Clases.DtUsuario"%>
+<%@page import="servicios.DtUsuario"%>
 <%@page import="java.util.List"%>
 
 
@@ -56,21 +56,21 @@
                 for (int i = 0; i < lista.size(); i++) {
                     out.print("<tr>");
                     out.print("<label for=\"" + i + "\"></label></td>");
-                    out.print("<td>" + lista.get(i).getNickName() + "</td>");
+                    out.print("<td>" + lista.get(i).getNickname() + "</td>");
                     out.print("<td>" + lista.get(i).getNombre() + "</td>");
                     out.print("<td>" + lista.get(i).getApellido() + "</td>");
 
             %>  
         <td align="center">   
             <form action="SeguirUsuario" method="post">
-                <input type="hidden" name="seguido" value="<%= lista.get(i).getNickName()%>" />
+                <input type="hidden" name="seguido" value="<%= lista.get(i).getNickname()%>" />
                 <input type="hidden" name="accion" value="seguir" />
                 <input type="button" class="btn btn-primary" value="Seguir" onclick="submit()"/>
             </form>
         </td>
         <td align="center"> 
             <form action="SeguirUsuario" method="post">
-                <input type="hidden" name="seguido" value="<%= lista.get(i).getNickName()%>" />
+                <input type="hidden" name="seguido" value="<%= lista.get(i).getNickname()%>" />
                 <input type="hidden" name="accion" value="dejarseguir" />
                 <input type="button" class="btn btn-primary" value="Dejar de Seguir" onclick="submit()"/>
             </form>   

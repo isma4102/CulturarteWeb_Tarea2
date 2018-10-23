@@ -1,6 +1,6 @@
 
-<%@page import="logica.Clases.DtinfoColaborador"%>
-<%@page import="logica.Clases.DtUsuario"%>
+<%@page import="servicios.DtinfoColaborador"%>
+<%@page import="servicios.DtUsuario"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -35,11 +35,11 @@
                 <%for (DtUsuario dtusu : usu) {%>
                 <form  action="${pageContext.request.contextPath}/ServletConsultarUsuario" method="POST">
                     <tr>
-                    <input style="border:none" class="form-control-plaintext" readonly="" name="nick" type="hidden" value="<%=dtusu.getNickName()%>"/>&nbsp;&nbsp;&nbsp;
-                    <td><%=dtusu.getNickName()%></td>
+                    <input style="border:none" class="form-control-plaintext" readonly="" name="nick" type="hidden" value="<%=dtusu.getNickname()%>"/>&nbsp;&nbsp;&nbsp;
+                    <td><%=dtusu.getNickname()%></td>
                     <td><%=dtusu.getNombre()%>&nbsp;&nbsp;&nbsp;</td>
                     <td><%=dtusu.getApellido()%>&nbsp;&nbsp;&nbsp;</td>
-                    <%if (dtusu.Esproponente() == false) { %>
+                    <%if (dtusu.isEsproponente() == false) { %>
                     <td>Colaborador&nbsp;&nbsp;&nbsp;<br/></td>
                         <%} else {%>
                     <td>Proponente&nbsp;&nbsp;&nbsp;<br/></td>

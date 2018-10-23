@@ -6,7 +6,6 @@ package ControladorServlet;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,10 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.InputStream;
 import javax.servlet.http.Part;
 import java.io.ByteArrayOutputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
@@ -50,10 +49,18 @@ public class ServletAltaUsuario extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    @Override
+    public void init() throws ServletException {
+        try {
+            URL url = new URL("http://127.0.0.1:8280/servicioAltaUsuario");
+            PublicadorAltaUsuarioService webService = new PublicadorAltaUsuarioService(url);
+            this.port = webService.getPublicadorAltaUsuarioPort();
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        URL url = new URL("http://127.0.0.1:8280/servicioAltaUsuario");
-        PublicadorAltaUsuarioService webService = new PublicadorAltaUsuarioService(url);
-        this.port = webService.getPublicadorAltaUsuarioPort();
 
         DtUsuario usuLogeado = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
 
@@ -92,7 +99,7 @@ public class ServletAltaUsuario extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            URL url = new URL("http://127.0.0.1:8280/servicioConsultarU");
+            URL url = new URL("http://127.0.0.1:8280/servicioConsultaU");
             PublicadorConsultarUsuarioService webService = new PublicadorConsultarUsuarioService(url);
             PublicadorConsultarUsuario portCU = webService.getPublicadorConsultarUsuarioPort();
 
@@ -123,23 +130,30 @@ public class ServletAltaUsuario extends HttpServlet {
             String hash = a.sha1(pass);
             DataImagen imagen = null;
             final Part partImagen = request.getPart("imagen");
+            byte[] bytes = null;
+            String nombreArchivo = null;
+            String extensionArchivo = null;
+            
             if (partImagen.getSize() != 0) {
                 InputStream data = partImagen.getInputStream();
                 final String fileName = Utils.getFileName(partImagen);
-                String nombreArchivo = nick;
-                String extensionArchivo = Utils.extensionArchivo(fileName);
+                nombreArchivo = nick;
+                extensionArchivo = Utils.extensionArchivo(fileName);
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 int reads = data.read();
                 while (reads != -1) {
                     baos.write(reads);
                     reads = data.read();
                 } // while
-                byte[] bytes = baos.toByteArray();
-                imagen = new DataImagen();
-                imagen.setStream(bytes);
-                imagen.setExtensionArchivo(extensionArchivo);
-                imagen.setNombreArchivo(nombreArchivo);
+                bytes = baos.toByteArray();
+
             }
+
+            imagen = new DataImagen();
+            imagen.setStream(bytes);
+            imagen.setExtensionArchivo(extensionArchivo);
+            imagen.setNombreArchivo(nombreArchivo);
+
             if (tipoP.equals("proponente")) {
                 ok = this.port.agregarUsuarioProponente(nick, nombre, apellido, correo, fechaxml, imagen, direccion, biografia, sitio, hash);
                 if (ok) {

@@ -40,7 +40,7 @@ public class SeguirUsuario extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        URL url = new URL("http://127.0.0.1:8280/servicioConsultarU");
+        URL url = new URL("http://127.0.0.1:8280/servicioConsultaU");
         PublicadorConsultarUsuarioService webService = new PublicadorConsultarUsuarioService(url);
         this.port = webService.getPublicadorConsultarUsuarioPort();
 

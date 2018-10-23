@@ -4,10 +4,10 @@
     Author     : Santiago.S
 --%>
 
-<%@page import="logica.Clases.DTListaPropuestasR"%>
-<%@page import="logica.Clases.DtinfoPropuesta"%>
-<%@page import="logica.Clases.DtinfoColaborador"%>
-<%@page import="logica.Clases.DtNickTitProp"%>
+<%@page import="servicios.DtListaPropuestasR"%>
+<%@page import="servicios.DtinfoPropuesta"%>
+<%@page import="servicios.DtinfoColaborador"%>
+<%@page import="servicios.DtNickTitProp"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -45,17 +45,17 @@
         <div style="overflow: auto">
             <tbody>
                 <%
-                    List<DTListaPropuestasR> lista = (List<DTListaPropuestasR>) request.getAttribute("lista_propuestas");
+                    List<DtListaPropuestasR> lista = (List<DtListaPropuestasR>) request.getAttribute("lista_propuestas");
                     for (int i = 0; i < lista.size(); i++) {
                         out.print("<tr>");
                         out.print("<form class=\"form-signin\" action=\"ServletRegistroColaboracion\" method=\"POST\"> ");
                         out.print("<td><button style=\"background:url('/CulturarteWeb/Imagenes/selecc.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px\"  type=\"input\" name=\"seleccionar\" class=\"btn btn-primary\"></button></td>");
-                        out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"TituloP\" value=\"" + lista.get(i).getTituloP() + "\" readonly=\"readonly\"/>");
-                        out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"Estado\" value=\"" + lista.get(i).getEstadoActual().toString() + "\" readonly=\"readonly\"/>");
-                        out.print("<td><p> " + lista.get(i).getTituloP() + "</p></td>");
+                        out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"TituloP\" value=\"" + lista.get(i).getTitulo() + "\" readonly=\"readonly\"/>");
+                        out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"Estado\" value=\"" + lista.get(i).getEstado().toString() + "\" readonly=\"readonly\"/>");
+                        out.print("<td><p> " + lista.get(i).getTitulo() + "</p></td>");
                         out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"Proponente\" value=\"" + lista.get(i).getProponente() + "\" readonly=\"readonly\"/>");
                         out.print("<td><p> " + lista.get(i).getProponente() + "</p></td>");
-                        out.print("<td><p> " + lista.get(i).getEstadoActual().toString() + "</p></td>");
+                        out.print("<td><p> " + lista.get(i).getEstado().toString() + "</p></td>");
                         out.print("<td><button style=\"background:url('/CulturarteWeb/Imagenes/ver.png');background-position:center;background-repeat:no-repeat;width:70px; height:25px\" type=\"input\" name=\"Ver\" class=\"btn btn-primary\"></button></td>");
                         out.print("</form>");
                         out.print("</tr>");
@@ -63,11 +63,11 @@
                 %>
             </tbody>
     </table>
-            <div style=" text-align: center;">
-    <a href="javascript:window.history.back();" class="btn btn-primary" > &laquo; Volver</a>
-    <a href="ServletInicio" class="btn btn-primary" > &laquo; Volver a inicio</a>
-            </div>
-                <jsp:include page="/Vistas/footer.jsp" /> 
+    <div style=" text-align: center;">
+        <a href="javascript:window.history.back();" class="btn btn-primary" > &laquo; Volver</a>
+        <a href="ServletInicio" class="btn btn-primary" > &laquo; Volver a inicio</a>
+    </div>
+    <jsp:include page="/Vistas/footer.jsp" /> 
 
 </body>
 </html>

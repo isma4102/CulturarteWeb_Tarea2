@@ -6,8 +6,11 @@ package ControladorServlet;
  * and open the template in the editor.
  */
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,6 +20,7 @@ import servicios.DtColaboraciones;
 import servicios.DtUsuario;
 import servicios.DtinfoColaborador;
 import servicios.DtinfoPropuesta;
+import servicios.PublicadorConsultarPropuestaService;
 import servicios.PublicadorConsultarUsuario;
 import servicios.PublicadorConsultarUsuarioService;
 
@@ -38,10 +42,19 @@ public class ServletConsultarUsuario extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    @Override
+    public void init() throws ServletException {
+        try {
+            URL url = new URL("http://127.0.0.1:8280/servicioConsultaU");
+            PublicadorConsultarUsuarioService webService = new PublicadorConsultarUsuarioService(url);
+            this.port = webService.getPublicadorConsultarUsuarioPort();
+
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ServletCancelarPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        URL url = new URL("http://127.0.0.1:8280/servicioConsultarU");
-        PublicadorConsultarUsuarioService webService = new PublicadorConsultarUsuarioService(url);
-        this.port = webService.getPublicadorConsultarUsuarioPort();
 
         response.setContentType("text/html;charset=UTF-8");
         if (port.listarUsuarios().getLista().isEmpty()) {

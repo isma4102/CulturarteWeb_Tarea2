@@ -8,6 +8,7 @@ package ControladorServlet;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -15,6 +16,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -28,6 +31,7 @@ import servicios.DataImagen;
 import servicios.DtUsuario;
 import servicios.PublicadorAltaPropuesta;
 import servicios.PublicadorAltaPropuestaService;
+import servicios.PublicadorConsultarUsuarioService;
 import servicios.TipoRetorno;
 
 /**
@@ -52,11 +56,18 @@ public class ServletAltaPropuesta extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        URL url = new URL("http://127.0.0.1:8280/servicioAltaP");
-        PublicadorAltaPropuestaService webService = new PublicadorAltaPropuestaService(url);
-        this.port = webService.getPublicadorAltaPropuestaPort();
+    @Override
+    public void init() throws ServletException {
+        try {
+            URL url = new URL("http://127.0.0.1:8280/servicioAltaP");
+            PublicadorAltaPropuestaService webService = new PublicadorAltaPropuestaService(url);
+            this.port = webService.getPublicadorAltaPropuestaPort();
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         DtUsuario usuLogeado = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
         if (usuLogeado == null) {
             request.getRequestDispatcher("iniciar-sesion").forward(request, response);
@@ -135,7 +146,7 @@ public class ServletAltaPropuesta extends HttpServlet {
             DtUsuario dtLogeado = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
 
             boolean encontrado = port.seleccionarUC(dtLogeado.getNickname(), cat);
-            
+
             GregorianCalendar cal = new GregorianCalendar();
             cal.setTime(ParseFecha(fechaR));
             XMLGregorianCalendar fecha = DatatypeFactory.newInstance().newXMLGregorianCalendar(cal);

@@ -7,7 +7,10 @@ package ControladorServlet;
  */
 import clases.EstadoSesion;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,17 +40,24 @@ public class Login extends HttpServlet {
      * @param response servlet response
      * @return
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
      */
+    @Override
+    public void init() throws ServletException {
+        try {
+            URL url = new URL("http://127.0.0.1:8280/servicioConsultaU");
+            PublicadorConsultarUsuarioService webService = new PublicadorConsultarUsuarioService(url);
+            this.port = webService.getPublicadorConsultarUsuarioPort();
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     public static DtUsuario getUsuarioSesion(HttpServletRequest request) {
         return (DtUsuario) request.getSession().getAttribute("usuario_logueado");
 
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        URL url = new URL("http://127.0.0.1:8280/servicioConsultarU");
-        PublicadorConsultarUsuarioService webService = new PublicadorConsultarUsuarioService(url);
-        this.port = webService.getPublicadorConsultarUsuarioPort();
 
         DtUsuario usuLogeado = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
         if (usuLogeado == null) {
@@ -87,7 +97,7 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession objSesion = request.getSession();
-        
+
         String login = request.getParameter("login");
         String password = request.getParameter("pass");
         EstadoSesion nuevoEstado = null;

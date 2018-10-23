@@ -4,7 +4,7 @@
     Author     : Santiago.S
 --%>
 
-<%@page import="logica.Clases.DtNickTitProp"%>
+<%@page import="servicios.DtNickTitProp"%>
 <%@page import="java.util.List"%>
 
 
@@ -61,14 +61,14 @@
                 for (int i = 0; i < lista.size(); i++) {
                     out.print("<tr>");
                     out.print("<label for=\"" + i + "\"></label></td>");
-                    out.print("<td>" + lista.get(i).getTituloP() + "</td>");
+                    out.print("<td>" + lista.get(i).getTitulo() + "</td>");
                     out.print("<td>" + lista.get(i).getProponente() + "</td>");
             %>
 
 
         <form action="ServletComentarPropuesta" method="post">
             <td align="center">   
-                <input type="hidden" name="TituloP" value="<%= lista.get(i).getTituloP()%>">
+                <input type="hidden" name="TituloP" value="<%= lista.get(i).getTitulo()%>">
                 <textarea name="texto" placeholder="Escriba un Comentario..."  required style="background-color: white; resize: none;width: 300px; height: 100px;" ></textarea>
             </td>
             <td><input type="button" class="btn btn-primary" value="Comentar" onclick="submit()"/></td>

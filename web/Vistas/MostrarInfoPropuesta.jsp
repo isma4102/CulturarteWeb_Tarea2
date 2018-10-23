@@ -7,9 +7,9 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="javax.swing.ImageIcon"%>
-<%@page import="logica.Clases.DtinfoColaborador"%>
+<%@page import="servicios.DtinfoColaborador"%>
 <%@page import="java.util.List"%>
-<%@page import="logica.Clases.DtinfoPropuesta"%>
+<%@page import="servicios.DtinfoPropuesta"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -88,7 +88,7 @@
                                     <div class="panel-body" style="padding: 1%">
                                         <%         Date now = new Date();
                                             SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy");
-                                            out.print(sf.format(propuestaSelec.getFechaReal().getTime()));
+                                            out.print(sf.format(propuestaSelec.getFechaReal().toGregorianCalendar().getTime()));
                                         %>
                                     </div>
                                 </div>

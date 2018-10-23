@@ -6,6 +6,7 @@
 package ControladorServlet;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import java.util.logging.Level;
@@ -21,6 +22,7 @@ import servicios.DtNickTitProp;
 import servicios.PublicadorConsultarPropuesta;
 import servicios.PublicadorConsultarPropuestaService;
 import servicios.DtUsuario;
+
 /**
  *
  * @author Martin
@@ -39,10 +41,19 @@ public class ServletConsultarPropuesta extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    @Override
+    public void init() throws ServletException {
+        try {
+            URL url = new URL("http://127.0.0.1:8280/servicioConsultaP");
+
+            PublicadorConsultarPropuestaService webService = new PublicadorConsultarPropuestaService(url);
+            this.port = webService.getPublicadorConsultarPropuestaPort();
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ServletCancelarPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        URL url = new URL("http://127.0.0.1:8280/servicioECC");
-        PublicadorConsultarPropuestaService webService = new PublicadorConsultarPropuestaService(url);
-        this.port = webService.getPublicadorConsultarPropuestaPort();
 
         List<DtNickTitProp> listP = this.port.listarPropuestas().getListPropuestas();
 
@@ -95,8 +106,8 @@ public class ServletConsultarPropuesta extends HttpServlet {
         } catch (Exception ex) {
             Logger.getLogger(ServletConsultarPropuesta.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         request.getRequestDispatcher("/Vistas/ConsultarPropuesta2.jsp").forward(request, response);
+
     }
 
     /**

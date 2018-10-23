@@ -50,7 +50,7 @@ public class ServletMarcarFavorita extends HttpServlet {
             PublicadorConsultarPropuestaService webServiceP = new PublicadorConsultarPropuestaService(urlP);
             this.portP = webServiceP.getPublicadorConsultarPropuestaPort();
 
-            URL url = new URL("http://127.0.0.1:8280/servicioConsultarU");
+            URL url = new URL("http://127.0.0.1:8280/servicioConsultaU");
             PublicadorConsultarUsuarioService webService = new PublicadorConsultarUsuarioService(url);
             this.portU = webService.getPublicadorConsultarUsuarioPort();
 

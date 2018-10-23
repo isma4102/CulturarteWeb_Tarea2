@@ -4,11 +4,11 @@
     Author     : Lucas
 --%>
 
+<%@page import="servicios.DtConsultaPropuesta"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.logging.SimpleFormatter"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
-<%@page import="logica.Clases.DtinfoPropuesta"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -22,7 +22,7 @@
 
 
 <%@page import="ControladorServlet.servletBuscador"%>
-<%  List<DtinfoPropuesta> lista = new ArrayList<>();
+<%  List<DtConsultaPropuesta> lista = new ArrayList<>();
     lista = (ArrayList) request.getAttribute("resultado");
     if (lista.isEmpty()) {%>
 <script>
@@ -47,7 +47,7 @@
         <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Ordenar<span class="caret"></span></button>
         <ul class="dropdown-menu">
             <form action="servletBuscador" method="GET">
-                <input style="display: none" type="text" name="busqueda" value="<%= busqueda %>"/>
+                <input style="display: none" type="text" name="busqueda" value="<%= busqueda%>"/>
                 <input class="btn" type="submit" name="filtro" value="Estado"></input><br>
                 <input class="btn" type="submit" name="filtro" value="Alfabeticamente"></input><br>
                 <input class="btn" type="submit" name="filtro" value="Fecha"></input>
@@ -58,18 +58,17 @@
         <h1>Resultado de la busqueda</h1>
         <h3>Se encontraron <%=lista.size()%> resultados</h3>
         <%for (int i = 0; i < lista.size(); i++) {
-                DtinfoPropuesta p = lista.get(i);
+                DtConsultaPropuesta p = lista.get(i);
         %>
         <div style="background-color: #444; border-color: #444" id="elemento<%=i%>" class="panel panel-primary">
             <div style="height: 30%;width: 100%" class="btn btn-info panel-heading" data-toggle="collapse" data-target="#descripcion<%=i%>" >
                 <div style="float: left;width: 30% ; height: 30%" class="img-thumbnail">
                     <% out.print("<img style=\"width: 100%; height:100%\" src=\"/CulturarteWeb/ServletImagenes?TituloP=" + p.getTitulo() + "\" >");%><br>
-                    <div class="Estado" style="float: left"><h5 style="color: black;font-weight: bold" ><%=p.getEstado()%></h5></div>
+                    <div class="Estado" style="float: left"><h5 style="color: black;font-weight: bold" ><%=p.getEstadoActual()%></h5></div>
                 </div>
                 <div><h3 class="Titulo"><%=p.getTitulo()%></h3></div><br><br>
                 <div style="font-weight: bold;float: right" class="Lugar"><%=p.getLugar()%></div><br>
-                <% SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");%>
-                <div style="font-weight: bold;float: right" class="Lugar"><%=formato.format(p.getFechaReal().getTime())%></div>
+                <div style="font-weight: bold;float: right" class="Lugar"><%=p.getFechaR()%></div>
             </div>
             <div id="descripcion<%=i%>" class="collapse panel-footer Descripcion"><h4 style="font-weight: bold">Descripcion</h4><%=p.getDescripcion()%></div>
         </div>

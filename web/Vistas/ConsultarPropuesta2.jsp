@@ -3,17 +3,17 @@
     Created on : 30/09/2018, 04:19:30 PM
     Author     : Martin
 --%>
-<%@page import="logica.Clases.TipoE"%>
-<%@page import="logica.Clases.DtUsuario"%>
-<%@page import="logica.Clases.DtConsultaPropuesta"%>
-<%@page import="logica.Clases.DtConsultaPropuesta2"%>
+<%@page import="servicios.TipoE"%>
+<%@page import="servicios.DtUsuario"%>
+<%@page import="servicios.DtConsultaPropuesta"%>
+<%@page import="servicios.DtConsultaPropuesta2"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="javax.swing.ImageIcon"%>
-<%@page import="logica.Clases.DtinfoColaborador"%>
+<%@page import="servicios.DtinfoColaborador"%>
 <%@page import="java.util.List"%>
-<%@page import="logica.Clases.DtinfoPropuesta"%>
+<%@page import="servicios.DtinfoPropuesta"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -83,9 +83,9 @@
                                 <h3 class="panel-title">Estado Actual</h3>
                             </div>
                             <div class="panel-body" style="padding: 1%">
-                                <%if (propuestaSelec.getEstadoActual()== TipoE.enFinanciacion.toString())
+                                <%if (propuestaSelec.getEstadoActual()== TipoE.EN_FINANCIACION.value().toString())
                                         out.print("En Financiacion");
-                                    else if (propuestaSelec.getEstadoActual()== TipoE.noFinanciada.toString())
+                                    else if (propuestaSelec.getEstadoActual()== TipoE.NO_FINANCIADA.value().toString())
                                         out.print("No Financiada");
                                     else
                                         out.print(propuestaSelec.getEstadoActual());
@@ -134,7 +134,7 @@
                                 <h3 class="panel-title">Tipo de retorno</h3>
                             </div>
                             <div class="panel-body" style="padding: 1%">
-                                <%out.print(propuestaSelec.getTipoRetorno());%>
+                                <%out.print(propuestaSelec.getTipoRet());%>
                             </div>
                         </div>
 
@@ -176,26 +176,26 @@
                         <% } %>         
                         <div class="modal-footer">
                             <%if (request.getSession().getAttribute("usuario_logueado") != null) {
-                                    if (((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickName().compareTo(propuestaSelec.getNickproponente()) == 0) {
-                                        if (propuestaSelec.getExtendible()) {
+                                    if (((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickname().compareTo(propuestaSelec.getNickproponente()) == 0) {
+                                        if (propuestaSelec.isEsExtendible()) {
                                             out.print("<form class=\"form-signin\" action=\"ServletExtenderFinanciacion\" method=\"POST\">");
                                             out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"TituloP\" value=\"" + propuestaSelec.getTitulo() + "\" readonly=\"readonly\"/>");
                                             out.print("<button type=\"input\" name=\"seleccionar\" class=\"btn btn-primary\">Extender Financiación</button>");
                                             out.print("</form>");
-                                        } else if (propuestaSelec.getCancelable()) {
+                                        } else if (propuestaSelec.isEsCancelable()) {
                                             out.print("<form class=\"form-signin\" action=\"ServletCancelarPropuesta\" method=\"POST\">");
                                             out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"TituloP\" value=\"" + propuestaSelec.getTitulo() + "\" readonly=\"readonly\"/>");
                                             out.print("<button type=\"input\" name=\"seleccionar\" class=\"btn btn-primary\">Cancelar Propuesta</button>");
                                             out.print("</form>");
                                         }
                                     } else {
-                                        if (propuestaSelec.getComentable()) {
+                                        if (propuestaSelec.isEsComentable()) {
                                             out.print("<form class=\"form-signin\" action=\"ServletComentarPropuesta\" method=\"POST\">");
                                             out.print("<textarea name=\"texto\" placeholder=\"Escriba un Comentario...\"  required style=\"background-color: white; resize: none;width: 300px; height: 100px;\" ></textarea>");
                                             out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"TituloP\" value=\"" + propuestaSelec.getTitulo() + "\" readonly=\"readonly\"/>");
                                             out.print("<button style=\"margin-top: -17%;margin-left: 12%;\" type=\"input\" name=\"seleccionar\" class=\"btn btn-primary\">Comentar propuesta</button>");
                                             out.print("</form>");
-                                        } else if (propuestaSelec.getColaborable()) {
+                                        } else if (propuestaSelec.isEsColaborable()) {
                                             out.print("<form class=\"form-signin\" action=\"ServletRegistroColaboracion\" method=\"POST\">");
                                             out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"TituloP\" value=\"" + propuestaSelec.getTitulo() + "\" readonly=\"readonly\"/>");
                                             out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"Estado\" value=\"" + propuestaSelec.getEstadoActual() + "\" readonly=\"readonly\"/>");
