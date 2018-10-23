@@ -116,6 +116,7 @@ public class ServletAltaPropuesta extends HttpServlet {
         String lugar = request.getParameter("LugarP");
         String desc = request.getParameter("Descripcion");
         String cat = request.getParameter("Categoria");
+        String tipoR = request.getParameter("TipoR");
 
         float montoT = Float.parseFloat(request.getParameter("MontoT"));
         float montoE = Float.parseFloat(request.getParameter("MontoE"));
@@ -147,13 +148,9 @@ public class ServletAltaPropuesta extends HttpServlet {
 
             boolean encontrado = port.seleccionarUC(dtLogeado.getNickname(), cat);
 
-            GregorianCalendar cal = new GregorianCalendar();
-            cal.setTime(ParseFecha(fechaR));
-            XMLGregorianCalendar fecha = DatatypeFactory.newInstance().newXMLGregorianCalendar(cal);
-
             if (!encontrado) {
                 //XMLGregorianCalendar fechaXML =
-                boolean ok = port.crearPropuesta(titulo, desc, lugar, imagen, fecha, montoE, montoT, TipoRetorno.fromValue(cat));
+                boolean ok = port.crearPropuesta(titulo, desc, lugar, fechaR, montoE, montoT, tipoR);
                 MENSAJE = "Se registro exitosamente";
                 request.setAttribute("mensaje", MENSAJE);
                 request.getRequestDispatcher("/Vistas/FuncionamientoCorrecto.jsp").forward(request, response);
