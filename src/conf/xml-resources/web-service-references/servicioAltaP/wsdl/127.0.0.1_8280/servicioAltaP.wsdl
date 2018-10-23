@@ -12,11 +12,10 @@
 <part name="tituloP" type="xsd:string"></part>
 <part name="descripcion" type="xsd:string"></part>
 <part name="lugar" type="xsd:string"></part>
-<part name="imagen" type="tns:dataImagen"></part>
-<part name="fecha" type="xsd:dateTime"></part>
+<part name="fecha" type="xsd:string"></part>
 <part name="montoE" type="xsd:float"></part>
 <part name="montoTot" type="xsd:float"></part>
-<part name="retorno" type="tns:tipoRetorno"></part>
+<part name="retorno" type="xsd:string"></part>
 </message>
 <message name="CrearPropuestaResponse">
 <part name="return" type="xsd:boolean"></part>
@@ -40,7 +39,7 @@
 <input wsam:Action="http://Servicios/PublicadorAltaPropuesta/publicarRequest" message="tns:publicar"></input>
 <output wsam:Action="http://Servicios/PublicadorAltaPropuesta/publicarResponse" message="tns:publicarResponse"></output>
 </operation>
-<operation name="CrearPropuesta" parameterOrder="tituloP descripcion lugar imagen fecha montoE montoTot retorno">
+<operation name="CrearPropuesta" parameterOrder="tituloP descripcion lugar fecha montoE montoTot retorno">
 <input wsam:Action="http://Servicios/PublicadorAltaPropuesta/CrearPropuestaRequest" message="tns:CrearPropuesta"></input>
 <output wsam:Action="http://Servicios/PublicadorAltaPropuesta/CrearPropuestaResponse" message="tns:CrearPropuestaResponse"></output>
 <fault message="tns:Exception" name="Exception" wsam:Action="http://Servicios/PublicadorAltaPropuesta/CrearPropuesta/Fault/Exception"></fault>

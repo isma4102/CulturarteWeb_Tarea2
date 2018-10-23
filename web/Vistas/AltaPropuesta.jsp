@@ -60,6 +60,16 @@
                 </div>
                 <br>
                 <div>
+                    <label for="Tipo retorno">Tipos de retorno:</label>
+                    <select class="form-control" id="TipoR" name="TipoR">
+                        <option value="Entradas">Entradas</option>
+                        <option value="Ganancias">Ganancias</option>
+                        <option value="Ambas">Ambas</option>
+                    </select>
+                    <span id="error_MontoE" class="error">Debes seleccionar un tipo de retorno</span>
+                </div>
+                <br>
+                <div>
                     <label for="fechaR">Fecha de realizacion:</label>
                     <br>
                     <input class="form-control" id="FechaR" name="FechaR" type="date" required/>
@@ -78,19 +88,19 @@
             </form>
             <script type="text/javascript" src="/CulturarteWeb/AltaPropuesta.js"></script>
             <script>
-                    var today = new Date();
-                    var dd = today.getDate() + 1;
-                    var mm = today.getMonth() + 1;
-                    var yyyy = today.getFullYear();
-                    if (dd < 10) {
-                        dd = '0' + dd
-                    }
-                    if (mm < 10) {
-                        mm = '0' + mm
-                    }
+                var today = new Date();
+                var dd = today.getDate() + 1;
+                var mm = today.getMonth() + 1;
+                var yyyy = today.getFullYear();
+                if (dd < 10) {
+                    dd = '0' + dd
+                }
+                if (mm < 10) {
+                    mm = '0' + mm
+                }
 
-                    today = yyyy + '-' + mm + '-' + dd;
-                    document.getElementById("FechaR").setAttribute("min", today);
+                today = yyyy + '-' + mm + '-' + dd;
+                document.getElementById("FechaR").setAttribute("min", today);
             </script>
         </div>
     </body>
