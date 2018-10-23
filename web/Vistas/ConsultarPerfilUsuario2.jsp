@@ -185,7 +185,7 @@
                                             <h3 class="panel-title">Sitio</h3>
                                         </div>
                                         <div class="panel-body" style="padding: 1%">
-                                            <%out.println(dtu.getSitio());%>
+                                            <%out.println(dtu.getSitioweb());%>
                                         </div>
                                     </div>
                                 </div>
