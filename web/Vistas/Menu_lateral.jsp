@@ -78,13 +78,7 @@
                                 }
                             %>
                         </div>
-                        <button class="dropdown-btn">Otros
-                            <i class="fa fa-caret-down"></i>
-                            <img src="Imagenes/desplegar.png">
-                        </button>
-                        <div class="dropdown-container">
-                            <a style="color: white;"  onclick="getConfirmation('/CulturarteWeb/SeguirUsuario');" >Cargar datos de prueba</a>
-                        </div>
+                        
                     </div>
                 </ul>
             </div>

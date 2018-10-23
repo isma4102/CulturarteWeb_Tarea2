@@ -97,11 +97,15 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession objSesion = request.getSession();
-
         String login = request.getParameter("login");
         String password = request.getParameter("pass");
         EstadoSesion nuevoEstado = null;
         codificador a = new codificador();
+        DtUsuario usrCorreo = null;
+        DtUsuario usrNick = null;
+        try {
+            usrNick = this.port.obtenerDtUsuario(login);
+        } catch (Exception error) {
 
         DtUsuario usrNick = this.port.obtenerDtUsuario(login);
 

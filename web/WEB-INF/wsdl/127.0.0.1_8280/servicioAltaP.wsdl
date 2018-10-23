@@ -8,6 +8,10 @@
 <part name="arg0" type="xsd:string"></part>
 </message>
 <message name="publicarResponse"></message>
+<message name="ListarCategorias"></message>
+<message name="ListarCategoriasResponse">
+<part name="return" type="tns:dtCategorias"></part>
+</message>
 <message name="CrearPropuesta">
 <part name="tituloP" type="xsd:string"></part>
 <part name="descripcion" type="xsd:string"></part>
@@ -22,10 +26,6 @@
 </message>
 <message name="Exception">
 <part name="fault" element="tns:Exception"></part>
-</message>
-<message name="ListarCategorias"></message>
-<message name="ListarCategoriasResponse">
-<part name="return" type="tns:dtCategorias"></part>
 </message>
 <message name="SeleccionarUC">
 <part name="nick" type="xsd:string"></part>
@@ -44,10 +44,6 @@
 <output wsam:Action="http://Servicios/PublicadorAltaPropuesta/CrearPropuestaResponse" message="tns:CrearPropuestaResponse"></output>
 <fault message="tns:Exception" name="Exception" wsam:Action="http://Servicios/PublicadorAltaPropuesta/CrearPropuesta/Fault/Exception"></fault>
 </operation>
-<operation name="ListarCategorias">
-<input wsam:Action="http://Servicios/PublicadorAltaPropuesta/ListarCategoriasRequest" message="tns:ListarCategorias"></input>
-<output wsam:Action="http://Servicios/PublicadorAltaPropuesta/ListarCategoriasResponse" message="tns:ListarCategoriasResponse"></output>
-</operation>
 <operation name="SeleccionarUC" parameterOrder="nick categoria">
 <input wsam:Action="http://Servicios/PublicadorAltaPropuesta/SeleccionarUCRequest" message="tns:SeleccionarUC"></input>
 <output wsam:Action="http://Servicios/PublicadorAltaPropuesta/SeleccionarUCResponse" message="tns:SeleccionarUCResponse"></output>
@@ -57,6 +53,15 @@
 <binding name="PublicadorAltaPropuestaPortBinding" type="tns:PublicadorAltaPropuesta">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc"></soap:binding>
 <operation name="publicar">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
+</operation>
+<operation name="ListarCategorias">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
@@ -76,15 +81,6 @@
 <fault name="Exception">
 <soap:fault name="Exception" use="literal"></soap:fault>
 </fault>
-</operation>
-<operation name="ListarCategorias">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</output>
 </operation>
 <operation name="SeleccionarUC">
 <soap:operation soapAction=""></soap:operation>

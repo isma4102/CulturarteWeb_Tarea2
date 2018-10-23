@@ -4,9 +4,6 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="css/bootstrap.css" rel="stylesheet">
-        <script src="js/bootstrap.js"></script>
-        <script type="text/javascript" src="/CulturarteWeb/js/jquery.js"></script>
         <link href="css/RegistrarColaboracion.css" rel="stylesheet">
         <link href="css/Tabs_diseño.css" rel="stylesheet">
     </head>
