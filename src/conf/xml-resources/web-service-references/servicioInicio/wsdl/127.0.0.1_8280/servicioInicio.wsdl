@@ -8,6 +8,10 @@
 <part name="arg0" type="xsd:string"></part>
 </message>
 <message name="publicarInicioResponse"></message>
+<message name="ListarPropuestasWeb"></message>
+<message name="ListarPropuestasWebResponse">
+<part name="return" type="tns:dtListPropuestaWeb"></part>
+</message>
 <message name="getDtPropuestas"></message>
 <message name="getDtPropuestasResponse">
 <part name="return" type="tns:dtListConsultaPropuesta"></part>
@@ -15,28 +19,33 @@
 <message name="Exception">
 <part name="fault" element="tns:Exception"></part>
 </message>
-<message name="ListarPropuestasWeb"></message>
-<message name="ListarPropuestasWebResponse">
-<part name="return" type="tns:dtListPropuestaWeb"></part>
-</message>
 <portType name="PublicadorInicio">
 <operation name="publicarInicio">
 <input wsam:Action="http://Servicios/PublicadorInicio/publicarInicioRequest" message="tns:publicarInicio"></input>
 <output wsam:Action="http://Servicios/PublicadorInicio/publicarInicioResponse" message="tns:publicarInicioResponse"></output>
+</operation>
+<operation name="ListarPropuestasWeb">
+<input wsam:Action="http://Servicios/PublicadorInicio/ListarPropuestasWebRequest" message="tns:ListarPropuestasWeb"></input>
+<output wsam:Action="http://Servicios/PublicadorInicio/ListarPropuestasWebResponse" message="tns:ListarPropuestasWebResponse"></output>
 </operation>
 <operation name="getDtPropuestas">
 <input wsam:Action="http://Servicios/PublicadorInicio/getDtPropuestasRequest" message="tns:getDtPropuestas"></input>
 <output wsam:Action="http://Servicios/PublicadorInicio/getDtPropuestasResponse" message="tns:getDtPropuestasResponse"></output>
 <fault message="tns:Exception" name="Exception" wsam:Action="http://Servicios/PublicadorInicio/getDtPropuestas/Fault/Exception"></fault>
 </operation>
-<operation name="ListarPropuestasWeb">
-<input wsam:Action="http://Servicios/PublicadorInicio/ListarPropuestasWebRequest" message="tns:ListarPropuestasWeb"></input>
-<output wsam:Action="http://Servicios/PublicadorInicio/ListarPropuestasWebResponse" message="tns:ListarPropuestasWebResponse"></output>
-</operation>
 </portType>
 <binding name="PublicadorInicioPortBinding" type="tns:PublicadorInicio">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc"></soap:binding>
 <operation name="publicarInicio">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
+</operation>
+<operation name="ListarPropuestasWeb">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
@@ -56,15 +65,6 @@
 <fault name="Exception">
 <soap:fault name="Exception" use="literal"></soap:fault>
 </fault>
-</operation>
-<operation name="ListarPropuestasWeb">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</output>
 </operation>
 </binding>
 <service name="PublicadorInicioService">
