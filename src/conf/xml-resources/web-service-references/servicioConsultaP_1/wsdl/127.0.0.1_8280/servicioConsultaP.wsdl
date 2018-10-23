@@ -4,6 +4,10 @@
 <xsd:import namespace="http://Servicios/" schemaLocation="http://127.0.0.1:8280/servicioConsultaP?xsd=1"></xsd:import>
 </xsd:schema>
 </types>
+<message name="publicarConsultaPropuesta">
+<part name="arg0" type="xsd:string"></part>
+</message>
+<message name="publicarConsultaPropuestaResponse"></message>
 <message name="SeleccionarPropuesta">
 <part name="titulo" type="xsd:string"></part>
 <part name="nickProp" type="xsd:string"></part>
@@ -14,15 +18,9 @@
 <message name="Exception">
 <part name="fault" element="tns:Exception"></part>
 </message>
-<message name="publicarConsultaPropuesta">
-<part name="arg0" type="xsd:string"></part>
-</message>
-<message name="publicarConsultaPropuestaResponse"></message>
-<message name="ListarPropuestasCategoria">
-<part name="nombre" type="xsd:string"></part>
-</message>
-<message name="ListarPropuestasCategoriaResponse">
-<part name="return" type="tns:dtListInfoPropuesta"></part>
+<message name="getDtPropuestas"></message>
+<message name="getDtPropuestasResponse">
+<part name="return" type="tns:dtListConsultaPropuesta"></part>
 </message>
 <message name="ExtenderFinanciacion">
 <part name="titulo" type="xsd:string"></part>
@@ -43,25 +41,21 @@
 <message name="ListarPropuestasCancelarResponse">
 <part name="return" type="tns:dtListNickTitProp"></part>
 </message>
+<message name="ListarPropuestasCategoria">
+<part name="nombre" type="xsd:string"></part>
+</message>
+<message name="ListarPropuestasCategoriaResponse">
+<part name="return" type="tns:dtListInfoPropuesta"></part>
+</message>
 <message name="ComentarPropuesta">
 <part name="titulo" type="xsd:string"></part>
 <part name="nick" type="xsd:string"></part>
 <part name="texto" type="xsd:string"></part>
 </message>
 <message name="ComentarPropuestaResponse"></message>
-<message name="getDtPropuestas"></message>
-<message name="getDtPropuestasResponse">
-<part name="return" type="tns:dtListConsultaPropuesta"></part>
-</message>
-<message name="ListarPropuestas"></message>
-<message name="ListarPropuestasResponse">
+<message name="ListarPropuestasComentar"></message>
+<message name="ListarPropuestasComentarResponse">
 <part name="return" type="tns:dtListNickTitProp"></part>
-</message>
-<message name="ListarColaboradoresProp">
-<part name="titulo" type="xsd:string"></part>
-</message>
-<message name="ListarColaboradoresPropResponse">
-<part name="return" type="tns:dtListConsultaPropuesta2"></part>
 </message>
 <message name="ListarPropuestasNoI"></message>
 <message name="ListarPropuestasNoIResponse">
@@ -73,23 +67,30 @@
 <message name="ListarPropuestasX_deProponenteXResponse">
 <part name="return" type="tns:dtListNickTitProp"></part>
 </message>
-<message name="ListarPropuestasComentar"></message>
-<message name="ListarPropuestasComentarResponse">
+<message name="ListarColaboradoresProp">
+<part name="titulo" type="xsd:string"></part>
+</message>
+<message name="ListarColaboradoresPropResponse">
+<part name="return" type="tns:dtListConsultaPropuesta2"></part>
+</message>
+<message name="ListarPropuestas"></message>
+<message name="ListarPropuestasResponse">
 <part name="return" type="tns:dtListNickTitProp"></part>
 </message>
 <portType name="PublicadorConsultarPropuesta">
+<operation name="publicarConsultaPropuesta">
+<input wsam:Action="http://Servicios/PublicadorConsultarPropuesta/publicarConsultaPropuestaRequest" message="tns:publicarConsultaPropuesta"></input>
+<output wsam:Action="http://Servicios/PublicadorConsultarPropuesta/publicarConsultaPropuestaResponse" message="tns:publicarConsultaPropuestaResponse"></output>
+</operation>
 <operation name="SeleccionarPropuesta" parameterOrder="titulo nickProp">
 <input wsam:Action="http://Servicios/PublicadorConsultarPropuesta/SeleccionarPropuestaRequest" message="tns:SeleccionarPropuesta"></input>
 <output wsam:Action="http://Servicios/PublicadorConsultarPropuesta/SeleccionarPropuestaResponse" message="tns:SeleccionarPropuestaResponse"></output>
 <fault message="tns:Exception" name="Exception" wsam:Action="http://Servicios/PublicadorConsultarPropuesta/SeleccionarPropuesta/Fault/Exception"></fault>
 </operation>
-<operation name="publicarConsultaPropuesta">
-<input wsam:Action="http://Servicios/PublicadorConsultarPropuesta/publicarConsultaPropuestaRequest" message="tns:publicarConsultaPropuesta"></input>
-<output wsam:Action="http://Servicios/PublicadorConsultarPropuesta/publicarConsultaPropuestaResponse" message="tns:publicarConsultaPropuestaResponse"></output>
-</operation>
-<operation name="ListarPropuestasCategoria">
-<input wsam:Action="http://Servicios/PublicadorConsultarPropuesta/ListarPropuestasCategoriaRequest" message="tns:ListarPropuestasCategoria"></input>
-<output wsam:Action="http://Servicios/PublicadorConsultarPropuesta/ListarPropuestasCategoriaResponse" message="tns:ListarPropuestasCategoriaResponse"></output>
+<operation name="getDtPropuestas">
+<input wsam:Action="http://Servicios/PublicadorConsultarPropuesta/getDtPropuestasRequest" message="tns:getDtPropuestas"></input>
+<output wsam:Action="http://Servicios/PublicadorConsultarPropuesta/getDtPropuestasResponse" message="tns:getDtPropuestasResponse"></output>
+<fault message="tns:Exception" name="Exception" wsam:Action="http://Servicios/PublicadorConsultarPropuesta/getDtPropuestas/Fault/Exception"></fault>
 </operation>
 <operation name="ExtenderFinanciacion">
 <input wsam:Action="http://Servicios/PublicadorConsultarPropuesta/ExtenderFinanciacionRequest" message="tns:ExtenderFinanciacion"></input>
@@ -104,24 +105,18 @@
 <input wsam:Action="http://Servicios/PublicadorConsultarPropuesta/ListarPropuestasCancelarRequest" message="tns:ListarPropuestasCancelar"></input>
 <output wsam:Action="http://Servicios/PublicadorConsultarPropuesta/ListarPropuestasCancelarResponse" message="tns:ListarPropuestasCancelarResponse"></output>
 </operation>
+<operation name="ListarPropuestasCategoria">
+<input wsam:Action="http://Servicios/PublicadorConsultarPropuesta/ListarPropuestasCategoriaRequest" message="tns:ListarPropuestasCategoria"></input>
+<output wsam:Action="http://Servicios/PublicadorConsultarPropuesta/ListarPropuestasCategoriaResponse" message="tns:ListarPropuestasCategoriaResponse"></output>
+</operation>
 <operation name="ComentarPropuesta" parameterOrder="titulo nick texto">
 <input wsam:Action="http://Servicios/PublicadorConsultarPropuesta/ComentarPropuestaRequest" message="tns:ComentarPropuesta"></input>
 <output wsam:Action="http://Servicios/PublicadorConsultarPropuesta/ComentarPropuestaResponse" message="tns:ComentarPropuestaResponse"></output>
 <fault message="tns:Exception" name="Exception" wsam:Action="http://Servicios/PublicadorConsultarPropuesta/ComentarPropuesta/Fault/Exception"></fault>
 </operation>
-<operation name="getDtPropuestas">
-<input wsam:Action="http://Servicios/PublicadorConsultarPropuesta/getDtPropuestasRequest" message="tns:getDtPropuestas"></input>
-<output wsam:Action="http://Servicios/PublicadorConsultarPropuesta/getDtPropuestasResponse" message="tns:getDtPropuestasResponse"></output>
-<fault message="tns:Exception" name="Exception" wsam:Action="http://Servicios/PublicadorConsultarPropuesta/getDtPropuestas/Fault/Exception"></fault>
-</operation>
-<operation name="ListarPropuestas">
-<input wsam:Action="http://Servicios/PublicadorConsultarPropuesta/ListarPropuestasRequest" message="tns:ListarPropuestas"></input>
-<output wsam:Action="http://Servicios/PublicadorConsultarPropuesta/ListarPropuestasResponse" message="tns:ListarPropuestasResponse"></output>
-</operation>
-<operation name="ListarColaboradoresProp">
-<input wsam:Action="http://Servicios/PublicadorConsultarPropuesta/ListarColaboradoresPropRequest" message="tns:ListarColaboradoresProp"></input>
-<output wsam:Action="http://Servicios/PublicadorConsultarPropuesta/ListarColaboradoresPropResponse" message="tns:ListarColaboradoresPropResponse"></output>
-<fault message="tns:Exception" name="Exception" wsam:Action="http://Servicios/PublicadorConsultarPropuesta/ListarColaboradoresProp/Fault/Exception"></fault>
+<operation name="ListarPropuestasComentar">
+<input wsam:Action="http://Servicios/PublicadorConsultarPropuesta/ListarPropuestasComentarRequest" message="tns:ListarPropuestasComentar"></input>
+<output wsam:Action="http://Servicios/PublicadorConsultarPropuesta/ListarPropuestasComentarResponse" message="tns:ListarPropuestasComentarResponse"></output>
 </operation>
 <operation name="ListarPropuestasNoI">
 <input wsam:Action="http://Servicios/PublicadorConsultarPropuesta/ListarPropuestasNoIRequest" message="tns:ListarPropuestasNoI"></input>
@@ -131,13 +126,27 @@
 <input wsam:Action="http://Servicios/PublicadorConsultarPropuesta/ListarPropuestasX_deProponenteXRequest" message="tns:ListarPropuestasX_deProponenteX"></input>
 <output wsam:Action="http://Servicios/PublicadorConsultarPropuesta/ListarPropuestasX_deProponenteXResponse" message="tns:ListarPropuestasX_deProponenteXResponse"></output>
 </operation>
-<operation name="ListarPropuestasComentar">
-<input wsam:Action="http://Servicios/PublicadorConsultarPropuesta/ListarPropuestasComentarRequest" message="tns:ListarPropuestasComentar"></input>
-<output wsam:Action="http://Servicios/PublicadorConsultarPropuesta/ListarPropuestasComentarResponse" message="tns:ListarPropuestasComentarResponse"></output>
+<operation name="ListarColaboradoresProp">
+<input wsam:Action="http://Servicios/PublicadorConsultarPropuesta/ListarColaboradoresPropRequest" message="tns:ListarColaboradoresProp"></input>
+<output wsam:Action="http://Servicios/PublicadorConsultarPropuesta/ListarColaboradoresPropResponse" message="tns:ListarColaboradoresPropResponse"></output>
+<fault message="tns:Exception" name="Exception" wsam:Action="http://Servicios/PublicadorConsultarPropuesta/ListarColaboradoresProp/Fault/Exception"></fault>
+</operation>
+<operation name="ListarPropuestas">
+<input wsam:Action="http://Servicios/PublicadorConsultarPropuesta/ListarPropuestasRequest" message="tns:ListarPropuestas"></input>
+<output wsam:Action="http://Servicios/PublicadorConsultarPropuesta/ListarPropuestasResponse" message="tns:ListarPropuestasResponse"></output>
 </operation>
 </portType>
 <binding name="PublicadorConsultarPropuestaPortBinding" type="tns:PublicadorConsultarPropuesta">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc"></soap:binding>
+<operation name="publicarConsultaPropuesta">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
+</operation>
 <operation name="SeleccionarPropuesta">
 <soap:operation soapAction=""></soap:operation>
 <input>
@@ -150,7 +159,7 @@
 <soap:fault name="Exception" use="literal"></soap:fault>
 </fault>
 </operation>
-<operation name="publicarConsultaPropuesta">
+<operation name="getDtPropuestas">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
@@ -158,15 +167,9 @@
 <output>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
-</operation>
-<operation name="ListarPropuestasCategoria">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</output>
+<fault name="Exception">
+<soap:fault name="Exception" use="literal"></soap:fault>
+</fault>
 </operation>
 <operation name="ExtenderFinanciacion">
 <soap:operation soapAction=""></soap:operation>
@@ -198,6 +201,15 @@
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
 </operation>
+<operation name="ListarPropuestasCategoria">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
+</operation>
 <operation name="ComentarPropuesta">
 <soap:operation soapAction=""></soap:operation>
 <input>
@@ -210,7 +222,7 @@
 <soap:fault name="Exception" use="literal"></soap:fault>
 </fault>
 </operation>
-<operation name="getDtPropuestas">
+<operation name="ListarPropuestasComentar">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
@@ -218,11 +230,17 @@
 <output>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
-<fault name="Exception">
-<soap:fault name="Exception" use="literal"></soap:fault>
-</fault>
 </operation>
-<operation name="ListarPropuestas">
+<operation name="ListarPropuestasNoI">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
+</operation>
+<operation name="ListarPropuestasX_deProponenteX">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
@@ -243,25 +261,7 @@
 <soap:fault name="Exception" use="literal"></soap:fault>
 </fault>
 </operation>
-<operation name="ListarPropuestasNoI">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</output>
-</operation>
-<operation name="ListarPropuestasX_deProponenteX">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</output>
-</operation>
-<operation name="ListarPropuestasComentar">
+<operation name="ListarPropuestas">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>

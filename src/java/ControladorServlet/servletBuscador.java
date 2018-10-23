@@ -102,7 +102,6 @@ public class servletBuscador extends HttpServlet {
                 request.setAttribute("tipoRetorno", "busqueda");
                 request.getRequestDispatcher("/Vistas/busqueda.jsp").forward(request, response);
             }
-
         } catch (Exception ex) {
 
         }

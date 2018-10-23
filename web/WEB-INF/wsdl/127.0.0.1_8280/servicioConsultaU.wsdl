@@ -4,6 +4,16 @@
 <xsd:import namespace="http://Servicios/" schemaLocation="http://127.0.0.1:8280/servicioConsultaU?xsd=1"></xsd:import>
 </xsd:schema>
 </types>
+<message name="getDtColaborador">
+<part name="nickname" type="xsd:string"></part>
+</message>
+<message name="getDtColaboradorResponse">
+<part name="return" type="tns:dtinfoColaborador"></part>
+</message>
+<message name="ListarUsuarios"></message>
+<message name="ListarUsuariosResponse">
+<part name="return" type="tns:dtListUsuario"></part>
+</message>
 <message name="DesactivarProponente">
 <part name="nick" type="xsd:string"></part>
 </message>
@@ -121,9 +131,9 @@
 <input wsam:Action="http://Servicios/PublicadorConsultarUsuario/ListarUsuariosRequest" message="tns:ListarUsuarios"></input>
 <output wsam:Action="http://Servicios/PublicadorConsultarUsuario/ListarUsuariosResponse" message="tns:ListarUsuariosResponse"></output>
 </operation>
-<operation name="getDtColaborador">
-<input wsam:Action="http://Servicios/PublicadorConsultarUsuario/getDtColaboradorRequest" message="tns:getDtColaborador"></input>
-<output wsam:Action="http://Servicios/PublicadorConsultarUsuario/getDtColaboradorResponse" message="tns:getDtColaboradorResponse"></output>
+<operation name="getMontoColaboracion">
+<input wsam:Action="http://Servicios/PublicadorConsultarUsuario/getMontoColaboracionRequest" message="tns:getMontoColaboracion"></input>
+<output wsam:Action="http://Servicios/PublicadorConsultarUsuario/getMontoColaboracionResponse" message="tns:getMontoColaboracionResponse"></output>
 </operation>
 <operation name="ListarPropuestasNoIngresadas">
 <input wsam:Action="http://Servicios/PublicadorConsultarUsuario/ListarPropuestasNoIngresadasRequest" message="tns:ListarPropuestasNoIngresadas"></input>
@@ -174,6 +184,24 @@
 </portType>
 <binding name="PublicadorConsultarUsuarioPortBinding" type="tns:PublicadorConsultarUsuario">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc"></soap:binding>
+<operation name="getDtColaborador">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
+</operation>
+<operation name="ListarUsuarios">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
+</operation>
 <operation name="DesactivarProponente">
 <soap:operation soapAction=""></soap:operation>
 <input>
@@ -216,7 +244,7 @@
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
 </operation>
-<operation name="getDtColaborador">
+<operation name="getMontoColaboracion">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
