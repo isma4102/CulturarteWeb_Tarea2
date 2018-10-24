@@ -38,6 +38,7 @@
                         <div style="color: white" class="dropdown-container">
                             <% if ((DtUsuario) request.getSession().getAttribute("usuario_logueado") != null) {
                                     out.print("<a  style = \"color: white\" href = \"/CulturarteWeb/SeguirUsuario\" > Seguir usuario</a >");
+                                    out.print("<a style=\"color: white\" href=\"/CulturarteWeb/RankingUsuarios\" >Ranking de Usuarios</a>");
                                 } else {
                                     out.print("<a style=\"color: white\" href=\"/CulturarteWeb/altaUsuarioServlet\" >Alta Usuario</a>");
                                     out.print("<a style=\"color: white\" href=\"/CulturarteWeb/RankingUsuarios\" >Ranking de Usuarios</a>");

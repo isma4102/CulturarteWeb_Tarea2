@@ -38,8 +38,8 @@
                     <th >Nickname</th>
                     <th>Nombre</th>
                     <th>Apellido</th>
-                    <th>Prononente/Colaborador</th>
-                    <th>Cantidad de Seguidores</th>
+                    <th>Prop/Colab</th>
+                    <th>Cantidad Seguidores</th>
                     <th>Ver Perfil</th>
                 </tr>
                 </thead>
@@ -55,7 +55,7 @@
                         <%} else {%>
                     <td>Proponente&nbsp;&nbsp;&nbsp;<br/></td>
                         <%}%>
-                    <td><<!--%=dtusu.getSeguidores()%!-->></td>
+                    <td><%=dtusu.getSeguidores().size()%></td>
                     <td><button style="background:url('/CulturarteWeb/Imagenes/ver.png');background-position:center center;
                                 background-repeat:no-repeat;width:70px; height:25px" type="input" name="Ver" class="btn btn-primary"></button></td>
                     </tr>

@@ -42,7 +42,7 @@ private static final long serialVersionUID = 1L;
         PublicadorConsultarUsuarioService webService = new PublicadorConsultarUsuarioService(url);
         this.port = webService.getPublicadorConsultarUsuarioPort();
 
-            List<DtUsuario> lista = this.port.listarUsuarios().getLista();
+            List<DtUsuario> lista = this.port.listarUsuariosRanking().getLista();
             request.setAttribute("UsuariosRanking", lista);
             request.getRequestDispatcher("Vistas/RankingUsuarios.jsp").forward(request, response);
         
