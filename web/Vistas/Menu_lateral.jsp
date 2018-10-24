@@ -40,6 +40,7 @@
                                     out.print("<a  style = \"color: white\" href = \"/CulturarteWeb/SeguirUsuario\" > Seguir usuario</a >");
                                 } else {
                                     out.print("<a style=\"color: white\" href=\"/CulturarteWeb/altaUsuarioServlet\" >Alta Usuario</a>");
+                                    out.print("<a style=\"color: white\" href=\"/CulturarteWeb/RankingUsuarios\" >Ranking de Usuarios</a>");
                                 }
                             %>
                             <a style="color: white" href="/CulturarteWeb/ServletConsultarUsuario">Consultar Perfiles</a>
