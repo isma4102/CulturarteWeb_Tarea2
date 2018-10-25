@@ -39,6 +39,10 @@
 <input wsam:Action="http://Servicios/PublicadorAltaPropuesta/publicarRequest" message="tns:publicar"></input>
 <output wsam:Action="http://Servicios/PublicadorAltaPropuesta/publicarResponse" message="tns:publicarResponse"></output>
 </operation>
+<operation name="ListarCategorias">
+<input wsam:Action="http://Servicios/PublicadorAltaPropuesta/ListarCategoriasRequest" message="tns:ListarCategorias"></input>
+<output wsam:Action="http://Servicios/PublicadorAltaPropuesta/ListarCategoriasResponse" message="tns:ListarCategoriasResponse"></output>
+</operation>
 <operation name="CrearPropuesta" parameterOrder="tituloP descripcion lugar fecha montoE montoTot retorno">
 <input wsam:Action="http://Servicios/PublicadorAltaPropuesta/CrearPropuestaRequest" message="tns:CrearPropuesta"></input>
 <output wsam:Action="http://Servicios/PublicadorAltaPropuesta/CrearPropuestaResponse" message="tns:CrearPropuestaResponse"></output>

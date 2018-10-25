@@ -8,15 +8,15 @@
 <part name="arg0" type="xsd:string"></part>
 </message>
 <message name="publicarRegistrarColaboracionResponse"></message>
+<message name="listarPropuestasRWEB"></message>
+<message name="listarPropuestasRWEBResponse">
+<part name="return" type="tns:dtListPropuestasRWEB"></part>
+</message>
 <message name="SeleccionarColaborador">
 <part name="nickName" type="xsd:string"></part>
 </message>
 <message name="SeleccionarColaboradorResponse">
 <part name="return" type="tns:dtinfoColaborador"></part>
-</message>
-<message name="listarPropuestasRWEB"></message>
-<message name="listarPropuestasRWEBResponse">
-<part name="return" type="tns:dtListPropuestasRWEB"></part>
 </message>
 <message name="SeleccionarPropuestaR">
 <part name="opcion" type="xsd:string"></part>
@@ -39,13 +39,13 @@
 <input wsam:Action="http://Servicios/PublicadorRegistrarColaboracion/publicarRegistrarColaboracionRequest" message="tns:publicarRegistrarColaboracion"></input>
 <output wsam:Action="http://Servicios/PublicadorRegistrarColaboracion/publicarRegistrarColaboracionResponse" message="tns:publicarRegistrarColaboracionResponse"></output>
 </operation>
-<operation name="SeleccionarColaborador">
-<input wsam:Action="http://Servicios/PublicadorRegistrarColaboracion/SeleccionarColaboradorRequest" message="tns:SeleccionarColaborador"></input>
-<output wsam:Action="http://Servicios/PublicadorRegistrarColaboracion/SeleccionarColaboradorResponse" message="tns:SeleccionarColaboradorResponse"></output>
-</operation>
 <operation name="listarPropuestasRWEB">
 <input wsam:Action="http://Servicios/PublicadorRegistrarColaboracion/listarPropuestasRWEBRequest" message="tns:listarPropuestasRWEB"></input>
 <output wsam:Action="http://Servicios/PublicadorRegistrarColaboracion/listarPropuestasRWEBResponse" message="tns:listarPropuestasRWEBResponse"></output>
+</operation>
+<operation name="SeleccionarColaborador">
+<input wsam:Action="http://Servicios/PublicadorRegistrarColaboracion/SeleccionarColaboradorRequest" message="tns:SeleccionarColaborador"></input>
+<output wsam:Action="http://Servicios/PublicadorRegistrarColaboracion/SeleccionarColaboradorResponse" message="tns:SeleccionarColaboradorResponse"></output>
 </operation>
 <operation name="SeleccionarPropuestaR">
 <input wsam:Action="http://Servicios/PublicadorRegistrarColaboracion/SeleccionarPropuestaRRequest" message="tns:SeleccionarPropuestaR"></input>
@@ -68,7 +68,7 @@
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
 </operation>
-<operation name="SeleccionarColaborador">
+<operation name="listarPropuestasRWEB">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
@@ -77,7 +77,7 @@
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
 </operation>
-<operation name="listarPropuestasRWEB">
+<operation name="SeleccionarColaborador">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>

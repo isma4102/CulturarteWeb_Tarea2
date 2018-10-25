@@ -12,6 +12,9 @@
 <xs:element name="imagen" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="password" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="esproponente" type="xs:boolean"></xs:element>
+<xs:element name="biografia" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="direccion" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="sitioweb" type="xs:string" minOccurs="0"></xs:element>
 </xs:sequence>
 </xs:complexType>
 
