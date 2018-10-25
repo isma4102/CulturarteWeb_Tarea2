@@ -15,12 +15,20 @@
 <xs:element name="biografia" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="direccion" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="sitioweb" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="seguidores" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="seguidos" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
 </xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="Exception">
 <xs:sequence>
 <xs:element name="message" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtListUsuario">
+<xs:sequence>
+<xs:element name="lista" type="tns:dtUsuario" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
 </xs:sequence>
 </xs:complexType>
 
@@ -84,6 +92,20 @@
 <xs:element name="nickname" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="password" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="seguidores">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="key" minOccurs="0" type="xs:string"></xs:element>
+<xs:element name="value" minOccurs="0" type="tns:usuario"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
 </xs:sequence>
 </xs:complexType>
 
@@ -128,12 +150,6 @@
 <xs:element name="fechaRealiz" type="xs:dateTime" minOccurs="0"></xs:element>
 <xs:element name="Entradas" type="xs:boolean"></xs:element>
 <xs:element name="Propuesta" type="xs:string" minOccurs="0"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="dtListUsuario">
-<xs:sequence>
-<xs:element name="lista" type="tns:dtUsuario" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
 </xs:sequence>
 </xs:complexType>
 
