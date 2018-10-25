@@ -25,14 +25,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
-import servicios.DataImagen;
 import servicios.DtUsuario;
 import servicios.PublicadorAltaPropuesta;
 import servicios.PublicadorAltaPropuestaService;
-import servicios.PublicadorConsultarUsuarioService;
-import servicios.TipoRetorno;
 
 /**
  *

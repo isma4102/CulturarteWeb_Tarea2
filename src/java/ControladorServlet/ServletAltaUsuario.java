@@ -20,14 +20,9 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.annotation.MultipartConfig;
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
-import servicios.DataImagen;
 import servicios.DtUsuario;
 import servicios.PublicadorAltaUsuario;
 import servicios.PublicadorAltaUsuarioService;
@@ -98,85 +93,66 @@ public class ServletAltaUsuario extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            URL url = new URL("http://127.0.0.1:8280/servicioConsultaU");
-            PublicadorConsultarUsuarioService webService = new PublicadorConsultarUsuarioService(url);
-            PublicadorConsultarUsuario portCU = webService.getPublicadorConsultarUsuarioPort();
-
-            codificador a = new codificador();
-
-            Boolean ok = false;
-            String nick = request.getParameter("nick");
-            String nombre = request.getParameter("nombre");
-            String apellido = request.getParameter("apellido");
-            String correo = request.getParameter("correo");
-            String pass = request.getParameter("pass");
-            String fecha = request.getParameter("fecha");
-            String pass2 = request.getParameter("pass2");
-            String direccion = request.getParameter("direccion");
-            String sitio = request.getParameter("sitio");
-            String biografia = request.getParameter("biografia");
-            String tipoP = request.getParameter("tipoP");
-
-            GregorianCalendar cal = new GregorianCalendar();
-            cal.setTime(ParseFecha(fecha));
-            XMLGregorianCalendar fechaxml = DatatypeFactory.newInstance().newXMLGregorianCalendar(cal);
-
-            if (!pass.equals(pass2)) {
-                request.setAttribute("malPass", "Sus contraseñas no coinciden");
-                request.getRequestDispatcher("/Vistas/altaUsuario.jsp").forward(request, response);
-                return;
-            }
-            String hash = a.sha1(pass);
-            DataImagen imagen = null;
-            final Part partImagen = request.getPart("imagen");
-            byte[] bytes = null;
-            String nombreArchivo = null;
-            String extensionArchivo = null;
+        URL url = new URL("http://127.0.0.1:8280/servicioConsultaU");
+        PublicadorConsultarUsuarioService webService = new PublicadorConsultarUsuarioService(url);
+        PublicadorConsultarUsuario portCU = webService.getPublicadorConsultarUsuarioPort();
+        codificador a = new codificador();
+        Boolean ok = false;
+        String nick = request.getParameter("nick");
+        String nombre = request.getParameter("nombre");
+        String apellido = request.getParameter("apellido");
+        String correo = request.getParameter("correo");
+        String pass = request.getParameter("pass");
+        String fecha = request.getParameter("fecha");
+        String pass2 = request.getParameter("pass2");
+        String direccion = request.getParameter("direccion");
+        String sitio = request.getParameter("sitio");
+        String biografia = request.getParameter("biografia");
+        String tipoP = request.getParameter("tipoP");
+        if (!pass.equals(pass2)) {
+            request.setAttribute("malPass", "Sus contraseñas no coinciden");
+            request.getRequestDispatcher("/Vistas/altaUsuario.jsp").forward(request, response);
+            return;
+        }
+        String hash = a.sha1(pass);
+        final Part partImagen = request.getPart("imagen");
+        byte[] bytes = null;
+        String nombreArchivo = null;
+        String extensionArchivo = null;
+        if (partImagen.getSize() != 0) {
+            InputStream data = partImagen.getInputStream();
+            final String fileName = Utils.getFileName(partImagen);
+            nombreArchivo = nick;
+            extensionArchivo = Utils.extensionArchivo(fileName);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            int reads = data.read();
+            while (reads != -1) {
+                baos.write(reads);
+                reads = data.read();
+            } // while
+            bytes = baos.toByteArray();
             
-            if (partImagen.getSize() != 0) {
-                InputStream data = partImagen.getInputStream();
-                final String fileName = Utils.getFileName(partImagen);
-                nombreArchivo = nick;
-                extensionArchivo = Utils.extensionArchivo(fileName);
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                int reads = data.read();
-                while (reads != -1) {
-                    baos.write(reads);
-                    reads = data.read();
-                } // while
-                bytes = baos.toByteArray();
-
-            }
-
-            imagen = new DataImagen();
-            imagen.setStream(bytes);
-            imagen.setExtensionArchivo(extensionArchivo);
-            imagen.setNombreArchivo(nombreArchivo);
-
-            if (tipoP.equals("proponente")) {
-                ok = this.port.agregarUsuarioProponente(nick, nombre, apellido, correo, fechaxml, imagen, direccion, biografia, sitio, hash);
-                if (ok) {
-                    request.setAttribute("mensaje", "Se registro exitosamente");
-                    DtUsuario user = portCU.obtenerDtUsuario(nick);
-                    request.getSession().setAttribute("usuario_logueado", user);
-                } else {
-                    request.setAttribute("mensaje", "Error al registrar este usuario");
-                }
-                request.getRequestDispatcher("/Vistas/altaUsuario.jsp").forward(request, response);
+        }
+        if (tipoP.equals("proponente")) {
+            ok = this.port.agregarUsuarioProponente(nick, nombre, apellido, correo, fecha, direccion, biografia, sitio, hash);
+            if (ok) {
+                request.setAttribute("mensaje", "Se registro exitosamente");
+                DtUsuario user = portCU.obtenerDtUsuario(nick);
+                request.getSession().setAttribute("usuario_logueado", user);
             } else {
-                ok = this.port.agregarUsuarioColaborador(nick, nombre, apellido, correo, fechaxml, imagen, hash);
-                if (ok) {
-                    request.setAttribute("mensaje", "Se registro exitosamente");
-                    DtUsuario user = portCU.obtenerDtUsuario(nick);
-                    request.getSession().setAttribute("usuario_logueado", user);
-                } else {
-                    request.setAttribute("mensaje", "Error al dar registrar este usuario");
-                }
-                request.getRequestDispatcher("/Vistas/altaUsuario.jsp").forward(request, response);
+                request.setAttribute("mensaje", "Error al registrar este usuario");
             }
-        } catch (DatatypeConfigurationException ex) {
-            Logger.getLogger(ServletAltaUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            request.getRequestDispatcher("/Vistas/altaUsuario.jsp").forward(request, response);
+        } else {
+            ok = this.port.agregarUsuarioColaborador(nick, nombre, apellido, correo, fecha, hash);
+            if (ok) {
+                request.setAttribute("mensaje", "Se registro exitosamente");
+                DtUsuario user = portCU.obtenerDtUsuario(nick);
+                request.getSession().setAttribute("usuario_logueado", user);
+            } else {
+                request.setAttribute("mensaje", "Error al dar registrar este usuario");
+            }
+            request.getRequestDispatcher("/Vistas/altaUsuario.jsp").forward(request, response);
         }
     }
 
