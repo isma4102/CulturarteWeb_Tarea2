@@ -117,12 +117,10 @@ public class ServletAltaPropuesta extends HttpServlet {
         String desc = request.getParameter("Descripcion");
         String cat = request.getParameter("Categoria");
         String tipoR = request.getParameter("TipoR");
-
         float montoT = Float.parseFloat(request.getParameter("MontoT"));
         float montoE = Float.parseFloat(request.getParameter("MontoE"));
         String fechaR = (request.getParameter("FechaR") == null ? "" : request.getParameter("FechaR"));
 
-        DataImagen imagen = null;
         final Part partImagen = request.getPart("imagen");
 
         if (partImagen.getSize() != 0) {
@@ -135,12 +133,8 @@ public class ServletAltaPropuesta extends HttpServlet {
             while (reads != -1) {
                 baos.write(reads);
                 reads = data.read();
-            } // while
+            }
             byte[] bytes = baos.toByteArray();
-            imagen = new DataImagen();
-            imagen.setStream(bytes);
-            imagen.setExtensionArchivo(extensionArchivo);
-            imagen.setNombreArchivo(nombreArchivo);
         }
 
         try {
@@ -149,16 +143,19 @@ public class ServletAltaPropuesta extends HttpServlet {
             boolean encontrado = port.seleccionarUC(dtLogeado.getNickname(), cat);
 
             if (!encontrado) {
-                //XMLGregorianCalendar fechaXML =
                 boolean ok = port.crearPropuesta(titulo, desc, lugar, fechaR, montoE, montoT, tipoR);
-                MENSAJE = "Se registro exitosamente";
-                request.setAttribute("mensaje", MENSAJE);
+                if (ok) {
+                    MENSAJE = "Se registro exitosamente";
+                    request.setAttribute("mensaje", MENSAJE);
+                } else {
+                    MENSAJE = "No se pudo registrar";
+                    request.setAttribute("mensaje", MENSAJE);
+                }
                 request.getRequestDispatcher("/Vistas/FuncionamientoCorrecto.jsp").forward(request, response);
             }
-
         } catch (ExceptionInInitializerError | Exception a) {
             String mensajeError = "La propuesta no pudo ser dada de alta";
-            request.setAttribute("mensaje", mensajeError);
+            request.setAttribute("mensaje", a.getMessage());
             request.getRequestDispatcher("/Vistas/FuncionamientoCorrecto.jsp").forward(request, response);
         }
 
@@ -173,21 +170,4 @@ public class ServletAltaPropuesta extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    private Calendar dateToCalendar(Date date) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        return calendar;
-    }
-
-    public Date ParseFecha(String fecha) {
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        Date fechaDate = new Date();
-        try {
-            fechaDate = formato.parse(fecha);
-        } catch (ParseException ex) {
-            System.out.println(ex);
-        }
-        return fechaDate;
-    }
 }

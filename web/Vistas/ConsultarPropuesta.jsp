@@ -23,7 +23,6 @@
     </head>
     <body>
         <jsp:include page="/Vistas/Barra_menu.jsp" />
-
         <table id="tabla" class="table table-responsive table-bordered table-hover formulario" style="width: 70%;">
             <thead>
             <h3 style="position: absolute;top: 76px;">Consulta de propuesta</h3>
@@ -45,7 +44,7 @@
                         out.print("<tr>");
                         out.print("<form class=\"form-signin\" action=\"ServletConsultarPropuesta\" method=\"POST\"> ");
                         out.print("<input style=\"border:none\" type=\"hidden\" class=\"form-control-plaintext\" name=\"TituloP\" value=\"" + lista.get(i).getTitulo() + "\" readonly=\"readonly\"/>");
-                        out.print("<td><p>" + lista.get(i).getTitulo()+ " </p></td>");
+                        out.print("<td><p>" + lista.get(i).getTitulo() + " </p></td>");
                         out.print("<td><p>" + lista.get(i).getProponente() + "</p></td>");
                         out.print("<td><button style=\"background:url('/CulturarteWeb/Imagenes/ver.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px\" type=\"input\" name=\"Ver\" class=\"btn btn-primary\"></button></td>");
                         out.print("</form>");

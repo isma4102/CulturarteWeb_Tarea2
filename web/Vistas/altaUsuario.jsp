@@ -12,8 +12,6 @@
         <link type="text/css" href="css/bootstrap.min.css">
         <link id="bootstrap-css" type="text/css" href="/CulturarteWeb/css/bootstrap.css">
 
-
-    </script>
     <%
         String contraseniasDiferentes = (String) request.getAttribute("malPass");
         if (contraseniasDiferentes != null) {%>
@@ -29,10 +27,7 @@
         window.alert("<%= mensaje%>");
         location.href = "/CulturarteWeb/ServletInicio";
     </script>
-    <%  }
-    %>
-
-
+    <% }%>
 </head>
 <body>
     <jsp:include page="/Vistas/Barra_menu.jsp" />

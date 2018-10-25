@@ -6,28 +6,27 @@
 package ControladorServlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import servicios.DtListPropuestaWeb;
-import servicios.DtPropuestaWeb;
-import servicios.PublicadorInicio;
-import servicios.PublicadorInicioService;
+import servicios.DtUsuario;
+import servicios.PublicadorConsultarUsuario;
+import servicios.PublicadorConsultarUsuarioService;
 
 /**
  *
  * @author Martin
  */
-@WebServlet(name = "ServletInicio", urlPatterns = {"/ServletInicio"})
-public class ServletInicio extends HttpServlet {
+@WebServlet(name = "ServletDesactivarUsuario", urlPatterns = {"/ServletDesactivarUsuario"})
+public class ServletDesactivarUsuario extends HttpServlet {
 
-    private PublicadorInicio port;
+    private PublicadorConsultarUsuario port;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,35 +35,22 @@ public class ServletInicio extends HttpServlet {
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
      */
     @Override
     public void init() throws ServletException {
         try {
-            URL url = new URL("http://127.0.0.1:8280/servicioInicio");
-            PublicadorInicioService webService = new PublicadorInicioService(url);
-            this.port = webService.getPublicadorInicioPort();
+            URL url = new URL("http://127.0.0.1:8280/servicioConsultaU");
+            PublicadorConsultarUsuarioService webService = new PublicadorConsultarUsuarioService(url);
+            this.port = webService.getPublicadorConsultarUsuarioPort();
 
         } catch (MalformedURLException ex) {
-            ex.printStackTrace();
+            Logger.getLogger(ServletCancelarPropuesta.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        DtListPropuestaWeb ListaProp = this.port.listarPropuestasWeb();
 
-        List<DtPropuestaWeb> listPublicada = ListaProp.getPublicadas();
-        List<DtPropuestaWeb> listFinanciada = ListaProp.getNoFinanciadas();
-        List<DtPropuestaWeb> listEnFinanciacion = ListaProp.getEnFinanciacion();
-        List<DtPropuestaWeb> listNoFinanciada = ListaProp.getNoFinanciadas();
-        List<DtPropuestaWeb> listCancelada = ListaProp.getCanceladas();
-
-        request.setAttribute("Cancelada", listCancelada);
-        request.setAttribute("Publicada", listPublicada);
-        request.setAttribute("Financiada", listFinanciada);
-        request.setAttribute("noFinanciada", listNoFinanciada);
-        request.setAttribute("enFinanciacion", listEnFinanciacion);
-
-        request.getRequestDispatcher("Vistas/Inicio.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -79,7 +65,6 @@ public class ServletInicio extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         processRequest(request, response);
     }
 
@@ -93,7 +78,25 @@ public class ServletInicio extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        processRequest(request, response);
+        DtUsuario usu = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
+        if (usu != null && usu.isEsproponente()) {
+            try {
+                boolean ok = this.port.desactivarProponente(usu.getNickname());
+
+                if (ok) {
+                    request.getSession().setAttribute("usuario_logueado", null);
+                    String mensajeD = "El usuario fue desactivado con exito";
+                    request.setAttribute("mensajeDesactivacion", mensajeD);
+                    request.getRequestDispatcher("Vistas/Inicio.jsp").forward(request, response);
+                }
+
+            } catch (ExceptionInInitializerError | Exception a) {
+                String mensajeD = "La operacion no pudo ser realizada con exito";
+                request.setAttribute("mensajeDesactivacion", mensajeD);
+                request.getRequestDispatcher("Vistas/Inicio.jsp").forward(request, response);
+            }
+        }
+
     }
 
     /**

@@ -23,6 +23,7 @@
         <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <title>Datos del Usuario</title>
+        
     </head>
     <body>
         <jsp:include page="/Vistas/Barra_menu.jsp" />
@@ -40,10 +41,6 @@
                         out.print("<img src=\"/CulturarteWeb/ServletImagenes?nickname=" + dtu.getNickname() + "\" class=\"avatar img-circle img-thumbnail\" alt=\"avatar\">");
                     %>
                     <br>
-
-
-
-
                 </div><!--/col-3-->
                 <div class="col-sm-9">
                     <ul class="nav nav-tabs">
@@ -52,10 +49,13 @@
                         <li><a data-toggle="tab" href="#Seguidos">Seguidos</a></li>
                         <li><a data-toggle="tab" href="#PFavoritas">Propuestas favoritas</a></li>
                             <%if (dtu.isEsproponente()) {%>
-                        <li><a data-toggle = "tab" href = "#PCreadas" > Propuestas creadas</a></li></ul>
+                        <li><a data-toggle = "tab" href = "#PCreadas" > Propuestas creadas</a></li>
                             <%} else {%>
-                    <li><a data-toggle = "tab" href = "#PCreadas" > Colaboraciones</a></li></ul>
-                        <%}%>
+                        <li><a data-toggle = "tab" href = "#PCreadas" > Colaboraciones</a></li></ul>
+                            <%}%>
+                            <%if (nick.isEsproponente()) {%>
+                    <li><a data-toggle="tab" href="#DesactivarP">Desactivar Cuenta</a></li></ul>
+                        <%}%>    
                     <div class="tab-content">
                         <div style = "color:black" class="tab-pane active" id = "Informacion"> 
                             <hr>
@@ -112,7 +112,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <div class="panel panel-primary">
@@ -129,7 +128,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="form-group">
                                 <div class="col-xs-6">
 
@@ -184,14 +182,13 @@
                                             <h3 class="panel-title">Sitio</h3>
                                         </div>
                                         <div class="panel-body" style="padding: 1%">
-                                            <%out.println(dtu.getSitio());%>
+                                            <%out.println(dtu.getSitioweb());%>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <%}%>
                             <hr>
-
                         </div><!--/tab-pane-->
                         <div style="color:black"  style="color: black"  class="tab-pane" id="Seguidores">
                             <div class="seguidores">
@@ -292,9 +289,6 @@
                             </div>
                         </div><!--/tab-pane-->
                         <div style="color:black" class="tab-pane" id="PCreadas">
-
-
-
                             <%if (dtu.isEsproponente()) {%>
                             <%if (nick != null) {%>
                             <%if (dtu.getNickname().equals(nick.getNickname())) {%>
@@ -359,7 +353,6 @@
                                 </table>
                                 <% } else {%>
                                 <h3>No posee propuestas creadas</h3>
-
                                 <% }%> 
                             </div>
                             <%}%> 
@@ -388,11 +381,9 @@
                                         </tr>
                                     </form>
                                     <%}%>   
-
                                 </table>
                                 <% } else {%>
                                 <h3>No posee propuestas creadas</h3>
-
                                 <% }%> 
                             </div>
                             <%}%>
@@ -402,13 +393,13 @@
                                 <h3>Colaboraciones</h3>
                                 <%List<DtinfoPropuesta> colaboraciones = (List<DtinfoPropuesta>) request.getAttribute("Colaboraciones");
                                     if (colaboraciones.size() > 0) {
-                                List<DtColaboraciones> dtc=(List<DtColaboraciones>)request.getAttribute("Colaborador"); %>
+                                        List<DtColaboraciones> dtc = (List<DtColaboraciones>) request.getAttribute("Colaborador"); %>
                                 <table class="table table-bordered table-hover  formulario" style="margin-right: 200px; width: 88%; margin-top:50px;">
 
                                     <tr>
                                         <th>Titulo</th>
-                                        
-                                            <%if (dtu.getNickname().equals(nick.getNickname())) {%>
+
+                                        <%if (dtu.getNickname().equals(nick.getNickname())) {%>
                                         <th>Fecha de colaboracion:</th>
                                         <th>Monto</th>  
                                             <% }%>
@@ -423,7 +414,7 @@
                                                 int mes2 = calen.get(Calendar.MONTH) + 1;
                                                 int anio2 = calen.get(Calendar.YEAR);
                                                 out.println("<td>" + dia2 + "/" + mes2 + "/" + anio2 + "</td>");
-                                                Float monto=dtp.getMontoC();
+                                                Float monto = dtp.getMontoC();
                                         %>
                                         <td><p><%=monto%></p></td>&nbsp;&nbsp;&nbsp;
                                         <%}%>
@@ -465,6 +456,28 @@
                             <% }%>
                             <%}%>
                             <%}%>
+                        </div>
+                        <div style="color:black" class="tab-pane" id="DesactivarP">
+                            <form action="ServletDesactivarUsuario" method="POST">
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading" style="padding: 1%">
+                                        <h3 class="panel-title">Advertecia</h3>
+                                        <br>
+                                        <br>
+                                    </div>
+                                    <div class="panel-body" style="padding: 1%">
+                                        <span>
+                                            Al desactivar su cuenta perdera toda su información (datos básicos, imagenes,propuestas y colaboraciones a estas), los restantes usuarios
+                                            que tengan algun vinculo con sus propuestas o su perfil no podran visualizarlo.
+                                        </span>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <div>
+                                        <input class="btn btn-primary btn-block form-control" type="submit" value="Desactivar Perfil" />
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div><!--/tab-pane-->
                 </div><!--/tab-content-->

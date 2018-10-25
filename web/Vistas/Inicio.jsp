@@ -13,6 +13,16 @@
         <link rel="icon" type="image/png" href="Imagenes/icono.png"/>
         <title>Culturarte</title>
 
+        <%
+            String mensaje = (String) request.getAttribute("mensajeDesactivacion");
+            if (mensaje != null) {%>
+        <script type="text/javascript">
+            window.alert("<%= mensaje%>");
+            location.href = "/CulturarteWeb/ServletInicio";
+        </script>
+        <% }%>
+
+
     </head>
     <body>
 
@@ -30,9 +40,9 @@
             }
         %>
 
-       
-    <br><br><br><br><br>        
-    <jsp:include page="/Vistas/footer.jsp" />
-</body>
+
+        <br><br><br><br><br>        
+        <jsp:include page="/Vistas/footer.jsp" />
+    </body>
 
 </html>

@@ -89,22 +89,29 @@ public class ServletConsultarPropuesta extends HttpServlet {
         String tit = request.getParameter("TituloP");
         String titulo = new String(tit.getBytes("ISO-8859-1"), "UTF-8");
         DtUsuario proponente = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
-        String nickProp = null;
+        String nickProp = " ";
 
         if (proponente != null) {
             nickProp = proponente.getNickname();
         }
 
         try {
-            DtConsultaPropuesta dtinfo = this.port.seleccionarPropuesta(titulo, nickProp);
-            request.setAttribute("propuesta", dtinfo);
 
+            if (request.getSession().getAttribute("usuario_logueado") != null) {
+                DtConsultaPropuesta dtinfo = this.port.seleccionarPropuesta(titulo, nickProp);
+                request.setAttribute("propuesta", dtinfo);
+            } else {
+                DtConsultaPropuesta dtinfo = this.port.seleccionarPropuesta2(titulo);
+                request.setAttribute("propuesta", dtinfo);
+            }
             List<DtConsultaPropuesta2> listColab = this.port.listarColaboradoresProp(titulo).getLista();
 
             request.setAttribute("listaC", listColab);
 
         } catch (Exception ex) {
-            Logger.getLogger(ServletConsultarPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+            String error = ex.getMessage();
+            request.setAttribute("errorContrasenia", error);
+            request.getRequestDispatcher("/Vistas/ConsultarPropuesta.jsp").forward(request, response);
         }
         request.getRequestDispatcher("/Vistas/ConsultarPropuesta2.jsp").forward(request, response);
 
