@@ -87,13 +87,13 @@ public class ServletDesactivarUsuario extends HttpServlet {
                     request.getSession().setAttribute("usuario_logueado", null);
                     String mensajeD = "El usuario fue desactivado con exito";
                     request.setAttribute("mensajeDesactivacion", mensajeD);
-                    request.getRequestDispatcher("Vistas/Inicio.jsp").forward(request, response);
+                    request.getRequestDispatcher("ServletInicio").forward(request, response);
                 }
 
             } catch (ExceptionInInitializerError | Exception a) {
                 String mensajeD = "La operacion no pudo ser realizada con exito";
                 request.setAttribute("mensajeDesactivacion", mensajeD);
-                request.getRequestDispatcher("Vistas/Inicio.jsp").forward(request, response);
+                request.getRequestDispatcher("ServletInicio").forward(request, response);
             }
         }
 
