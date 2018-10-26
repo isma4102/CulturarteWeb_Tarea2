@@ -134,7 +134,7 @@ public class ServletAltaUsuario extends HttpServlet {
             
         }
         if (tipoP.equals("proponente")) {
-            ok = this.port.agregarUsuarioProponente(nick, nombre, apellido, correo, fecha, direccion, biografia, sitio, hash);
+            ok = this.port.agregarUsuarioProponente(nick, nombre, apellido, correo, fecha, direccion, biografia, sitio, hash,bytes,nombreArchivo,extensionArchivo);
             if (ok) {
                 request.setAttribute("mensaje", "Se registro exitosamente");
                 DtUsuario user = portCU.obtenerDtUsuario(nick);
@@ -144,7 +144,7 @@ public class ServletAltaUsuario extends HttpServlet {
             }
             request.getRequestDispatcher("/Vistas/altaUsuario.jsp").forward(request, response);
         } else {
-            ok = this.port.agregarUsuarioColaborador(nick, nombre, apellido, correo, fecha, hash);
+            ok = this.port.agregarUsuarioColaborador(nick, nombre, apellido, correo, fecha, hash,bytes,nombreArchivo,extensionArchivo);
             if (ok) {
                 request.setAttribute("mensaje", "Se registro exitosamente");
                 DtUsuario user = portCU.obtenerDtUsuario(nick);

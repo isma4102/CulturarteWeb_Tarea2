@@ -4,17 +4,6 @@
 <part name="arg0" type="xsd:string"></part>
 </message>
 <message name="publicarAltaUsuarioResponse"></message>
-<message name="AgregarUsuarioColaborador">
-<part name="nick" type="xsd:string"></part>
-<part name="nombre" type="xsd:string"></part>
-<part name="apellido" type="xsd:string"></part>
-<part name="correo" type="xsd:string"></part>
-<part name="fecha" type="xsd:string"></part>
-<part name="hash" type="xsd:string"></part>
-</message>
-<message name="AgregarUsuarioColaboradorResponse">
-<part name="return" type="xsd:boolean"></part>
-</message>
 <message name="AgregarUsuarioProponente">
 <part name="nick" type="xsd:string"></part>
 <part name="nombre" type="xsd:string"></part>
@@ -25,8 +14,25 @@
 <part name="biografia" type="xsd:string"></part>
 <part name="sitio" type="xsd:string"></part>
 <part name="hash" type="xsd:string"></part>
+<part name="arreglo" type="xsd:base64Binary"></part>
+<part name="nombreimg" type="xsd:string"></part>
+<part name="extencion" type="xsd:string"></part>
 </message>
 <message name="AgregarUsuarioProponenteResponse">
+<part name="return" type="xsd:boolean"></part>
+</message>
+<message name="AgregarUsuarioColaborador">
+<part name="nick" type="xsd:string"></part>
+<part name="nombre" type="xsd:string"></part>
+<part name="apellido" type="xsd:string"></part>
+<part name="correo" type="xsd:string"></part>
+<part name="fecha" type="xsd:string"></part>
+<part name="hash" type="xsd:string"></part>
+<part name="arreglo" type="xsd:base64Binary"></part>
+<part name="nombreimg" type="xsd:string"></part>
+<part name="extencion" type="xsd:string"></part>
+</message>
+<message name="AgregarUsuarioColaboradorResponse">
 <part name="return" type="xsd:boolean"></part>
 </message>
 <message name="ParseFecha">
@@ -40,13 +46,13 @@
 <input wsam:Action="http://Servicios/PublicadorAltaUsuario/publicarAltaUsuarioRequest" message="tns:publicarAltaUsuario"></input>
 <output wsam:Action="http://Servicios/PublicadorAltaUsuario/publicarAltaUsuarioResponse" message="tns:publicarAltaUsuarioResponse"></output>
 </operation>
-<operation name="AgregarUsuarioColaborador" parameterOrder="nick nombre apellido correo fecha hash">
-<input wsam:Action="http://Servicios/PublicadorAltaUsuario/AgregarUsuarioColaboradorRequest" message="tns:AgregarUsuarioColaborador"></input>
-<output wsam:Action="http://Servicios/PublicadorAltaUsuario/AgregarUsuarioColaboradorResponse" message="tns:AgregarUsuarioColaboradorResponse"></output>
-</operation>
-<operation name="AgregarUsuarioProponente" parameterOrder="nick nombre apellido correo fecha direccion biografia sitio hash">
+<operation name="AgregarUsuarioProponente" parameterOrder="nick nombre apellido correo fecha direccion biografia sitio hash arreglo nombreimg extencion">
 <input wsam:Action="http://Servicios/PublicadorAltaUsuario/AgregarUsuarioProponenteRequest" message="tns:AgregarUsuarioProponente"></input>
 <output wsam:Action="http://Servicios/PublicadorAltaUsuario/AgregarUsuarioProponenteResponse" message="tns:AgregarUsuarioProponenteResponse"></output>
+</operation>
+<operation name="AgregarUsuarioColaborador" parameterOrder="nick nombre apellido correo fecha hash arreglo nombreimg extencion">
+<input wsam:Action="http://Servicios/PublicadorAltaUsuario/AgregarUsuarioColaboradorRequest" message="tns:AgregarUsuarioColaborador"></input>
+<output wsam:Action="http://Servicios/PublicadorAltaUsuario/AgregarUsuarioColaboradorResponse" message="tns:AgregarUsuarioColaboradorResponse"></output>
 </operation>
 <operation name="ParseFecha">
 <input wsam:Action="http://Servicios/PublicadorAltaUsuario/ParseFechaRequest" message="tns:ParseFecha"></input>
@@ -64,7 +70,7 @@
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
 </operation>
-<operation name="AgregarUsuarioColaborador">
+<operation name="AgregarUsuarioProponente">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
@@ -73,7 +79,7 @@
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
 </operation>
-<operation name="AgregarUsuarioProponente">
+<operation name="AgregarUsuarioColaborador">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
