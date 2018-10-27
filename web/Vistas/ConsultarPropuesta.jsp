@@ -21,13 +21,14 @@
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
         <title>Consultar Propuesta</title>
     </head>
-    <body>
+    <body >
         <jsp:include page="/Vistas/Barra_menu.jsp" />
-        <table id="tabla" class="table table-responsive table-bordered table-hover formulario" style="width: 70%;">
+
+        <table id="tabla" class="table table-bordered table-hover formulario" style="width: 70%;">
             <thead>
-            <h3 style="position: absolute;top: 76px;">Consulta de propuesta</h3>
+            <h3  style=" text-align: center;top: 76px;">Consulta de propuesta</h3>
             <form class="navbar-form navbar-right responsive-utilities-test" >
-                <input id="buscar" style="width: 216px;margin-top: 139px;" type="text" name="Buscar" class="form-control" placeholder="Buscar" onkeyup="FiltrarTabla()" />
+                <input id="buscar" style=" display: block;margin-right: auto;margin-left: auto;width: 216px" type="text" name="Buscar" class="form-control" placeholder="Buscar" onkeyup="FiltrarTabla()" />
             </form>
 
             <tr>

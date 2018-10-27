@@ -3,34 +3,17 @@
 <html>
     <head>
         <link href="css/Menu_lateral.css" rel="stylesheet">
-        <script type="text/javascript" src="js/jquery.js"></script>
-        <script type="text/javascript">
-            function getConfirmation() {
-            <% if (request.getSession().getAttribute("usuario_logueado") != null) { %>
-                alert("Cierre sesion antes de Cargar los datos de prueba");
-            <% } else {%>
-                var retVal = confirm("¿Desea continuar? todos los datos se perderan");
-                if (retVal == true) {
-                    var var2 = document.getElementById('contenedor_carga');
-                    var2.style.display = "block";
-                        location.href = "/CulturarteWeb/ServletDatosdePrueba";
-                } else {
-                    alert("Operación Cancelada");
-                }
-            <% } %>
-            }
 
-        </script>
     </head>
     <body> 
         <div id="wrapper" >
 
             <!-- Sidebar -->
-            <div id="sidebar-wrapper">
-                
+            <div style="margin-top: -2%;" id="sidebar-wrapper">
+
                 <ul class="sidebar-nav">
                     <div class="sidenav">
-                          
+
                         <button  class="dropdown-btn"> <img style="margin-right: 4%;" src="Imagenes/Usuarios.png">Usuario
                             <i class="fa fa-caret-down"></i>
                             <img src="Imagenes/desplegar.png">
@@ -64,8 +47,6 @@
                                 }%>
                             <a style="color: white" href="/CulturarteWeb/ServletConsultarPropuesta">Consultar propuestas</a>
                             <a style="color: white" href="/CulturarteWeb/ServletPropuestaCategoria">Consultar propuestas por categoria</a>
-
-
                         </div>                          
                         <button class="dropdown-btn"><img style="margin-right: 4%;" src="Imagenes/Colaboracion.png">Colaboraciones
                             <i class="fa fa-caret-down"></i>
@@ -74,24 +55,24 @@
                         <div class="dropdown-container">
                             <% if ((DtUsuario) request.getSession().getAttribute("usuario_logueado") != null) {
                                     if (((DtUsuario) request.getSession().getAttribute("usuario_logueado")).isEsproponente() == false) {
-                                        
                                         out.print("<a style=\"color: white\" href=\"/CulturarteWeb/ServletRegistroColaboracion\">Registrar Colaboración a propuesta</a>");
                                     }
                                 }
                             %>
                         </div>
-                        
                     </div>
                 </ul>
             </div>
-            <!-- /#sidebar-wrapper -->
 
-            <!-- Page Content -->
-            <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">  <img src="Imagenes/menu-icono.png" alt="" class="menu-bar"></a>
-            <a href="/CulturarteWeb/ServletInicio">
-                <img src="Imagenes/logo.png" style="width: 38%">
-            </a>
+
         </div>
+         <li class="nav-item">
+                      <a style="z-index: 1;position: relative" href="#menu-toggle" id="menu-toggle" class="nav-link"><img src="Imagenes/menu-icono.png" alt="" class="menu-bar"></a>
+                    </li>
+                        
+        <a style="z-index: 1;" href="/CulturarteWeb/ServletInicio">
+            <img src="Imagenes/logo.png" style="width: 38%">
+        </a>
         <script>
             $("#menu-toggle").click(function (e) {
                 e.preventDefault();
@@ -113,7 +94,7 @@
                 });
             }
         </script>
-        
+
 
     </body>
 </html>
