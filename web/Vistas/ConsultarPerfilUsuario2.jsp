@@ -178,7 +178,6 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-xs-6">
-
                                         <div class="panel panel-primary">
                                             <div class="panel-heading" style="padding: 1%">
                                                 <h3 class="panel-title">Sitio</h3>
