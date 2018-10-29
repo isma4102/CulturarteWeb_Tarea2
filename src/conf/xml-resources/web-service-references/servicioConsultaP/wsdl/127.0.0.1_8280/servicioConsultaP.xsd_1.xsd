@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is JAX-WS RI 2.2.9-b130926.1035 svn-revision#5f6196f2b90e9460065a4c2f4e30e065b245e51e. --><xs:schema xmlns:tns="http://Servicios/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://Servicios/">
+
+<xs:element name="Exception" type="tns:Exception"></xs:element>
+
+<xs:complexType name="dtListConsultaPropuesta">
+<xs:sequence>
+<xs:element name="lista" type="tns:dtConsultaPropuesta" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtConsultaPropuesta">
+<xs:sequence>
+<xs:element name="titulo" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="descripcion" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="categoria" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="lugar" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="fechaR" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="imagen" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="montoActual" type="xs:float"></xs:element>
+<xs:element name="EstadoActual" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="montoE" type="xs:float"></xs:element>
+<xs:element name="montoTot" type="xs:float"></xs:element>
+<xs:element name="tipoRet" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nickproponente" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="esExtendible" type="xs:boolean"></xs:element>
+<xs:element name="esCancelable" type="xs:boolean"></xs:element>
+<xs:element name="esComentable" type="xs:boolean"></xs:element>
+<xs:element name="esColaborable" type="xs:boolean"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Exception">
+<xs:sequence>
+<xs:element name="message" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtListInfoPropuesta">
+<xs:sequence>
+<xs:element name="lista" type="tns:dtinfoPropuesta" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtinfoPropuesta">
+<xs:sequence>
+<xs:element name="Titulo" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="Descripcion" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="imagen" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="TipoEspec" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="Lugar" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="FechaReal" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="Precio" type="xs:float"></xs:element>
+<xs:element name="Monto" type="xs:float"></xs:element>
+<xs:element name="estado" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="tipoRetorno" type="tns:tipoRetorno" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtListConsultaPropuesta2">
+<xs:sequence>
+<xs:element name="lista" type="tns:dtConsultaPropuesta2" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtConsultaPropuesta2">
+<xs:sequence>
+<xs:element name="nickColab" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nombreColab" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="apellidoColab" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="montoColab" type="xs:float"></xs:element>
+<xs:element name="fechaR" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtListNickTitProp">
+<xs:sequence>
+<xs:element name="ListPropuestas" type="tns:dtNickTitProp" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtNickTitProp">
+<xs:sequence>
+<xs:element name="Titulo" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="Proponente" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:simpleType name="tipoRetorno">
+<xs:restriction base="xs:string">
+<xs:enumeration value="Entradas"></xs:enumeration>
+<xs:enumeration value="porGanancias"></xs:enumeration>
+<xs:enumeration value="EntGan"></xs:enumeration>
+</xs:restriction>
+</xs:simpleType>
+</xs:schema>
