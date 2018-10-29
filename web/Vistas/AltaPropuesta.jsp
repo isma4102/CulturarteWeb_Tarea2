@@ -3,10 +3,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script type="text/javascript" src="/CulturarteWeb/script/jquery.js"></script>
-        <link href="css/bootstrap.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="/CulturarteWeb/css/AltaProp.css" />
-        <link rel="stylesheet" type="text/css" href="/CulturarteWeb/css/bootstrap.css" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Nueva Propuesta</title>
@@ -103,5 +100,6 @@
                 document.getElementById("FechaR").setAttribute("min", today);
             </script>
         </div>
+                        <jsp:include page="/Vistas/footer.jsp" /> 
     </body>
 </html>

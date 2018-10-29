@@ -7,10 +7,7 @@
     </head>
     <body> 
         <div id="wrapper" >
-
-            <!-- Sidebar -->
             <div style="margin-top: -2%;" id="sidebar-wrapper">
-
                 <ul class="sidebar-nav">
                     <div class="sidenav">
 

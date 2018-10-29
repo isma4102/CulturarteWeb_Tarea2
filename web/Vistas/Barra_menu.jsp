@@ -1,81 +1,70 @@
 <%@page import="servicios.DtUsuario"%>
 <!DOCTYPE html>
-<html lang="en">
-
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/material-kit.css" rel="stylesheet">
-        <script type="text/javascript" src="js/jquery.js"></script>
-    </head>
-    <body  class="hidden-sn grey-skin">
-
-        <nav class="navbar navbar-inverse navbar-expand-lg bg-dark" role="navigation-demo">
-            <jsp:include page="/Vistas/Menu_lateral.jsp" />
-
-            <div style="position: absolute" class="container">
-                <div style="float: right" class="navbar-translate">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="navbar-toggler-icon"></span>
-                        <span class="navbar-toggler-icon"></span>
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                </div>
-                <div class="collapse navbar-collapse">
-                    <ul style="float: right;margin-right: -36%;" class="navbar-nav ml-auto">
-                        <form style="margin-top: 16px;" action="servletBuscador" method="GET" class="navbar-form navbar-right">
-                            <input name="busqueda" type="text" class="form-control" placeholder="Titulo, descripcion, lugar..." required/>
-                            <input style="margin-left: 68%;margin-top: -56px;" class="btn btn-default" id="btnBuscar" type="submit" value="Buscar"/>
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/material-kit.css" rel="stylesheet">
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<nav class="navbar navbar-inverse navbar-expand-lg bg-dark" role="navigation-demo">
+    <jsp:include page="/Vistas/Menu_lateral.jsp" />
+    <div style="position: absolute" class="container">
+        <div style="float: right" class="navbar-translate">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul style="float: right;margin-right: -36%;" class="navbar-nav ml-auto">
+                <form style="margin-top: 16px;" action="servletBuscador" method="GET" class="navbar-form navbar-right">
+                    <input name="busqueda" type="text" class="form-control" placeholder="Titulo, descripcion, lugar..." required/>
+                    <input style="margin-left: 59%;margin-top: -56px;" class="btn btn-default" id="btnBuscar" type="submit" value="Buscar"/>
+                </form>
+                <li class="nav-item">
+                    <a href="/CulturarteWeb/ServletAltaPropuesta" class="nav-link">
+                        Tengo una propuesta
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/CulturarteWeb/ServletConsultarPropuesta" class="nav-link">
+                        Quiero ver Propuestas
+                    </a>
+                </li>
+                <% if ((DtUsuario) request.getSession().getAttribute("usuario_logueado") != null) {%>
+                <li class="nav-item">
+                    <a class="nav-link">
+                        <%=((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickname()%>
+                    </a>
+                </li>
+                <li class="dropdown nav-item">
+                    <a href="#" class="profile-photo dropdown-toggle nav-link" data-toggle="dropdown">
+                        <div class="profile-photo-small">
+                            <img src="Imagenes/nadie.png" alt="Circle Image" class="rounded-circle img-fluid">
+                        </div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <form  action="${pageContext.request.contextPath}/ServletConsultarUsuario" method="POST">
+                            <input style="border:none;background-color:#222222;color:white" class="form-control-plaintext" readonly name="nick" type="hidden" value="<%= ((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickname()%>"/>
+                            <button style="width: 96%;font-size: 100%;" type="submit"  class="dropdown-item">Perfil</button>
                         </form>
-                        <li class="nav-item">
-                            <a href="/CulturarteWeb/ServletAltaPropuesta" class="nav-link">
-                                Tengo una propuesta
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/CulturarteWeb/ServletConsultarPropuesta" class="nav-link">
-                                Quiero ver Propuestas
-                            </a>
-                        </li>
-                        <% if ((DtUsuario) request.getSession().getAttribute("usuario_logueado") != null) {%>
-                        <li class="nav-item">
-                            <a class="nav-link">
-                                <%=((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickname()%>
-                            </a>
-                        </li>
-                        <li class="dropdown nav-item">
-                            <a href="#pablo" class="profile-photo dropdown-toggle nav-link" data-toggle="dropdown">
-                                <div class="profile-photo-small">
-                                    <img src="Imagenes/nadie.png" alt="Circle Image" class="rounded-circle img-fluid">
-                                </div>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <form  action="${pageContext.request.contextPath}/ServletConsultarUsuario" method="POST">
-                                    <input style="border:none;background-color:#222222;color:white" class="form-control-plaintext" readonly name="nick" type="hidden" value="<%= ((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickname()%>"/>
-                                    <button style="width: 96%;font-size: 100%;" type="submit"  class="dropdown-item">Perfil</button>
-                                </form>
-                                <a style="font-size: 100%;" type="button" href="/CulturarteWeb/CerrarSesion" class="dropdown-item">Cerrar Sesión</a>
-                            </div>
-                        </li>
-                        <% } else {%>
-                        <li class="nav-item">
-                            <a  href="/CulturarteWeb/iniciar-sesion" class="nav-link">
-                                Iniciar sesión
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a  href="/CulturarteWeb/altaUsuarioServlet" class="nav-link">
-                                Registrarse
-                            </a>
-                        </li>
-                        <% }%>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <script src="js/popper.min.js" type="text/javascript"></script>
-    </body>
-</html>
+                        <a style="font-size: 100%;" type="button" href="/CulturarteWeb/CerrarSesion" class="dropdown-item">Cerrar Sesión</a>
+                    </div>
+                </li>
+                <% } else {%>
+                <li class="nav-item">
+                    <a  href="/CulturarteWeb/iniciar-sesion" class="nav-link">
+                        Iniciar sesión
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a  href="/CulturarteWeb/altaUsuarioServlet" class="nav-link">
+                        Registrarse
+                    </a>
+                </li>
+                <% }%>
+            </ul>
+        </div>
+    </div>
+</nav>

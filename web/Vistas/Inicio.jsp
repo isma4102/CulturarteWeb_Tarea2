@@ -8,8 +8,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>        
-        <link href="css/Indicador_Carga.css" rel="stylesheet">
+    <head >        
+        
         <link rel="icon" type="image/png" href="Imagenes/icono.png"/>
         <title>Culturarte</title>
 

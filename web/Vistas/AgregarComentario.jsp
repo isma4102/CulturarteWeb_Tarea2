@@ -11,9 +11,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="js/bootstrap.js"></script>
-        <script type="text/javascript" src="js/jquery.js"></script>
-        <link href="css/bootstrap.css" rel="stylesheet">
+         
         <%
             String comentarProp = (String) request.getAttribute("comentarProp");
             if (comentarProp != null) {%>

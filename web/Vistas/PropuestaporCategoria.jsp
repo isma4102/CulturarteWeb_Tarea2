@@ -11,10 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-        <link href="css/bootstrap.css" rel="stylesheet">
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
+           
         <title>Consultar propuestas por categoria</title>
     </head>
     <body>

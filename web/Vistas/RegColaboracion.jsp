@@ -13,11 +13,8 @@
 <!DOCTYPE html>
 <html>
     <head>       
-        <script type="text/javascript" src="/CulturarteWeb/script/jquery.js"></script>
-        <link href="css/bootstrap.css" rel="stylesheet">
+       
         <link href="css/RegistrarColaboracion.css" rel="stylesheet">
-        <script src="js/bootstrap.js"></script>
-        <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="script/FiltrarTabla.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />

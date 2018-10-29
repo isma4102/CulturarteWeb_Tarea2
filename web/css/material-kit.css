@@ -467,7 +467,7 @@ section {
 body {
   margin: 0;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-  font-size: 1rem;
+  font-size: 1.3rem;
   font-weight: 400;
   line-height: 1.5;
   color: #212529;
@@ -8865,7 +8865,7 @@ button:focus {
   position: relative;
   padding: 12px 30px;
   margin: 0.3125rem 1px;
-  font-size: .75rem;
+  font-size: 1.3rem;
   font-weight: 400;
   line-height: 1.428571;
   text-decoration: none;
@@ -10914,7 +10914,7 @@ fieldset[disabled][disabled] .btn-group-raised .btn,
 }
 
 body {
-  background-color: #eee;
+  /*! background-color: #eee; */
   color: #3C4858;
   font-weight: 300;
 }
@@ -14775,7 +14775,7 @@ h2.title {
 }
 
 .text-info {
-  color: #00bcd4 !important;
+  color: #4b82c3 !important;
 }
 
 .text-rose {
@@ -16027,7 +16027,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 }
 
 .page-header {
-  height: 100vh;
+  height: 18vh;
   background-position: center center;
   background-size: cover;
   margin: 0;
@@ -16383,7 +16383,7 @@ footer .pull-center {
 .card.bg-danger,
 .card.card-rotate.bg-danger .front,
 .card.card-rotate.bg-danger .back {
-  background: linear-gradient(60deg, #ef5350, #d32f2f);
+  background: linear-gradient(60deg, #337ab7, #337ab7);
 }
 
 .card .card-header-rose,
@@ -16398,7 +16398,7 @@ footer .pull-center {
 }
 
 .card .card-header-danger {
-  box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.2), 0 13px 24px -11px rgba(244, 67, 54, 0.6);
+  box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.2), 0 13px 24px -11px rgb(26, 72, 112);
 }
 
 .card .card-header-rose {
@@ -17273,7 +17273,7 @@ footer .pull-center {
 }
 
 .profile-page .page-header {
-  height: 380px;
+  height: 153px;
   background-position: top center;
 }
 
