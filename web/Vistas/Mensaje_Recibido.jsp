@@ -10,9 +10,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Mensaje Recibido</title>
-        <script type="text/javascript" src="js/jquery.js"></script> 
-        <link href="css/bootstrap.css" rel="stylesheet">
-        <script src="js/bootstrap.js"></script>
        
     </head>
     <body>

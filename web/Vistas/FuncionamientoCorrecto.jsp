@@ -8,9 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="css/bootstrap.css" rel="stylesheet">
-        <script type="text/javascript" src="js/jquery.js"></script>
-        <script src="js/bootstrap.js"></script>
+             <link href="css/bootstrap.min.css" rel="stylesheet">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 

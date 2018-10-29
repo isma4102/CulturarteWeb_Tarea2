@@ -20,198 +20,267 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Información de Propuesta</title>
-        <script type="text/javascript" src="js/jquery.js"></script> 
-        <link href="css/bootstrap.css" rel="stylesheet">
-        <script src="js/bootstrap.js"></script>
 
 
     </head>
-    <body>
+    <body class="hidden-sn grey-skin"> 
         <jsp:include page="/Vistas/Barra_menu.jsp" />
 
         <%
             DtConsultaPropuesta propuestaSelec = (DtConsultaPropuesta) request.getAttribute("propuesta");
-
         %>
+        <div class="page-header header-filter" data-parallax="true" style="margin-top: -20px;background-color: #337ab7;"></div>
+        <div style="margin-left: 2%;" class="main main-raised">
+            <div class="profile-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 ml-auto mr-auto">
+                            <div class="container bootstrap snippet" style="margin-top: 7%;">
+                                <div class="row">
+                                    <div class="col-sm-3"><!--left col-->
+                                        <div style="width: 273%;margin-left: -392%;" class="card card-blog">
+                                            <div class="card-header card-header-image">
+                                                <a href="#pablo">
+                                                    <img class="img" src="/CulturarteWeb/ServletImagenes?TituloP=<%=propuestaSelec.getTitulo()%>">
+                                                    <div class="card-title">
 
-        <div class="modal-content formulario" style="margin-top: 8%;width: 32%;margin-left: 34%;">
-            <div class="modal-header">
-                <h3 align="center">Información de la Propuesta de <% out.print(propuestaSelec.getNickproponente()); %></h3>
-                <div class="modal-body">
-                    <div id="mostrarinfo">
-                        <div style="width: 41%;margin: 0 auto">
-                            <% out.print("<img style=\"width: 139%;margin-left: -15%;\" src=\"/CulturarteWeb/ServletImagenes?TituloP=" + propuestaSelec.getTitulo() + "\" class=\"img-rounded\" alt=\"avatar\">");
-                            %>
-                        </div>
-                        </br>
-                        </br>
-                        <div class="panel panel-primary">
-                            <div class="panel-heading" style="padding: 1%">
-                                <h3 class="panel-title">Titulo</h3>
-                            </div>
-                            <div class="panel-body" style="padding: 1%">
-                                <% out.print(propuestaSelec.getTitulo()); %>
-                            </div>
-                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="card-body">
+                                                <h2 align="center" class="card-category text-info"><% out.print(propuestaSelec.getTitulo()); %></h2>
+                                                <p class="card-description">
+                                                    <%out.print(propuestaSelec.getDescripcion());%>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <br>
+                                    </div><!--/col-3-->
+                                    <div style="font-size: 73%;margin-top: -110%;" class="card card-nav-tabs card-plain">
+                                        <div class="card-header card-header-danger">
+                                            <div class="nav-tabs-navigation">
+                                                <div class="nav-tabs-wrapper">
+                                                    <ul class="nav nav-tabs" data-tabs="tabs">
+                                                        <li class="active"><a style="color: white" data-toggle="tab" href="#Informacion">Información</a></li>
+                                                        <li><a style="color: white" data-toggle="tab" href="#Colaboradores">Colaboradores</a></li>
 
-                        <div class="panel panel-primary">
-                            <div class="panel-heading" style="padding: 1%">
-                                <h3 class="panel-title">Descripción</h3>
-                            </div>
-                            <textarea readonly style="background-color: white; height: 76px;resize: none" class="form-control rounded-0" rows="20"><%out.print(propuestaSelec.getDescripcion());%></textarea>
-                        </div>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body ">
+                                            <div class="tab-content text-center">
+                                                <div style = "color:black" class="tab-pane active" id = "Informacion"> 
+                                                    <hr>
+                                                    <div class="form-group">
+                                                        <div class="col-xs-6">
+                                                            <div class="panel panel-primary">
+                                                                <div class="panel-heading" style = "padding: 1%"
+                                                                     > <h3 
+                                                                        class="panel-title">Tipo de espectaculo</h3
+                                                                    > </div> 
+                                                                <div  class="panel-body" style = "padding: 1%"> 
+                                                                    <%out.print(propuestaSelec.getCategoria());%>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
-                        <div class="panel panel-primary">
-                            <div class="panel-heading" style="padding: 1%">
-                                <h3 class="panel-title">Tipo de espectaculo</h3>
-                            </div>
-                            <div class="panel-body" style="padding: 1%">
-                                <%out.print(propuestaSelec.getCategoria());%>
-                            </div>
-                        </div>
+                                                    <div class="form-group">
+                                                        <div class="col-xs-6">
+                                                            <div class="panel panel-primary">
+                                                                <div class="panel-heading" style = "padding: 1%"
+                                                                     > <h3 
+                                                                        class="panel-title">Lugar</h3
+                                                                    > </div> 
+                                                                <div  class="panel-body" style = "padding: 1%"> 
+                                                                    <%out.print(propuestaSelec.getLugar());%>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
-                        <div class="panel panel-primary">
-                            <div class="panel-heading" style="padding: 1%">
-                                <h3 class="panel-title">Lugar</h3>
-                            </div>
-                            <div class="panel-body" style="padding: 1%">
-                                <%out.print(propuestaSelec.getLugar());%>
-                            </div>
-                        </div>
-                        <div class="panel panel-primary">
-                            <div class="panel-heading" style="padding: 1%">
-                                <h3 class="panel-title">Estado Actual</h3>
-                            </div>
-                            <div class="panel-body" style="padding: 1%">
-                                <%if (propuestaSelec.getEstadoActual()== TipoE.EN_FINANCIACION.value().toString())
-                                        out.print("En Financiacion");
-                                    else if (propuestaSelec.getEstadoActual()== TipoE.NO_FINANCIADA.value().toString())
-                                        out.print("No Financiada");
-                                    else
-                                        out.print(propuestaSelec.getEstadoActual());
-                                    %>
-                            </div>
-                        </div>
+                                                    <div class="form-group">
+                                                        <div class="col-xs-6">
+                                                            <div class="panel panel-primary">
+                                                                <div class="panel-heading" style = "padding: 1%"
+                                                                     > <h3 
+                                                                        class="panel-title">Estado Actual</h3
+                                                                    > </div> 
+                                                                <div  class="panel-body" style = "padding: 1%"> 
+                                                                    <%if (propuestaSelec.getEstadoActual() == TipoE.EN_FINANCIACION.value().toString()) {
+                                                                            out.print("En Financiacion");
+                                                                        } else if (propuestaSelec.getEstadoActual() == TipoE.NO_FINANCIADA.value().toString()) {
+                                                                            out.print("No Financiada");
+                                                                        } else {
+                                                                            out.print(propuestaSelec.getEstadoActual());
+                                                                        }
+                                                                    %>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
-                        <div class="panel panel-primary">
-                            <div class="panel-heading" style="padding: 1%">
-                                <h3 class="panel-title">Fecha de relizacion</h3>
-                            </div>
-                            <div class="panel-body" style="padding: 1%">
-                                <% out.print(propuestaSelec.getFechaR());%>
-                            </div>
-                        </div>
+                                                    <div class="form-group">
+                                                        <div class="col-xs-6">
+                                                            <div class="panel panel-primary">
+                                                                <div class="panel-heading" style = "padding: 1%"
+                                                                     > <h3 
+                                                                        class="panel-title">Fecha de relizacion</h3
+                                                                    > </div> 
+                                                                <div  class="panel-body" style = "padding: 1%"> 
+                                                                    <%out.print(propuestaSelec.getFechaR());%>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
-                        <div class="panel panel-primary">
-                            <div class="panel-heading" style="padding: 1%">
-                                <h3 class="panel-title">Precio de entrada</h3>
-                            </div>
-                            <div class="panel-body" style="padding: 1%">
-                                <%out.print(propuestaSelec.getMontoE());%>
-                            </div>
-                        </div>
 
-                        <div class="panel panel-primary">
-                            <div class="panel-heading" style="padding: 1%">
-                                <h3 class="panel-title">Monto Final</h3>
-                            </div>
-                            <div class="panel-body" style="padding: 1%">
-                                <%out.print(propuestaSelec.getMontoTot());%>
-                            </div>
-                        </div>
+                                                    <div class="form-group">
+                                                        <div class="col-xs-6">
+                                                            <div class="panel panel-primary">
+                                                                <div class="panel-heading" style = "padding: 1%"
+                                                                     > <h3 
+                                                                        class="panel-title">Precio de entrada</h3
+                                                                    > </div> 
+                                                                <div  class="panel-body" style = "padding: 1%"> 
+                                                                    <%out.print(propuestaSelec.getMontoE());%>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
-                        <div class="panel panel-primary">
-                            <div class="panel-heading" style="padding: 1%">
-                                <h3 class="panel-title">Monto Actual</h3>
-                            </div>
-                            <div class="panel-body" style="padding: 1%">
-                                <%out.print(propuestaSelec.getMontoActual());%>
-                            </div>
-                        </div>
+                                                    <div class="form-group">
+                                                        <div class="col-xs-6">
+                                                            <div class="panel panel-primary">
+                                                                <div class="panel-heading" style = "padding: 1%"
+                                                                     > <h3 
+                                                                        class="panel-title">Monto final</h3
+                                                                    > </div> 
+                                                                <div  class="panel-body" style = "padding: 1%"> 
+                                                                    <%out.print(propuestaSelec.getMontoTot());%>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
-                        <div class="panel panel-primary">
-                            <div class="panel-heading" style="padding: 1%">
-                                <h3 class="panel-title">Tipo de retorno</h3>
-                            </div>
-                            <div class="panel-body" style="padding: 1%">
-                                <%out.print(propuestaSelec.getTipoRet());%>
-                            </div>
-                        </div>
+                                                    <div class="form-group">
+                                                        <div class="col-xs-6">
+                                                            <div class="panel panel-primary">
+                                                                <div class="panel-heading" style = "padding: 1%"
+                                                                     > <h3 
+                                                                        class="panel-title">Monto actual</h3
+                                                                    > </div> 
+                                                                <div  class="panel-body" style = "padding: 1%"> 
+                                                                    <%out.print(propuestaSelec.getMontoActual());%>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
-                        <h4 align="center" class="modal-title" id="classModalLabel">
-                            Colaboradores
-                        </h4>
-                        <% if (((List<DtConsultaPropuesta2>) (List<DtConsultaPropuesta2>) request.getAttribute("listaC")).isEmpty()) {
-                                out.print("<h3 align=\"center\" class=\"panel-title\">No existen Colaboradores</h3>");
-                            } else {%>
+                                                    <div class="form-group">
+                                                        <div class="col-xs-6">
+                                                            <div class="panel panel-primary">
+                                                                <div class="panel-heading" style = "padding: 1%"
+                                                                     > <h3 
+                                                                        class="panel-title">Tipo de retorno</h3
+                                                                    > </div> 
+                                                                <div  class="panel-body" style = "padding: 1%"> 
+                                                                    <%out.print(propuestaSelec.getTipoRet());%>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div><!--/tab-pane-->
 
-                        <div style="  overflow-x: auto;">
-                            <table class="table  table-bordered table-hover" style="width: 70%;">
-                                <thead>
-                                    <tr>   
-                                        <th class="active" style = "color: black" >NickName</th>
-                                        <th class="active" style = "color: black" >Nombre</th>
-                                        <th class="active" style = "color: black" >Apellido</th>
-                                        <th class="active" style = "color: black" >Monto Colab.</th>
-                                        <th class="active" style = "color: black" >Fecha R.</th>
-                                    </tr>
-                                </thead>
-                                <div style="overflow: auto">
-                                    <tbody>
-                                        <%
-                                            List<DtConsultaPropuesta2> lista = (List<DtConsultaPropuesta2>) request.getAttribute("listaC");
-                                            for (int i = 0; i < lista.size(); i++) {
-                                                out.print("<tr>");
-                                                out.print("<td><p>" + lista.get(i).getNickColab() + "</p></td>");
-                                                out.print("<td><p>" + lista.get(i).getNombreColab() + "</p></td>");
-                                                out.print("<td><p>" + lista.get(i).getApellidoColab() + "</p></td>");
-                                                out.print("<td><p>" + lista.get(i).getMontoColab() + "</p></td>");
-                                                out.print("<td><p>" + lista.get(i).getFechaR() + "</p></td>");
-                                                out.print("</tr>");
-                                            }
-                                        %>
-                                    </tbody>
-                            </table>
-                        </div>
-                        <% } %>         
-                        <div class="modal-footer">
-                            <%if (request.getSession().getAttribute("usuario_logueado") != null) {
-                                    if (((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickname().compareTo(propuestaSelec.getNickproponente()) == 0) {
-                                        if (propuestaSelec.isEsExtendible()) {
-                                            out.print("<form class=\"form-signin\" action=\"ServletExtenderFinanciacion\" method=\"POST\">");
-                                            out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"TituloP\" value=\"" + propuestaSelec.getTitulo() + "\" readonly=\"readonly\"/>");
-                                            out.print("<button type=\"input\" name=\"seleccionar\" class=\"btn btn-primary\">Extender Financiación</button>");
-                                            out.print("</form>");
-                                        } else if (propuestaSelec.isEsCancelable()) {
-                                            out.print("<form class=\"form-signin\" action=\"ServletCancelarPropuesta\" method=\"POST\">");
-                                            out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"TituloP\" value=\"" + propuestaSelec.getTitulo() + "\" readonly=\"readonly\"/>");
-                                            out.print("<button type=\"input\" name=\"seleccionar\" class=\"btn btn-primary\">Cancelar Propuesta</button>");
-                                            out.print("</form>");
-                                        }
-                                    } else {
-                                        if (propuestaSelec.isEsComentable()) {
-                                            out.print("<form class=\"form-signin\" action=\"ServletComentarPropuesta\" method=\"POST\">");
-                                            out.print("<textarea name=\"texto\" placeholder=\"Escriba un Comentario...\"  required style=\"background-color: white; resize: none;width: 300px; height: 100px;\" ></textarea>");
-                                            out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"TituloP\" value=\"" + propuestaSelec.getTitulo() + "\" readonly=\"readonly\"/>");
-                                            out.print("<button style=\"margin-top: -17%;margin-left: 12%;\" type=\"input\" name=\"seleccionar\" class=\"btn btn-primary\">Comentar propuesta</button>");
-                                            out.print("</form>");
-                                        } else if (propuestaSelec.isEsColaborable()) {
-                                            out.print("<form class=\"form-signin\" action=\"ServletRegistroColaboracion\" method=\"POST\">");
-                                            out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"TituloP\" value=\"" + propuestaSelec.getTitulo() + "\" readonly=\"readonly\"/>");
-                                            out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"Estado\" value=\"" + propuestaSelec.getEstadoActual() + "\" readonly=\"readonly\"/>");
-                                            out.print("<button  type=\"input\" name=\"seleccionar\" class=\"btn btn-primary\">Colaborar en la propuesta</button>");
-                                            out.print("</form>");
-                                        }
-                                    }
-                                }%>
+                                                <div style="color:black"  style="color: black"  class="tab-pane" id="Colaboradores">
 
-                            <a href="javascript:window.history.back();" class="btn btn-danger"> &laquo; Volver</a>
-                        </div>
-                    </div>           
+
+
+                                                    <h4 align="center" class="modal-title" id="classModalLabel">
+                                                        Colaboradores
+                                                    </h4>
+                                                    <% if (((List<DtConsultaPropuesta2>) (List<DtConsultaPropuesta2>) request.getAttribute("listaC")).isEmpty()) {
+                                                            out.print("<h3 align=\"center\" class=\"panel-title\">No existen Colaboradores</h3>");
+                                                        } else {%>
+
+                                                    <div style="  overflow-x: auto;">
+                                                        <table class="table  table-bordered table-hover" style="width: 70%;">
+                                                            <thead>
+                                                                <tr>   
+                                                                    <th class="active" style = "color: black" >NickName</th>
+                                                                    <th class="active" style = "color: black" >Nombre</th>
+                                                                    <th class="active" style = "color: black" >Apellido</th>
+                                                                    <th class="active" style = "color: black" >Monto Colab.</th>
+                                                                    <th class="active" style = "color: black" >Fecha R.</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <div style="overflow: auto">
+                                                                <tbody>
+                                                                    <%
+                                                                        List<DtConsultaPropuesta2> lista = (List<DtConsultaPropuesta2>) request.getAttribute("listaC");
+                                                                        for (int i = 0; i < lista.size(); i++) {
+                                                                            out.print("<tr>");
+                                                                            out.print("<td><p>" + lista.get(i).getNickColab() + "</p></td>");
+                                                                            out.print("<td><p>" + lista.get(i).getNombreColab() + "</p></td>");
+                                                                            out.print("<td><p>" + lista.get(i).getApellidoColab() + "</p></td>");
+                                                                            out.print("<td><p>" + lista.get(i).getMontoColab() + "</p></td>");
+                                                                            out.print("<td><p>" + lista.get(i).getFechaR() + "</p></td>");
+                                                                            out.print("</tr>");
+                                                                        }
+                                                                    %>
+                                                                </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <% } %>         
+                                                    <div class="modal-footer">
+                                                        <%if (request.getSession().getAttribute("usuario_logueado") != null) {
+                                                                if (((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickname().compareTo(propuestaSelec.getNickproponente()) == 0) {
+                                                                    if (propuestaSelec.isEsExtendible()) {
+                                                                        out.print("<form class=\"form-signin\" action=\"ServletExtenderFinanciacion\" method=\"POST\">");
+                                                                        out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"TituloP\" value=\"" + propuestaSelec.getTitulo() + "\" readonly=\"readonly\"/>");
+                                                                        out.print("<button type=\"input\" name=\"seleccionar\" class=\"btn btn-primary\">Extender Financiación</button>");
+                                                                        out.print("</form>");
+                                                                    } else if (propuestaSelec.isEsCancelable()) {
+                                                                        out.print("<form class=\"form-signin\" action=\"ServletCancelarPropuesta\" method=\"POST\">");
+                                                                        out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"TituloP\" value=\"" + propuestaSelec.getTitulo() + "\" readonly=\"readonly\"/>");
+                                                                        out.print("<button type=\"input\" name=\"seleccionar\" class=\"btn btn-primary\">Cancelar Propuesta</button>");
+                                                                        out.print("</form>");
+                                                                    }
+                                                                } else {
+                                                                    if (propuestaSelec.isEsComentable()) {
+                                                                        out.print("<form class=\"form-signin\" action=\"ServletComentarPropuesta\" method=\"POST\">");
+                                                                        out.print("<textarea name=\"texto\" placeholder=\"Escriba un Comentario...\"  required style=\"background-color: white; resize: none;width: 300px; height: 100px;\" ></textarea>");
+                                                                        out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"TituloP\" value=\"" + propuestaSelec.getTitulo() + "\" readonly=\"readonly\"/>");
+                                                                        out.print("<button style=\"margin-top: -17%;margin-left: 12%;\" type=\"input\" name=\"seleccionar\" class=\"btn btn-primary\">Comentar propuesta</button>");
+                                                                        out.print("</form>");
+                                                                    } else if (propuestaSelec.isEsColaborable()) {
+                                                                        out.print("<form class=\"form-signin\" action=\"ServletRegistroColaboracion\" method=\"POST\">");
+                                                                        out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"TituloP\" value=\"" + propuestaSelec.getTitulo() + "\" readonly=\"readonly\"/>");
+                                                                        out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"Estado\" value=\"" + propuestaSelec.getEstadoActual() + "\" readonly=\"readonly\"/>");
+                                                                        out.print("<button  type=\"input\" name=\"seleccionar\" class=\"btn btn-primary\">Colaborar en la propuesta</button>");
+                                                                        out.print("</form>");
+                                                                    }
+                                                                }
+                                                            }%>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div style="text-align: center;margin-left: -21%;">
+
+                                                <a href="javascript:window.history.back();" class="btn btn-primary" > &laquo; Volver</a>
+                                                <a href="ServletInicio" class="btn btn-primary" > &laquo; Volver a inicio</a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div><!--/tab-pane-->
+                            </div><!--/tab-content-->
+                        </div><!--/row-->
+                    </div>
                 </div>
-            </div>
+            </div>     
         </div>
-        <br><br><br><br>
     </body>
-    <jsp:include page="/Vistas/footer.jsp" />
 </html>

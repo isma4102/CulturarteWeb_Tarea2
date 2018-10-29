@@ -18,47 +18,73 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="css/bootstrap.css" rel="stylesheet">
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <script type="text/javascript" src="js/jquery.js"></script>
-        <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
+
         <title>Datos del Usuario</title>
 
     </head>
-    <body>
+    <body class="profile-page sidebar-collapse">
         <jsp:include page="/Vistas/Barra_menu.jsp" />
-
-        <hr>
-        <div class="container bootstrap snippet" style="margin-top: 7%;">
-            <div class="row">
-
-
-            </div>
-            <div class="row">
-                <div class="col-sm-3"><!--left col-->
-                    <%DtUsuario dtu = (DtUsuario) request.getAttribute("Usuario");
-                        DtUsuario nick = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
-                        out.print("<img src=\"/CulturarteWeb/ServletImagenes?nickname=" + dtu.getNickname() + "\" class=\"avatar img-circle img-thumbnail\" alt=\"avatar\">");
-                    %>
-                    <br>
-                </div><!--/col-3-->
-                <div class="col-sm-9">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="#Informacion">Información</a></li>
-                        <li><a data-toggle="tab" href="#Seguidores">Seguidores</a></li>
-                        <li><a data-toggle="tab" href="#Seguidos">Seguidos</a></li>
-                        <li><a data-toggle="tab" href="#PFavoritas">Propuestas favoritas</a></li>
-                            <%if (dtu.isEsproponente()) {%>
-                        <li><a data-toggle = "tab" href = "#PCreadas" > Propuestas creadas</a></li>
-                            <%if (nick.isEsproponente() && dtu.getNickname().compareTo(nick.getNickname()) == 0) { %>
-                        <li><a data-toggle="tab" href="#DesactivarP">Desactivar Cuenta</a></li>
-                            <%}
-                            } else {%>
-                        <li><a data-toggle = "tab" href = "#PCreadas" > Colaboraciones</a></li>
-                            <%}%>
-
-                        <div class="tab-content">
+        <%DtUsuario dtu = (DtUsuario) request.getAttribute("Usuario");
+            DtUsuario nick = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
+        %>
+        <div class="page-header header-filter" data-parallax="true" style="margin-top: -20px;background-color: #0c7cd5"></div>
+        <div style="margin-left: 2%;" class="main main-raised">
+            <div style="margin-bottom: 16%;" class="profile-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 ml-auto mr-auto">
+                            <div class="profile">
+                                <div class="avatar">
+                                    <img src="Imagenes/nadie.png" alt="Circle Image" class="img-raised rounded-circle img-fluid">
+                                </div>
+                                <div class="name">
+                                    <h1 class="title"><%=dtu.getNickname()%></h1>
+                                    <h3>  <%
+                                        if (dtu.isEsproponente()) {
+                                            out.println("Proponente");
+                                        } else {
+                                            out.println("Colaborador");
+                                        }%></h3>
+                                    <a class="btn btn-just-icon btn-link btn-dribbble"></a>
+                                    <a><img style="width: 5%;" src="Imagenes/Web.png"><% out.print(dtu.getCorreo()); %></a>
+                                </div>
+                            </div>
+                            <div class="follow">
+                                <button class="btn btn-fab btn-primary btn-round" rel="tooltip" title="Seguir a este usuario">
+                                    <i class="material-icons">+</i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="description text-center">
+                        <p> <%if (dtu.getBiografia() != null) {
+                                out.println(dtu.getBiografia());
+                            }%></p>
+                    </div>
+                </div>
+                <div style="font-size: 73%;" class="card card-nav-tabs card-plain">
+                    <div class="card-header card-header-danger">
+                        <div class="nav-tabs-navigation">
+                            <div class="nav-tabs-wrapper">
+                                <ul class="nav nav-tabs" data-tabs="tabs">
+                                    <li class="active"><a style="color: white" data-toggle="tab" href="#Informacion">Información</a></li>
+                                    <li><a style="color: white" data-toggle="tab" href="#Seguidores">Seguidores</a></li>
+                                    <li><a style="color: white" data-toggle="tab" href="#Seguidos">Seguidos</a></li>
+                                    <li><a style="color: white" data-toggle="tab" href="#PFavoritas">Propuestas favoritas</a></li>
+                                        <%if (dtu.isEsproponente()) {%>
+                                    <li><a style="color: white" data-toggle = "tab" href = "#PCreadas" > Propuestas creadas</a></li>
+                                        <%if (nick.isEsproponente() && dtu.getNickname().compareTo(nick.getNickname()) == 0) { %>
+                                    <li><a style="color: white" data-toggle="tab" href="#DesactivarP">Desactivar Cuenta</a></li>
+                                        <%}
+                                        } else {%>
+                                    <li><a style="color: white" data-toggle = "tab" href = "#PCreadas" > Colaboraciones</a></li>
+                                        <%}%>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body ">
+                        <div class="tab-content text-center">
                             <div style = "color:black" class="tab-pane active" id = "Informacion"> 
                                 <hr>
                                 <div class="form-group">
@@ -480,22 +506,24 @@
                                         </div>
                                     </div>
                                 </form>
+                            </div>
                                 </ul>
                             </div>
-                        </div><!--/tab-pane-->
-                </div><!--/tab-content-->
+                            <div style="text-align: center;margin-left: -21%;">
 
-            </div><!--/row-->
-            <div style="text-align: center;margin-left: -21%;">
+                                <a href="javascript:window.history.back();" class="btn btn-primary" > &laquo; Volver</a>
+                                <a href="ServletInicio" class="btn btn-primary" > &laquo; Volver a inicio</a>
+                            </div>
+                        </div>
 
-                <a href="javascript:window.history.back();" class="btn btn-primary" > &laquo; Volver</a>
-                <a href="ServletInicio" class="btn btn-primary" > &laquo; Volver a inicio</a>
-            </div>
+                    </div>
 
-            <br><br><br><br><br>        
-            <jsp:include page="/Vistas/footer.jsp" />
+                </div>
 
+            </div>   
 
+        </div>  
 
-            </body>
-            </html>
+        <jsp:include page="/Vistas/footer.jsp" />
+    </body>
+</html>
