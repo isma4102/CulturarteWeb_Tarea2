@@ -24,6 +24,7 @@ import servicios.PublicadorConsultarPropuestaService;
 import servicios.PublicadorConsultarUsuario;
 import servicios.PublicadorConsultarUsuarioService;
 
+
 /**
  *
  * @author gabri
@@ -32,6 +33,7 @@ import servicios.PublicadorConsultarUsuarioService;
 public class ServletConsultarUsuario extends HttpServlet {
 
     private PublicadorConsultarUsuario port;
+    private RegistroSitio RS;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,6 +50,7 @@ public class ServletConsultarUsuario extends HttpServlet {
             URL url = new URL("http://127.0.0.1:8280/servicioConsultaU");
             PublicadorConsultarUsuarioService webService = new PublicadorConsultarUsuarioService(url);
             this.port = webService.getPublicadorConsultarUsuarioPort();
+            RS = new RegistroSitio();
 
         } catch (MalformedURLException ex) {
             Logger.getLogger(ServletCancelarPropuesta.class.getName()).log(Level.SEVERE, null, ex);
@@ -63,6 +66,10 @@ public class ServletConsultarUsuario extends HttpServlet {
         }
         List<DtUsuario> usuarios = this.port.listarUsuarios().getLista();
         request.setAttribute("Usuarios", usuarios);
+        String browserDetails = request.getHeader("User-Agent");
+        String IP = request.getRemoteAddr();
+        String URL = "";
+        RS.ObtenerRegistro(browserDetails, IP, URL);
         request.getRequestDispatcher("Vistas/ConsultarPerfilUsuario.jsp").forward(request, response);
 
     }
