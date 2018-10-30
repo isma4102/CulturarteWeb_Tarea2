@@ -24,7 +24,7 @@
     </head>
     <body class="profile-page sidebar-collapse">
         <jsp:include page="/Vistas/Barra_menu.jsp" />
-        <%DtUsuario dtu = (DtUsuario) request.getAttribute("Usuario");
+        <% DtUsuario dtu = (DtUsuario) request.getAttribute("Usuario");
             DtUsuario nick = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
         %>
         <div class="page-header header-filter" data-parallax="true" style="margin-top: -20px;background-color: #0c7cd5"></div>
@@ -73,7 +73,7 @@
                                     <li><a style="color: white" data-toggle="tab" href="#PFavoritas">Propuestas favoritas</a></li>
                                         <%if (dtu.isEsproponente()) {%>
                                     <li><a style="color: white" data-toggle = "tab" href = "#PCreadas" > Propuestas creadas</a></li>
-                                        <%if (nick.isEsproponente() && dtu.getNickname().compareTo(nick.getNickname()) == 0) { %>
+                                        <%if (nick != null && nick.isEsproponente() && dtu.getNickname().compareTo(nick.getNickname()) == 0) {%>
                                     <li><a style="color: white" data-toggle="tab" href="#DesactivarP">Desactivar Cuenta</a></li>
                                         <%}
                                         } else {%>
@@ -204,7 +204,6 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-xs-6">
-
                                         <div class="panel panel-primary">
                                             <div class="panel-heading" style="padding: 1%">
                                                 <h3 class="panel-title">Sitio</h3>
@@ -508,23 +507,23 @@
                                     </div>
                                 </form>
                             </div>
-                                </ul>
-                            </div>
-                            <div style="text-align: center;margin-left: -21%;">
-
-                                <a href="javascript:window.history.back();" class="btn btn-primary" > &laquo; Volver</a>
-                                <a href="ServletInicio" class="btn btn-primary" > &laquo; Volver a inicio</a>
-                            </div>
+                            </ul>
                         </div>
+                        <div style="text-align: center;margin-left: -21%;">
 
+                            <a href="javascript:window.history.back();" class="btn btn-primary" > &laquo; Volver</a>
+                            <a href="ServletInicio" class="btn btn-primary" > &laquo; Volver a inicio</a>
+                        </div>
                     </div>
 
                 </div>
 
-            </div>   
+            </div>
 
-        </div>  
+        </div>   
 
-        <jsp:include page="/Vistas/footer.jsp" />
-    </body>
+    </div>  
+
+    <jsp:include page="/Vistas/footer.jsp" />
+</body>
 </html>

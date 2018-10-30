@@ -141,6 +141,7 @@ public class Login extends HttpServlet {
             } else {
                 nuevoEstado = EstadoSesion.LOGIN_CORRECTO;
                 request.getSession().setAttribute("usuario_logueado", usrNick);// setea el usuario logueado
+
                 objSesion.setAttribute("estado_sesion", nuevoEstado);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/index.html");
                 dispatcher.forward(request, response);

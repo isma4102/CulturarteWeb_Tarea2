@@ -39,6 +39,18 @@
 <message name="ListarPropuestasNoIngresadasResponse">
 <part name="return" type="tns:dtListInfoPropuesta"></part>
 </message>
+<message name="ListarPropuestasNoIngresadas">
+<part name="nickname" type="xsd:string"></part>
+</message>
+<message name="ListarPropuestasNoIngresadasResponse">
+<part name="return" type="tns:dtListInfoPropuesta"></part>
+</message>
+<message name="retornarImagen">
+<part name="nick" type="xsd:string"></part>
+</message>
+<message name="retornarImagenResponse">
+<part name="return" type="xsd:base64Binary"></part>
+</message>
 <message name="ListarUsuariosRanking"></message>
 <message name="ListarUsuariosRankingResponse">
 <part name="return" type="tns:dtListUsuario"></part>
@@ -47,6 +59,10 @@
 <part name="nickname" type="xsd:string"></part>
 </message>
 <message name="ObtenerSeguidoresResponse">
+<part name="return" type="tns:dtListUsuario"></part>
+</message>
+<message name="ListarUsuariosRanking"></message>
+<message name="ListarUsuariosRankingResponse">
 <part name="return" type="tns:dtListUsuario"></part>
 </message>
 <message name="getMontoColaboracion">
@@ -130,6 +146,15 @@
 <input wsam:Action="http://Servicios/PublicadorConsultarUsuario/ListarPropuestasDeProponenteXRequest" message="tns:ListarPropuestasDeProponenteX"></input>
 <output wsam:Action="http://Servicios/PublicadorConsultarUsuario/ListarPropuestasDeProponenteXResponse" message="tns:ListarPropuestasDeProponenteXResponse"></output>
 <fault message="tns:Exception" name="Exception" wsam:Action="http://Servicios/PublicadorConsultarUsuario/ListarPropuestasDeProponenteX/Fault/Exception"></fault>
+</operation>
+<operation name="ListarPropuestasNoIngresadas">
+<input wsam:Action="http://Servicios/PublicadorConsultarUsuario/ListarPropuestasNoIngresadasRequest" message="tns:ListarPropuestasNoIngresadas"></input>
+<output wsam:Action="http://Servicios/PublicadorConsultarUsuario/ListarPropuestasNoIngresadasResponse" message="tns:ListarPropuestasNoIngresadasResponse"></output>
+</operation>
+<operation name="retornarImagen">
+<input wsam:Action="http://Servicios/PublicadorConsultarUsuario/retornarImagenRequest" message="tns:retornarImagen"></input>
+<output wsam:Action="http://Servicios/PublicadorConsultarUsuario/retornarImagenResponse" message="tns:retornarImagenResponse"></output>
+<fault message="tns:Exception" name="Exception" wsam:Action="http://Servicios/PublicadorConsultarUsuario/retornarImagen/Fault/Exception"></fault>
 </operation>
 <operation name="getDtColaborador">
 <input wsam:Action="http://Servicios/PublicadorConsultarUsuario/getDtColaboradorRequest" message="tns:getDtColaborador"></input>
@@ -359,6 +384,54 @@
 </output>
 </operation>
 <operation name="DejarSeguirUsuario">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
+<fault name="Exception">
+<soap:fault name="Exception" use="literal"></soap:fault>
+</fault>
+</operation>
+<operation name="VerPropuestas">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
+</operation>
+<operation name="ObtenerFavoritas">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
+</operation>
+<operation name="ObtenerDtUsuario">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
+</operation>
+<operation name="AgregarFavortio">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
+</operation>
+<operation name="SeguirUsuario">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>

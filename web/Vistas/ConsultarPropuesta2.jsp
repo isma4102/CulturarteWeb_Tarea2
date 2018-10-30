@@ -20,7 +20,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Información de Propuesta</title>
-
+        
 
     </head>
     <body class="hidden-sn grey-skin"> 

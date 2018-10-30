@@ -88,17 +88,12 @@ public class ServletConsultarPropuesta extends HttpServlet {
 
         String tit = request.getParameter("TituloP");
         String titulo = new String(tit.getBytes("ISO-8859-1"), "UTF-8");
-        DtUsuario proponente = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
-        String nickProp = " ";
-
-        if (proponente != null) {
-            nickProp = proponente.getNickname();
-        }
 
         try {
+            DtUsuario proponente = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
 
             if (request.getSession().getAttribute("usuario_logueado") != null) {
-                DtConsultaPropuesta dtinfo = this.port.seleccionarPropuesta(titulo, nickProp);
+                DtConsultaPropuesta dtinfo = this.port.seleccionarPropuesta(titulo, proponente.getNickname());
                 request.setAttribute("propuesta", dtinfo);
             } else {
                 DtConsultaPropuesta dtinfo = this.port.seleccionarPropuesta2(titulo);

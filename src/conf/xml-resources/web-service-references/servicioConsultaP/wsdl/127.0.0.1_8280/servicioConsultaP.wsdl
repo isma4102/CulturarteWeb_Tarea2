@@ -82,12 +82,26 @@
 <message name="ListarPropuestasX_deProponenteX">
 <part name="nick" type="xsd:string"></part>
 </message>
-<message name="ListarPropuestasX_deProponenteXResponse">
+<message name="ListarPropuestasCancelarResponse">
 <part name="return" type="tns:dtListNickTitProp"></part>
 </message>
 <message name="ListarPropuestasNoI"></message>
 <message name="ListarPropuestasNoIResponse">
 <part name="return" type="tns:dtListInfoPropuesta"></part>
+</message>
+<message name="ListarPropuestasNoI"></message>
+<message name="ListarPropuestasNoIResponse">
+<part name="return" type="tns:dtListInfoPropuesta"></part>
+</message>
+<message name="ListarPropuestasX_deProponenteX">
+<part name="nick" type="xsd:string"></part>
+</message>
+<message name="ListarPropuestasX_deProponenteXResponse">
+<part name="return" type="tns:dtListNickTitProp"></part>
+</message>
+<message name="ListarPropuestas"></message>
+<message name="ListarPropuestasResponse">
+<part name="return" type="tns:dtListNickTitProp"></part>
 </message>
 <portType name="PublicadorConsultarPropuesta">
 <operation name="publicarConsultaPropuesta">
@@ -175,6 +189,27 @@
 <output>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
+</operation>
+<operation name="ListarPropuestasCategoria">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
+</operation>
+<operation name="retornarImagen">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
+<fault name="Exception">
+<soap:fault name="Exception" use="literal"></soap:fault>
+</fault>
 </operation>
 <operation name="ExtenderFinanciacion">
 <soap:operation soapAction=""></soap:operation>
