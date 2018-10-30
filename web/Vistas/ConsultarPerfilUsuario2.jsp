@@ -35,7 +35,7 @@
                         <div class="col-md-6 ml-auto mr-auto">
                             <div class="profile">
                                 <div class="avatar">
-                                    <img src="Imagenes/nadie.png" alt="Circle Image" class="img-raised rounded-circle img-fluid">
+                                    <img src="/CulturarteWeb/ServletImagenes?nickname=<%= dtu.getNickname() %>" alt="Circle Image" class="img-raised rounded-circle img-fluid"/>
                                 </div>
                                 <div class="name">
                                     <h1 class="title"><%=dtu.getNickname()%></h1>
