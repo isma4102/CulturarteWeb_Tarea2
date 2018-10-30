@@ -17,10 +17,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <script type="text/javascript" src="js/jquery.min.js"></script>
+        
         <script type="text/javascript" src="script/FiltrarTabla.js"></script>
         <link rel="stylesheet" type="text/css" href="css/RegistrarColaboracion.css"/>
-        <link href="css/bootstrap.css" rel="stylesheet">
         <title>Culturarte:: Ranking de Usuarios</title>
     </head>
     <body>

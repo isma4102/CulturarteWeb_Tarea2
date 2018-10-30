@@ -109,16 +109,18 @@ public class ServletAltaUsuario extends HttpServlet {
         String sitio = request.getParameter("sitio");
         String biografia = request.getParameter("biografia");
         String tipoP = request.getParameter("tipoP");
+
         if (!pass.equals(pass2)) {
             request.setAttribute("malPass", "Sus contraseñas no coinciden");
             request.getRequestDispatcher("/Vistas/altaUsuario.jsp").forward(request, response);
             return;
         }
+
         String hash = a.sha1(pass);
-        final Part partImagen = request.getPart("imagen");
         byte[] bytes = null;
         String nombreArchivo = null;
         String extensionArchivo = null;
+        final Part partImagen = request.getPart("imagen");
         if (partImagen.getSize() != 0) {
             InputStream data = partImagen.getInputStream();
             final String fileName = Utils.getFileName(partImagen);
@@ -131,10 +133,14 @@ public class ServletAltaUsuario extends HttpServlet {
                 reads = data.read();
             } // while
             bytes = baos.toByteArray();
-            
         }
+
         if (tipoP.equals("proponente")) {
-            ok = this.port.agregarUsuarioProponente(nick, nombre, apellido, correo, fecha, direccion, biografia, sitio, hash,bytes,nombreArchivo,extensionArchivo);
+            if (nombreArchivo != null) {
+                ok = this.port.agregarUsuarioProponente(nick, nombre, apellido, correo, fecha, direccion, biografia, sitio, hash, bytes, nombreArchivo, extensionArchivo);
+            } else {
+                ok = this.port.agregarUsuarioProponente2(nick, nombre, apellido, correo, fecha, direccion, biografia, sitio, hash);
+            }
             if (ok) {
                 request.setAttribute("mensaje", "Se registro exitosamente");
                 DtUsuario user = portCU.obtenerDtUsuario(nick);
@@ -144,7 +150,12 @@ public class ServletAltaUsuario extends HttpServlet {
             }
             request.getRequestDispatcher("/Vistas/altaUsuario.jsp").forward(request, response);
         } else {
-            ok = this.port.agregarUsuarioColaborador(nick, nombre, apellido, correo, fecha, hash,bytes,nombreArchivo,extensionArchivo);
+            if (nombreArchivo != null) {
+                ok = this.port.agregarUsuarioColaborador(nick, nombre, apellido, correo, fecha, hash, bytes, nombreArchivo, extensionArchivo);
+            } else {
+                ok = this.port.agregarUsuarioColaborador2(nick, nombre, apellido, correo, fecha, hash);
+            }
+
             if (ok) {
                 request.setAttribute("mensaje", "Se registro exitosamente");
                 DtUsuario user = portCU.obtenerDtUsuario(nick);

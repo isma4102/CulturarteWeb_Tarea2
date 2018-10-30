@@ -16,10 +16,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Información de Propuesta</title>
-        <script type="text/javascript" src="js/jquery.js"></script> 
-        <link href="css/bootstrap.css" rel="stylesheet">
         <link href="css/RegistrarColaboracion.css" rel="stylesheet">
-        <script src="js/bootstrap.js"></script>
         <script>
             $(document).ready(function ()
             {
