@@ -20,7 +20,6 @@ import servicios.DtColaboraciones;
 import servicios.DtUsuario;
 import servicios.DtinfoColaborador;
 import servicios.DtinfoPropuesta;
-import servicios.PublicadorConsultarPropuestaService;
 import servicios.PublicadorConsultarUsuario;
 import servicios.PublicadorConsultarUsuarioService;
 
@@ -116,7 +115,6 @@ public class ServletConsultarUsuario extends HttpServlet {
                     }
                 }
             } else {
-
                 List<DtinfoPropuesta> colaboraciones = this.port.verPropuestas(nickname).getLista();
                 DtinfoColaborador dtc = this.port.getDtColaborador(nickname);
                 List<DtColaboraciones> monto = this.port.getMontoColaboracion(dtc.getNickname()).getLista();
