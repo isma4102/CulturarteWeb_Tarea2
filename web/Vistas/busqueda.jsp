@@ -76,9 +76,10 @@
         %>   
     </div>
 </div>
+    <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.min.js"></script>
 <script src="script/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
+
 <%--<script src="script/filtroBusqueda.js"></script>--%>
 
 
