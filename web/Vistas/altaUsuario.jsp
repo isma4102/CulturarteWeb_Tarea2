@@ -38,7 +38,7 @@
                         <div style="width: 158%;margin-top: 24%;" class="card card-login">
                             
                                 <div class="card-header card-header-primary text-center">
-                                    <font face="">Registrarse</font>
+                                    <h2 class="card-title">Registrarse</h2>
                                    
                                 </div>
                                 <div class="card-body">
