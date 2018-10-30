@@ -37,11 +37,12 @@
                         <div class="col-md-6 ml-auto mr-auto">
                             <div class="container bootstrap snippet" style="margin-top: 7%;">
                                 <div class="row">
+
                                     <div class="col-sm-3"><!--left col-->
-                                        <div style="width: 273%;margin-left: -392%;" class="card card-blog">
+                                        <div style="width: 328%;;margin-left: -392%;" class="card card-blog">
                                             <div class="card-header card-header-image">
                                                 <a href="#pablo">
-                                                    <img class="img" src="/CulturarteWeb/ServletImagenes?TituloP=<%=propuestaSelec.getTitulo()%>">
+                                                    <img style="width: 314px;;height: 319px;" class="img" src="/CulturarteWeb/ServletImagenes?TituloP=<%=propuestaSelec.getTitulo()%>">
                                                     <div class="card-title">
 
                                                     </div>
@@ -49,7 +50,7 @@
                                             </div>
                                             <div class="card-body">
                                                 <h2 align="center" class="card-category text-info"><% out.print(propuestaSelec.getTitulo()); %></h2>
-                                                <p class="card-description">
+                                                <p style="height: 176px;" class="card-description">
                                                     <%out.print(propuestaSelec.getDescripcion());%>
                                                 </p>
                                             </div>
@@ -61,8 +62,9 @@
                                             <div class="nav-tabs-navigation">
                                                 <div class="nav-tabs-wrapper">
                                                     <ul class="nav nav-tabs" data-tabs="tabs">
-                                                        <li class="active"><a style="color: white" data-toggle="tab" href="#Informacion">Información</a></li>
-                                                        <li><a style="color: white" data-toggle="tab" href="#Colaboradores">Colaboradores</a></li>
+                                                        <li class="active"><a style="color: black" data-toggle="tab" href="#Informacion">Información</a></li>
+                                                        <li><a style="color: black" data-toggle="tab" href="#Colaboradores">Colaboradores</a></li>
+                                                          <li><a style="color: black" data-toggle="tab" href="#Comentarios">Comentarios</a></li>
 
                                                     </ul>
                                                 </div>
@@ -263,24 +265,44 @@
                                                                     }
                                                                 }
                                                             }%>
+                                                    </div>
+                                                </div>
+                                                <div style="color:black"  style="color: black"  class="tab-pane" id="Comentarios">
+                                                    <div class="row">
+                                                        <div class="col-sm-1">
+                                                            <div class="thumbnail">
+                                                                <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                                                            </div><!-- /thumbnail -->
+                                                        </div><!-- /col-sm-1 -->
+
+                                                        <div class="col-sm-5">
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-heading">
+                                                                    <strong>myusername</strong> <span class="text-muted">commented 5 days ago</span>
+                                                                </div>
+                                                                <div class="panel-body">
+                                                                    Panel content
+                                                                </div><!-- /panel-body -->
+                                                            </div><!-- /panel panel-default -->
+                                                        </div><!-- /col-sm-5 -->
 
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div style="text-align: center;margin-left: -21%;">
+                                                <div style="text-align: center;margin-left: -21%;">
 
-                                                <a href="javascript:window.history.back();" class="btn btn-primary" > &laquo; Volver</a>
-                                                <a href="ServletInicio" class="btn btn-primary" > &laquo; Volver a inicio</a>
+                                                    <a href="javascript:window.history.back();" class="btn btn-primary" > &laquo; Volver</a>
+                                                    <a href="ServletInicio" class="btn btn-primary" > &laquo; Volver a inicio</a>
+                                                </div>
                                             </div>
+
                                         </div>
 
-                                    </div>
-                                </div><!--/tab-pane-->
-                            </div><!--/tab-content-->
-                        </div><!--/row-->
+                                    </div><!--/tab-pane-->
+                                </div><!--/tab-content-->
+                            </div><!--/row-->
+                        </div>
                     </div>
-                </div>
-            </div>     
-        </div>
+                </div>     
+            </div>
     </body>
 </html>

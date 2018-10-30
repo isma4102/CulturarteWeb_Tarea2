@@ -17,7 +17,7 @@
             </button>
         </div>
         <div class="collapse navbar-collapse">
-            <ul style="float: right;margin-right: -36%;" class="navbar-nav ml-auto">
+            <ul style="float: right;margin-right: -22%; " class="navbar-nav ml-auto">
                 <form style="margin-top: 16px;" action="servletBuscador" method="GET" class="navbar-form navbar-right">
                     <input name="busqueda" type="text" class="form-control" placeholder="Titulo, descripcion, lugar..." required/>
                     <input style="margin-left: 59%;margin-top: -56px;" class="btn btn-default" id="btnBuscar" type="submit" value="Buscar"/>
@@ -41,7 +41,7 @@
                 <li class="dropdown nav-item">
                     <a href="#" class="profile-photo dropdown-toggle nav-link" data-toggle="dropdown">
                         <div class="profile-photo-small">
-                            <img src="Imagenes/nadie.png" alt="Circle Image" class="rounded-circle img-fluid">
+                            <img src="/CulturarteWeb/ServletImagenes?nickname=<%= ((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickname() %>" class="rounded-circle img-fluid">
                         </div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
