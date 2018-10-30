@@ -97,6 +97,20 @@
 <xs:element name="nickname" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="password" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="seguidores">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="key" minOccurs="0" type="xs:string"></xs:element>
+<xs:element name="value" minOccurs="0" type="tns:usuario"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
 </xs:sequence>
 </xs:complexType>
 

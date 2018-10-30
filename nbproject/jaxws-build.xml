@@ -42,21 +42,21 @@
         <delete dir="${build.generated.sources.dir}/jax-ws/servicios"/>
         <delete dir="${build.generated.dir}/jax-wsCache/servicioAltaP"/>
     </target>
-    <target name="wsimport-client-servicioAltaUsuario" depends="wsimport-init">
-        <mkdir dir="${build.generated.dir}/jax-wsCache/servicioAltaUsuario"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/servicioAltaUsuario" destdir="${build.generated.dir}/jax-wsCache/servicioAltaUsuario" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/servicioAltaUsuario/wsdl/127.0.0.1_8280/servicioAltaUsuario.wsdl" catalog="catalog.xml" extension="true" verbose="true" fork="false" wsdlLocation="http://127.0.0.1:8280/servicioAltaUsuario?wsdl" xnocompile="true" xendorsed="true">
-            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/servicioAltaUsuario/wsdl/127.0.0.1_8280/servicioAltaUsuario.wsdl"/>
-            <produces dir="${build.generated.dir}/jax-wsCache/servicioAltaUsuario"/>
+    <target name="wsimport-client-servicioConsultaP" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/servicioConsultaP"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/servicioConsultaP" destdir="${build.generated.dir}/jax-wsCache/servicioConsultaP" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/servicioConsultaP/wsdl/127.0.0.1_8280/servicioConsultaP.wsdl" catalog="catalog.xml" extension="true" verbose="true" fork="false" wsdlLocation="http://127.0.0.1:8280/servicioConsultaP?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/servicioConsultaP/wsdl/127.0.0.1_8280/servicioConsultaP.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/servicioConsultaP"/>
         </wsimport>
         <copy todir="${build.generated.sources.dir}/jax-ws">
-            <fileset dir="${build.generated.dir}/jax-wsCache/servicioAltaUsuario">
+            <fileset dir="${build.generated.dir}/jax-wsCache/servicioConsultaP">
                 <include name="**/*.java"/>
             </fileset>
         </copy>
     </target>
-    <target name="wsimport-client-clean-servicioAltaUsuario" depends="-init-project">
+    <target name="wsimport-client-clean-servicioConsultaP" depends="-init-project">
         <delete dir="${build.generated.sources.dir}/jax-ws/servicios"/>
-        <delete dir="${build.generated.dir}/jax-wsCache/servicioAltaUsuario"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/servicioConsultaP"/>
     </target>
     <target name="wsimport-client-servicioConsultaU" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/servicioConsultaU"/>
@@ -74,37 +74,21 @@
         <delete dir="${build.generated.sources.dir}/jax-ws/servicios"/>
         <delete dir="${build.generated.dir}/jax-wsCache/servicioConsultaU"/>
     </target>
-    <target name="wsimport-client-servicioConsultaP" depends="wsimport-init">
-        <mkdir dir="${build.generated.dir}/jax-wsCache/servicioConsultaP"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/servicioConsultaP" destdir="${build.generated.dir}/jax-wsCache/servicioConsultaP" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/servicioConsultaP/wsdl/127.0.0.1_8280/servicioConsultaP.wsdl" catalog="catalog.xml" extension="true" verbose="true" fork="false" wsdlLocation="http://127.0.0.1:8280/servicioConsultaP?wsdl" xnocompile="true" xendorsed="true">
-            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/servicioConsultaP/wsdl/127.0.0.1_8280/servicioConsultaP.wsdl"/>
-            <produces dir="${build.generated.dir}/jax-wsCache/servicioConsultaP"/>
+    <target name="wsimport-client-servicioAltaUsuario" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/servicioAltaUsuario"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/servicioAltaUsuario" destdir="${build.generated.dir}/jax-wsCache/servicioAltaUsuario" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/servicioAltaUsuario/wsdl/127.0.0.1_8280/servicioAltaUsuario.wsdl" catalog="catalog.xml" extension="true" verbose="true" fork="false" wsdlLocation="http://127.0.0.1:8280/servicioAltaUsuario?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/servicioAltaUsuario/wsdl/127.0.0.1_8280/servicioAltaUsuario.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/servicioAltaUsuario"/>
         </wsimport>
         <copy todir="${build.generated.sources.dir}/jax-ws">
-            <fileset dir="${build.generated.dir}/jax-wsCache/servicioConsultaP">
+            <fileset dir="${build.generated.dir}/jax-wsCache/servicioAltaUsuario">
                 <include name="**/*.java"/>
             </fileset>
         </copy>
     </target>
-    <target name="wsimport-client-clean-servicioConsultaP" depends="-init-project">
+    <target name="wsimport-client-clean-servicioAltaUsuario" depends="-init-project">
         <delete dir="${build.generated.sources.dir}/jax-ws/servicios"/>
-        <delete dir="${build.generated.dir}/jax-wsCache/servicioConsultaP"/>
-    </target>
-    <target name="wsimport-client-servicioRegistrarC" depends="wsimport-init">
-        <mkdir dir="${build.generated.dir}/jax-wsCache/servicioRegistrarC"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/servicioRegistrarC" destdir="${build.generated.dir}/jax-wsCache/servicioRegistrarC" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/servicioRegistrarC/wsdl/127.0.0.1_8280/servicioRegistrarC.wsdl" catalog="catalog.xml" extension="true" verbose="true" fork="false" wsdlLocation="http://127.0.0.1:8280/servicioRegistrarC?wsdl" xnocompile="true" xendorsed="true">
-            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/servicioRegistrarC/wsdl/127.0.0.1_8280/servicioRegistrarC.wsdl"/>
-            <produces dir="${build.generated.dir}/jax-wsCache/servicioRegistrarC"/>
-        </wsimport>
-        <copy todir="${build.generated.sources.dir}/jax-ws">
-            <fileset dir="${build.generated.dir}/jax-wsCache/servicioRegistrarC">
-                <include name="**/*.java"/>
-            </fileset>
-        </copy>
-    </target>
-    <target name="wsimport-client-clean-servicioRegistrarC" depends="-init-project">
-        <delete dir="${build.generated.sources.dir}/jax-ws/servicios"/>
-        <delete dir="${build.generated.dir}/jax-wsCache/servicioRegistrarC"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/servicioAltaUsuario"/>
     </target>
     <target name="wsimport-client-servicioInicio" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/servicioInicio"/>
@@ -122,101 +106,21 @@
         <delete dir="${build.generated.sources.dir}/jax-ws/servicios"/>
         <delete dir="${build.generated.dir}/jax-wsCache/servicioInicio"/>
     </target>
-    <target name="wsimport-client-servicioAltaP_1" depends="wsimport-init">
-        <mkdir dir="${build.generated.dir}/jax-wsCache/servicioAltaP_1"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/servicioAltaP_1" destdir="${build.generated.dir}/jax-wsCache/servicioAltaP_1" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/servicioAltaP_1/wsdl/127.0.0.1_8280/servicioAltaP.wsdl" catalog="catalog.xml" extension="true" verbose="true" fork="false" wsdlLocation="http://127.0.0.1:8280/servicioAltaP?wsdl" xnocompile="true" xendorsed="true">
-            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/servicioAltaP_1/wsdl/127.0.0.1_8280/servicioAltaP.wsdl"/>
-            <produces dir="${build.generated.dir}/jax-wsCache/servicioAltaP_1"/>
+    <target name="wsimport-client-servicioRegistrarC" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/servicioRegistrarC"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/servicioRegistrarC" destdir="${build.generated.dir}/jax-wsCache/servicioRegistrarC" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/servicioRegistrarC/wsdl/127.0.0.1_8280/servicioRegistrarC.wsdl" catalog="catalog.xml" extension="true" verbose="true" fork="false" wsdlLocation="http://127.0.0.1:8280/servicioRegistrarC?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/servicioRegistrarC/wsdl/127.0.0.1_8280/servicioRegistrarC.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/servicioRegistrarC"/>
         </wsimport>
         <copy todir="${build.generated.sources.dir}/jax-ws">
-            <fileset dir="${build.generated.dir}/jax-wsCache/servicioAltaP_1">
+            <fileset dir="${build.generated.dir}/jax-wsCache/servicioRegistrarC">
                 <include name="**/*.java"/>
             </fileset>
         </copy>
     </target>
-    <target name="wsimport-client-clean-servicioAltaP_1" depends="-init-project">
+    <target name="wsimport-client-clean-servicioRegistrarC" depends="-init-project">
         <delete dir="${build.generated.sources.dir}/jax-ws/servicios"/>
-        <delete dir="${build.generated.dir}/jax-wsCache/servicioAltaP_1"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/servicioRegistrarC"/>
     </target>
-    <target name="wsimport-client-servicioConsultaP_1" depends="wsimport-init">
-        <mkdir dir="${build.generated.dir}/jax-wsCache/servicioConsultaP_1"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/servicioConsultaP_1" destdir="${build.generated.dir}/jax-wsCache/servicioConsultaP_1" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/servicioConsultaP_1/wsdl/127.0.0.1_8280/servicioConsultaP.wsdl" catalog="catalog.xml" extension="true" verbose="true" fork="false" wsdlLocation="http://127.0.0.1:8280/servicioConsultaP?wsdl" xnocompile="true" xendorsed="true">
-            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/servicioConsultaP_1/wsdl/127.0.0.1_8280/servicioConsultaP.wsdl"/>
-            <produces dir="${build.generated.dir}/jax-wsCache/servicioConsultaP_1"/>
-        </wsimport>
-        <copy todir="${build.generated.sources.dir}/jax-ws">
-            <fileset dir="${build.generated.dir}/jax-wsCache/servicioConsultaP_1">
-                <include name="**/*.java"/>
-            </fileset>
-        </copy>
-    </target>
-    <target name="wsimport-client-clean-servicioConsultaP_1" depends="-init-project">
-        <delete dir="${build.generated.sources.dir}/jax-ws/servicios"/>
-        <delete dir="${build.generated.dir}/jax-wsCache/servicioConsultaP_1"/>
-    </target>
-    <target name="wsimport-client-servicioAltaUsuario_1" depends="wsimport-init">
-        <mkdir dir="${build.generated.dir}/jax-wsCache/servicioAltaUsuario_1"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/servicioAltaUsuario_1" destdir="${build.generated.dir}/jax-wsCache/servicioAltaUsuario_1" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/servicioAltaUsuario_1/wsdl/127.0.0.1_8280/servicioAltaUsuario.wsdl" catalog="catalog.xml" extension="true" verbose="true" fork="false" wsdlLocation="http://127.0.0.1:8280/servicioAltaUsuario?wsdl" xnocompile="true" xendorsed="true">
-            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/servicioAltaUsuario_1/wsdl/127.0.0.1_8280/servicioAltaUsuario.wsdl"/>
-            <produces dir="${build.generated.dir}/jax-wsCache/servicioAltaUsuario_1"/>
-        </wsimport>
-        <copy todir="${build.generated.sources.dir}/jax-ws">
-            <fileset dir="${build.generated.dir}/jax-wsCache/servicioAltaUsuario_1">
-                <include name="**/*.java"/>
-            </fileset>
-        </copy>
-    </target>
-    <target name="wsimport-client-clean-servicioAltaUsuario_1" depends="-init-project">
-        <delete dir="${build.generated.sources.dir}/jax-ws/servicios"/>
-        <delete dir="${build.generated.dir}/jax-wsCache/servicioAltaUsuario_1"/>
-    </target>
-    <target name="wsimport-client-servicioConsultaU_1" depends="wsimport-init">
-        <mkdir dir="${build.generated.dir}/jax-wsCache/servicioConsultaU_1"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/servicioConsultaU_1" destdir="${build.generated.dir}/jax-wsCache/servicioConsultaU_1" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/servicioConsultaU_1/wsdl/127.0.0.1_8280/servicioConsultaU.wsdl" catalog="catalog.xml" extension="true" verbose="true" fork="false" wsdlLocation="http://127.0.0.1:8280/servicioConsultaU?wsdl" xnocompile="true" xendorsed="true">
-            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/servicioConsultaU_1/wsdl/127.0.0.1_8280/servicioConsultaU.wsdl"/>
-            <produces dir="${build.generated.dir}/jax-wsCache/servicioConsultaU_1"/>
-        </wsimport>
-        <copy todir="${build.generated.sources.dir}/jax-ws">
-            <fileset dir="${build.generated.dir}/jax-wsCache/servicioConsultaU_1">
-                <include name="**/*.java"/>
-            </fileset>
-        </copy>
-    </target>
-    <target name="wsimport-client-clean-servicioConsultaU_1" depends="-init-project">
-        <delete dir="${build.generated.sources.dir}/jax-ws/servicios"/>
-        <delete dir="${build.generated.dir}/jax-wsCache/servicioConsultaU_1"/>
-    </target>
-    <target name="wsimport-client-servicioInicio_1" depends="wsimport-init">
-        <mkdir dir="${build.generated.dir}/jax-wsCache/servicioInicio_1"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/servicioInicio_1" destdir="${build.generated.dir}/jax-wsCache/servicioInicio_1" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/servicioInicio_1/wsdl/127.0.0.1_8280/servicioInicio.wsdl" catalog="catalog.xml" extension="true" verbose="true" fork="false" wsdlLocation="http://127.0.0.1:8280/servicioInicio?wsdl" xnocompile="true" xendorsed="true">
-            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/servicioInicio_1/wsdl/127.0.0.1_8280/servicioInicio.wsdl"/>
-            <produces dir="${build.generated.dir}/jax-wsCache/servicioInicio_1"/>
-        </wsimport>
-        <copy todir="${build.generated.sources.dir}/jax-ws">
-            <fileset dir="${build.generated.dir}/jax-wsCache/servicioInicio_1">
-                <include name="**/*.java"/>
-            </fileset>
-        </copy>
-    </target>
-    <target name="wsimport-client-clean-servicioInicio_1" depends="-init-project">
-        <delete dir="${build.generated.sources.dir}/jax-ws/servicios"/>
-        <delete dir="${build.generated.dir}/jax-wsCache/servicioInicio_1"/>
-    </target>
-    <target name="wsimport-client-servicioRegistrarC_1" depends="wsimport-init">
-        <mkdir dir="${build.generated.dir}/jax-wsCache/servicioRegistrarC_1"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/servicioRegistrarC_1" destdir="${build.generated.dir}/jax-wsCache/servicioRegistrarC_1" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/servicioRegistrarC_1/wsdl/127.0.0.1_8280/servicioRegistrarC.wsdl" catalog="catalog.xml" extension="true" verbose="true" fork="false" wsdlLocation="http://127.0.0.1:8280/servicioRegistrarC?wsdl" xnocompile="true" xendorsed="true">
-            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/servicioRegistrarC_1/wsdl/127.0.0.1_8280/servicioRegistrarC.wsdl"/>
-            <produces dir="${build.generated.dir}/jax-wsCache/servicioRegistrarC_1"/>
-        </wsimport>
-        <copy todir="${build.generated.sources.dir}/jax-ws">
-            <fileset dir="${build.generated.dir}/jax-wsCache/servicioRegistrarC_1">
-                <include name="**/*.java"/>
-            </fileset>
-        </copy>
-    </target>
-    <target name="wsimport-client-clean-servicioRegistrarC_1" depends="-init-project">
-        <delete dir="${build.generated.sources.dir}/jax-ws/servicios"/>
-        <delete dir="${build.generated.dir}/jax-wsCache/servicioRegistrarC_1"/>
-    </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-servicioAltaP, wsimport-client-servicioAltaUsuario, wsimport-client-servicioConsultaU, wsimport-client-servicioConsultaP, wsimport-client-servicioRegistrarC, wsimport-client-servicioInicio, wsimport-client-servicioAltaP_1, wsimport-client-servicioConsultaP_1, wsimport-client-servicioAltaUsuario_1, wsimport-client-servicioConsultaU_1, wsimport-client-servicioInicio_1, wsimport-client-servicioRegistrarC_1"/>
+    <target name="wsimport-client-generate" depends="wsimport-client-servicioAltaP, wsimport-client-servicioConsultaP, wsimport-client-servicioConsultaU, wsimport-client-servicioAltaUsuario, wsimport-client-servicioInicio, wsimport-client-servicioRegistrarC"/>
 </project>

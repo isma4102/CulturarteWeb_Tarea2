@@ -66,8 +66,11 @@ public class ServletConsultarUsuario extends HttpServlet {
         List<DtUsuario> usuarios = this.port.listarUsuarios().getLista();
         request.setAttribute("Usuarios", usuarios);
         String browserDetails = request.getHeader("User-Agent");
-        String IP = request.getRemoteAddr();
-        String URL = "";
+        String IP = request.getHeader("X-FORWARDED-FOR");  
+   if (IP == null) {  
+       IP = request.getRemoteAddr();  
+   } 
+        String URL = "ConsultarUsuario";
         RS.ObtenerRegistro(browserDetails, IP, URL);
         request.getRequestDispatcher("Vistas/ConsultarPerfilUsuario.jsp").forward(request, response);
 
