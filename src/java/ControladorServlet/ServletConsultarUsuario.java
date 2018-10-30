@@ -20,7 +20,6 @@ import servicios.DtColaboraciones;
 import servicios.DtUsuario;
 import servicios.DtinfoColaborador;
 import servicios.DtinfoPropuesta;
-import servicios.PublicadorConsultarPropuestaService;
 import servicios.PublicadorConsultarUsuario;
 import servicios.PublicadorConsultarUsuarioService;
 
