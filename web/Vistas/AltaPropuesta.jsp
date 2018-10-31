@@ -85,10 +85,9 @@
                                             <input class="form-control" type="file" accept="image/png, image/jpeg" id="imagen" name="imagen"/> <!-- rename it -->
                                         </div>
                                         <br>
-                                        <div>
-                                            <input class="btn btn-primary btn-block form-control" type="submit" value="Crear Propuesta" />
+                                        <div style="text-align: center">
+                                            <input class="btn btn-primary" type="submit" value="Crear Propuesta" />
                                         </div>
-
                                     </form>
                                     <script type="text/javascript" src="/CulturarteWeb/AltaPropuesta.js"></script>
                                     <script>
@@ -112,9 +111,15 @@
                     </div>
                 </div>
             </div>
-                                                 <br><br>
+            <br>
+            <div style="text-align: center">
+                <a href="javascript:window.history.back();" class="btn btn-primary" > &laquo; Volver</a>
+                <a href="ServletInicio" class="btn btn-primary" > &laquo; Volver a inicio</a>
+            </div>
+            <br>
+
         </div>
-                                            <br>                   
+        <br><br><br><br>             
         <jsp:include page="/Vistas/footer.jsp" /> 
     </body>
 </html>

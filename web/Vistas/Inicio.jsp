@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
     <head >        
-        
+          <link href="css/RegistrarColaboracion.css" rel="stylesheet">
         <link rel="icon" type="image/png" href="Imagenes/icono.png"/>
         <title>Culturarte</title>
 
@@ -26,8 +26,9 @@
     </head>
     <body>
 
-
-        <jsp:include page="/Vistas/Barra_menu.jsp" />
+      
+            <jsp:include page="/Vistas/Barra_menu.jsp" />
+        
 
           <div class="page-header header-filter" data-parallax="true" style="background-color: #337ab7;margin-top: -20px;"></div>
         <div style="margin-left: 2%;" class="main main-raised">
@@ -37,8 +38,8 @@
                         <div class="col-md-6 ml-auto mr-auto">
                             <div class="profile" style="width: 252%;margin-left: -75%;font-size: 60%;">
                                         <jsp:include page="/Vistas/Tabs_Propuestas.jsp" />
+                                     
                                         <br><br>
-
         <%
             if (request.getParameter("mensaje") != null) {
                 out.print("</div>");

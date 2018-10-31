@@ -510,7 +510,6 @@
                             </ul>
                         </div>
                         <div style="text-align: center;margin-left: -21%;">
-
                             <a href="javascript:window.history.back();" class="btn btn-primary" > &laquo; Volver</a>
                             <a href="ServletInicio" class="btn btn-primary" > &laquo; Volver a inicio</a>
                         </div>
