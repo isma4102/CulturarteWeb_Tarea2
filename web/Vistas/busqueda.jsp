@@ -79,7 +79,7 @@
     <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.min.js"></script>
 <script src="script/jquery.js"></script>
-
+        <jsp:include page="/Vistas/footer.jsp" />
 <%--<script src="script/filtroBusqueda.js"></script>--%>
 
 

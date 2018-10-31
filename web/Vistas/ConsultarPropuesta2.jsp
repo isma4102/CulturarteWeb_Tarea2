@@ -213,15 +213,15 @@
 
 
 
-                                                    <h4 align="center" class="modal-title" id="classModalLabel">
+                                                    <h2 align="center" class="modal-title" id="classModalLabel">
                                                         Colaboradores
-                                                    </h4>
+                                                    </h2>
                                                     <% if (((List<DtConsultaPropuesta2>) (List<DtConsultaPropuesta2>) request.getAttribute("listaC")).isEmpty()) {
                                                             out.print("<h3 align=\"center\" class=\"panel-title\">No existen Colaboradores</h3>");
                                                         } else {%>
 
                                                     <div style="  overflow-x: auto;">
-                                                        <table class="table  table-bordered table-hover" style="width: 70%;">
+                                                        <table class="table  table-bordered table-hover" >
                                                             <thead>
                                                                 <tr>   
                                                                     <th class="active" style = "color: black" >NickName</th>
@@ -264,7 +264,7 @@
                                                                         out.print("</form>");
                                                                     }
                                                                 } else {
-                                                                   if (propuestaSelec.isEsColaborable()) {
+                                                                    if (propuestaSelec.isEsColaborable()) {
                                                                         out.print("<form class=\"form-signin\" action=\"ServletRegistroColaboracion\" method=\"POST\">");
                                                                         out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"TituloP\" value=\"" + propuestaSelec.getTitulo() + "\" readonly=\"readonly\"/>");
                                                                         out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"Estado\" value=\"" + propuestaSelec.getEstadoActual() + "\" readonly=\"readonly\"/>");
@@ -301,8 +301,8 @@
                                                                 out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"TituloP\" value=\"" + propuestaSelec.getTitulo() + "\" readonly=\"readonly\"/>");
                                                                 out.print("<button name=\"seleccionar\" type=\"submit\" class=\"btn btn-primary\"><i class=\"fa fa-share\"></i>Comentar</button>");
                                                                 out.print("</form>");
-                                                            }
-                                                            else{
+                                                            } else {
+                                                                out.print(" <hr>");
                                                                 out.print("<a >Usted no puede comentar esta propuesta</a>");
                                                             }
                                                         }
@@ -322,12 +322,11 @@
                         </div>
                     </div>
                 </div>     
-
             </div>
-
         </div>
-        <br><br>
-        <jsp:include page="/Vistas/footer.jsp" />                          
-    </body>
+    </div>
+    <br><br>
+    <jsp:include page="/Vistas/footer.jsp" />                          
+</body>
 
 </html>

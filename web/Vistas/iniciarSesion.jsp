@@ -15,7 +15,6 @@
 
     </head>
     <body>
-        <font face=""
               <jsp:include page="/Vistas/Barra_menu.jsp" />
               <div style="margin-top: 11%;margin-left: -15%;" >
             <div class="container">
