@@ -8,6 +8,7 @@ package ControladorServlet;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
@@ -41,6 +42,7 @@ public class ServletAltaPropuesta extends HttpServlet {
     public static final String MENSAJE_EXITO = "mensaje_exito";
     private String MENSAJE;
     private PublicadorAltaPropuesta port;
+    private RegistroSitio RS;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -57,6 +59,7 @@ public class ServletAltaPropuesta extends HttpServlet {
             URL url = new URL("http://127.0.0.1:8280/servicioAltaP");
             PublicadorAltaPropuestaService webService = new PublicadorAltaPropuestaService(url);
             this.port = webService.getPublicadorAltaPropuestaPort();
+            RS = new RegistroSitio();
         } catch (MalformedURLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -74,6 +77,10 @@ public class ServletAltaPropuesta extends HttpServlet {
 
                 List<String> listCat = this.port.listarCategorias().getListCategoria();
                 request.setAttribute("listCat", listCat);
+                String browserDetails = request.getHeader("User-Agent");
+                String IP = InetAddress.getLocalHost().getHostAddress();
+                String URL = "http://" + RS.obtenerIP() + "/CulturarteWeb/ServletAltaPropuesta";
+                RS.ObtenerRegistro(browserDetails, IP, URL);
                 request.getRequestDispatcher("Vistas/AltaPropuesta.jsp").forward(request, response);
             } else {
                 request.setAttribute("mensaje", "Usted no tiene permiso para crear una propuesta");

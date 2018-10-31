@@ -33,6 +33,7 @@ public class ServletPropuestaCategoria extends HttpServlet {
 
     private PublicadorConsultarPropuesta port;
     private PublicadorAltaPropuesta portCat;
+    private RegistroSitio RS;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -55,7 +56,7 @@ public class ServletPropuestaCategoria extends HttpServlet {
 
             PublicadorAltaPropuestaService webServiceP = new PublicadorAltaPropuestaService(urlP);
             this.portCat = webServiceP.getPublicadorAltaPropuestaPort();
-
+RS = new RegistroSitio();
         } catch (MalformedURLException ex) {
             Logger.getLogger(ServletCancelarPropuesta.class.getName()).log(Level.SEVERE, null, ex);
         }

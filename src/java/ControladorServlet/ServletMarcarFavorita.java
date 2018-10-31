@@ -6,6 +6,7 @@
 package ControladorServlet;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
@@ -32,6 +33,7 @@ public class ServletMarcarFavorita extends HttpServlet {
 
     private PublicadorConsultarUsuario portU;
     private PublicadorConsultarPropuesta portP;
+    private RegistroSitio RS;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -53,7 +55,7 @@ public class ServletMarcarFavorita extends HttpServlet {
             URL url = new URL("http://127.0.0.1:8280/servicioConsultaU");
             PublicadorConsultarUsuarioService webService = new PublicadorConsultarUsuarioService(url);
             this.portU = webService.getPublicadorConsultarUsuarioPort();
-
+            RS = new RegistroSitio();
         } catch (MalformedURLException ex) {
             Logger.getLogger(ServletCancelarPropuesta.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -72,13 +74,17 @@ public class ServletMarcarFavorita extends HttpServlet {
                 List<DtinfoPropuesta> propuestas = this.portP.listarPropuestasNoI().getLista();
                 request.setAttribute("Propuestas", propuestas);
                 request.getRequestDispatcher("Vistas/MarcarFavorita.jsp").forward(request, response);
+                String browserDetails = request.getHeader("User-Agent");
+                String IP = InetAddress.getLocalHost().getHostAddress();
+                String URL = "http://" + RS.obtenerIP() + "/CulturarteWeb/ServletConsultarUsuario";
+                RS.ObtenerRegistro(browserDetails, IP, URL);
             } else {
                 request.setAttribute("mensaje", "No existe una sesion en el sistema");
                 request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
             }
 
         } catch (Exception a) {
-            
+
         }
     }
 

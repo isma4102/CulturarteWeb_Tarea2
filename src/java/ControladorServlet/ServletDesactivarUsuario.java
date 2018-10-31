@@ -6,6 +6,7 @@
 package ControladorServlet;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Level;
@@ -27,6 +28,7 @@ import servicios.PublicadorConsultarUsuarioService;
 public class ServletDesactivarUsuario extends HttpServlet {
 
     private PublicadorConsultarUsuario port;
+    private RegistroSitio RS;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,7 +45,7 @@ public class ServletDesactivarUsuario extends HttpServlet {
             URL url = new URL("http://127.0.0.1:8280/servicioConsultaU");
             PublicadorConsultarUsuarioService webService = new PublicadorConsultarUsuarioService(url);
             this.port = webService.getPublicadorConsultarUsuarioPort();
-
+RS = new RegistroSitio();
         } catch (MalformedURLException ex) {
             Logger.getLogger(ServletCancelarPropuesta.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -78,6 +80,10 @@ public class ServletDesactivarUsuario extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+         String browserDetails = request.getHeader("User-Agent");
+        String IP = InetAddress.getLocalHost().getHostAddress();
+        String URL = "http://"+RS.obtenerIP()+"/CulturarteWeb/ServletConsultarUsuario";
+        RS.ObtenerRegistro(browserDetails, IP, URL);
         DtUsuario usu = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
         if (usu != null && usu.isEsproponente()) {
             try {

@@ -7,6 +7,7 @@ package ControladorServlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
@@ -30,12 +31,13 @@ import servicios.PublicadorConsultarPropuestaService;
 public class ServletExtenderFinanciacion extends HttpServlet {
 
     private PublicadorConsultarPropuesta port;
+    private RegistroSitio RS;
 
     @Override
     public void init() throws ServletException {
         try {
             URL url = new URL("http://127.0.0.1:8280/servicioConsultaP");
-
+            RS = new RegistroSitio();
             PublicadorConsultarPropuestaService webService = new PublicadorConsultarPropuestaService(url);
             this.port = webService.getPublicadorConsultarPropuestaPort();
         } catch (MalformedURLException ex) {
@@ -57,6 +59,10 @@ public class ServletExtenderFinanciacion extends HttpServlet {
                     request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
                 } else {
                     request.setAttribute("lista_propuestas", lista);
+                    String browserDetails = request.getHeader("User-Agent");
+                    String IP = InetAddress.getLocalHost().getHostAddress();
+                    String URL = "http://" + RS.obtenerIP() + "/CulturarteWeb/ServletConsultarUsuario";
+                    RS.ObtenerRegistro(browserDetails, IP, URL);
                     request.getRequestDispatcher("/Vistas/ExtenderFinanciacion.jsp").forward(request, response);
                 }
             } else {

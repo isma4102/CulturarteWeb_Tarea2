@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.InputStream;
 import javax.servlet.http.Part;
 import java.io.ByteArrayOutputStream;
+import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
@@ -34,6 +35,7 @@ import servicios.PublicadorConsultarUsuarioService;
 public class ServletAltaUsuario extends HttpServlet {
 
     private PublicadorAltaUsuario port;
+    private RegistroSitio RS;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -50,6 +52,7 @@ public class ServletAltaUsuario extends HttpServlet {
             URL url = new URL("http://127.0.0.1:8280/servicioAltaUsuario");
             PublicadorAltaUsuarioService webService = new PublicadorAltaUsuarioService(url);
             this.port = webService.getPublicadorAltaUsuarioPort();
+            RS = new RegistroSitio();
         } catch (MalformedURLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -60,6 +63,10 @@ public class ServletAltaUsuario extends HttpServlet {
         DtUsuario usuLogeado = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
 
         if (usuLogeado == null) {
+            String browserDetails = request.getHeader("User-Agent");
+            String IP = InetAddress.getLocalHost().getHostAddress();
+            String URL = "http://" + RS.obtenerIP() + "/CulturarteWeb/ServletAltaUsuario";
+            RS.ObtenerRegistro(browserDetails, IP, URL);
             request.getRequestDispatcher("Vistas/altaUsuario.jsp").forward(request, response);
         } else {
             request.setAttribute("mensaje", "Ya existe una sesion en el sistema");

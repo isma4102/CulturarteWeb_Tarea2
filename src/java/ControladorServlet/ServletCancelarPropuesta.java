@@ -6,6 +6,7 @@
 package ControladorServlet;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
@@ -29,6 +30,7 @@ import servicios.PublicadorConsultarPropuestaService;
 public class ServletCancelarPropuesta extends HttpServlet {
 
     private PublicadorConsultarPropuesta port;
+    private RegistroSitio RS;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,6 +48,7 @@ public class ServletCancelarPropuesta extends HttpServlet {
 
             PublicadorConsultarPropuestaService webService = new PublicadorConsultarPropuestaService(url);
             this.port = webService.getPublicadorConsultarPropuestaPort();
+            RS = new RegistroSitio();
         } catch (MalformedURLException ex) {
             Logger.getLogger(ServletCancelarPropuesta.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -65,6 +68,10 @@ public class ServletCancelarPropuesta extends HttpServlet {
                     request.getRequestDispatcher("Vistas/Mensaje_Recibido.jsp").forward(request, response);
                 } else {
                     request.setAttribute("Lista", list);
+                    String browserDetails = request.getHeader("User-Agent");
+                    String IP = InetAddress.getLocalHost().getHostAddress();
+                    String URL = "http://" + RS.obtenerIP() + "/CulturarteWeb/ServletCancelarPropuesta";
+                    RS.ObtenerRegistro(browserDetails, IP, URL);
                     request.getRequestDispatcher("Vistas/CancelarPropuesta.jsp").forward(request, response);
                 }
             } else {

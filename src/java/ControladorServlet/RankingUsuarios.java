@@ -7,6 +7,7 @@ package ControladorServlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.InetAddress;
 import java.net.URL;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -27,6 +28,7 @@ public class RankingUsuarios extends HttpServlet {
 
     private PublicadorConsultarUsuario port;
     private static final long serialVersionUID = 1L;
+    private RegistroSitio RS;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,6 +41,7 @@ public class RankingUsuarios extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        RS = new RegistroSitio();
         response.setContentType("text/html;charset=UTF-8");
         URL url = new URL("http://127.0.0.1:8280/servicioConsultaU");
         PublicadorConsultarUsuarioService webService = new PublicadorConsultarUsuarioService(url);
@@ -46,6 +49,10 @@ public class RankingUsuarios extends HttpServlet {
 
         List<DtUsuario> lista = this.port.listarUsuariosRanking().getLista();
         request.setAttribute("UsuariosRanking", lista);
+        String browserDetails = request.getHeader("User-Agent");
+        String IP = InetAddress.getLocalHost().getHostAddress();
+        String URL = "http://"+RS.obtenerIP()+"/CulturarteWeb/ServletConsultarUsuario";
+        RS.ObtenerRegistro(browserDetails, IP, URL);
         request.getRequestDispatcher("Vistas/RankingUsuarios.jsp").forward(request, response);
 
     }

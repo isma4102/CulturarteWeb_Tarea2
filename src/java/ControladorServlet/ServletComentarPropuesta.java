@@ -6,6 +6,7 @@
 package ControladorServlet;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
@@ -29,6 +30,7 @@ import servicios.PublicadorConsultarPropuestaService;
 public class ServletComentarPropuesta extends HttpServlet {
 
     private PublicadorConsultarPropuesta port;
+    private RegistroSitio RS;
 
     @Override
     public void init() throws ServletException {
@@ -37,6 +39,7 @@ public class ServletComentarPropuesta extends HttpServlet {
 
             PublicadorConsultarPropuestaService webService = new PublicadorConsultarPropuestaService(url);
             this.port = webService.getPublicadorConsultarPropuestaPort();
+            RS = new RegistroSitio();
         } catch (MalformedURLException ex) {
             Logger.getLogger(ServletCancelarPropuesta.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -51,6 +54,10 @@ public class ServletComentarPropuesta extends HttpServlet {
             if (((DtUsuario) request.getSession().getAttribute("usuario_logueado")).isEsproponente() == false) {
                 List<DtNickTitProp> lista = port.listarPropuestasComentar().getListPropuestas();
                 request.setAttribute("lista_propuestascomentar", lista);
+                String browserDetails = request.getHeader("User-Agent");
+                String IP = InetAddress.getLocalHost().getHostAddress();
+                String URL = "http://" + RS.obtenerIP() + "/CulturarteWeb/ServletComentarPropuesta";
+                RS.ObtenerRegistro(browserDetails, IP, URL);
                 request.getRequestDispatcher("/Vistas/AgregarComentario.jsp").forward(request, response);
             } else {
                 request.setAttribute("mensaje", "Solo los colaboradores pueden entrar");
