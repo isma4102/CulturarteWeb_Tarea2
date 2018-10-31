@@ -56,13 +56,14 @@
                                             %>
                                         </tbody>
                                 </table>
+                                        <br><br>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-                                        <br><br>
+                                        
         <jsp:include page="/Vistas/footer.jsp" /> 
     </body>
 </html>

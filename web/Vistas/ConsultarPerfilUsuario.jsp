@@ -20,17 +20,11 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6 ml-auto mr-auto">
-                            <div class="profile">
-
-
-
-
+                            <div class="profile" style="width: 157%;margin-left: -27%;">
                                 <%List<DtUsuario> usu = (List<DtUsuario>) request.getAttribute("Usuarios");
                 if (usu.size() != 0) {%>
 
-                                <table id="tabla" class="table table-bordered table-hover formulario" style="margin-left: -7%;
-
-                                       font-size: 78%;">
+                                <table id="tabla" class="table table-bordered table-hover formulario" style="font-size: 78%;">
                                     <thead>
                                     <h2 style="text-align: center">Elije un Usuario</h2>
                                     <input id="buscar" style="width: 24%;margin-left: 38%;" type="text" name="Buscar" class="form-control" placeholder="Buscar" onkeyup="FiltrarTabla()" />
@@ -74,7 +68,7 @@
                 </div>
             </div>
         </div>
-        <br><br><br><br><br>        
+        <br><br>
         <jsp:include page="/Vistas/footer.jsp"/>
     </body>
 </html>
