@@ -20,38 +20,56 @@
     </head>
     <body >
         <jsp:include page="/Vistas/Barra_menu.jsp" />
+        <div class="page-header header-filter" data-parallax="true" style="background-color: #337ab7;margin-top: -20px;"></div>
+        <div style="margin-left: 2%;" class="main main-raised">
+            <div class="profile-content" style="width: 157%;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 ml-auto mr-auto" style="display: flex;justify-content: center;align-items: center;">
+                            <div class="profile" style="margin-left: -150%;width: 116%;">
 
-        <table id="tabla" class="table table-bordered table-hover formulario" style="width: 70%;">
-            <thead>
-            <h3  style=" text-align: center;top: 76px;">Consulta de propuesta</h3>
-            <form class="navbar-form navbar-right responsive-utilities-test" >
-                <input id="buscar" style=" display: block;margin-right: auto;margin-left: auto;width: 216px" type="text" name="Buscar" class="form-control" placeholder="Buscar" onkeyup="FiltrarTabla()" />
-            </form>
+                                <table id="tabla" class="table table-bordered table-hover formulario">
+                                    <thead>
+                                    <h3  style=" text-align: center;top: 76px;">Consulta de propuesta</h3>
+                                    <form class="navbar-form navbar-right responsive-utilities-test" >
+                                        <input id="buscar" style=" display: block;margin-right: auto;margin-left: auto;width: 216px" type="text" name="Buscar" class="form-control" placeholder="Buscar" onkeyup="FiltrarTabla()" />
+                                    </form>
 
-            <tr>
-                <th style="color:black" class="active">Titulo</th>
-                <th style="color:black" class="active">Categoria</th>
-                <th style="color:black" class="active">Ver informacion</th>
-            </tr>
-        </thead>
-        <div style="overflow: auto">
-            <tbody>
-                <%
-                    List<DtNickTitProp> lista = (List<DtNickTitProp>) request.getAttribute("listaPropuestas");
-                    for (int i = 0; i < lista.size(); i++) {
-                        out.print("<tr>");
-                        out.print("<form class=\"form-signin\" action=\"ServletConsultarPropuesta\" method=\"POST\"> ");
-                        out.print("<input style=\"border:none\" type=\"hidden\" class=\"form-control-plaintext\" name=\"TituloP\" value=\"" + lista.get(i).getTitulo() + "\" readonly=\"readonly\"/>");
-                        out.print("<td><p>" + lista.get(i).getTitulo() + " </p></td>");
-                        out.print("<td><p>" + lista.get(i).getProponente() + "</p></td>");
-                        out.print("<td><button style=\"background:url('/CulturarteWeb/Imagenes/ver.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px\" type=\"input\" name=\"Ver\" class=\"btn btn-primary\"></button></td>");
-                        out.print("</form>");
-                        out.print("</tr>");
-                    }
-                %>
-            </tbody>
-    </table>
-    <br><br><br><br>
-    <jsp:include page="/Vistas/footer.jsp" />
-</body>
+                                    <tr>
+                                        <th style="color:black" class="active">Titulo</th>
+                                        <th style="color:black" class="active">Categoria</th>
+                                        <th style="color:black" class="active">Ver informacion</th>
+                                    </tr>
+                                    </thead>
+                                    <div style="overflow: auto">
+                                        <tbody>
+                                            <%
+                                                List<DtNickTitProp> lista = (List<DtNickTitProp>) request.getAttribute("listaPropuestas");
+                                                for (int i = 0; i < lista.size(); i++) {
+                                                    out.print("<tr>");
+                                                    out.print("<form class=\"form-signin\" action=\"ServletConsultarPropuesta\" method=\"POST\"> ");
+                                                    out.print("<input style=\"border:none\" type=\"hidden\" class=\"form-control-plaintext\" name=\"TituloP\" value=\"" + lista.get(i).getTitulo() + "\" readonly=\"readonly\"/>");
+                                                    out.print("<td><p>" + lista.get(i).getTitulo() + " </p></td>");
+                                                    out.print("<td><p>" + lista.get(i).getProponente() + "</p></td>");
+                                                    out.print("<td><button style=\"background:url('/CulturarteWeb/Imagenes/ver.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px\" type=\"input\" name=\"Ver\" class=\"btn btn-primary\"></button></td>");
+                                                    out.print("</form>");
+                                                    out.print("</tr>");
+                                                }
+                                            %>
+                                        </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                                            <div style="text-align: center  ">
+                                            <a href="javascript:window.history.back();" class="btn btn-primary" > &laquo; Volver</a>
+                                            <a href="ServletInicio" class="btn btn-primary" > &laquo; Volver a inicio</a>
+                                        </div>
+                                        <br><br>
+        </div>
+        <br><br><br><br>
+        <jsp:include page="/Vistas/footer.jsp" />
+    </body>
 </html>

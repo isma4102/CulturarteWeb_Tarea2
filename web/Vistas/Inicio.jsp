@@ -28,7 +28,16 @@
 
 
         <jsp:include page="/Vistas/Barra_menu.jsp" />
-        <jsp:include page="/Vistas/Tabs_Propuestas.jsp" />
+
+          <div class="page-header header-filter" data-parallax="true" style="background-color: #337ab7;margin-top: -20px;"></div>
+        <div style="margin-left: 2%;" class="main main-raised">
+            <div class="profile-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 ml-auto mr-auto">
+                            <div class="profile" style="width: 252%;margin-left: -75%;font-size: 60%;">
+                                        <jsp:include page="/Vistas/Tabs_Propuestas.jsp" />
+                                        <br><br>
 
         <%
             if (request.getParameter("mensaje") != null) {
@@ -40,7 +49,12 @@
             }
         %>
 
-
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <br><br><br><br><br>        
         <jsp:include page="/Vistas/footer.jsp" />
     </body>

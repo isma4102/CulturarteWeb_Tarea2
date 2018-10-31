@@ -28,7 +28,7 @@
             <%List<DtUsuario> usu = (List<DtUsuario>) request.getAttribute("UsuariosRanking");
                 if (usu.size() != 0) {%>
 
-            <table id="tabla" class="table table-bordered table-hover" style="width: 70%;">
+            <table id="tabla" class="table table-bordered table-hover">
                 <thead>
                 <h3 style="text-align: center">Ranking de Usuarios de Culturarte</h3>
                 <input id="buscar" style="width: 24%;margin-left: 38%;" type="text" name="Buscar" class="form-control" placeholder="Buscar" onkeyup="FiltrarTabla()" />

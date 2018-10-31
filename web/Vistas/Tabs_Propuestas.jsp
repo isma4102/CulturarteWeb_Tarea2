@@ -10,7 +10,7 @@
     </head>
     <body> 
         </br></br></br></br>
-        <div class="container formulario_tabs">
+        <div class="container_tabs">
             <ul class="nav nav-tabs" role="tablist">
                 <li class="active"><a href="#hometab" role="tab" data-toggle="tab">Propuestas Publicadas</a></li>
                 <li><a href="#javatab" role="tab" data-toggle="tab">Propuestas en Financiación</a></li>

@@ -27,7 +27,7 @@
         <% DtUsuario dtu = (DtUsuario) request.getAttribute("Usuario");
             DtUsuario nick = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
         %>
-        <div class="page-header header-filter" data-parallax="true" style="margin-top: -20px;background-color: #0c7cd5"></div>
+      <div class="page-header header-filter" data-parallax="true" style="background-color: #337ab7;margin-top: -44px;z-index: -100;"></div>
         <div style="margin-left: 2%;" class="main main-raised">
             <div style="margin-bottom: 16%;" class="profile-content">
                 <div class="container">
@@ -35,7 +35,7 @@
                         <div class="col-md-6 ml-auto mr-auto">
                             <div class="profile">
                                 <div class="avatar">
-                                    <img src="/CulturarteWeb/ServletImagenes?nickname=<%= dtu.getNickname() %>" alt="Circle Image" class="img-raised rounded-circle img-fluid"/>
+                                    <img style="width: 23%;" src="/CulturarteWeb/ServletImagenes?nickname=<%= dtu.getNickname() %>" alt="Circle Image" class="img-raised rounded-circle img-fluid"/>
                                 </div>
                                 <div class="name">
                                     <h1 class="title"><%=dtu.getNickname()%></h1>

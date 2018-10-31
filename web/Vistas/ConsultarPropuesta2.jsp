@@ -20,7 +20,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Información de Propuesta</title>
-        
+
 
     </head>
     <body class="hidden-sn grey-skin"> 
@@ -38,10 +38,10 @@
                             <div class="container bootstrap snippet" style="margin-top: 7%;">
                                 <div class="row">
                                     <div class="col-sm-3"><!--left col-->
-                                        <div style="width: 273%;margin-left: -392%;" class="card card-blog">
+                                        <div style="width: 328%;;margin-left: -392%;" class="card card-blog">
                                             <div class="card-header card-header-image">
                                                 <a href="#pablo">
-                                                    <img class="img" src="/CulturarteWeb/ServletImagenes?TituloP=<%=propuestaSelec.getTitulo()%>">
+                                                    <img style="width: 314px;;height: 319px;" class="img" src="/CulturarteWeb/ServletImagenes?TituloP=<%=propuestaSelec.getTitulo()%>">
                                                     <div class="card-title">
 
                                                     </div>
@@ -49,7 +49,7 @@
                                             </div>
                                             <div class="card-body">
                                                 <h2 align="center" class="card-category text-info"><% out.print(propuestaSelec.getTitulo()); %></h2>
-                                                <p class="card-description">
+                                                <p style="height: 176px;" class="card-description">
                                                     <%out.print(propuestaSelec.getDescripcion());%>
                                                 </p>
                                             </div>
@@ -61,8 +61,9 @@
                                             <div class="nav-tabs-navigation">
                                                 <div class="nav-tabs-wrapper">
                                                     <ul class="nav nav-tabs" data-tabs="tabs">
-                                                        <li class="active"><a style="color: white" data-toggle="tab" href="#Informacion">Información</a></li>
-                                                        <li><a style="color: white" data-toggle="tab" href="#Colaboradores">Colaboradores</a></li>
+                                                        <li class="active"><a style="color: black" data-toggle="tab" href="#Informacion">Información</a></li>
+                                                        <li><a style="color: black" data-toggle="tab" href="#Colaboradores">Colaboradores</a></li>
+                                                        <li><a style="color: black" data-toggle="tab" href="#Comentarios">Comentarios</a></li>
 
                                                     </ul>
                                                 </div>
@@ -72,6 +73,21 @@
                                             <div class="tab-content text-center">
                                                 <div style = "color:black" class="tab-pane active" id = "Informacion"> 
                                                     <hr>
+
+                                                    <div class="form-group">
+                                                        <div class="col-xs-6">
+                                                            <div class="panel panel-primary">
+                                                                <div class="panel-heading" style = "padding: 1%"
+                                                                     > <h3 
+                                                                        class="panel-title">Autor</h3
+                                                                    > </div> 
+                                                                <div  class="panel-body" style = "padding: 1%"> 
+                                                                    <%out.print(propuestaSelec.getNickproponente());%>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
                                                     <div class="form-group">
                                                         <div class="col-xs-6">
                                                             <div class="panel panel-primary">
@@ -197,15 +213,15 @@
 
 
 
-                                                    <h4 align="center" class="modal-title" id="classModalLabel">
+                                                    <h2 align="center" class="modal-title" id="classModalLabel">
                                                         Colaboradores
-                                                    </h4>
+                                                    </h2>
                                                     <% if (((List<DtConsultaPropuesta2>) (List<DtConsultaPropuesta2>) request.getAttribute("listaC")).isEmpty()) {
                                                             out.print("<h3 align=\"center\" class=\"panel-title\">No existen Colaboradores</h3>");
                                                         } else {%>
 
                                                     <div style="  overflow-x: auto;">
-                                                        <table class="table  table-bordered table-hover" style="width: 70%;">
+                                                        <table class="table  table-bordered table-hover" >
                                                             <thead>
                                                                 <tr>   
                                                                     <th class="active" style = "color: black" >NickName</th>
@@ -248,13 +264,7 @@
                                                                         out.print("</form>");
                                                                     }
                                                                 } else {
-                                                                    if (propuestaSelec.isEsComentable()) {
-                                                                        out.print("<form class=\"form-signin\" action=\"ServletComentarPropuesta\" method=\"POST\">");
-                                                                        out.print("<textarea name=\"texto\" placeholder=\"Escriba un Comentario...\"  required style=\"background-color: white; resize: none;width: 300px; height: 100px;\" ></textarea>");
-                                                                        out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"TituloP\" value=\"" + propuestaSelec.getTitulo() + "\" readonly=\"readonly\"/>");
-                                                                        out.print("<button style=\"margin-top: -17%;margin-left: 12%;\" type=\"input\" name=\"seleccionar\" class=\"btn btn-primary\">Comentar propuesta</button>");
-                                                                        out.print("</form>");
-                                                                    } else if (propuestaSelec.isEsColaborable()) {
+                                                                    if (propuestaSelec.isEsColaborable()) {
                                                                         out.print("<form class=\"form-signin\" action=\"ServletRegistroColaboracion\" method=\"POST\">");
                                                                         out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"TituloP\" value=\"" + propuestaSelec.getTitulo() + "\" readonly=\"readonly\"/>");
                                                                         out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"Estado\" value=\"" + propuestaSelec.getEstadoActual() + "\" readonly=\"readonly\"/>");
@@ -263,24 +273,60 @@
                                                                     }
                                                                 }
                                                             }%>
-
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div style="text-align: center;margin-left: -21%;">
+                                                <div style="color:black"  style="color: black"  class="tab-pane" id="Comentarios">
+                                                    <div class="row">
+                                                        <div class="col-sm-1">
+                                                            <div style="width: 249%;" class="thumbnail">
+                                                                <img class="img-responsive user-photo" src="Imagenes/nadie.png">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-5">
+                                                            <div style="width: 240%;" class="panel panel-default">
+                                                                <div class="panel-heading">
+                                                                    <strong>Nombre</strong> <span class="text-muted">comentó esta propuesta</span>
+                                                                </div>
+                                                                <div class="panel-body">
+                                                                    Aqui esta el comentario
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <%
+                                                        if (((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickname().compareTo(propuestaSelec.getNickproponente()) != 0) {
+                                                            if (propuestaSelec.isEsComentable()) {
+                                                                out.print("<form class=\"form-signin\" action=\"ServletComentarPropuesta\" method=\"POST\">");
+                                                                out.print("<textarea name=\"texto\" placeholder=\"Escriba un Comentario...\"  required style=\"background-color: white; resize: none;width: 300px; height: 100px;\" ></textarea>");
+                                                                out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"TituloP\" value=\"" + propuestaSelec.getTitulo() + "\" readonly=\"readonly\"/>");
+                                                                out.print("<button name=\"seleccionar\" type=\"submit\" class=\"btn btn-primary\"><i class=\"fa fa-share\"></i>Comentar</button>");
+                                                                out.print("</form>");
+                                                            } else {
+                                                                out.print(" <hr>");
+                                                                out.print("<a >Usted no puede comentar esta propuesta</a>");
+                                                            }
+                                                        }
+                                                    %>
+                                                </div>
 
-                                                <a href="javascript:window.history.back();" class="btn btn-primary" > &laquo; Volver</a>
-                                                <a href="ServletInicio" class="btn btn-primary" > &laquo; Volver a inicio</a>
                                             </div>
+
                                         </div>
-
-                                    </div>
-                                </div><!--/tab-pane-->
-                            </div><!--/tab-content-->
-                        </div><!--/row-->
+                                        <div style="text-align: center  ">
+                                            <a href="javascript:window.history.back();" class="btn btn-primary" > &laquo; Volver</a>
+                                            <a href="ServletInicio" class="btn btn-primary" > &laquo; Volver a inicio</a>
+                                        </div>
+                                    </div><!--/tab-pane-->
+                                </div><!--/tab-content-->
+                            </div><!--/row-->
+                        </div>
                     </div>
-                </div>
-            </div>     
+                </div>     
+            </div>
         </div>
-    </body>
+    </div>
+    <br><br>
+    <jsp:include page="/Vistas/footer.jsp" />                          
+</body>
+
 </html>

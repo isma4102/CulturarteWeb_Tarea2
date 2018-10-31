@@ -12,5 +12,5 @@ package clases;
 public enum EstadoSesion {
     CONTRASENIA_INCORRECTA,           // nunca intentó iniciar sesión
     LOGIN_CORRECTO,     // tiene la sesión iniciada
-    LOGIN_INCORRECTO    // le erro a la sesión al menos una vez
+    LOGIN_INCORRECTO,    // le erro a la sesión al menos una vez
 }
