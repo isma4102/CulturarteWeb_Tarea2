@@ -126,6 +126,12 @@ public class Login extends HttpServlet {
                 } else {
                     nuevoEstado = EstadoSesion.LOGIN_CORRECTO;
                     request.getSession().setAttribute("usuario_logueado", usrCorreo);// setea el usuario logueado
+                    if (recordarme) {
+                        Cookie cookieSesion = new Cookie("cookieSesion", usrCorreo.getNickname());
+                        cookieSesion.setMaxAge(60*60*24);
+                        cookieSesion.setPath("/");
+                        response.addCookie(cookieSesion);
+                    }
                 }
 
             }
