@@ -6,6 +6,8 @@
 package ControladorServlet;
 
 import static java.lang.Math.log;
+import java.net.MalformedURLException;
+import java.net.URL;
 import servicios.DtListConsultaPropuesta;
 import servicios.DtListPropuestaWeb;
 import servicios.Exception_Exception;
@@ -30,6 +32,8 @@ public class RegistroSitio {
         this.navegador = "";
         this.sitio = "";
         this.ip = "";
+        PI = new PublicadorInicioService();
+        port = PI.getPublicadorInicioPort();
     }
 
     public String getIp() {
@@ -97,9 +101,12 @@ public class RegistroSitio {
         }
         this.SO = os;
         this.navegador = browser;
-        PI = new PublicadorInicioService();
-        port = PI.getPublicadorInicioPort();
+
         port.agregarRegistro(ip, navegador, sitio, SO);
 
+    }
+
+    public String obtenerIP() throws MalformedURLException {
+        return port.leerPropiedades("Ip");
     }
 }

@@ -22,6 +22,10 @@ import servicios.DtinfoColaborador;
 import servicios.DtinfoPropuesta;
 import servicios.PublicadorConsultarUsuario;
 import servicios.PublicadorConsultarUsuarioService;
+import java.net.InetAddress;
+import java.util.Properties;
+import servicios.PublicadorInicio;
+import servicios.PublicadorInicioService;
 
 
 /**
@@ -32,6 +36,7 @@ import servicios.PublicadorConsultarUsuarioService;
 public class ServletConsultarUsuario extends HttpServlet {
 
     private PublicadorConsultarUsuario port;
+    private PublicadorInicio port2;
     private RegistroSitio RS;
 
     /**
@@ -66,11 +71,8 @@ public class ServletConsultarUsuario extends HttpServlet {
         List<DtUsuario> usuarios = this.port.listarUsuarios().getLista();
         request.setAttribute("Usuarios", usuarios);
         String browserDetails = request.getHeader("User-Agent");
-        String IP = request.getHeader("X-FORWARDED-FOR");  
-   if (IP == null) {  
-       IP = request.getRemoteAddr();  
-   } 
-        String URL = "ConsultarUsuario";
+        String IP = InetAddress.getLocalHost().getHostAddress();
+        String URL = "http://"+RS.obtenerIP()+"/CulturarteWeb/ServletConsultarUsuario";
         RS.ObtenerRegistro(browserDetails, IP, URL);
         request.getRequestDispatcher("Vistas/ConsultarPerfilUsuario.jsp").forward(request, response);
 
