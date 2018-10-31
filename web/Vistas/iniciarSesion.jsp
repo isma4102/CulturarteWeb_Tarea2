@@ -50,7 +50,8 @@
                                                     <input type="password" name="pass" id="inputPassword" class="form-control" placeholder="Contraseña..." required>
                                                     <span class="help-block"></span>
                                                 </div>
-                                                <div class="checkbox">
+                                                <div>
+                                                <label><input type="checkbox" name="Recordarme" value="">Recordarme</label>
                                                 </div>
                                                 <button  class="btn btn-block" onclick="submit()">Iniciar Sesión</button>
                                             </form>

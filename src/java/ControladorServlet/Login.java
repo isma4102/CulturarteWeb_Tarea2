@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -104,6 +105,7 @@ public class Login extends HttpServlet {
         codificador a = new codificador();
         DtUsuario usrCorreo = null;
         DtUsuario usrNick = null;
+        boolean recordarme = request.getParameter("Recordarme") != null;
         try {
             usrNick = this.port.obtenerDtUsuario(login);
         } catch (Exception error) {
@@ -142,8 +144,13 @@ public class Login extends HttpServlet {
             } else {
                 nuevoEstado = EstadoSesion.LOGIN_CORRECTO;
                 request.getSession().setAttribute("usuario_logueado", usrNick);// setea el usuario logueado
-
                 objSesion.setAttribute("estado_sesion", nuevoEstado);
+                if (recordarme) {
+                    Cookie cookieSesion = new Cookie("cookieSesion", usrNick.getNickname());
+                    cookieSesion.setMaxAge(60*60*24);
+                    cookieSesion.setPath("/");
+                    response.addCookie(cookieSesion);
+                }
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/index.html");
                 dispatcher.forward(request, response);
             }
