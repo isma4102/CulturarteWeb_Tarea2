@@ -66,7 +66,7 @@
                                         <div>
                                             <label for="contrasenia">Contraseña:</label>
                                             <input name="pass" class="form-control" placeholder="Escribe una contraseña" type="password" required/>
-                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                            <br>
                                             <label for="contrasenia">Confirmar contraseña:</label>
                                             <input name="pass2" class="form-control" placeholder="Vuelve a escribir tu contraseña" type="password" required/>
                                         </div>
@@ -78,8 +78,8 @@
                                         <br>
                                         <div>
                                             <label>Tipo de persona</label><br>
-                                            <input onclick="document.getElementById('otros').style.display = 'none'" name="tipoP"  type="radio"  value="colaborador" checked>Soy un colaborador &nbsp;&nbsp;&nbsp;
-                                            <input onclick="document.getElementById('otros').style.display = 'block'" name="tipoP"  type="radio"  value="proponente">Soy un proponente<br>
+                                            <input onclick="document.getElementById('otros').style.display = 'none'" name="tipoP"  type="radio"  value="colaborador" checked><a style="font-size: 159%;">Soy un colaborador</a> &nbsp;&nbsp;&nbsp;
+                                            <input onclick="document.getElementById('otros').style.display = 'block'" name="tipoP"  type="radio"  value="proponente"><a style="font-size: 159%;">Soy un proponente</a><br>
                                         </div>
                                         <br>
                                         <div class="btn btn-default image-preview-input">
@@ -102,6 +102,7 @@
                                         </div>
                                         <div>
                                             <input class="btn btn-primary btn-block" type="submit" value="Crear cuenta"/>
+                                            <br>
                                         </div>
                                     </form>
                                 </div>
@@ -111,5 +112,6 @@
             </div>
         </div>
         <br><br><br><br>
+          <jsp:include page="/Vistas/footer.jsp" />
     </body>
 </html>

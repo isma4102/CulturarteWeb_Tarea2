@@ -79,6 +79,7 @@
             var2.style.display = "block";
             <% }%>
         </script>        
-        <br><br><br><br><br>        
+        <br><br><br>
+        <jsp:include page="/Vistas/footer.jsp" />
     </body>
 </html>

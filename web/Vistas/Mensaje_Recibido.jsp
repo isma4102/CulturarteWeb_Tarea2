@@ -18,7 +18,7 @@
                <div class="modal-content formulario" style="margin-top: 8%;width: 32%;margin-left: 34%;">
 
                     <div class="modal-header">
-                        <h5 align="center" class="modal-title" id="exampleModalLabel">Mensaje</h5>
+                        <h5 style="font-size: 138%;" align="center" class="modal-title" id="exampleModalLabel">Mensaje</h5>
 
                     </div>
                     <div class="modal-body">
@@ -26,8 +26,7 @@
                     </div>
                     <div class="modal-footer">
                         <a href="javascript:window.history.back();" class="btn btn-primary"> &laquo; Volver</a>
-                       <a style="color:#FFFFFF" class="btn btn-primary" href="/CulturarteWeb/ServletInicio">Salir al Inicio</a> </button>
-
+                       <a style="color:#FFFFFF" class="btn btn-primary" href="/CulturarteWeb/ServletInicio">Salir al Inicio</a>
                     </div>
                </div>
                     <div style="margin-top: 26%;">

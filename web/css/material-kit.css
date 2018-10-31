@@ -8965,7 +8965,7 @@ button:focus {
 .btn.btn-primary:focus,
 .btn.btn-primary:active,
 .btn.btn-primary:hover {
-  box-shadow: 0 14px 26px -12px rgba(156, 39, 176, 0.42), 0 4px 23px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(156, 39, 176, 0.2);
+  box-shadow: 0 14px 26px -12px rgb(51, 122, 183), 0 4px 23px 0px rgb(51, 122, 183), 0 8px 10px -5px rgb(51, 122, 183);
 }
 
 .btn.btn-primary.btn-link {
