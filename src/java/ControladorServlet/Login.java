@@ -61,6 +61,7 @@ public class Login extends HttpServlet {
 
         DtUsuario usuLogeado = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
         if (usuLogeado == null) {
+             request.getSession().setAttribute("estado_sesion", null);
             response.setContentType("text/html;charset=UTF-8");
             RequestDispatcher dispatcher = request.getRequestDispatcher("/Vistas/iniciarSesion.jsp");
             dispatcher.forward(request, response);

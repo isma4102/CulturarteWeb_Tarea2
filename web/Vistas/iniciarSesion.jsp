@@ -31,7 +31,9 @@
                                 Contraseña Incorrecta.
                                 <%} else {%>                  
                                 Usuario Incorrecto, reintente o Registrese si aun no tiene una cuenta.                  
-                                <%}%>  
+                                <%}
+                                
+                                %>  
                             </div>
                             <div class="modal-body">
                                 <div class="row">
@@ -76,6 +78,7 @@
                         || request.getSession().getAttribute("estado_sesion") == EstadoSesion.CONTRASENIA_INCORRECTA) { %>
             var var2 = document.getElementById('Error_login');
             var2.style.display = "block";
+           
             <% }%>
         </script>        
         <br><br><br>

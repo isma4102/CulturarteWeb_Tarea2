@@ -60,8 +60,13 @@ public class ServletCancelarPropuesta extends HttpServlet {
         } else {
             if (usuLogueado.isEsproponente()) {
                 List<DtNickTitProp> list = port.listarPropuestasCancelar(usuLogueado.getNickname()).getListPropuestas();
-                request.setAttribute("Lista", list);
-                request.getRequestDispatcher("Vistas/CancelarPropuesta.jsp").forward(request, response);
+                if (list.isEmpty()) {
+                    request.setAttribute("mensaje", "No tiene propuestas para cancelar");
+                    request.getRequestDispatcher("Vistas/Mensaje_Recibido.jsp").forward(request, response);
+                } else {
+                    request.setAttribute("Lista", list);
+                    request.getRequestDispatcher("Vistas/CancelarPropuesta.jsp").forward(request, response);
+                }
             } else {
                 request.setAttribute("mensaje", "Solo los proponentes pueden entrar");
                 request.getRequestDispatcher("Vistas/Mensaje_Recibido.jsp").forward(request, response);

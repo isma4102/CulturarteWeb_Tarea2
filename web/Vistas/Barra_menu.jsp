@@ -41,7 +41,7 @@
                 <li class="dropdown nav-item">
                     <a href="#" class="profile-photo dropdown-toggle nav-link" data-toggle="dropdown">
                         <div class="profile-photo-small">
-                            <img style="width: 100%;" src="/CulturarteWeb/ServletImagenes?nickname=<%= ((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickname() %>" class="rounded-circle img-fluid">
+                            <img style="width: 100%;" src="/CulturarteWeb/ServletImagenes?nickname=<%= ((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickname() %>" class="img-circle">
                         </div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
