@@ -41,7 +41,6 @@ public class ServletRegistroColaboracion extends HttpServlet {
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         ServletContext context;
         context = request.getServletContext();
         String ruta = context.getResource("").getPath();

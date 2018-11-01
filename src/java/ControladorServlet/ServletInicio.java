@@ -7,9 +7,7 @@ package ControladorServlet;
 
 import clases.EstadoSesion;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.InetAddress;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import javax.servlet.ServletContext;
@@ -50,19 +48,7 @@ public class ServletInicio extends HttpServlet {
      */
     @Override
     public void init() throws ServletException {
-        try {
-            URL url = new URL("http://127.0.0.1:8280/servicioInicio");
-            PublicadorInicioService webService = new PublicadorInicioService(url);
-            this.port = webService.getPublicadorInicioPort();
 
-            URL url1 = new URL("http://127.0.0.1:8280/servicioConsultaU");
-            PublicadorConsultarUsuarioService webService1 = new PublicadorConsultarUsuarioService(url1);
-            this.port1 = webService1.getPublicadorConsultarUsuarioPort();
-            RS = new RegistroSitio();
-
-        } catch (MalformedURLException ex) {
-            ex.printStackTrace();
-        }
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -72,6 +58,11 @@ public class ServletInicio extends HttpServlet {
         URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + "/servicioInicio");
         PublicadorInicioService webService = new PublicadorInicioService(url);
         this.port = webService.getPublicadorInicioPort();
+
+        URL url1 = new URL("http://" + conf.obtenerServer("servidor", ruta) + "/servicioConsultaU");
+        PublicadorConsultarUsuarioService webService1 = new PublicadorConsultarUsuarioService(url1);
+        this.port1 = webService1.getPublicadorConsultarUsuarioPort();
+        RS = new RegistroSitio();
 
         DtListPropuestaWeb ListaProp = this.port.listarPropuestasWeb();
         List<DtPropuestaWeb> listPublicada = ListaProp.getPublicadas();
