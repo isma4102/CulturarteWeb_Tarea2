@@ -10,7 +10,6 @@
             <div style="margin-top: -2%;" id="sidebar-wrapper">
                 <ul class="sidebar-nav">
                     <div class="sidenav">
-
                         <button  class="dropdown-btn"> <img style="margin-right: 4%;" src="Imagenes/Usuarios.png">Usuario
                             <i class="fa fa-caret-down"></i>
                             <img src="Imagenes/desplegar.png">
@@ -68,7 +67,7 @@
                     </li>
                         
         <a style="z-index: 1;" href="/CulturarteWeb/ServletInicio">
-            <img src="Imagenes/logo.png" style="width: 38%">
+            <img src="Imagenes/logo.png" style="width: 58%;">
         </a>
         <script>
             $("#menu-toggle").click(function (e) {
