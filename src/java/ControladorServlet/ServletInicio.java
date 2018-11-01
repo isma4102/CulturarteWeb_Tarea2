@@ -12,6 +12,7 @@ import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -37,6 +38,7 @@ public class ServletInicio extends HttpServlet {
     private PublicadorInicio port;
     private PublicadorConsultarUsuario port1;
     private RegistroSitio RS;
+    configuracion conf = new configuracion();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -64,8 +66,14 @@ public class ServletInicio extends HttpServlet {
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        DtListPropuestaWeb ListaProp = this.port.listarPropuestasWeb();
+        ServletContext context;
+        context = request.getServletContext();
+        String ruta = context.getResource("").getPath();
+        URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + "/servicioInicio");
+        PublicadorInicioService webService = new PublicadorInicioService(url);
+        this.port = webService.getPublicadorInicioPort();
 
+        DtListPropuestaWeb ListaProp = this.port.listarPropuestasWeb();
         List<DtPropuestaWeb> listPublicada = ListaProp.getPublicadas();
         List<DtPropuestaWeb> listFinanciada = ListaProp.getNoFinanciadas();
         List<DtPropuestaWeb> listEnFinanciacion = ListaProp.getEnFinanciacion();

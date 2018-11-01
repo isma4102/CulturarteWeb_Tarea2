@@ -23,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.ServletContext;
 import javax.servlet.annotation.MultipartConfig;
 import servicios.DtUsuario;
 import servicios.PublicadorAltaUsuario;
@@ -36,6 +37,7 @@ public class ServletAltaUsuario extends HttpServlet {
 
     private PublicadorAltaUsuario port;
     private RegistroSitio RS;
+    configuracion conf = new configuracion();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,19 +50,18 @@ public class ServletAltaUsuario extends HttpServlet {
      */
     @Override
     public void init() throws ServletException {
-        try {
-            URL url = new URL("http://127.0.0.1:8280/servicioAltaUsuario");
-            PublicadorAltaUsuarioService webService = new PublicadorAltaUsuarioService(url);
-            this.port = webService.getPublicadorAltaUsuarioPort();
-            RS = new RegistroSitio();
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        ServletContext context;
+        context = request.getServletContext();
+        String ruta = context.getResource("").getPath();
         DtUsuario usuLogeado = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
+        URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + ":8280/servicioAltaUsuario");
+        PublicadorAltaUsuarioService webService = new PublicadorAltaUsuarioService(url);
+        this.port = webService.getPublicadorAltaUsuarioPort();
 
         if (usuLogeado == null) {
             String browserDetails = request.getHeader("User-Agent");

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -44,7 +45,12 @@ public class SeguirUsuario extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RS = new RegistroSitio();
         response.setContentType("text/html;charset=UTF-8");
-        URL url = new URL("http://127.0.0.1:8280/servicioConsultaU");
+        configuracion conf = new configuracion();
+        ServletContext context;
+        context = request.getServletContext();
+        String ruta = context.getResource("").getPath();
+
+        URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + "/servicioConsultaU");
         PublicadorConsultarUsuarioService webService = new PublicadorConsultarUsuarioService(url);
         this.port = webService.getPublicadorConsultarUsuarioPort();
 

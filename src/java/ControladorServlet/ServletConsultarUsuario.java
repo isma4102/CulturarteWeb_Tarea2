@@ -24,9 +24,9 @@ import servicios.PublicadorConsultarUsuario;
 import servicios.PublicadorConsultarUsuarioService;
 import java.net.InetAddress;
 import java.util.Properties;
+import javax.servlet.ServletContext;
 import servicios.PublicadorInicio;
 import servicios.PublicadorInicioService;
-
 
 /**
  *
@@ -38,6 +38,7 @@ public class ServletConsultarUsuario extends HttpServlet {
     private PublicadorConsultarUsuario port;
     private PublicadorInicio port2;
     private RegistroSitio RS;
+    configuracion conf = new configuracion();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -50,20 +51,19 @@ public class ServletConsultarUsuario extends HttpServlet {
      */
     @Override
     public void init() throws ServletException {
-        try {
-            URL url = new URL("http://127.0.0.1:8280/servicioConsultaU");
-            PublicadorConsultarUsuarioService webService = new PublicadorConsultarUsuarioService(url);
-            this.port = webService.getPublicadorConsultarUsuarioPort();
-            RS = new RegistroSitio();
-
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(ServletCancelarPropuesta.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ServletContext context;
+        context = request.getServletContext();
+        String ruta = context.getResource("").getPath();
+
+        URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + "/servicioConsultaU");
+        PublicadorConsultarUsuarioService webService = new PublicadorConsultarUsuarioService(url);
+        this.port = webService.getPublicadorConsultarUsuarioPort();
 
         response.setContentType("text/html;charset=UTF-8");
+
         if (port.listarUsuarios().getLista().isEmpty()) {
             request.setAttribute("mensaje", "No existen usuarios en el sistema");
             request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
@@ -72,7 +72,7 @@ public class ServletConsultarUsuario extends HttpServlet {
         request.setAttribute("Usuarios", usuarios);
         String browserDetails = request.getHeader("User-Agent");
         String IP = InetAddress.getLocalHost().getHostAddress();
-        String URL = "http://"+RS.obtenerIP()+"/CulturarteWeb/ServletConsultarUsuario";
+        String URL = "http://" + RS.obtenerIP() + "/CulturarteWeb/ServletConsultarUsuario";
         RS.ObtenerRegistro(browserDetails, IP, URL);
         request.getRequestDispatcher("Vistas/ConsultarPerfilUsuario.jsp").forward(request, response);
 

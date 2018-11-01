@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,20 +33,23 @@ import servicios.TipoE;
 public class ServletRegistroColaboracion extends HttpServlet {
 
     private PublicadorRegistrarColaboracion port;
+    configuracion conf = new configuracion();
 
     @Override
     public void init() throws ServletException {
-        try {
-            URL url = new URL("http://127.0.0.1:8280/servicioRegistrarC");
 
-            PublicadorRegistrarColaboracionService webService = new PublicadorRegistrarColaboracionService(url);
-            this.port = webService.getPublicadorRegistrarColaboracionPort();
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(ServletCancelarPropuesta.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        ServletContext context;
+        context = request.getServletContext();
+        String ruta = context.getResource("").getPath();
+        URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + "/servicioRegistrarC");
+
+        PublicadorRegistrarColaboracionService webService = new PublicadorRegistrarColaboracionService(url);
+        this.port = webService.getPublicadorRegistrarColaboracionPort();
+
         if (request.getSession().getAttribute("usuario_logueado") == null) {
             request.setAttribute("mensaje", "No existe una sesion en el sistema");
             request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);

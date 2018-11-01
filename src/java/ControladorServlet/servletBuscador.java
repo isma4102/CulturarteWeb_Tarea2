@@ -15,6 +15,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,6 +29,7 @@ import servicios.PublicadorConsultarPropuestaService;
 public class servletBuscador extends HttpServlet {
 
     private PublicadorConsultarPropuesta port;
+    configuracion conf = new configuracion();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,17 +42,18 @@ public class servletBuscador extends HttpServlet {
      */
     @Override
     public void init() throws ServletException {
-        try {
-            URL url = new URL("http://127.0.0.1:8280/servicioConsultaP");
 
-            PublicadorConsultarPropuestaService webService = new PublicadorConsultarPropuestaService(url);
-            this.port = webService.getPublicadorConsultarPropuestaPort();
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(ServletCancelarPropuesta.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ServletContext context;
+        context = request.getServletContext();
+        String ruta = context.getResource("").getPath();
+        URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + "/servicioConsultaP");
+        //URL url = new URL("http://"+conf.leerPropiedades("servidor")+"/servicioConsultaP");
+
+        PublicadorConsultarPropuestaService webService = new PublicadorConsultarPropuestaService(url);
+        this.port = webService.getPublicadorConsultarPropuestaPort();
 
     }
 

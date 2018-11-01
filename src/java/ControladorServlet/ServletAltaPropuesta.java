@@ -19,6 +19,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -55,17 +56,19 @@ public class ServletAltaPropuesta extends HttpServlet {
      */
     @Override
     public void init() throws ServletException {
-        try {
-            URL url = new URL("http://127.0.0.1:8280/servicioAltaP");
-            PublicadorAltaPropuestaService webService = new PublicadorAltaPropuestaService(url);
-            this.port = webService.getPublicadorAltaPropuestaPort();
-            RS = new RegistroSitio();
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        configuracion conf = new configuracion();
+        ServletContext context;
+        context = request.getServletContext();
+        String ruta = context.getResource("").getPath();
+
+        URL url = new URL("http://"+conf.obtenerServer("servidor", ruta)+"/servicioAltaP");
+        PublicadorAltaPropuestaService webService = new PublicadorAltaPropuestaService(url);
+        this.port = webService.getPublicadorAltaPropuestaPort();
+
         DtUsuario usuLogeado = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
         if (usuLogeado == null) {
             request.getRequestDispatcher("iniciar-sesion").forward(request, response);

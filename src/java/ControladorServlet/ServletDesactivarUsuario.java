@@ -11,6 +11,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,6 +30,7 @@ public class ServletDesactivarUsuario extends HttpServlet {
 
     private PublicadorConsultarUsuario port;
     private RegistroSitio RS;
+    configuracion conf = new configuracion();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,18 +43,23 @@ public class ServletDesactivarUsuario extends HttpServlet {
      */
     @Override
     public void init() throws ServletException {
-        try {
-            URL url = new URL("http://127.0.0.1:8280/servicioConsultaU");
-            PublicadorConsultarUsuarioService webService = new PublicadorConsultarUsuarioService(url);
-            this.port = webService.getPublicadorConsultarUsuarioPort();
-RS = new RegistroSitio();
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(ServletCancelarPropuesta.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        RS = new RegistroSitio();
+
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ServletContext context;
+        context = request.getServletContext();
+        String ruta = context.getResource("").getPath();
 
+        try {
+            URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + "/servicioConsultaU");
+            PublicadorConsultarUsuarioService webService = new PublicadorConsultarUsuarioService(url);
+            this.port = webService.getPublicadorConsultarUsuarioPort();
+
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ServletCancelarPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -80,9 +87,9 @@ RS = new RegistroSitio();
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-         String browserDetails = request.getHeader("User-Agent");
+        String browserDetails = request.getHeader("User-Agent");
         String IP = InetAddress.getLocalHost().getHostAddress();
-        String URL = "http://"+RS.obtenerIP()+"/CulturarteWeb/ServletConsultarUsuario";
+        String URL = "http://" + RS.obtenerIP() + "/CulturarteWeb/ServletConsultarUsuario";
         RS.ObtenerRegistro(browserDetails, IP, URL);
         DtUsuario usu = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
         if (usu != null && usu.isEsproponente()) {

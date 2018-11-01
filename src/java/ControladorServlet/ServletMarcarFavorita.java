@@ -12,6 +12,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,6 +35,7 @@ public class ServletMarcarFavorita extends HttpServlet {
     private PublicadorConsultarUsuario portU;
     private PublicadorConsultarPropuesta portP;
     private RegistroSitio RS;
+    configuracion conf = new configuracion();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,22 +48,22 @@ public class ServletMarcarFavorita extends HttpServlet {
      */
     @Override
     public void init() throws ServletException {
-        try {
-            URL urlP = new URL("http://127.0.0.1:8280/servicioConsultaP");
-
-            PublicadorConsultarPropuestaService webServiceP = new PublicadorConsultarPropuestaService(urlP);
-            this.portP = webServiceP.getPublicadorConsultarPropuestaPort();
-
-            URL url = new URL("http://127.0.0.1:8280/servicioConsultaU");
-            PublicadorConsultarUsuarioService webService = new PublicadorConsultarUsuarioService(url);
-            this.portU = webService.getPublicadorConsultarUsuarioPort();
-            RS = new RegistroSitio();
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(ServletCancelarPropuesta.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ServletContext context;
+        context = request.getServletContext();
+        String ruta = context.getResource("").getPath();
+
+        URL urlP = new URL("http://" + conf.obtenerServer("servidor", ruta) + "/servicioConsultaP");
+
+        PublicadorConsultarPropuestaService webServiceP = new PublicadorConsultarPropuestaService(urlP);
+        this.portP = webServiceP.getPublicadorConsultarPropuestaPort();
+
+        URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + "/servicioConsultaU");
+        PublicadorConsultarUsuarioService webService = new PublicadorConsultarUsuarioService(url);
+        this.portU = webService.getPublicadorConsultarUsuarioPort();
+
         try {
             DtUsuario usuLogeado = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
             if (usuLogeado != null) {

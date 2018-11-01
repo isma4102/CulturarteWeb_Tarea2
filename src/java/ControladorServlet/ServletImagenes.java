@@ -15,6 +15,7 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,6 +36,7 @@ public class ServletImagenes extends HttpServlet {
 
     private PublicadorConsultarUsuario port;
     private PublicadorConsultarPropuesta port1;
+    configuracion conf = new configuracion();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -47,13 +49,14 @@ public class ServletImagenes extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception_Exception {
         response.setContentType("text/html;charset=UTF-8");
-        URL url = new URL("http://127.0.0.1:8280/servicioConsultaU");
-        URL url1 = new URL("http://127.0.0.1:8280/servicioConsultaP");
+        ServletContext context;
+        context = request.getServletContext();
+        String ruta = context.getResource("").getPath();
+
+        URL url = new URL("http://"+conf.obtenerServer("servidor", ruta)+"/servicioConsultaU");
+        URL url1 = new URL("http://"+conf.obtenerServer("servidor", ruta)+"/servicioConsultaP");
         PublicadorConsultarUsuarioService webService = new PublicadorConsultarUsuarioService(url);
         this.port = webService.getPublicadorConsultarUsuarioPort();
-
-        PublicadorConsultarPropuestaService webService1 = new PublicadorConsultarPropuestaService(url1);
-        this.port1 = webService1.getPublicadorConsultarPropuestaPort();
 
         if (request.getParameter("TituloP") != null) {
             BufferedImage bi = null;
