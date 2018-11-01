@@ -5,6 +5,7 @@ package ControladorServlet;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import com.sun.xml.rpc.processor.modeler.j2ee.xml.string;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -37,7 +38,7 @@ public class ServletConsultarUsuario extends HttpServlet {
 
     private PublicadorConsultarUsuario port;
     private PublicadorInicio port2;
-    private RegistroSitio RS;
+    private RegistroSitio RS = new RegistroSitio();
     configuracion conf = new configuracion();
 
     /**
@@ -55,7 +56,7 @@ public class ServletConsultarUsuario extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ServletContext context;
-        context = request.getServletContext();
+       context = request.getServletContext();
         String ruta = context.getResource("").getPath();
 
         URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + "/servicioConsultaU");
@@ -72,6 +73,7 @@ public class ServletConsultarUsuario extends HttpServlet {
         request.setAttribute("Usuarios", usuarios);
         String browserDetails = request.getHeader("User-Agent");
         String IP = InetAddress.getLocalHost().getHostAddress();
+        String a = RS.obtenerIP();
         String URL = "http://" + RS.obtenerIP() + "/CulturarteWeb/ServletConsultarUsuario";
         RS.ObtenerRegistro(browserDetails, IP, URL);
         request.getRequestDispatcher("Vistas/ConsultarPerfilUsuario.jsp").forward(request, response);

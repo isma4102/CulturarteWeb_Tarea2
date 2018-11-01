@@ -31,7 +31,7 @@ import servicios.PublicadorConsultarPropuestaService;
 public class ServletComentarPropuesta extends HttpServlet {
 
     private PublicadorConsultarPropuesta port;
-    private RegistroSitio RS;
+    private RegistroSitio RS= new RegistroSitio();
     configuracion conf = new configuracion();
 
     @Override

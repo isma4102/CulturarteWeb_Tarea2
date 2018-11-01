@@ -34,7 +34,7 @@ public class ServletPropuestaCategoria extends HttpServlet {
 
     private PublicadorConsultarPropuesta port;
     private PublicadorAltaPropuesta portCat;
-    private RegistroSitio RS;
+    private RegistroSitio RS= new RegistroSitio();
     configuracion conf = new configuracion();
 
     /**

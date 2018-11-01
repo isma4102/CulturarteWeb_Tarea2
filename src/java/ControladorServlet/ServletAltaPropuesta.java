@@ -43,7 +43,7 @@ public class ServletAltaPropuesta extends HttpServlet {
     public static final String MENSAJE_EXITO = "mensaje_exito";
     private String MENSAJE;
     private PublicadorAltaPropuesta port;
-    private RegistroSitio RS;
+    private RegistroSitio RS = new RegistroSitio();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

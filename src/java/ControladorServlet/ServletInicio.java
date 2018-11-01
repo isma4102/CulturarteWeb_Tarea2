@@ -35,7 +35,7 @@ public class ServletInicio extends HttpServlet {
 
     private PublicadorInicio port;
     private PublicadorConsultarUsuario port1;
-    private RegistroSitio RS;
+    private RegistroSitio RS= new RegistroSitio();
     configuracion conf = new configuracion();
 
     /**

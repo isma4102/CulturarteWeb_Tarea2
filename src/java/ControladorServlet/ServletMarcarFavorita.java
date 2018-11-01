@@ -34,7 +34,7 @@ public class ServletMarcarFavorita extends HttpServlet {
 
     private PublicadorConsultarUsuario portU;
     private PublicadorConsultarPropuesta portP;
-    private RegistroSitio RS;
+    private RegistroSitio RS= new RegistroSitio();
     configuracion conf = new configuracion();
 
     /**

@@ -36,7 +36,7 @@ import servicios.PublicadorConsultarUsuarioService;
 public class ServletAltaUsuario extends HttpServlet {
 
     private PublicadorAltaUsuario port;
-    private RegistroSitio RS;
+    private RegistroSitio RS= new RegistroSitio();
     configuracion conf = new configuracion();
 
     /**
@@ -59,7 +59,7 @@ public class ServletAltaUsuario extends HttpServlet {
         context = request.getServletContext();
         String ruta = context.getResource("").getPath();
         DtUsuario usuLogeado = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
-        URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + ":8280/servicioAltaUsuario");
+        URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + "/servicioAltaUsuario");
         PublicadorAltaUsuarioService webService = new PublicadorAltaUsuarioService(url);
         this.port = webService.getPublicadorAltaUsuarioPort();
 

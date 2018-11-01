@@ -33,7 +33,7 @@ import servicios.DtUsuario;
 public class ServletConsultarPropuesta extends HttpServlet {
 
     private PublicadorConsultarPropuesta port;
-    private RegistroSitio RS;
+    private RegistroSitio RS = new RegistroSitio();
 
     configuracion conf = new configuracion();
 

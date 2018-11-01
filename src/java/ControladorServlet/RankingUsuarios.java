@@ -29,7 +29,7 @@ public class RankingUsuarios extends HttpServlet {
 
     private PublicadorConsultarUsuario port;
     private static final long serialVersionUID = 1L;
-    private RegistroSitio RS;
+    private RegistroSitio RS = new RegistroSitio();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

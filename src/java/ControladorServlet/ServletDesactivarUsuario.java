@@ -29,7 +29,7 @@ import servicios.PublicadorConsultarUsuarioService;
 public class ServletDesactivarUsuario extends HttpServlet {
 
     private PublicadorConsultarUsuario port;
-    private RegistroSitio RS;
+    private RegistroSitio RS= new RegistroSitio();
     configuracion conf = new configuracion();
 
     /**
