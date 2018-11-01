@@ -36,8 +36,8 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6 ml-auto mr-auto">
-                            <div class="profile" style="width: 252%;margin-left: -75%;font-size: 60%;">
-                                        <jsp:include page="/Vistas/Tabs_Propuestas.jsp" />
+                            <div class="profile">
+                                       <jsp:include page="/Vistas/Tabs_Propuestas.jsp" />
                                      
                                         <br><br>
         <%

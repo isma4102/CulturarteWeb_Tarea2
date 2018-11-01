@@ -7,21 +7,16 @@
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <nav class="navbar navbar-inverse navbar-expand-lg bg-dark" role="navigation-demo">
     <jsp:include page="/Vistas/Menu_lateral.jsp" />
-    <div style="position: absolute" class="container">
-        <div style="float: right" class="navbar-translate">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="navbar-toggler-icon"></span>
-                <span class="navbar-toggler-icon"></span>
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        </div>
+    <div class="container">
+       
         <div class="collapse navbar-collapse">
-            <ul style="float: right;margin-right: -22%; " class="navbar-nav ml-auto">
+            <ul style="float: right;float: left" class="navbar-nav ml-auto">
+                <li class="nav-item" style="margin-left: -8%;">
                 <form style="margin-top: 16px;" action="servletBuscador" method="GET" class="navbar-form navbar-right">
                     <input name="busqueda" type="text" class="form-control" placeholder="Titulo, descripcion, lugar..." required/>
                     <input style="margin-left: 59%;margin-top: -56px;" class="btn btn-default" id="btnBuscar" type="submit" value="Buscar"/>
                 </form>
+                </li>
                 <li class="nav-item">
                     <a href="/CulturarteWeb/ServletAltaPropuesta" class="nav-link">
                         Tengo una propuesta
