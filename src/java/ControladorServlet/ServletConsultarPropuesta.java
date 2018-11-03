@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import servicios.DtConsultaPropuesta;
 import servicios.DtConsultaPropuesta2;
+import servicios.DtListComentarios;
 import servicios.DtNickTitProp;
 import servicios.PublicadorConsultarPropuesta;
 import servicios.PublicadorConsultarPropuestaService;
@@ -107,6 +108,8 @@ public class ServletConsultarPropuesta extends HttpServlet {
                 DtConsultaPropuesta dtinfo = this.port.seleccionarPropuesta2(titulo);
                 request.setAttribute("propuesta", dtinfo);
             }
+            DtListComentarios comentario = this.port.listarComentarios(titulo);
+            request.setAttribute("comentarios", comentario.getLista2());
             List<DtConsultaPropuesta2> listColab = this.port.listarColaboradoresProp(titulo).getLista();
 
             request.setAttribute("listaC", listColab);

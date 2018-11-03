@@ -3,6 +3,7 @@
     Created on : 30/09/2018, 04:19:30 PM
     Author     : Martin
 --%>
+<%@page import="servicios.DtComentarios"%>
 <%@page import="servicios.TipoE"%>
 <%@page import="servicios.DtUsuario"%>
 <%@page import="servicios.DtConsultaPropuesta"%>
@@ -27,7 +28,9 @@
         <jsp:include page="/Vistas/Barra_menu.jsp" />
 
         <%
+            List<DtComentarios> comentarios = (List<DtComentarios>) request.getAttribute("comentarios");
             DtConsultaPropuesta propuestaSelec = (DtConsultaPropuesta) request.getAttribute("propuesta");
+
         %>
         <div class="page-header header-filter" data-parallax="true" style="margin-top: -20px;background-color: #337ab7;"></div>
         <div style="margin-left: 2%;" class="main main-raised">
@@ -209,10 +212,10 @@
                                                     </div>
                                                 </div><!--/tab-pane-->
 
-                                                <div style="color:black"  style="color: black"  class="tab-pane" id="Colaboradores">
+                                                <div style="color:black;color: black"  class="tab-pane" id="Colaboradores">
 
 
-
+                                                    <hr>
                                                     <h2 align="center" class="modal-title" id="classModalLabel">
                                                         Colaboradores
                                                     </h2>
@@ -234,6 +237,7 @@
                                                             <div style="overflow: auto">
                                                                 <tbody>
                                                                     <%
+
                                                                         List<DtConsultaPropuesta2> lista = (List<DtConsultaPropuesta2>) request.getAttribute("listaC");
                                                                         for (int i = 0; i < lista.size(); i++) {
                                                                             out.print("<tr>");
@@ -248,7 +252,8 @@
                                                                 </tbody>
                                                         </table>
                                                     </div>
-                                                    <% } %>         
+                                                    <% } %>        
+
                                                     <div class="modal-footer">
                                                         <%if (request.getSession().getAttribute("usuario_logueado") != null) {
                                                                 if (((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickname().compareTo(propuestaSelec.getNickproponente()) == 0) {
@@ -275,31 +280,42 @@
                                                             }%>
                                                     </div>
                                                 </div>
+                                                <hr>
                                                 <div style="color:black"  style="color: black"  class="tab-pane" id="Comentarios">
+                                                    <% if (!comentarios.isEmpty()) {
+                                                            for (int i = 0; i < comentarios.size(); i++) {%>
                                                     <div class="row">
                                                         <div class="col-sm-1">
                                                             <div style="width: 249%;" class="thumbnail">
-                                                                <img class="img-responsive user-photo" src="Imagenes/nadie.png">
+                                                                <img class="img-responsive user-photo" src="/CulturarteWeb/ServletImagenes?nickname=<%= comentarios.get(i).getColaborador()%>">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-5">
                                                             <div style="width: 240%;" class="panel panel-default">
                                                                 <div class="panel-heading">
-                                                                    <strong>Nombre</strong> <span class="text-muted">comentó esta propuesta</span>
+                                                                    <strong><%= comentarios.get(i).getColaborador()%></strong> <span class="text-muted">comentó esta propuesta</span>
                                                                 </div>
                                                                 <div class="panel-body">
-                                                                    Aqui esta el comentario
+                                                                    <%= comentarios.get(i).getComentario()%>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <hr>
+                                                    <% }
+                                                        } else {%>
+                                                        
+                                                        <p> No hay comentarios en esta propuesta </p>
+                                                        <%  }%>
+                                                    <hr>
                                                     <%
                                                         if (((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickname().compareTo(propuestaSelec.getNickproponente()) != 0) {
                                                             if (propuestaSelec.isEsComentable()) {
                                                                 out.print("<form class=\"form-signin\" action=\"ServletComentarPropuesta\" method=\"POST\">");
+                                                                out.print("<input type=\"hidden\" name=\"TituloP\" value=\"" +  propuestaSelec.getTitulo() + "\">");
                                                                 out.print("<textarea name=\"texto\" placeholder=\"Escriba un Comentario...\"  required style=\"background-color: white; resize: none;width: 300px; height: 100px;\" ></textarea>");
-                                                                out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"TituloP\" value=\"" + propuestaSelec.getTitulo() + "\" readonly=\"readonly\"/>");
-                                                                out.print("<button name=\"seleccionar\" type=\"submit\" class=\"btn btn-primary\"><i class=\"fa fa-share\"></i>Comentar</button>");
+                                                                out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"texto\" value=\"" + propuestaSelec.getTitulo() + "\" readonly=\"readonly\"/>");
+                                                                out.print("<button style=\"margin-top: -9%;margin-left: 1%;\" name=\"Comentar\" type=\"submit\" class=\"btn btn-primary\"><i class=\"fa fa-share\"></i>Comentar</button>");
                                                                 out.print("</form>");
                                                             } else {
                                                                 out.print(" <hr>");
