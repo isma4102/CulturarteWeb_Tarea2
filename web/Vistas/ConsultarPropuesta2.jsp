@@ -59,24 +59,30 @@
                                         </div>
                                         <br>
                                     </div><!--/col-3-->
-                                    <div style="font-size: 73%;margin-top: -110%;" class="card card-nav-tabs card-plain">
-                                        <div class="card-header card-header-danger">
-                                            <div class="nav-tabs-navigation">
-                                                <div class="nav-tabs-wrapper">
-                                                    <ul class="nav nav-tabs" data-tabs="tabs">
-                                                        <li class="active"><a style="color: black" data-toggle="tab" href="#Informacion">Información</a></li>
-                                                        <li><a style="color: black" data-toggle="tab" href="#Colaboradores">Colaboradores</a></li>
-                                                        <li><a style="color: black" data-toggle="tab" href="#Comentarios">Comentarios</a></li>
+                                    <div style="font-size: 80%;margin-left: -29%;width: 103%;" class="container_tabs">
+                                        <ul class="nav nav-tabs" role="tablist">
+                                            <li class="active"><a href="#Informacion" role="tab" data-toggle="tab">Información</a></li>
+                                            <li><a href="#Colaboradores" role="tab" data-toggle="tab">Colaboradores</a></li>
+                                            <li><a href="#Comentarios" role="tab" data-toggle="tab">Comentarios</a></li>
 
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        </ul>
                                         <div class="card-body ">
                                             <div class="tab-content text-center">
                                                 <div style = "color:black" class="tab-pane active" id = "Informacion"> 
                                                     <hr>
-
+                                                    <div class="form-group">
+                                                        <div class="col-xs-6">
+                                                            <div class="panel panel-primary">
+                                                                <div class="panel-heading" style = "padding: 1%"
+                                                                     > <h3 
+                                                                        class="panel-title">Nombre</h3
+                                                                    > </div> 
+                                                                <div  class="panel-body" style = "padding: 1%"> 
+                                                                    <%out.print(propuestaSelec.getTitulo());%>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     <div class="form-group">
                                                         <div class="col-xs-6">
                                                             <div class="panel panel-primary">
@@ -277,10 +283,11 @@
                                                                         out.print("</form>");
                                                                     }
                                                                 }
+                                                                out.print("<hr>");
                                                             }%>
                                                     </div>
                                                 </div>
-                                                <hr>
+
                                                 <div style="color:black"  style="color: black"  class="tab-pane" id="Comentarios">
                                                     <% if (!comentarios.isEmpty()) {
                                                             for (int i = 0; i < comentarios.size(); i++) {%>
@@ -303,46 +310,54 @@
                                                     </div>
                                                     <hr>
                                                     <% }
-                                                        } else {%>
-                                                        
-                                                        <p> No hay comentarios en esta propuesta </p>
-                                                        <%  }%>
+                                                    } else {%>
+
+                                                    <p> No hay comentarios en esta propuesta </p>
                                                     <hr>
+                                                    <%  }%>
+
                                                     <%
-                                                        if (((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickname().compareTo(propuestaSelec.getNickproponente()) != 0) {
-                                                            if (propuestaSelec.isEsComentable()) {
-                                                                out.print("<form class=\"form-signin\" action=\"ServletComentarPropuesta\" method=\"POST\">");
-                                                                out.print("<input type=\"hidden\" name=\"TituloP\" value=\"" +  propuestaSelec.getTitulo() + "\">");
-                                                                out.print("<textarea name=\"texto\" placeholder=\"Escriba un Comentario...\"  required style=\"background-color: white; resize: none;width: 300px; height: 100px;\" ></textarea>");
-                                                                out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"texto\" value=\"" + propuestaSelec.getTitulo() + "\" readonly=\"readonly\"/>");
-                                                                out.print("<button style=\"margin-top: -9%;margin-left: 1%;\" name=\"Comentar\" type=\"submit\" class=\"btn btn-primary\"><i class=\"fa fa-share\"></i>Comentar</button>");
-                                                                out.print("</form>");
-                                                            } else {
-                                                                out.print(" <hr>");
-                                                                out.print("<a >Usted no puede comentar esta propuesta</a>");
+                                                        if (request.getSession().getAttribute("usuario_logueado") != null) {
+                                                            if (((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickname().compareTo(propuestaSelec.getNickproponente()) != 0) {
+                                                                if (propuestaSelec.isEsComentable()) {
+                                                                    out.print("<form class=\"form-signin\" action=\"ServletComentarPropuesta\" method=\"POST\">");
+                                                                    out.print("<input type=\"hidden\" name=\"TituloP\" value=\"" + propuestaSelec.getTitulo() + "\">");
+                                                                    out.print("<textarea name=\"texto\" placeholder=\"Escriba un Comentario...\"  required style=\"background-color: white; resize: none;width: 300px; height: 100px;\" ></textarea>");
+                                                                    out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"texto\" value=\"" + propuestaSelec.getTitulo() + "\" readonly=\"readonly\"/>");
+                                                                    out.print("<button style=\"margin-top: -9%;margin-left: 1%;\" name=\"Comentar\" type=\"submit\" class=\"btn btn-primary\"><i class=\"fa fa-share\"></i>Comentar</button>");
+                                                                    out.print("</form>");
+                                                                } else {
+                                                                    out.print(" <hr>");
+                                                                    out.print("<a>Usted no puede comentar esta propuesta</a>");
+                                                                }
                                                             }
+                                                        } else {
+                                                            out.print("Inicie sesion para comentar");
                                                         }
                                                     %>
+                                                    <br>
                                                 </div>
-
                                             </div>
-
-                                        </div>
-                                        <div style="text-align: center  ">
-                                            <a href="javascript:window.history.back();" class="btn btn-primary" > &laquo; Volver</a>
-                                            <a href="ServletInicio" class="btn btn-primary" > &laquo; Volver a inicio</a>
+                                            <div style="text-align: center">
+                                                <a href="javascript:window.history.back();" class="btn btn-primary" > &laquo; Volver</a>
+                                                <a href="ServletInicio" class="btn btn-primary" > &laquo; Volver a inicio</a>
+                                            </div >
                                         </div>
                                     </div><!--/tab-pane-->
+
                                 </div><!--/tab-content-->
+
                             </div><!--/row-->
+
                         </div>
                     </div>
                 </div>     
             </div>
+
         </div>
-    </div>
-    <br><br>
-    <jsp:include page="/Vistas/footer.jsp" />                          
-</body>
+
+        <br><br>
+        <jsp:include page="/Vistas/footer.jsp" />                          
+    </body>
 
 </html>

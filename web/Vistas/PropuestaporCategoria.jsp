@@ -16,14 +16,21 @@
     </head>
     <body>
         <jsp:include page="/Vistas/Barra_menu.jsp"/>
-        <br><br><br>
-        <div style="align-content: center;width: 100%">
-            <h1>Selecciona la categoria a filtrar...</h1>
-        </div>
-        <div style=" right: -40%;width: 40%;height: 30%; margin-left: 3%;" class="dropdown formulario_ver_propuesta">
+       
+         <div class="page-header header-filter" data-parallax="true" style="background-color: #337ab7;margin-top: -20px;"> </div>
+        <div style="margin-left: 2%;" class="main main-raised">
+            <div class="profile-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 ml-auto mr-auto">
+                            <div class="profile">
+        
+                                <h2 style="text-align: center">Selecciona la categoria a filtrar...</h2>
+        
+        <div style="text-align: center;" class="dropdown formulario_ver_propuesta">
             <br><br>
             <form action="${pageContext.request.contextPath}/ServletPropuestaCategoria" method="POST">
-                <select class="btn btn-default dropdown-toggle" name="cat">
+                <select class="dropdown-toggle" name="cat">
                     <%List<String> categorias = (List<String>) request.getAttribute("Categorias");
                         for (String cat : categorias) {%>
                     <option><%=cat%></option>
@@ -66,7 +73,15 @@
             <a href="javascript:window.history.back();" class="btn btn-primary" > &laquo; Volver</a>
             <a href="ServletInicio" class="btn btn-primary" > &laquo; Volver a inicio</a>
         </div>
-        <br><br><br><br>
+        <br><br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <br><br>
         <jsp:include page="/Vistas/footer.jsp" />
     </body>
 </html>

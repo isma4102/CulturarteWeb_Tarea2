@@ -12,18 +12,18 @@
         </br></br></br></br>
         <div style="font-size: 52%;margin-left: -56%;width: 212%;" class="container_tabs">
             <ul class="nav nav-tabs" role="tablist">
-                <li class="active"><a href="#hometab" role="tab" data-toggle="tab">Propuestas Publicadas</a></li>
-                <li><a href="#javatab" role="tab" data-toggle="tab">Propuestas en Financiación</a></li>
-                <li><a href="#csharptab" role="tab" data-toggle="tab">Propuestas Financiadas</a></li>
-                <li><a href="#mysqltab" role="tab" data-toggle="tab">Propuestas NO Financiadas</a></li>
-                <li><a href="#jquerytab" role="tab" data-toggle="tab">Propuestas Canceladas</a></li>
+                <li class="active"><a href="#publicadas" role="tab" data-toggle="tab">Propuestas Publicadas</a></li>
+                <li><a href="#en_financiacion" role="tab" data-toggle="tab">Propuestas en Financiación</a></li>
+                <li><a href="#financiadas" role="tab" data-toggle="tab">Propuestas Financiadas</a></li>
+                <li><a href="#no_financiadas" role="tab" data-toggle="tab">Propuestas NO Financiadas</a></li>
+                <li><a href="#canceladas" role="tab" data-toggle="tab">Propuestas Canceladas</a></li>
 
             </ul>
       
 
         <!-- Tab panes -->
         <div class="tab-content">
-            <div  style = 'color: black' class='tab-pane active' id = 'hometab'>
+            <div  style = 'color: black' class='tab-pane active' id = 'publicadas'>
                 <div class="wrapper">
                     <div class="scroller" style="overflow-y: scroll;">
                         <div class="contenedor-tabla">
@@ -67,7 +67,7 @@
                     </div>
                 </div>
             </div>
-            <div style="color: black" class="tab-pane" id="javatab">
+            <div style="color: black" class="tab-pane" id="en_financiacion">
                 <div class="wrapper">
                     <div class="scroller" style="overflow-y: scroll;">
                         <div class="contenedor-tabla">
@@ -110,7 +110,7 @@
                     </div>
                 </div>
             </div>
-            <div style="color: black" class="tab-pane" id="csharptab">
+            <div style="color: black" class="tab-pane" id="financiadas">
                 <div class="wrapper">
                     <div class="scroller" style="overflow-y: scroll;">
                         <div class="contenedor-tabla">
@@ -155,7 +155,7 @@
                     </div>
                 </div>
             </div>
-            <div style="color: black" class="tab-pane" id="mysqltab">
+            <div style="color: black" class="tab-pane" id="no_financiadas">
                 <div class="wrapper">
                     <div class="scroller" style="overflow-y: scroll;">
                         <div class="contenedor-tabla">
@@ -198,7 +198,7 @@
                     </div>
                 </div>
             </div>
-            <div style="color: black" class="tab-pane" id="jquerytab">
+            <div style="color: black" class="tab-pane" id="canceladas">
                 <div class="wrapper">
                     <div class="scroller" style="overflow-y: scroll;">
                         <div class="container" style="padding-top: 1em;">
@@ -239,7 +239,5 @@
             </div>
         </div>
     </div>
-
-</div>
 </body>
 </html>
