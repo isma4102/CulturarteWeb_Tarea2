@@ -12,7 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
            
-        <title>Consultar propuestas por categoria</title>
+        <title>Culturarte</title>
     </head>
     <body>
         <jsp:include page="/Vistas/Barra_menu.jsp"/>

@@ -1865,7 +1865,7 @@ pre code {
 
 .table {
   width: 100%;
-  max-width: 100%;
+  max-width: 282%;
   margin-bottom: 1rem;
   background-color: transparent;
 }
@@ -1896,7 +1896,7 @@ pre code {
 }
 
 .table-bordered {
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  /*! /*! border: 1px solid rgba(0, 0, 0, 0.06); */ */
 }
 
 .table-bordered th,

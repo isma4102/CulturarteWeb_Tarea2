@@ -12,7 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Extender Financiacón de propuesta</title>
+        <title>Culturarte</title>
     </head>
     <body>
         <jsp:include page="/Vistas/Barra_menu.jsp" />

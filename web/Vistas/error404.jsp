@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Error 404</title>
+        <title>Culturarte</title>
     </head>
     <body >
         <img style="width: 78%;margin-left: 11%;" src="/CulturarteWeb/Imagenes/error404.png">
