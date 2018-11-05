@@ -20,75 +20,88 @@
         <%
             }
         %>
-
+        <script type="text/javascript" src="script/FiltrarTabla.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Culturarte:: Seguir Usuario</title>
+        <title>Culturarte</title>
 
     </head>
     <body>
         <jsp:include page="/Vistas/Barra_menu.jsp" />
-        <br>
-        <br>
-        <br>
-        <br> 
-        <h3 align="center" >Usuarios de Culturarte</h3>
-        <form class="navbar-form navbar-right" action="SeguirUsuario" method="POST">
-            Nickname: <input style="margin-right: 600px;" type="text" name="BuscarUsu" class="form-control" placeholder="Buscar..." />
-        </form>
+        <div class="page-header header-filter" data-parallax="true" style="background-color: #337ab7;margin-top: -20px;"></div>
+        <div style="margin-left: 2%;" class="main main-raised">
+            <div class="profile-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 ml-auto mr-auto" >
+                            <div class="profile" >
+                                <h2 align="center" >Seguir usuario</h2>
 
-        <table class="table table-bordered table-hover  formulario" style="margin-left: 192px; width: 88%;">
-
-            <thead>
-
-            <th bgcolor="white"> Nick del Usuario</th>
-            <th bgcolor="white"> Nombre del Usuario</th>
-            <th bgcolor="white"> Apellido del Usuario</th>
-            <th bgcolor="white" style="text-align:center"> Seguir</th>
-            <th bgcolor="white" style="text-align:center"> Dejar de Seguir</th>
-
-        </thead>
+                                <input id="buscar" style=" display: block;margin-right: auto;margin-left: auto;width: 216px" type="text" name="Buscar" class="form-control" placeholder="Buscar" onkeyup="FiltrarTabla()" />
 
 
-        <tbody>
-            <%
-                List<DtUsuario> lista = (List<DtUsuario>) request.getAttribute("usuarios");
-                for (int i = 0; i < lista.size(); i++) {
-                    out.print("<tr>");
-                    out.print("<label for=\"" + i + "\"></label></td>");
-                    out.print("<td>" + lista.get(i).getNickname() + "</td>");
-                    out.print("<td>" + lista.get(i).getNombre() + "</td>");
-                    out.print("<td>" + lista.get(i).getApellido() + "</td>");
+                                <table style="font-size: 69%;" id="tabla" class="table table-bordered table-hover  formulario">
 
-            %>  
-        <td align="center">   
-            <form action="SeguirUsuario" method="post">
-                <input type="hidden" name="seguido" value="<%= lista.get(i).getNickname()%>" />
-                <input type="hidden" name="accion" value="seguir" />
-                <input type="button" class="btn btn-primary" value="Seguir" onclick="submit()"/>
-            </form>
-        </td>
-        <td align="center"> 
-            <form action="SeguirUsuario" method="post">
-                <input type="hidden" name="seguido" value="<%= lista.get(i).getNickname()%>" />
-                <input type="hidden" name="accion" value="dejarseguir" />
-                <input type="button" class="btn btn-primary" value="Dejar de Seguir" onclick="submit()"/>
-            </form>   
-        </td>       
-        <%
+                                    <thead>
 
-                out.print("</tr>");
+                                    <th bgcolor="white"> Nick del Usuario</th>
+                                    <th bgcolor="white"> Nombre del Usuario</th>
+                                    <th bgcolor="white"> Apellido del Usuario</th>
+                                    <th bgcolor="white" style="text-align:center"> Seguir</th>
+                                    <th bgcolor="white" style="text-align:center"> Dejar de Seguir</th>
 
-            }
-        %>
-    </tbody> 
-</table>
-</form>
+                                    </thead>
 
-<br><br><br><br><br>        
-<jsp:include page="/Vistas/footer.jsp" />
 
-</body>
+                                    <tbody>
+                                        <%
+                                            List<DtUsuario> lista = (List<DtUsuario>) request.getAttribute("usuarios");
+                                            for (int i = 0; i < lista.size(); i++) {
+                                                out.print("<tr>");
+                                                out.print("<label for=\"" + i + "\"></label></td>");
+                                                out.print("<td>" + lista.get(i).getNickname() + "</td>");
+                                                out.print("<td>" + lista.get(i).getNombre() + "</td>");
+                                                out.print("<td>" + lista.get(i).getApellido() + "</td>");
+
+                                        %>  
+                                    <td align="center">   
+                                        <form action="SeguirUsuario" method="post">
+                                            <input type="hidden" name="seguido" value="<%= lista.get(i).getNickname()%>" />
+                                            <input type="hidden" name="accion" value="seguir" />
+                                            <input type="button" class="btn btn-primary" value="Seguir" onclick="submit()"/>
+                                        </form>
+                                    </td>
+                                    <td align="center"> 
+                                        <form action="SeguirUsuario" method="post">
+                                            <input type="hidden" name="seguido" value="<%= lista.get(i).getNickname()%>" />
+                                            <input type="hidden" name="accion" value="dejarseguir" />
+                                            <input type="button" class="btn btn-primary" value="Dejar de Seguir" onclick="submit()"/>
+                                        </form>   
+                                    </td>       
+                                    <%
+
+                                            out.print("</tr>");
+
+                                        }
+                                    %>
+                                    </tbody> 
+                                </table>
+
+                                <div style=" text-align: center;">
+                                    <a href="javascript:window.history.back();" class="btn btn-primary" > &laquo; Volver</a>
+                                    <a href="ServletInicio" class="btn btn-primary" > &laquo; Volver a inicio</a>
+                                </div>
+                                    <br><br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br><br>
+        <jsp:include page="/Vistas/footer.jsp" />
+
+    </body>
 
 </html>
 

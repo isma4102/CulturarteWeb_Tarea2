@@ -56,7 +56,9 @@ public class ServletImagenes extends HttpServlet {
         URL url = new URL("http://"+conf.obtenerServer("servidor", ruta)+"/servicioConsultaU");
         URL url1 = new URL("http://"+conf.obtenerServer("servidor", ruta)+"/servicioConsultaP");
         PublicadorConsultarUsuarioService webService = new PublicadorConsultarUsuarioService(url);
+        PublicadorConsultarPropuestaService webService2 = new PublicadorConsultarPropuestaService(url1);
         this.port = webService.getPublicadorConsultarUsuarioPort();
+        this.port1 = webService2.getPublicadorConsultarPropuestaPort();
 
         if (request.getParameter("TituloP") != null) {
             BufferedImage bi = null;

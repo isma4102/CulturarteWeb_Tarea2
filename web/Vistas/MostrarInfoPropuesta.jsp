@@ -15,7 +15,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Información de Propuesta</title>
+        <title>Culturarte</title>
         <link href="css/RegistrarColaboracion.css" rel="stylesheet">
         <script>
             $(document).ready(function ()

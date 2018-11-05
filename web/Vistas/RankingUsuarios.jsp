@@ -20,7 +20,7 @@
 
         <script type="text/javascript" src="script/FiltrarTabla.js"></script>
         <link rel="stylesheet" type="text/css" href="css/RegistrarColaboracion.css"/>
-        <title>Culturarte:: Ranking de Usuarios</title>
+        <title>Culturarte</title>
     </head>
     <body>
         <jsp:include page="/Vistas/Barra_menu.jsp" />

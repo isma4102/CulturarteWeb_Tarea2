@@ -11,7 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="/CulturarteWeb/css/bootstrap.css" rel="stylesheet" id="bootstrap-css">
-        <title>Iniciar Sesion:: CulturarteWeb</title>
+        <title>Culturarte</title>
 
     </head>
     <body>

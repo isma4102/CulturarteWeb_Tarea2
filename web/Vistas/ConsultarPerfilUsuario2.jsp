@@ -19,7 +19,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-        <title>Datos del Usuario</title>
+        <title>Culturarte</title>
 
     </head>
     <body class="profile-page sidebar-collapse">
@@ -509,7 +509,7 @@
                             </div>
                             </ul>
                         </div>
-                        <div style="text-align: center;margin-left: -21%;">
+                        <div style="text-align: center">
                             <a href="javascript:window.history.back();" class="btn btn-primary" > &laquo; Volver</a>
                             <a href="ServletInicio" class="btn btn-primary" > &laquo; Volver a inicio</a>
                         </div>

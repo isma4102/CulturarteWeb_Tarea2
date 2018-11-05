@@ -102,7 +102,7 @@ public class ServletComentarPropuesta extends HttpServlet {
             String texto = request.getParameter("texto");
 
             try {
-                this.port.comentarPropuesta(TituloP, texto, texto);
+                this.port.comentarPropuesta(TituloP, nickColab, texto);
                 request.setAttribute("comentarProp", "Propuesta Comentada con Éxito!!!");
             } catch (Exception ex) {
                 Logger.getLogger(ServletComentarPropuesta.class.getName()).log(Level.SEVERE, null, ex);

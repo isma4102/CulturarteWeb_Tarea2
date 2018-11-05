@@ -16,7 +16,7 @@
         <script type="text/javascript" src="script/FiltrarTabla.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-        <title>Consultar Propuesta</title>
+        <title>Culturarte</title>
     </head>
     <body >
         <jsp:include page="/Vistas/Barra_menu.jsp" />
@@ -29,10 +29,10 @@
                             <div class="profile" style="width: 157%;margin-left: -27%;">
                                 <table id="tabla" class="table table-bordered table-hover formulario">
                                     <thead>
-                                    <h3  style=" text-align: center;top: 76px;">Consulta de propuesta</h3>
-                                    <form class="navbar-form navbar-right responsive-utilities-test" >
+                                    <h2  style=" text-align: center;top: 76px;">Consulta de propuesta</h2>
+                                    <div style="text-align: center">
                                         <input id="buscar" style=" display: block;margin-right: auto;margin-left: auto;width: 216px" type="text" name="Buscar" class="form-control" placeholder="Buscar" onkeyup="FiltrarTabla()" />
-                                    </form>
+                                    </div>
 
                                     <tr>
                                         <th style="color:black" class="active">Titulo</th>

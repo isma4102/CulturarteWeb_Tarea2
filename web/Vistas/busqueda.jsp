@@ -17,7 +17,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     
     <link rel="stylesheet" href="css/buscadorCSS.css">
-    <title>Busqueda</title>
+    <title>Culturarte</title>
 </head>
 
 
