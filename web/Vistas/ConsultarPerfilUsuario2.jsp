@@ -27,7 +27,7 @@
         <% DtUsuario dtu = (DtUsuario) request.getAttribute("Usuario");
             DtUsuario nick = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
         %>
-      <div class="page-header header-filter" data-parallax="true" style="background-color: #337ab7;margin-top: -44px;z-index: -100;"></div>
+        <div class="page-header header-filter" data-parallax="true" style="background-color: #337ab7;margin-top: -44px;z-index: -100;"></div>
         <div style="margin-left: 2%;" class="main main-raised">
             <div style="margin-bottom: 16%;" class="profile-content">
                 <div class="container">
@@ -35,8 +35,9 @@
                         <div class="col-md-6 ml-auto mr-auto">
                             <div class="profile">
                                 <div class="avatar">
-                                    <img style="width: 23%;" src="/CulturarteWeb/ServletImagenes?nickname=<%= dtu.getNickname() %>" alt="Circle Image" class="img-raised rounded-circle img-fluid"/>
+                                    <img style="background-color: gray;width: 23%;" src="/CulturarteWeb/ServletImagenes?nickname=<%= dtu.getNickname()%>" class="rounded-circle "/>
                                 </div>
+                                <br>
                                 <div class="name">
                                     <h1 class="title"><%=dtu.getNickname()%></h1>
                                     <h3>  <%
@@ -62,27 +63,22 @@
                             }%></p>
                     </div>
                 </div>
-                <div style="font-size: 73%;" class="card card-nav-tabs card-plain">
-                    <div class="card-header card-header-danger">
-                        <div class="nav-tabs-navigation">
-                            <div class="nav-tabs-wrapper">
-                                <ul class="nav nav-tabs" data-tabs="tabs">
-                                    <li class="active"><a style="color: white" data-toggle="tab" href="#Informacion">Información</a></li>
-                                    <li><a style="color: white" data-toggle="tab" href="#Seguidores">Seguidores</a></li>
-                                    <li><a style="color: white" data-toggle="tab" href="#Seguidos">Seguidos</a></li>
-                                    <li><a style="color: white" data-toggle="tab" href="#PFavoritas">Propuestas favoritas</a></li>
-                                        <%if (dtu.isEsproponente()) {%>
-                                    <li><a style="color: white" data-toggle = "tab" href = "#PCreadas" > Propuestas creadas</a></li>
-                                        <%if (nick != null && nick.isEsproponente() && dtu.getNickname().compareTo(nick.getNickname()) == 0) {%>
-                                    <li><a style="color: white" data-toggle="tab" href="#DesactivarP">Desactivar Cuenta</a></li>
-                                        <%}
+                <div style="font-size: 80%;" class="container_tabs">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="active"><a data-toggle="tab" href="#Informacion">Información</a></li>
+                        <li><a  data-toggle="tab" href="#Seguidores">Seguidores</a></li>
+                        <li><a  data-toggle="tab" href="#Seguidos">Seguidos</a></li>
+                        <li><a  data-toggle="tab" href="#PFavoritas">Propuestas favoritas</a></li>
+                            <%if (dtu.isEsproponente()) {%>
+                        <li><a data-toggle = "tab" href = "#PCreadas" > Propuestas creadas</a></li>
+                            <%if (nick != null && nick.isEsproponente() && dtu.getNickname().compareTo(nick.getNickname()) == 0) {%>
+                        <li><a data-toggle="tab" href="#DesactivarP">Desactivar Cuenta</a></li>
+                            <%}
                                         } else {%>
-                                    <li><a style="color: white" data-toggle = "tab" href = "#PCreadas" > Colaboraciones</a></li>
-                                        <%}%>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                        <li><a data-toggle = "tab" href = "#PCreadas" > Colaboraciones</a></li>
+                            <%}%>
+                    </ul>
+
                     <div class="card-body ">
                         <div class="tab-content text-center">
                             <div style = "color:black" class="tab-pane active" id = "Informacion"> 
@@ -175,19 +171,7 @@
                                     </div>
                                 </div>
                                 <%if (dtu.isEsproponente()) {%>       
-                                <div class="form-group">
-                                    <div class="col-xs-6">
-
-                                        <div class="panel panel-primary">
-                                            <div class="panel-heading" style="padding: 1%">
-                                                <h3 class="panel-title">Biografia</h3>
-                                            </div>
-                                            <div class="panel-body" style="padding: 1%">
-                                                <%out.println(dtu.getBiografia());%>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                               
 
                                 <div class="form-group">
                                     <div class="col-xs-6">
@@ -300,7 +284,7 @@
                                             <tr>
                                             <input readonly style="border:none" name="TituloP" type="hidden" value="<%=dtp.getTitulo()%>"/>&nbsp;&nbsp;&nbsp;
                                             <td><p><%=dtp.getTitulo()%></p></td>    
-                                            <td><textarea readonly style="background-color: white; resize: none;width: 300px; height: 100px;" ><%=dtp.getDescripcion()%></textarea></td>
+                                            <td style="width: 35%"><p ><%=dtp.getDescripcion()%></p></td>
                                             <td><p><%=dtp.getEstado()%></p></td>
                                             <td><button style="background:url('/CulturarteWeb/Imagenes/ver.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px" name="consulta" type="submit" class="btn btn-primary"></button></td>
 

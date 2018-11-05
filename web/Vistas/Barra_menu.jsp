@@ -7,9 +7,9 @@
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <nav class="navbar navbar-inverse navbar-expand-lg bg-dark" role="navigation-demo">
     <jsp:include page="/Vistas/Menu_lateral.jsp" />
-    <div class="container">
+  
        
-        <div class="collapse navbar-collapse">
+        <div class="">
             <ul style="float: right;float: left" class="navbar-nav ml-auto">
                 <li class="nav-item" style="margin-left: -8%;">
                 <form style="margin-top: 16px;" action="servletBuscador" method="GET" class="navbar-form navbar-right">
@@ -27,6 +27,7 @@
                         Quiero ver Propuestas
                     </a>
                 </li>
+                <li style="margin-top: -1px;">    <a> | </a></li>
                 <% if ((DtUsuario) request.getSession().getAttribute("usuario_logueado") != null) {%>
                 <li class="nav-item">
                     <a class="nav-link">
@@ -39,6 +40,7 @@
                             <img style="width: 100%;" src="/CulturarteWeb/ServletImagenes?nickname=<%= ((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickname() %>" class="img-circle">
                         </div>
                     </a>
+                    
                     <div class="dropdown-menu dropdown-menu-right">
                         <form  action="${pageContext.request.contextPath}/ServletConsultarUsuario" method="POST">
                             <input style="border:none;background-color:#222222;color:white" class="form-control-plaintext" readonly name="nick" type="hidden" value="<%= ((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickname()%>"/>
@@ -61,5 +63,5 @@
                 <% }%>
             </ul>
         </div>
-    </div>
+    
 </nav>

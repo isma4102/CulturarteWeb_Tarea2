@@ -83,21 +83,21 @@
                                         </div>
                                         <br>
                                         <div class="btn btn-default image-preview-input">
-                                            <span>Selecciona imagen para tu perfil</span>
+                                            <span>Selecciona imagen para tu perfil:</span>
                                             <input type="file" accept="image/png, image/jpeg" id="imagen" name="imagen"/> <!-- rename it -->
                                         </div>
                                         <br>
                                         <div id="otros" style="display: none">
                                             <div>
-                                                <label for="direccion">Direccion</label>
-                                                <input class="form-control" name="direccion" type="text" />
-                                                &nbsp;&nbsp;&nbsp;&nbsp;
-                                                <label for="sitio">Sitio web</label>
-                                                <input class="form-control"  name="sitio" type="text" />
+                                                <label for="direccion">Dirección:</label>
+                                                <input class="form-control" name="direccion" type="text" placeholder="Dirección" />
+                                               
+                                                <label for="sitio">Sitio web:</label>
+                                                <input class="form-control"  name="sitio" type="text" placeholder="Sitio web"/>
                                             </div><br>
 
                                             <p>Biografia:
-                                                <textarea class="form-control" name="biografia"></textarea>
+                                                <textarea class="form-control" name="biografia" placeholder="Biografia"></textarea>
                                             </p>
                                         </div>
                                         <div>

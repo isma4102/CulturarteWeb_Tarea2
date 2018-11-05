@@ -34,13 +34,22 @@
 .center {
     margin: auto;
     width: 50%;
-    
+
     padding: 10px;
 }
-centrar{
-    width: 500px;
-    max-width: 100%;
-    margin: auto;
-    margin-top: 30px;
-    padding: 20px;
+
+@media all and (max-width: 767px){
+    .resposive_tabs{
+        width:100%;
+        font-size: 63%;
+    }
 }
+
+@media all and (min-width: 767px){
+    .resposive_tabs{
+        width: 201%;
+        font-size: 63%;
+        margin-left: -51%;
+    }
+}
+

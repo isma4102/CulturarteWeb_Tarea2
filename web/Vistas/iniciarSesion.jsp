@@ -16,7 +16,7 @@
     </head>
     <body>
               <jsp:include page="/Vistas/Barra_menu.jsp" />
-              <div style="margin-top: 11%;margin-left: -15%;" >
+              <div style="margin-top: 5%;margin-left: -15%;" >
             <div class="container">
                 <div class="row">
                     <div class="col-lg-4 col-md-6 ml-auto mr-auto">
@@ -51,7 +51,7 @@
                                                     <span class="help-block"></span>
                                                 </div>
                                                 <div>
-                                                <label><input type="checkbox" name="Recordarme" value="">Recordarme</label>
+                                                <label><input type="checkbox" name="Recordarme" value="">  Recordarme</label>
                                                 </div>
                                                 <button  class="btn btn-block" onclick="submit()">Iniciar Sesión</button>
                                             </form>
