@@ -66,7 +66,7 @@ public class ServletInicio extends HttpServlet {
 
         DtListPropuestaWeb ListaProp = this.port.listarPropuestasWeb();
         List<DtPropuestaWeb> listPublicada = ListaProp.getPublicadas();
-        List<DtPropuestaWeb> listFinanciada = ListaProp.getNoFinanciadas();
+        List<DtPropuestaWeb> listFinanciada = ListaProp.getFinanciadas();
         List<DtPropuestaWeb> listEnFinanciacion = ListaProp.getEnFinanciacion();
         List<DtPropuestaWeb> listNoFinanciada = ListaProp.getNoFinanciadas();
         List<DtPropuestaWeb> listCancelada = ListaProp.getCanceladas();
