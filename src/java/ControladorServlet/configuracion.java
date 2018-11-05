@@ -19,9 +19,10 @@ public class configuracion {
 
     public String obtenerServer(String caso, String ruta) {
         Properties prop = new Properties();
-        InputStream archivo = null;
-        String rutaRecortada = recortarRuta(ruta);
-        rutaRecortada=rutaRecortada+"/config/config.properties";
+        InputStream archivo;
+        String rutaRecortada = null;
+        rutaRecortada = recortarRuta(ruta);
+        rutaRecortada = rutaRecortada + "/config/config.properties";
         try {
             archivo = new FileInputStream(rutaRecortada);
             prop.load(archivo);
@@ -33,10 +34,13 @@ public class configuracion {
     }
 
     public String recortarRuta(String ruta) {
-        String recortada;
+        String recortada = null;
         String[] partes;
         partes = ruta.split("/");
-        recortada=partes[1]+"/"+partes[2]+"/"+partes[3]+"/"+partes[4]+"/"+partes[5]+"/"+partes[6];
+        int parts = partes.length - 2;
+        for (int i = 1; i <= parts; i++) {
+            recortada = recortada + partes[i];
+        }
         return recortada;
     }
 

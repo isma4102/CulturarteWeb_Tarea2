@@ -5,13 +5,9 @@ package ControladorServlet;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import com.sun.xml.rpc.processor.modeler.j2ee.xml.string;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,10 +20,8 @@ import servicios.DtinfoPropuesta;
 import servicios.PublicadorConsultarUsuario;
 import servicios.PublicadorConsultarUsuarioService;
 import java.net.InetAddress;
-import java.util.Properties;
 import javax.servlet.ServletContext;
 import servicios.PublicadorInicio;
-import servicios.PublicadorInicioService;
 
 /**
  *
@@ -56,7 +50,7 @@ public class ServletConsultarUsuario extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ServletContext context;
-       context = request.getServletContext();
+        context = request.getServletContext();
         String ruta = context.getResource("").getPath();
 
         URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + "/servicioConsultaU");
@@ -105,6 +99,14 @@ public class ServletConsultarUsuario extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ServletContext context;
+        context = request.getServletContext();
+        String ruta = context.getResource("").getPath();
+
+        URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + "/servicioConsultaU");
+        PublicadorConsultarUsuarioService webService = new PublicadorConsultarUsuarioService(url);
+        this.port = webService.getPublicadorConsultarUsuarioPort();
+
         try {
             String nickname = request.getParameter("nick");
 

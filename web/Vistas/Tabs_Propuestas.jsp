@@ -5,7 +5,6 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="css/RegistrarColaboracion.css" rel="stylesheet">
-            
         <link href="css/Tabs_diseño.css" rel="stylesheet">
     </head>
     <body> 
@@ -19,225 +18,226 @@
                 <li><a href="#canceladas" role="tab" data-toggle="tab">Propuestas Canceladas</a></li>
 
             </ul>
-      
 
-        <!-- Tab panes -->
-        <div class="tab-content">
-            <div  style = 'color: black' class='tab-pane active' id = 'publicadas'>
-                <div class="wrapper">
-                    <div class="scroller" style="overflow-y: scroll;">
-                        <div class="contenedor-tabla">
-                            <div class="contenedor-fila">
-                                <div class="container" style="padding-top: 1em;">
-                                    <div class="row" >
-                                        <%
-                                            List<DtPropuestaWeb> listP = (List<DtPropuestaWeb>) request.getAttribute("Publicada");
-                                            for (int i = 0; i < listP.size(); i++) {
-                                                out.print("<div style=\"margin-left: 30px;\" class=\"contenedor-columna\">");
-                                                out.print("<div style=\"width: 180px;\"  class=\"thumbnail\">");
-                                                out.print("<div style=\"margin-left: 16%;\">");
-                                                out.print("<img width=\"100\" height=\"100\" src=\"/CulturarteWeb/ServletImagenes?TituloP=" + listP.get(i).getTituloP() + "\" >");
-                                                out.print("</div>");
-                                                out.print("<div class=\"caption\">");
-                                                out.print("<h3 style=\"width: 135%;\">" + listP.get(i).getTituloP() + "</h3>");
-                                                out.print("<p>" + listP.get(i).getDescrip() + "</p>");
-                                                out.print("<p>");
-                                                out.print("<p> Recaudacion: " + listP.get(i).getRecaudacion() + " </p>");
-                                                //arranca barrita
-                                                out.print("<div class='progress progress-striped'>");
-                                                out.print("<div class='progress-bar progress-bar-info' role='progressbar'");
-                                                out.print("aria-valuenow='" + listP.get(i).getPorcentaje() + "' aria-valuemin='0' aria-valuemax='100'");
-                                                out.print("style='width: " + listP.get(i).getPorcentaje() + "%'>");
-                                                out.print("<span class='sr-only'>20% completado</span>");
-                                                out.print("</div>");
-                                                out.print("</div>");
-                                                //termina barrita
-                                                out.print("<p> Tiempo:" + listP.get(i).getTiempoR() + " </p>");
-                                                out.print("<p> Cantidad Colab: " + listP.get(i).getColaboradores() + " </p>");
-                                                out.print("</p>");
-                                                out.print("</div>");
-                                                out.print("</div>");
-                                                out.print("</div>");
-                                            }
-                                        %>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div style="color: black" class="tab-pane" id="en_financiacion">
-                <div class="wrapper">
-                    <div class="scroller" style="overflow-y: scroll;">
-                        <div class="contenedor-tabla">
-                            <div class="contenedor-fila">
-                                <div class="container" style="padding-top: 1em;">
-                                    <div class="row">
-                                        <% List<DtPropuestaWeb> listEnF = (List<DtPropuestaWeb>) request.getAttribute("enFinanciacion");
-                                            for (int i = 0; i < listEnF.size(); i++) {
-                                                out.print("<div style=\"margin-left: 30px;\" class=\"contenedor-columna\">");
-                                                out.print("<div style=\"width: 180px;\"  class=\"thumbnail\">");
-                                                out.print("<div style=\"margin-left: 25%;\">");
-                                                out.print("<img width=\"100\" height=\"100\" src=\"/CulturarteWeb/ServletImagenes?TituloP=" + listEnF.get(i).getTituloP() + "\" >");
-                                                out.print("</div>");
-                                                out.print("<div class=\"caption\">");
-                                                out.print("<h3 style=\"width: 135%;\">" + listEnF.get(i).getTituloP() + "</h3>");
-                                                out.print("<p>" + listEnF.get(i).getDescrip() + "</p>");
-                                                out.print("<p>");
-                                                out.print("<p> Recaudacion: " + listEnF.get(i).getRecaudacion() + " </p>");
-                                                //arranca barrita
-                                                out.print("<div class='progress progress-striped'>");
-                                                out.print("<div class='progress-bar progress-bar-info' role='progressbar'");
-                                                out.print("aria-valuenow='" + listEnF.get(i).getPorcentaje() + "' aria-valuemin='0' aria-valuemax='100'");
-                                                out.print("style='width: " + listEnF.get(i).getPorcentaje() + "%'>");
-                                                out.print("<span class='sr-only'>20% completado</span>");
-                                                out.print("</div>");
-                                                out.print("</div>");
-                                                //termina barrita
-                                                out.print("<p> Tiempo:" + listEnF.get(i).getTiempoR() + " </p>");
-                                                out.print("<p> Cantidad Colab: " + listEnF.get(i).getColaboradores() + " </p>");
-                                                out.print("</p>");
-                                                out.print("</div>");
-                                                out.print("</div>");
-                                                out.print("</div>");
-                                            }
-                                        %>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div style="color: black" class="tab-pane" id="financiadas">
-                <div class="wrapper">
-                    <div class="scroller" style="overflow-y: scroll;">
-                        <div class="contenedor-tabla">
-                            <div class="contenedor-fila">
-                                <div class="container" style="padding-top: 1em;">
 
-                                    <div class="row">
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div  style = 'color: black' class='tab-pane active' id = 'publicadas'>
+                    <div class="wrapper">
+                        <div class="scroller" style="overflow-y: scroll;">
+                            <div class="contenedor-tabla">
+                                <div class="contenedor-fila">
+                                    <div class="container" style="padding-top: 1em;">
+                                        <div class="row" >
 
-                                        <% List<DtPropuestaWeb> listF = (List<DtPropuestaWeb>) request.getAttribute("Financiada");
-                                            for (int i = 0; i < listF.size(); i++) {
-                                                out.print("<div style=\"margin-left: 30px;\" class=\"contenedor-columna\">");
-                                                out.print("<div style=\"width: 180px;\" class=\"thumbnail\">");
-                                                out.print("<div style=\"margin-left: 16%;\">");
-                                                out.print("<img width=\"100\" height=\"100\" src=\"/CulturarteWeb/ServletImagenes?TituloP=" + listF.get(i).getTituloP() + "\" >");
-                                                out.print("</div>");
-                                                out.print("<div class=\"caption\">");
-                                                out.print("<h3 style=\"width: 135%;\">" + listF.get(i).getTituloP() + "</h3>");
-                                                out.print("<p>" + listF.get(i).getDescrip() + "</p>");
-                                                out.print("<p>");
-                                                out.print("<p> Recaudacion: " + listF.get(i).getRecaudacion() + " </p>");
-                                                //arranca barrita
-                                                out.print("<div class='progress progress-striped'>");
-                                                out.print("<div class='progress-bar progress-bar-info' role='progressbar'");
-                                                out.print("aria-valuenow='" + listF.get(i).getPorcentaje() + "' aria-valuemin='0' aria-valuemax='100'");
-                                                out.print("style='width: " + listF.get(i).getPorcentaje() + "%'>");
-                                                out.print("<span class='sr-only'>20% completado</span>");
-                                                out.print("</div>");
-                                                out.print("</div>");
-                                                //termina barrita
-                                                out.print("<p> Tiempo:" + listF.get(i).getTiempoR() + " </p>");
-                                                out.print("<p> Cantidad Colab: " + listF.get(i).getColaboradores() + " </p>");
-                                                out.print("</p>");
-                                                out.print("</div>");
-                                                out.print("</div>");
-                                                out.print("</div>");
-                                            }
-                                        %>
+                                            <%
+                                                List<DtPropuestaWeb> listP = (List<DtPropuestaWeb>) request.getAttribute("Publicada");
+                                                for (int i = 0; i < listP.size(); i++) {
+                                                    out.print("<div style=\"margin-left: 30px;\" class=\"contenedor-columna\">");
+                                                    out.print("<div style=\"width: 180px;\"  class=\"thumbnail\">");
+                                                    out.print("<div style=\"margin-left: 16%;\">");
+                                                    out.print("<a href=\"/CulturarteWeb/ServletConsultarPropuesta?TituloP=" + listP.get(i).getTituloP() + "\"><img width=\"100\" height=\"100\" src=\"/CulturarteWeb/ServletImagenes?TituloP=" + listP.get(i).getTituloP() + "\" ></a>");
+                                                    out.print("</div>");
+                                                    out.print("<div class=\"caption\">");
+                                                    out.print("<h3 style=\"width: 135%;\">" + listP.get(i).getTituloP() + "</h3>");
+                                                    out.print("<p>" + listP.get(i).getDescrip() + "</p>");
+                                                    out.print("<p>");
+                                                    out.print("<p> Recaudacion: " + listP.get(i).getRecaudacion() + " </p>");
+                                                    //arranca barrita
+                                                    out.print("<div class='progress progress-striped'>");
+                                                    out.print("<div class='progress-bar progress-bar-info' role='progressbar'");
+                                                    out.print("aria-valuenow='" + listP.get(i).getPorcentaje() + "' aria-valuemin='0' aria-valuemax='100'");
+                                                    out.print("style='width: " + listP.get(i).getPorcentaje() + "%'>");
+                                                    out.print("<span class='sr-only'>20% completado</span>");
+                                                    out.print("</div>");
+                                                    out.print("</div>");
+                                                    //termina barrita
+                                                    out.print("<p> Tiempo:" + listP.get(i).getTiempoR() + " </p>");
+                                                    out.print("<p> Cantidad Colab: " + listP.get(i).getColaboradores() + " </p>");
+                                                    out.print("</p>");
+                                                    out.print("</div>");
+                                                    out.print("</div>");
+                                                    out.print("</div>");
+                                                }
+                                            %>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div style="color: black" class="tab-pane" id="no_financiadas">
-                <div class="wrapper">
-                    <div class="scroller" style="overflow-y: scroll;">
-                        <div class="contenedor-tabla">
-                            <div class="contenedor-fila">
-                                <div class="container" style="padding-top: 1em;">
-                                    <div class="row">
-                                        <% List<DtPropuestaWeb> listNoF = (List<DtPropuestaWeb>) request.getAttribute("noFinanciada");
-                                            for (int i = 0; i < listNoF.size(); i++) {
-                                                out.print("<div style=\"margin-left: 30px;\" style=\"padding-left: 30px;\" flex-direction: row class=\"contenedor-columna\">");
-                                                out.print("<div style=\"width: 180px;\" class=\"thumbnail\">");
-                                                out.print("<div style=\"margin-left: 16%;\">");
-                                                out.print("<img width=\"100\" height=\"100\" src=\"/CulturarteWeb/ServletImagenes?TituloP=" + listNoF.get(i).getTituloP() + "\" >");
-                                                out.print("</div>");
-                                                out.print("<div class=\"caption\">");
-                                                out.print("<h3 style=\"width: 135%;\">" + listNoF.get(i).getTituloP() + "</h3>");
-                                                out.print("<p>" + listNoF.get(i).getDescrip() + "</p>");
-                                                out.print("<p>");
-                                                out.print("<p> Recaudacion: " + listNoF.get(i).getRecaudacion() + " </p>");
-                                                //arranca barrita
-                                                out.print("<div class='progress progress-striped'>");
-                                                out.print("<div class='progress-bar progress-bar-info' role='progressbar'");
-                                                out.print("aria-valuenow='" + listNoF.get(i).getPorcentaje() + "' aria-valuemin='0' aria-valuemax='100'");
-                                                out.print("style='width: " + listNoF.get(i).getPorcentaje() + "%'>");
-                                                out.print("<span class='sr-only'>20% completado</span>");
-                                                out.print("</div>");
-                                                out.print("</div>");
-                                                //termina barrita
-                                                out.print("<p> Tiempo:" + listNoF.get(i).getTiempoR() + " </p>");
-                                                out.print("<p> Cantidad Colab: " + listNoF.get(i).getColaboradores() + " </p>");
-                                                out.print("</p>");
-                                                out.print("</div>");
-                                                out.print("</div>");
-                                                out.print("</div>");
-                                            }
-                                        %>
+                <div style="color: black" class="tab-pane" id="en_financiacion">
+                    <div class="wrapper">
+                        <div class="scroller" style="overflow-y: scroll;">
+                            <div class="contenedor-tabla">
+                                <div class="contenedor-fila">
+                                    <div class="container" style="padding-top: 1em;">
+                                        <div class="row">
+                                            <% List<DtPropuestaWeb> listEnF = (List<DtPropuestaWeb>) request.getAttribute("enFinanciacion");
+                                                for (int i = 0; i < listEnF.size(); i++) {
+                                                    out.print("<div style=\"margin-left: 30px;\" class=\"contenedor-columna\">");
+                                                    out.print("<div style=\"width: 180px;\"  class=\"thumbnail\">");
+                                                    out.print("<div style=\"margin-left: 25%;\">");
+                                                    out.print("<img width=\"100\" height=\"100\" src=\"/CulturarteWeb/ServletImagenes?TituloP=" + listEnF.get(i).getTituloP() + "\" >");
+                                                    out.print("</div>");
+                                                    out.print("<div class=\"caption\">");
+                                                    out.print("<h3 style=\"width: 135%;\">" + listEnF.get(i).getTituloP() + "</h3>");
+                                                    out.print("<p>" + listEnF.get(i).getDescrip() + "</p>");
+                                                    out.print("<p>");
+                                                    out.print("<p> Recaudacion: " + listEnF.get(i).getRecaudacion() + " </p>");
+                                                    //arranca barrita
+                                                    out.print("<div class='progress progress-striped'>");
+                                                    out.print("<div class='progress-bar progress-bar-info' role='progressbar'");
+                                                    out.print("aria-valuenow='" + listEnF.get(i).getPorcentaje() + "' aria-valuemin='0' aria-valuemax='100'");
+                                                    out.print("style='width: " + listEnF.get(i).getPorcentaje() + "%'>");
+                                                    out.print("<span class='sr-only'>20% completado</span>");
+                                                    out.print("</div>");
+                                                    out.print("</div>");
+                                                    //termina barrita
+                                                    out.print("<p> Tiempo:" + listEnF.get(i).getTiempoR() + " </p>");
+                                                    out.print("<p> Cantidad Colab: " + listEnF.get(i).getColaboradores() + " </p>");
+                                                    out.print("</p>");
+                                                    out.print("</div>");
+                                                    out.print("</div>");
+                                                    out.print("</div>");
+                                                }
+                                            %>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div style="color: black" class="tab-pane" id="canceladas">
-                <div class="wrapper">
-                    <div class="scroller" style="overflow-y: scroll;">
-                        <div class="container" style="padding-top: 1em;">
-                            <div class="row">
-                                <% List<DtPropuestaWeb> listC = (List<DtPropuestaWeb>) request.getAttribute("Cancelada");
-                                    for (int i = 0; i < listC.size(); i++) {
-                                        out.print("<div style=\"margin-left: 30px;\" class=\"contenedor-columna\">");
-                                        out.print("<div style=\"width: 180px;\" class=\"thumbnail\">");
-                                        out.print("<div style=\"margin-left: 16%;\">");
-                                        out.print("<img width=\"100\" height=\"100\" src=\"/CulturarteWeb/ServletImagenes?TituloP=" + listC.get(i).getTituloP() + "\" >");
-                                        out.print("</div>");
-                                        out.print("<div class=\"caption\">");
-                                        out.print("<h3 style=\"width: 135%;\">" + listC.get(i).getTituloP() + "</h3>");
-                                        out.print("<p>" + listC.get(i).getDescrip() + "</p>");
-                                        out.print("<p>");
-                                        out.print("<p> Recaudacion: " + listC.get(i).getRecaudacion() + " </p>");
-                                        //arranca barrita
-                                        out.print("<div class='progress progress-striped'>");
-                                        out.print("<div class='progress-bar progress-bar-info' role='progressbar'");
-                                        out.print("aria-valuenow='" + listC.get(i).getPorcentaje() + "' aria-valuemin='0' aria-valuemax='100'");
-                                        out.print("style='width: " + listC.get(i).getPorcentaje() + "%'>");
-                                        out.print("<span class='sr-only'>20% completado</span>");
-                                        out.print("</div>");
-                                        out.print("</div>");
-                                        //termina barrita
-                                        out.print("<p> Tiempo:" + listC.get(i).getTiempoR() + " </p>");
-                                        out.print("<p> Cantidad Colab: " + listC.get(i).getColaboradores() + " </p>");
-                                        out.print("</p>");
-                                        out.print("</div>");
-                                        out.print("</div>");
-                                        out.print("</div>");
-                                    }
-                                %>
+                <div style="color: black" class="tab-pane" id="financiadas">
+                    <div class="wrapper">
+                        <div class="scroller" style="overflow-y: scroll;">
+                            <div class="contenedor-tabla">
+                                <div class="contenedor-fila">
+                                    <div class="container" style="padding-top: 1em;">
+
+                                        <div class="row">
+
+                                            <% List<DtPropuestaWeb> listF = (List<DtPropuestaWeb>) request.getAttribute("Financiada");
+                                                for (int i = 0; i < listF.size(); i++) {
+                                                    out.print("<div style=\"margin-left: 30px;\" class=\"contenedor-columna\">");
+                                                    out.print("<div style=\"width: 180px;\" class=\"thumbnail\">");
+                                                    out.print("<div style=\"margin-left: 16%;\">");
+                                                    out.print("<img width=\"100\" height=\"100\" src=\"/CulturarteWeb/ServletImagenes?TituloP=" + listF.get(i).getTituloP() + "\" >");
+                                                    out.print("</div>");
+                                                    out.print("<div class=\"caption\">");
+                                                    out.print("<h3 style=\"width: 135%;\">" + listF.get(i).getTituloP() + "</h3>");
+                                                    out.print("<p>" + listF.get(i).getDescrip() + "</p>");
+                                                    out.print("<p>");
+                                                    out.print("<p> Recaudacion: " + listF.get(i).getRecaudacion() + " </p>");
+                                                    //arranca barrita
+                                                    out.print("<div class='progress progress-striped'>");
+                                                    out.print("<div class='progress-bar progress-bar-info' role='progressbar'");
+                                                    out.print("aria-valuenow='" + listF.get(i).getPorcentaje() + "' aria-valuemin='0' aria-valuemax='100'");
+                                                    out.print("style='width: " + listF.get(i).getPorcentaje() + "%'>");
+                                                    out.print("<span class='sr-only'>20% completado</span>");
+                                                    out.print("</div>");
+                                                    out.print("</div>");
+                                                    //termina barrita
+                                                    out.print("<p> Tiempo:" + listF.get(i).getTiempoR() + " </p>");
+                                                    out.print("<p> Cantidad Colab: " + listF.get(i).getColaboradores() + " </p>");
+                                                    out.print("</p>");
+                                                    out.print("</div>");
+                                                    out.print("</div>");
+                                                    out.print("</div>");
+                                                }
+                                            %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="color: black" class="tab-pane" id="no_financiadas">
+                    <div class="wrapper">
+                        <div class="scroller" style="overflow-y: scroll;">
+                            <div class="contenedor-tabla">
+                                <div class="contenedor-fila">
+                                    <div class="container" style="padding-top: 1em;">
+                                        <div class="row">
+                                            <% List<DtPropuestaWeb> listNoF = (List<DtPropuestaWeb>) request.getAttribute("noFinanciada");
+                                                for (int i = 0; i < listNoF.size(); i++) {
+                                                    out.print("<div style=\"margin-left: 30px;\" style=\"padding-left: 30px;\" flex-direction: row class=\"contenedor-columna\">");
+                                                    out.print("<div style=\"width: 180px;\" class=\"thumbnail\">");
+                                                    out.print("<div style=\"margin-left: 16%;\">");
+                                                    out.print("<img width=\"100\" height=\"100\" src=\"/CulturarteWeb/ServletImagenes?TituloP=" + listNoF.get(i).getTituloP() + "\" >");
+                                                    out.print("</div>");
+                                                    out.print("<div class=\"caption\">");
+                                                    out.print("<h3 style=\"width: 135%;\">" + listNoF.get(i).getTituloP() + "</h3>");
+                                                    out.print("<p>" + listNoF.get(i).getDescrip() + "</p>");
+                                                    out.print("<p>");
+                                                    out.print("<p> Recaudacion: " + listNoF.get(i).getRecaudacion() + " </p>");
+                                                    //arranca barrita
+                                                    out.print("<div class='progress progress-striped'>");
+                                                    out.print("<div class='progress-bar progress-bar-info' role='progressbar'");
+                                                    out.print("aria-valuenow='" + listNoF.get(i).getPorcentaje() + "' aria-valuemin='0' aria-valuemax='100'");
+                                                    out.print("style='width: " + listNoF.get(i).getPorcentaje() + "%'>");
+                                                    out.print("<span class='sr-only'>20% completado</span>");
+                                                    out.print("</div>");
+                                                    out.print("</div>");
+                                                    //termina barrita
+                                                    out.print("<p> Tiempo:" + listNoF.get(i).getTiempoR() + " </p>");
+                                                    out.print("<p> Cantidad Colab: " + listNoF.get(i).getColaboradores() + " </p>");
+                                                    out.print("</p>");
+                                                    out.print("</div>");
+                                                    out.print("</div>");
+                                                    out.print("</div>");
+                                                }
+                                            %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="color: black" class="tab-pane" id="canceladas">
+                    <div class="wrapper">
+                        <div class="scroller" style="overflow-y: scroll;">
+                            <div class="container" style="padding-top: 1em;">
+                                <div class="row">
+                                    <% List<DtPropuestaWeb> listC = (List<DtPropuestaWeb>) request.getAttribute("Cancelada");
+                                        for (int i = 0; i < listC.size(); i++) {
+                                            out.print("<div style=\"margin-left: 30px;\" class=\"contenedor-columna\">");
+                                            out.print("<div style=\"width: 180px;\" class=\"thumbnail\">");
+                                            out.print("<div style=\"margin-left: 16%;\">");
+                                            out.print("<img width=\"100\" height=\"100\" src=\"/CulturarteWeb/ServletImagenes?TituloP=" + listC.get(i).getTituloP() + "\" >");
+                                            out.print("</div>");
+                                            out.print("<div class=\"caption\">");
+                                            out.print("<h3 style=\"width: 135%;\">" + listC.get(i).getTituloP() + "</h3>");
+                                            out.print("<p>" + listC.get(i).getDescrip() + "</p>");
+                                            out.print("<p>");
+                                            out.print("<p> Recaudacion: " + listC.get(i).getRecaudacion() + " </p>");
+                                            //arranca barrita
+                                            out.print("<div class='progress progress-striped'>");
+                                            out.print("<div class='progress-bar progress-bar-info' role='progressbar'");
+                                            out.print("aria-valuenow='" + listC.get(i).getPorcentaje() + "' aria-valuemin='0' aria-valuemax='100'");
+                                            out.print("style='width: " + listC.get(i).getPorcentaje() + "%'>");
+                                            out.print("<span class='sr-only'>20% completado</span>");
+                                            out.print("</div>");
+                                            out.print("</div>");
+                                            //termina barrita
+                                            out.print("<p> Tiempo:" + listC.get(i).getTiempoR() + " </p>");
+                                            out.print("<p> Cantidad Colab: " + listC.get(i).getColaboradores() + " </p>");
+                                            out.print("</p>");
+                                            out.print("</div>");
+                                            out.print("</div>");
+                                            out.print("</div>");
+                                        }
+                                    %>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</body>
+    </body>
 </html>

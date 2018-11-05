@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import servicios.DtConsultaPropuesta;
+import servicios.Exception_Exception;
 import servicios.PublicadorConsultarPropuesta;
 import servicios.PublicadorConsultarPropuestaService;
 
@@ -30,6 +31,8 @@ public class servletBuscador extends HttpServlet {
 
     private PublicadorConsultarPropuesta port;
     configuracion conf = new configuracion();
+    PublicadorConsultarPropuestaService webService=null;
+    PublicadorConsultarPropuestaService webService1=null;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -51,14 +54,21 @@ public class servletBuscador extends HttpServlet {
         String ruta = context.getResource("").getPath();
         URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + "/servicioConsultaP");
         //URL url = new URL("http://"+conf.leerPropiedades("servidor")+"/servicioConsultaP");
-        PublicadorConsultarPropuestaService webService = new PublicadorConsultarPropuestaService(url);
+        webService = new PublicadorConsultarPropuestaService(url);
         this.port = webService.getPublicadorConsultarPropuestaPort();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         try {
+            ServletContext context;
+            context = request.getServletContext();
+            String ruta = context.getResource("").getPath();
+            URL url1 = new URL("http://" + conf.obtenerServer("servidor", ruta) + "/servicioConsultaP");
+            
+            webService1 = new PublicadorConsultarPropuestaService(url1);
+            this.port = webService1.getPublicadorConsultarPropuestaPort();
+            
             String filtro = request.getParameter("filtro");
 
             String busqueda = request.getParameter("busqueda");
@@ -72,7 +82,6 @@ public class servletBuscador extends HttpServlet {
                     resultado.add(prop);
                 }
             }
-
             if (filtro != null) {
                 switch (filtro) {
                     case "Alfabeticamente":
@@ -103,9 +112,10 @@ public class servletBuscador extends HttpServlet {
                 request.setAttribute("tipoRetorno", "busqueda");
                 request.getRequestDispatcher("/Vistas/busqueda.jsp").forward(request, response);
             }
-        } catch (Exception ex) {
-
+        } catch (Exception_Exception ex) {
+            Logger.getLogger(servletBuscador.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
 
     /**
