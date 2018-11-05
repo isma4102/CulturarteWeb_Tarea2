@@ -67,7 +67,7 @@
                     </li>
                         
         <a style="z-index: 1;" href="/CulturarteWeb/ServletInicio">
-            <img src="Imagenes/logo.png" style="width: 58%;">
+            <img src="Imagenes/logo.png" style="width: 37%;">
         </a>
         <script>
             $("#menu-toggle").click(function (e) {
