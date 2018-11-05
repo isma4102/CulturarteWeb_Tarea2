@@ -237,6 +237,7 @@
                                                                         List<DtConsultaPropuesta2> lista = (List<DtConsultaPropuesta2>) request.getAttribute("listaC");
                                                                         for (int i = 0; i < lista.size(); i++) {
                                                                             out.print("<tr>");
+
                                                                             out.print("<td><p>" + lista.get(i).getNickColab() + "</p></td>");
                                                                             out.print("<td><p>" + lista.get(i).getNombreColab() + "</p></td>");
                                                                             out.print("<td><p>" + lista.get(i).getApellidoColab() + "</p></td>");

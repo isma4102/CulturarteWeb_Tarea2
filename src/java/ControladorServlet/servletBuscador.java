@@ -51,10 +51,8 @@ public class servletBuscador extends HttpServlet {
         String ruta = context.getResource("").getPath();
         URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + "/servicioConsultaP");
         //URL url = new URL("http://"+conf.leerPropiedades("servidor")+"/servicioConsultaP");
-
         PublicadorConsultarPropuestaService webService = new PublicadorConsultarPropuestaService(url);
         this.port = webService.getPublicadorConsultarPropuestaPort();
-
     }
 
     @Override
