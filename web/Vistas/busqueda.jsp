@@ -15,7 +15,6 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    
     <link rel="stylesheet" href="css/buscadorCSS.css">
     <title>Culturarte</title>
 </head>
@@ -38,13 +37,10 @@
 <jsp:include page="/Vistas/Barra_menu.jsp" />
 <input id="cantidad" style="display: none" type="text" value="<%= lista.size()%>"/>
 <br>
-<br>
-<br>
-<br>
 <div>
     <input style="display: none" id="busqueda" type="text" value="<%=busqueda%>"></input>
     <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Ordenar<span class="caret"></span></button>
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Ordenar</button>
         <ul class="dropdown-menu">
             <form action="servletBuscador" method="GET">
                 <input style="display: none" type="text" name="busqueda" value="<%= busqueda%>"/>
@@ -76,10 +72,10 @@
         %>   
     </div>
 </div>
-    <script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.min.js"></script>
-<script src="script/jquery.js"></script>
-        <jsp:include page="/Vistas/footer.jsp" />
-<%--<script src="script/filtroBusqueda.js"></script>--%>
+
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<jsp:include page="/Vistas/footer.jsp" />
 
 
