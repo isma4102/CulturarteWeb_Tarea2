@@ -41,7 +41,7 @@
                             <div class="container bootstrap snippet" style="margin-top: 7%;">
                                 <div class="row">
                                     <div class="col-sm-3"><!--left col-->
-                                        <div style="width: 328%;;margin-left: -392%;" class="card card-blog">
+                                        <div style="width: 328%;margin-left: -361%;" class="card card-blog">
                                             <div class="card-header card-header-image">
                                                 <a href="#pablo">
                                                     <img style="width: 314px;;height: 319px;" class="img" src="/CulturarteWeb/ServletImagenes?TituloP=<%=propuestaSelec.getTitulo()%>">

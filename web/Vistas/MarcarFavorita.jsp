@@ -45,7 +45,7 @@
                                     <div style="text-align: center;">
                                         <input style="margin-right: auto;margin-left: auto;width: 216px;" id="buscar" type="text" name="Buscar" class="form-control" placeholder="Buscar" onkeyup="FiltrarTabla()" />
                                 </div>
-                                    <table id="tabla" class="table table-bordered table-hover formulario_ver_propuesta" style="font-size: 60%;width: 206%;margin-left: -53%;">
+                                    <table id="tabla" class="table table-bordered table-hover formulario_ver_propuesta" style="font-size: 78%;;width: 206%;margin-left: -53%;">
 
                                         <tr>
                                             <th>Titulo</th>
