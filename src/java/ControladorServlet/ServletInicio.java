@@ -36,7 +36,7 @@ public class ServletInicio extends HttpServlet {
     private PublicadorInicio port;
     private PublicadorConsultarUsuario port1;
     private RegistroSitio RS= new RegistroSitio();
-    configuracion conf = new configuracion();
+    private configuracion conf = new configuracion();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -55,6 +55,7 @@ public class ServletInicio extends HttpServlet {
         ServletContext context;
         context = request.getServletContext();
         String ruta = context.getResource("").getPath();
+        String sv  = conf.obtenerServer("servidor", ruta);
         URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + "/servicioInicio");
         PublicadorInicioService webService = new PublicadorInicioService(url);
         this.port = webService.getPublicadorInicioPort();
