@@ -94,6 +94,15 @@ public class SeguirUsuario extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        configuracion conf = new configuracion();
+        ServletContext context;
+        context = request.getServletContext();
+        String ruta = context.getResource("").getPath();
+
+        URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + "/servicioConsultaU");
+        PublicadorConsultarUsuarioService webService = new PublicadorConsultarUsuarioService(url);
+        this.port = webService.getPublicadorConsultarUsuarioPort();
         DtUsuario usuario = Login.getUsuarioSesion(request);
 
         if (usuario != null) {
@@ -105,6 +114,7 @@ public class SeguirUsuario extends HttpServlet {
                 if (accion.equals("seguir")) {
                     try {
                         this.port.seguirUsuario(seguidor, seguido);
+                        usuario.getSeguidos().add(seguido);
                         request.setAttribute("solicitudseguir", "Usuario Seguido con Exito!!!");
                     } catch (Exception ex) {
                         Logger.getLogger(SeguirUsuario.class.getName()).log(Level.SEVERE, null, ex);
@@ -114,14 +124,16 @@ public class SeguirUsuario extends HttpServlet {
                 } else if (accion.equals("dejarseguir")) {
                     try {
                         this.port.dejarSeguirUsuario(seguidor, seguido);
+                        usuario.getSeguidos().remove(seguido);
                         request.setAttribute("solicitudseguir", "Finalizacion de Seguimineto realizada con Exito!!!");
                     } catch (Exception ex) {
                         Logger.getLogger(SeguirUsuario.class.getName()).log(Level.SEVERE, null, ex);
                         request.setAttribute("solicitudseguir", ex.getMessage());
                     }
 
-                }
+                }              
                 processRequest(request, response);
+                
             } else if (request.getParameter("BuscarUsu") != null) {
                 List<DtUsuario> lista = this.port.listarUsuarios().getLista();
                 ArrayList<DtUsuario> retorno = new ArrayList<>();

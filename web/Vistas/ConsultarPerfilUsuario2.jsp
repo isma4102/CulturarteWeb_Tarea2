@@ -17,16 +17,28 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <%
+            DtUsuario dtu = (DtUsuario) request.getAttribute("Usuario");
+            DtUsuario nick = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
+            String solicitudseguir = (String) request.getAttribute("solicitudseguir");
+            if (solicitudseguir != null) {%>
+        <script type="text/javascript">
 
+            window.onload = function () {
+                alert("<%= solicitudseguir%>");
+            }
+
+        </script>
+        <%
+            }
+        %>
+        
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Culturarte</title>
 
     </head>
     <body class="profile-page sidebar-collapse">
         <jsp:include page="/Vistas/Barra_menu.jsp" />
-        <% DtUsuario dtu = (DtUsuario) request.getAttribute("Usuario");
-            DtUsuario nick = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
-        %>
         <div class="page-header header-filter" data-parallax="true" style="background-color: #337ab7;margin-top: -44px;z-index: -100;"></div>
         <div style="margin-left: 2%;" class="main main-raised">
             <div style="margin-bottom: 16%;" class="profile-content">
@@ -51,9 +63,19 @@
                                 </div>
                             </div>
                             <div class="follow">
-                                <button class="btn btn-fab btn-primary btn-round" rel="tooltip" title="Seguir a este usuario">
-                                    <i class="material-icons">+</i>
-                                </button>
+                                <%if(nick.getSeguidos().contains(dtu.getNickname())){%>
+                                        <form action="SeguirUsuario" method="post">
+                                            <input type="hidden" name="seguido" value="<%=dtu.getNickname()%>" />
+                                            <input type="hidden" name="accion" value="dejarseguir" />
+                                            <input type="button" class="btn btn-fab btn-primary btn-round" rel="tooltip" title="Dejar de Seguir a este usuario" value="-" onclick="submit()"/>
+                                        </form>                                 
+                                <%}else{%>
+                                        <form action="SeguirUsuario" method="post">
+                                            <input type="hidden" name="seguido" value="<%=dtu.getNickname()%>" />
+                                            <input type="hidden" name="accion" value="seguir" />
+                                            <input type="button" class="btn btn-fab btn-primary btn-round" rel="tooltip" title="Seguir a este usuario" value="+" onclick="submit()"/>
+                                        </form>          
+                               <%}%>
                             </div>
                         </div>
                     </div>
