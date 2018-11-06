@@ -19,7 +19,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+       <meta charset="UTF-8"/>
         <title>Culturarte</title>
 
 
@@ -43,7 +43,7 @@
                                     <div class="col-sm-3"><!--left col-->
                                         <div style="width: 328%;margin-left: -361%;" class="card card-blog">
                                             <div class="card-header card-header-image">
-                                                <a href="#pablo">
+                                                <a >
                                                     <img style="width: 314px;;height: 319px;" class="img" src="/CulturarteWeb/ServletImagenes?TituloP=<%=propuestaSelec.getTitulo()%>">
                                                     <div class="card-title">
 

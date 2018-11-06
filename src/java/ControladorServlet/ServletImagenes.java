@@ -61,8 +61,8 @@ public class ServletImagenes extends HttpServlet {
         this.port1 = webService2.getPublicadorConsultarPropuestaPort();
 
         if (request.getParameter("TituloP") != null) {
-            BufferedImage bi = null;
             String titulo = request.getParameter("TituloP");
+            BufferedImage bi = null;
             byte[] arreglo = port1.retornarImagen(titulo);
             BufferedImage bi1 = this.createImageFromBytes(arreglo);
             OutputStream out1 = response.getOutputStream();
