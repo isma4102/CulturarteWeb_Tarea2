@@ -63,7 +63,8 @@
                                 </div>
                             </div>
                             <div class="follow">
-                                <%if(nick.getSeguidos().contains(dtu.getNickname())){%>
+                                <%  if(nick!=null)
+                                    if(nick.getSeguidos().contains(dtu.getNickname())){%>
                                         <form action="SeguirUsuario" method="post">
                                             <input type="hidden" name="seguido" value="<%=dtu.getNickname()%>" />
                                             <input type="hidden" name="accion" value="dejarseguir" />
