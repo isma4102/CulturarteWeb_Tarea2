@@ -37,7 +37,7 @@ public class configuracion {
         String recortada = null;
         String[] partes;
         partes = ruta.split("/");
-        int parts = partes.length - 2;
+        int parts = partes.length - 2;//commit
         for (int i = 1; i < parts; i++) {
             if (i == 1) {
                 recortada = partes[i] + "/";

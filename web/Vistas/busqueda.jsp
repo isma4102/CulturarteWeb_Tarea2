@@ -59,10 +59,11 @@
         <div style="background-color: #444; border-color: #444" id="elemento<%=i%>" class="panel panel-primary">
             <div style="height: 30%;width: 100%" class="btn btn-info panel-heading" data-toggle="collapse" data-target="#descripcion<%=i%>" >
                 <div style="float: left;width: 30% ; height: 30%" class="img-thumbnail">
-                    <% out.print("<img style=\"width: 100%; height:100%\" src=\"/CulturarteWeb/ServletImagenes?TituloP=" + p.getTitulo() + "\" >");%><br>
+                    <% out.print("<img style=\"width: 100%; height:100%\" src=\"/CulturarteWeb/servletBuscador?TituloP=" + p.getTitulo() + "\" >");%><br>
                     <div class="Estado" style="float: left"><h5 style="color: black;font-weight: bold" ><%=p.getEstadoActual()%></h5></div>
                 </div>
                 <div><h3 class="Titulo"><%=p.getTitulo()%></h3></div><br><br>
+                <td><button style="background:url('/CulturarteWeb/Imagenes/ver.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px" type="input" name="Ver" class="btn btn-primary"></button></td>
                 <div style="font-weight: bold;float: right" class="Lugar"><%=p.getLugar()%></div><br>
                 <div style="font-weight: bold;float: right" class="Lugar"><%=p.getFechaR()%></div>
             </div>
@@ -73,7 +74,6 @@
     </div>
 </div>
 
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <jsp:include page="/Vistas/footer.jsp" />
