@@ -94,6 +94,12 @@ public class ServletConsultarPropuesta extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ServletContext context;
+        context = request.getServletContext();
+        String ruta = context.getResource("").getPath();
+        URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + "/servicioConsultaP");
+        PublicadorConsultarPropuestaService webService = new PublicadorConsultarPropuestaService(url);
+        this.port = webService.getPublicadorConsultarPropuestaPort();
 
         String tit = request.getParameter("TituloP");
         String titulo = new String(tit.getBytes("ISO-8859-1"), "UTF-8");
