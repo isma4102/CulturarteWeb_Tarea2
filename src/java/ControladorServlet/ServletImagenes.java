@@ -62,6 +62,7 @@ public class ServletImagenes extends HttpServlet {
 
         if (request.getParameter("TituloP") != null) {
             String titulo = request.getParameter("TituloP");
+            titulo=titulo.replace("%20", " ");
             BufferedImage bi = null;
             byte[] arreglo = port1.retornarImagen(titulo);
             BufferedImage bi1 = this.createImageFromBytes(arreglo);
