@@ -4,6 +4,7 @@
     Author     : Santiago.S
 --%>
 
+<%@page import="ControladorServlet.configuracion"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -11,7 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Culturarte</title>
     </head>
-    <body >
+    <body>
         <img style="width: 78%;margin-left: 11%;" src="/CulturarteWeb/Imagenes/error404.png">
     </body>
 </html>

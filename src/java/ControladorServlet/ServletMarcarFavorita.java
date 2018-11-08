@@ -54,9 +54,7 @@ public class ServletMarcarFavorita extends HttpServlet {
         ServletContext context;
         context = request.getServletContext();
         String ruta = context.getResource("").getPath();
-
         URL urlP = new URL("http://" + conf.obtenerServer("servidor", ruta) + "/servicioConsultaP");
-
         PublicadorConsultarPropuestaService webServiceP = new PublicadorConsultarPropuestaService(urlP);
         this.portP = webServiceP.getPublicadorConsultarPropuestaPort();
 

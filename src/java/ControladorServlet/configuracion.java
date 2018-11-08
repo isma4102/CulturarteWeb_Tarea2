@@ -5,8 +5,10 @@
  */
 package ControladorServlet;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -18,13 +20,16 @@ import javax.swing.JOptionPane;
  */
 public class configuracion {
 
-    public String obtenerServer(String caso, String ruta) {
+    public String obtenerServer(String caso, String ruta) throws IOException {
         Properties prop = new Properties();
         InputStream archivo;
-        String rutaRecortada = recortarRuta(ruta);
-        rutaRecortada = rutaRecortada + "config/config.properties";
+        ruta = ruta.replace("%", " ");
+        ruta = ruta.replace("20", "");
+        ruta = this.recortarRuta(ruta);
+
+        ruta = ruta + "config.properties";
         try {
-            archivo = new FileInputStream(rutaRecortada);
+            archivo = new FileInputStream(ruta);
             prop.load(archivo);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -37,7 +42,7 @@ public class configuracion {
         String recortada = null;
         String[] partes;
         partes = ruta.split("/");
-        int parts = partes.length - 2;//commit
+        int parts = partes.length;//commit
         for (int i = 1; i < parts; i++) {
             if (i == 1) {
                 recortada = partes[i] + "/";

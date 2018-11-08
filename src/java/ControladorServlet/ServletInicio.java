@@ -53,7 +53,7 @@ public class ServletInicio extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ServletContext context;
-        context = request.getServletContext();
+        context = (ServletContext) request.getServletContext();
         String ruta = context.getResource("").getPath();
         String sv  = conf.obtenerServer("servidor", ruta);
         URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + "/servicioInicio");
