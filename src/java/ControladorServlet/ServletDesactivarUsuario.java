@@ -44,22 +44,11 @@ public class ServletDesactivarUsuario extends HttpServlet {
     @Override
     public void init() throws ServletException {
         RS = new RegistroSitio();
-
+        
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ServletContext context;
-        context = request.getServletContext();
-        String ruta = context.getResource("").getPath();
-
-        try {
-            URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + "/servicioConsultaU");
-            PublicadorConsultarUsuarioService webService = new PublicadorConsultarUsuarioService(url);
-            this.port = webService.getPublicadorConsultarUsuarioPort();
-
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(ServletCancelarPropuesta.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -87,6 +76,20 @@ public class ServletDesactivarUsuario extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+        ServletContext context;
+        context = request.getServletContext();
+        String ruta = context.getResource("").getPath();
+
+        try {
+            URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + "/servicioConsultaU");
+            PublicadorConsultarUsuarioService webService = new PublicadorConsultarUsuarioService(url);
+            this.port = webService.getPublicadorConsultarUsuarioPort();
+
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ServletCancelarPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         String browserDetails = request.getHeader("User-Agent");
         String IP = InetAddress.getLocalHost().getHostAddress();
         String URL = "http://" + RS.obtenerIP() + "/CulturarteWeb/ServletConsultarUsuario";
