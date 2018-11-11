@@ -7,8 +7,6 @@
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <nav class="navbar navbar-inverse navbar-expand-lg bg-dark" role="navigation-demo">
     <jsp:include page="/Vistas/Menu_lateral.jsp" />
-  
-       
     <div style="position: absolute;right: 0" class="container">
             <ul style="float: right;float: left" class="navbar-nav ml-auto">
                 <li class="nav-item" style="margin-left: -8%;">
