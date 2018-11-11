@@ -56,7 +56,7 @@ public class ServletAltaPropuesta extends HttpServlet {
      */
     @Override
     public void init() throws ServletException {
-       
+
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -65,7 +65,7 @@ public class ServletAltaPropuesta extends HttpServlet {
         context = request.getServletContext();
         String ruta = context.getResource("").getPath();
 
-        URL url = new URL("http://"+conf.obtenerServer("servidor", ruta)+"/servicioAltaP");
+        URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + "/servicioAltaP");
         PublicadorAltaPropuestaService webService = new PublicadorAltaPropuestaService(url);
         this.port = webService.getPublicadorAltaPropuestaPort();
 
@@ -127,7 +127,7 @@ public class ServletAltaPropuesta extends HttpServlet {
         String fechaR = (request.getParameter("FechaR") == null ? "" : request.getParameter("FechaR"));
 
         final Part partImagen = request.getPart("imagen");
-
+        byte[] bytes = null;
         if (partImagen.getSize() != 0) {
             InputStream data = partImagen.getInputStream();
             final String fileName = Utils.getFileName(partImagen);
@@ -139,16 +139,19 @@ public class ServletAltaPropuesta extends HttpServlet {
                 baos.write(reads);
                 reads = data.read();
             }
-            byte[] bytes = baos.toByteArray();
+            bytes = baos.toByteArray();
         }
 
         try {
             DtUsuario dtLogeado = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
-
             boolean encontrado = port.seleccionarUC(dtLogeado.getNickname(), cat);
-
             if (!encontrado) {
-                boolean ok = port.crearPropuesta(titulo, desc, lugar, fechaR, montoE, montoT, tipoR);
+                boolean ok = false;
+                if (bytes != null) {
+                    ok = port.crearPropuesta(titulo, desc, lugar, fechaR, montoE, montoT, tipoR);
+                } else {
+                    ok = port.crearPropuesta(titulo, desc, lugar, fechaR, montoE, montoT, tipoR);
+                }
                 if (ok) {
                     MENSAJE = "Se registro exitosamente";
                     request.setAttribute("mensaje", MENSAJE);

@@ -29,7 +29,6 @@
                                 <div class="contenedor-fila">
                                     <div class="container" style="padding-top: 1em;">
                                         <div class="row" >
-
                                             <%
                                                 List<DtPropuestaWeb> listP = (List<DtPropuestaWeb>) request.getAttribute("Publicada");
                                                 for (int i = 0; i < listP.size(); i++) {
@@ -112,6 +111,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
