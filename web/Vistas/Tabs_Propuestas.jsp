@@ -29,14 +29,16 @@
                                 <div class="contenedor-fila">
                                     <div class="container" style="padding-top: 1em;">
                                         <div class="row" >
-
                                             <%
                                                 List<DtPropuestaWeb> listP = (List<DtPropuestaWeb>) request.getAttribute("Publicada");
                                                 for (int i = 0; i < listP.size(); i++) {
                                                     out.print("<div style=\"margin-left: 30px;\" class=\"contenedor-columna\">");
                                                     out.print("<div style=\"width: 180px;\"  class=\"thumbnail\">");
                                                     out.print("<div style=\"margin-left: 16%;\">");
-                                                    out.print("<a href=\"/CulturarteWeb/ServletConsultarPropuesta?TituloP=" + listP.get(i).getTituloP() + "\"><img width=\"100\" height=\"100\" src=\"/CulturarteWeb/ServletImagenes?TituloP=" + listP.get(i).getTituloP() + "\" ></a>");
+                                                    out.print("<form class=\"form-signin\" action=\"ServletConsultarPropuesta\" method=\"POST\"> ");
+                                                    out.print("<input style=\"border:none\" type=\"hidden\" class=\"form-control-plaintext\" name=\"TituloP\" value=\"" + listP.get(i).getTituloP() + "\" readonly=\"readonly\"/>");
+                                                    out.print("<button style=\"border: #ffffff\" id=\"titulo\"  type=\"input\"><img width=\"100\" height=\"100\" src=\"/CulturarteWeb/ServletImagenes?TituloP=" + listP.get(i).getTituloP() + "\" ></button>");
+                                                    out.print("</form>");
                                                     out.print("</div>");
                                                     out.print("<div class=\"caption\">");
                                                     out.print("<h3 style=\"width: 135%;\">" + listP.get(i).getTituloP() + "</h3>");
@@ -79,7 +81,10 @@
                                                     out.print("<div style=\"margin-left: 30px;\" class=\"contenedor-columna\">");
                                                     out.print("<div style=\"width: 180px;\"  class=\"thumbnail\">");
                                                     out.print("<div style=\"margin-left: 25%;\">");
-                                                    out.print("<img width=\"100\" height=\"100\" src=\"/CulturarteWeb/ServletImagenes?TituloP=" + listEnF.get(i).getTituloP() + "\" >");
+                                                    out.print("<form class=\"form-signin\" action=\"ServletConsultarPropuesta\" method=\"POST\"> ");
+                                                    out.print("<input style=\"border:none\" type=\"hidden\" class=\"form-control-plaintext\" name=\"TituloP\" value=\"" + listEnF.get(i).getTituloP() + "\" readonly=\"readonly\"/>");
+                                                    out.print("<button style=\"border: #ffffff\" id=\"titulo\"  type=\"input\"><img width=\"100\" height=\"100\" src=\"/CulturarteWeb/ServletImagenes?TituloP=" + listEnF.get(i).getTituloP() + "\" ></button>");
+                                                    out.print("</form>");
                                                     out.print("</div>");
                                                     out.print("<div class=\"caption\">");
                                                     out.print("<h3 style=\"width: 135%;\">" + listEnF.get(i).getTituloP() + "</h3>");
@@ -106,6 +111,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -124,7 +130,10 @@
                                                     out.print("<div style=\"margin-left: 30px;\" class=\"contenedor-columna\">");
                                                     out.print("<div style=\"width: 180px;\" class=\"thumbnail\">");
                                                     out.print("<div style=\"margin-left: 16%;\">");
-                                                    out.print("<img width=\"100\" height=\"100\" src=\"/CulturarteWeb/ServletImagenes?TituloP=" + listF.get(i).getTituloP() + "\" >");
+                                                    out.print("<form class=\"form-signin\" action=\"ServletConsultarPropuesta\" method=\"POST\"> ");
+                                                    out.print("<input style=\"border:none\" type=\"hidden\" class=\"form-control-plaintext\" name=\"TituloP\" value=\"" + listF.get(i).getTituloP() + "\" readonly=\"readonly\"/>");
+                                                    out.print("<button style=\"border: #ffffff\" id=\"titulo\"  type=\"input\"><img width=\"100\" height=\"100\" src=\"/CulturarteWeb/ServletImagenes?TituloP=" + listF.get(i).getTituloP() + "\" ></button>");
+                                                    out.print("</form>");
                                                     out.print("</div>");
                                                     out.print("<div class=\"caption\">");
                                                     out.print("<h3 style=\"width: 135%;\">" + listF.get(i).getTituloP() + "</h3>");
@@ -167,7 +176,10 @@
                                                     out.print("<div style=\"margin-left: 30px;\" style=\"padding-left: 30px;\" flex-direction: row class=\"contenedor-columna\">");
                                                     out.print("<div style=\"width: 180px;\" class=\"thumbnail\">");
                                                     out.print("<div style=\"margin-left: 16%;\">");
-                                                    out.print("<img width=\"100\" height=\"100\" src=\"/CulturarteWeb/ServletImagenes?TituloP=" + listNoF.get(i).getTituloP() + "\" >");
+                                                    out.print("<form class=\"form-signin\" action=\"ServletConsultarPropuesta\" method=\"POST\"> ");
+                                                    out.print("<input style=\"border:none\" type=\"hidden\" class=\"form-control-plaintext\" name=\"TituloP\" value=\"" + listNoF.get(i).getTituloP() + "\" readonly=\"readonly\"/>");
+                                                    out.print("<button style=\"border: #ffffff\" id=\"titulo\"  type=\"input\"><img width=\"100\" height=\"100\" src=\"/CulturarteWeb/ServletImagenes?TituloP=" + listNoF.get(i).getTituloP() + "\" ></button>");
+                                                    out.print("</form>");
                                                     out.print("</div>");
                                                     out.print("<div class=\"caption\">");
                                                     out.print("<h3 style=\"width: 135%;\">" + listNoF.get(i).getTituloP() + "</h3>");
@@ -208,7 +220,10 @@
                                             out.print("<div style=\"margin-left: 30px;\" class=\"contenedor-columna\">");
                                             out.print("<div style=\"width: 180px;\" class=\"thumbnail\">");
                                             out.print("<div style=\"margin-left: 16%;\">");
-                                            out.print("<img width=\"100\" height=\"100\" src=\"/CulturarteWeb/ServletImagenes?TituloP=" + listC.get(i).getTituloP() + "\" >");
+                                            out.print("<form class=\"form-signin\" action=\"ServletConsultarPropuesta\" method=\"POST\"> ");
+                                            out.print("<input style=\"border:none\" type=\"hidden\" class=\"form-control-plaintext\" name=\"TituloP\" value=\"" + listC.get(i).getTituloP() + "\" readonly=\"readonly\"/>");
+                                            out.print("<button style=\"border: #ffffff\" id=\"titulo\"  type=\"input\"><img width=\"100\" height=\"100\" src=\"/CulturarteWeb/ServletImagenes?TituloP=" + listC.get(i).getTituloP() + "\" ></button>");
+                                            out.print("</form>");
                                             out.print("</div>");
                                             out.print("<div class=\"caption\">");
                                             out.print("<h3 style=\"width: 135%;\">" + listC.get(i).getTituloP() + "</h3>");
