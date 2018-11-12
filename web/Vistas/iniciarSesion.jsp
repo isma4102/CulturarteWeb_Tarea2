@@ -58,7 +58,7 @@
                                         </div>
                                     </div>
                                     <div class="col-xs-6">
-                                        <p class="lead">Registrate en <span class="text-success">Culturarte</span></p>
+                                        <p style="font-size: 104%;" class="lead">Registrate en <span class="text-success">Culturarte</span></p>
                                         <ul class="list-unstyled" style="line-height: 2">
                                             <li><span class="fa fa-check text-success"></span>- Crear Propuestas</li>
                                             <li><span class="fa fa-check text-success"></span>- Seguir usuarios</li>

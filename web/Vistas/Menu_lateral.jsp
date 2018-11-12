@@ -8,7 +8,7 @@
     <body> 
         <div id="wrapper" >
             <div style="margin-top: -42px;" id="sidebar-wrapper">
-                <ul class="sidebar-nav">
+                <ul style="margin-top: 7%;" class="sidebar-nav">
                     <div class="sidenav">
                         <button  class="dropdown-btn"> <img style="margin-right: 4%;" src="Imagenes/Usuarios.png">Usuario
                             <i class="fa fa-caret-down"></i>

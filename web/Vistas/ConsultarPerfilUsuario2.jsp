@@ -13,6 +13,7 @@
 <%@page import="java.util.Calendar"%>
 <%@page import="java.util.Date"%>
 <%@page import="servicios.DtUsuario"%>
+<%@page import="servicios.DtPago"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -32,7 +33,7 @@
         <%
             }
         %>
-        
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Culturarte</title>
 
@@ -58,29 +59,29 @@
                                         } else {
                                             out.println("Colaborador");
                                         }%></h3>
-                                    <a class="btn btn-just-icon btn-link btn-dribbble"></a>
+
                                     <a><img style="width: 5%;" src="Imagenes/Web.png"><% out.print(dtu.getCorreo()); %></a>
                                 </div>
                             </div>
                             <div class="follow">
-                                <%  if(nick!=null)
-                                    if(nick.getSeguidos().contains(dtu.getNickname())){%>
-                                        <form action="SeguirUsuario" method="post">
-                                            <input type="hidden" name="seguido" value="<%=dtu.getNickname()%>" />
-                                            <input type="hidden" name="accion" value="dejarseguir" />
-                                            <input type="button" class="btn btn-fab btn-primary btn-round" rel="tooltip" title="Dejar de Seguir a este usuario" value="-" onclick="submit()"/>
-                                        </form>                                 
-                                <%}else{%>
-                                        <form action="SeguirUsuario" method="post">
-                                            <input type="hidden" name="seguido" value="<%=dtu.getNickname()%>" />
-                                            <input type="hidden" name="accion" value="seguir" />
-                                            <input type="button" class="btn btn-fab btn-primary btn-round" rel="tooltip" title="Seguir a este usuario" value="+" onclick="submit()"/>
-                                        </form>          
-                               <%}%>
+                                <%  if (nick != null)
+                                        if (nick.getSeguidos().contains(dtu.getNickname())) {%>
+                                <form action="SeguirUsuario" method="post">
+                                    <input type="hidden" name="seguido" value="<%=dtu.getNickname()%>" />
+                                    <input type="hidden" name="accion" value="dejarseguir" />
+                                    <input type="button" class="btn btn-fab btn-primary btn-round" rel="tooltip" title="Dejar de Seguir a este usuario" value="-" onclick="submit()"/>
+                                </form>                                 
+                                <%} else {%>
+                                <form action="SeguirUsuario" method="post">
+                                    <input type="hidden" name="seguido" value="<%=dtu.getNickname()%>" />
+                                    <input type="hidden" name="accion" value="seguir" />
+                                    <input type="button" class="btn btn-fab btn-primary btn-round" rel="tooltip" title="Seguir a este usuario" value="+" onclick="submit()"/>
+                                </form>          
+                                <%}%>
                             </div>
                         </div>
                     </div>
-                    <div class="description text-center">
+                    <div style="color: black" class="description text-center">
                         <p> <%if (dtu.getBiografia() != null) {
                                 out.println(dtu.getBiografia());
                             }%></p>
@@ -97,7 +98,7 @@
                             <%if (nick != null && nick.isEsproponente() && dtu.getNickname().compareTo(nick.getNickname()) == 0) {%>
                         <li><a data-toggle="tab" href="#DesactivarP">Desactivar Cuenta</a></li>
                             <%}
-                                        } else {%>
+                            } else {%>
                         <li><a data-toggle = "tab" href = "#PCreadas" > Colaboraciones</a></li>
                             <%}%>
                     </ul>
@@ -109,7 +110,7 @@
                                 <div class="form-group">
                                     <div class="col-xs-6">
                                         <div class="panel panel-primary">
-                                            <div class="panel-heading" style = "padding: 1%"
+                                            <div class="panel-heading" style = "background-color: #637390;padding: 1%"
                                                  > <h3 
                                                     class="panel-title">NickName</h3
                                                 > </div> 
@@ -124,7 +125,7 @@
                                 <div class="form-group">
                                     <div class="col-xs-6">
                                         <div class="panel panel-primary">
-                                            <div class="panel-heading" style="padding: 1%">
+                                            <div class="panel-heading" style="background-color: #637390;padding: 1%">
                                                 <h3 class="panel-title">Nombre</h3>
                                             </div>
                                             <div class="panel-body" style="padding: 1%">
@@ -137,7 +138,7 @@
                                 <div class="form-group">
                                     <div class="col-xs-6">
                                         <div class="panel panel-primary">
-                                            <div class="panel-heading" style="padding: 1%">
+                                            <div class="panel-heading" style="background-color: #637390;padding: 1%">
                                                 <h3 class="panel-title">Apellido</h3>
                                             </div>
                                             <div class="panel-body" style="padding: 1%">
@@ -150,7 +151,7 @@
                                 <div class="form-group">
                                     <div class="col-xs-6">
                                         <div class="panel panel-primary">
-                                            <div class="panel-heading" style="padding: 1%">
+                                            <div class="panel-heading" style="background-color: #637390;padding: 1%">
                                                 <h3 class="panel-title">Correo</h3>
                                             </div>
                                             <div class="panel-body" style="padding: 1%">
@@ -162,7 +163,7 @@
                                 <div class="form-group">
                                     <div class="col-xs-6">
                                         <div class="panel panel-primary">
-                                            <div class="panel-heading" style="padding: 1%">
+                                            <div class="panel-heading" style="background-color: #637390;padding: 1%">
                                                 <h3 class="panel-title">Fecha de Nacimiento</h3>
                                             </div>
                                             <div class="panel-body" style="padding: 1%">
@@ -179,7 +180,7 @@
                                     <div class="col-xs-6">
 
                                         <div class="panel panel-primary">
-                                            <div class="panel-heading" style="padding: 1%">
+                                            <div class="panel-heading" style="background-color: #637390;padding: 1%">
                                                 <h3 class="panel-title">Tipo de usuario</h3>
                                             </div>
                                             <div class="panel-body" style="padding: 1%">
@@ -194,13 +195,13 @@
                                     </div>
                                 </div>
                                 <%if (dtu.isEsproponente()) {%>       
-                               
+
 
                                 <div class="form-group">
                                     <div class="col-xs-6">
 
                                         <div class="panel panel-primary">
-                                            <div class="panel-heading" style="padding: 1%">
+                                            <div class="panel-heading" style="background-color: #637390;padding: 1%">
                                                 <h3 class="panel-title">Direccion</h3>
                                             </div>
                                             <div class="panel-body" style="padding: 1%">
@@ -212,7 +213,7 @@
                                 <div class="form-group">
                                     <div class="col-xs-6">
                                         <div class="panel panel-primary">
-                                            <div class="panel-heading" style="padding: 1%">
+                                            <div class="panel-heading" style="background-color: #637390;padding: 1%">
                                                 <h3 class="panel-title">Sitio</h3>
                                             </div>
                                             <div class="panel-body" style="padding: 1%">
@@ -330,7 +331,7 @@
                                     if (propuestasdeproponentenoing.size() > 0) {%>
                                 <div class="usuario" style="margin-bottom: 2%">
                                     <h3>Propuestas creadas</h3>
-                                    <table class="table table-bordered table-hover  formulario" style="margin-right: 200px; width: 88%; margin-top:50px;">
+                                    <table class="table table-bordered table-hover  formulario" >
 
                                         <tr>
                                             <th>Titulo</th>
@@ -344,7 +345,7 @@
                                             <tr>
                                             <input readonly style="border:none" name="TituloP" type="hidden" value="<%=dtp.getTitulo()%>"/>&nbsp;&nbsp;&nbsp;
                                             <td><p>Titulo de Prueba</p></td>
-                                            <td><textarea readonly style="background-color: white; resize: none;width: 300px; height: 100px;"><%=dtp.getDescripcion()%></textarea></td> 
+                                            <td style="width: 35%"><p ><%=dtp.getDescripcion()%></p></td>
                                             <td><p><%=dtp.getEstado()%></p></td>
                                             <td><button style="background:url('/CulturarteWeb/Imagenes/ver.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px" name="consulta" type="submit" class="btn btn-primary"></button></td>
                                             </tr>
@@ -363,7 +364,7 @@
                                     <h3>Propuestas creadas</h3>
                                     <%List<DtinfoPropuesta> propuestasdeproponente = (List<DtinfoPropuesta>) request.getAttribute("Propuestas");
                                         if (propuestasdeproponente.size() > 0) {%>
-                                    <table class="table table-bordered table-hover  formulario" style="margin-right: 200px; width: 88%; margin-top:50px;">
+                                    <table class="table table-bordered table-hover  formulario" >
 
                                         <tr>
                                             <th>Titulo</th>
@@ -377,7 +378,7 @@
                                             <tr>
                                             <input readonly style="border:none" name="TituloP" type="hidden" value="<%=dtp.getTitulo()%>"/>&nbsp;&nbsp;&nbsp;
                                             <td><p>Titulo de Prueba</p></td>
-                                            <td><textarea readonly style="background-color: white; resize: none;width: 300px; height: 100px;"><%=dtp.getDescripcion()%></textarea></td>
+                                            <td style="width: 35%"><p ><%=dtp.getDescripcion()%></p></td>
                                             <td><p><%=dtp.getEstado()%></p></td>
                                             <td><button style="background:url('/CulturarteWeb/Imagenes/ver.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px" name="consulta" type="submit" class="btn btn-primary"></button></td>
 
@@ -396,7 +397,7 @@
                                     <h3>Propuestas creadas</h3>
                                     <%List<DtinfoPropuesta> propuestasdeproponentenoing = (List<DtinfoPropuesta>) request.getAttribute("Propuestas");
                                         if (propuestasdeproponentenoing.size() > 0) {%>
-                                    <table class="table table-bordered table-hover  formulario" style="margin-right: 200px; width: 88%; margin-top:50px;">
+                                    <table class="table table-bordered table-hover  formulario" >
 
                                         <tr>
                                             <th>Titulo</th>
@@ -410,7 +411,7 @@
                                             <tr>
                                             <input readonly style="border:none" name="TituloP" type="hidden" value="<%=dtp.getTitulo()%>"/>&nbsp;&nbsp;&nbsp;
                                             <td><p>Titulo de Prueba</p></td>    
-                                            <td><textarea readonly style="background-color: white; resize: none;width: 300px; height: 100px;"><%=dtp.getDescripcion()%></textarea></td>
+                                            <td style="width: 35%"><p ><%=dtp.getDescripcion()%></p></td>
                                             <td><%=dtp.getEstado()%></td>
                                             <td><button style="background:url('/CulturarteWeb/Imagenes/ver.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px" name="consulta" type="submit" class="btn btn-primary"></button></td>
                                             </tr>
@@ -429,7 +430,7 @@
                                     <%List<DtinfoPropuesta> colaboraciones = (List<DtinfoPropuesta>) request.getAttribute("Colaboraciones");
                                         if (colaboraciones.size() > 0) {
                                             List<DtColaboraciones> dtc = (List<DtColaboraciones>) request.getAttribute("Colaborador"); %>
-                                    <table class="table table-bordered table-hover  formulario" style="margin-right: 200px; width: 88%; margin-top:50px;">
+                                    <table class="table table-bordered table-hover  formulario" >
 
                                         <tr>
                                             <th>Titulo</th>
@@ -437,6 +438,7 @@
                                             <%if (dtu.getNickname().equals(nick.getNickname())) {%>
                                             <th>Fecha de colaboracion:</th>
                                             <th>Monto</th>  
+                                            <th>Pagos</th>
                                                 <% }%>
                                         </tr>
 
@@ -452,15 +454,49 @@
                                                     Float monto = dtp.getMontoC();
                                             %>
                                             <td><p><%=monto%></p></td>&nbsp;&nbsp;&nbsp;
-                                            <%}%>
-
+                                            <td>     
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Pagos">
+                                                    Ver
+                                                </button>
+                                            </td>
+                                                <%}%>
                                         </tr>
-                                        <%}%>
+                                        <div class="modal fade" id="Pagos" tabindex="-1" role="dialog" aria-labelledby="Pagos" aria-hidden="true">
+                                            <div style="margin-bottom: -45%;" class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h2 style="text-align: center" class="modal-title" id="exampleModalLongTitle">Información</h2>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <% if (dtp.getPago().getTipo().equals("tarjeta")) {%>
+                                                        Numero de tarjeta: <%= dtp.getPago().getTarjetaBANCO()%>  <br>
+                                                        Numero de cuenta: <%= dtp.getPago().getNumeroCUENTA()%>  <br>
+                                                        CVC: <%= String.valueOf(dtp.getPago().getCvc())%>  <br>
+                                                        Fecha de vencimiento: <%= dtp.getPago().getFechaV()%>  <br>
+                                                        Titular: <%= dtp.getPago().getTitular()%>  <br>
+                                                        <% } else if (dtp.getPago().getTipo().equals("paypal")) {%>
+                                                        Numero de cuenta: <%= dtp.getPago().getNumeroCUENTA()%>  <br>
+                                                        Titular: <%= dtp.getPago().getTitular()%>  <br>
 
+                                                        <% } else {%>
+                                                        Banco: <%= dtp.getPago().getTarjetaBANCO()%><br>  
+                                                        Nombre de cuenta: <%= dtp.getPago().getNumeroCUENTA()%>  <br>
+                                                        Titular: <%= dtp.getPago().getTitular()%>  <br>
+                                                        <% }%>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <%}%>
                                     </table>
                                     <% } else {%>
                                     <h3>No posee colaboraciones</h3>
-
                                     <% }%>
                                 </div>
                                 <%} else {%>
@@ -468,7 +504,7 @@
                                     <h3>Colaboraciones</h3>
                                     <%List<DtinfoPropuesta> colaboraciones = (List<DtinfoPropuesta>) request.getAttribute("Colaboraciones");
                                         if (colaboraciones.size() > 0) {%>
-                                    <table class="table table-bordered table-hover  formulario" style="margin-right: 200px; width: 88%; margin-top:50px;">
+                                    <table class="table table-bordered table-hover  formulario" >
 
                                         <tr>
                                             <th>Titulo</th>
@@ -478,7 +514,7 @@
                                         <% for (DtinfoPropuesta dtp : colaboraciones) {%>
                                         <tr>
                                             <td><p><%=dtp.getTitulo()%></p></td>&nbsp;&nbsp;&nbsp;
-                                            <td><textarea readonly style="background-color: white; resize: none; width: 300px; height: 100px; overflow-y: scroll;"><%=dtp.getDescripcion()%></textarea>&nbsp;&nbsp;&nbsp;</td>
+                                            <td style="width: 80%;"><p ><%=dtp.getDescripcion()%></p></td>
                                         </tr>
                                         <%}%>
 
@@ -495,12 +531,12 @@
                             <div style="color:black" class="tab-pane" id="DesactivarP">
                                 <form action="ServletDesactivarUsuario" method="POST">
                                     <div class="panel panel-primary">
-                                        <div class="panel-heading" style="padding: 1%">
+                                        <div class="panel-heading" style="background-color: #3e6293;">
                                             <h3 class="panel-title">Advertecia</h3>
                                             <br>
                                             <br>
                                         </div>
-                                        <div class="panel-body" style="padding: 1%">
+                                        <div class="panel-body" style="padding: 1% ;background-color: #637390;">
                                             <span>
                                                 Al desactivar su cuenta perdera toda su información (datos básicos, imagenes,propuestas y colaboraciones a estas), los restantes usuarios
                                                 que tengan algun vinculo con sus propuestas o su perfil no podran visualizarlo.
@@ -529,6 +565,11 @@
         </div>   
 
     </div>  
+
+
+
+
+
 
     <jsp:include page="/Vistas/footer.jsp" />
 </body>

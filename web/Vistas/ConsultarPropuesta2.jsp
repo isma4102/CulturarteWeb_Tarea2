@@ -73,7 +73,7 @@
                                                     <div class="form-group">
                                                         <div class="col-xs-6">
                                                             <div class="panel panel-primary">
-                                                                <div class="panel-heading" style = "padding: 1%"
+                                                                <div class="panel-heading" style = "background-color: #637390;padding: 1%"
                                                                      > <h3 
                                                                         class="panel-title">Nombre</h3
                                                                     > </div> 
@@ -86,7 +86,7 @@
                                                     <div class="form-group">
                                                         <div class="col-xs-6">
                                                             <div class="panel panel-primary">
-                                                                <div class="panel-heading" style = "padding: 1%"
+                                                                <div class="panel-heading" style = "background-color: #637390;padding: 1%"
                                                                      > <h3 
                                                                         class="panel-title">Autor</h3
                                                                     > </div> 
@@ -100,7 +100,7 @@
                                                     <div class="form-group">
                                                         <div class="col-xs-6">
                                                             <div class="panel panel-primary">
-                                                                <div class="panel-heading" style = "padding: 1%"
+                                                                <div class="panel-heading" style = "background-color: #637390;padding: 1%"
                                                                      > <h3 
                                                                         class="panel-title">Tipo de espectaculo</h3
                                                                     > </div> 
@@ -114,7 +114,7 @@
                                                     <div class="form-group">
                                                         <div class="col-xs-6">
                                                             <div class="panel panel-primary">
-                                                                <div class="panel-heading" style = "padding: 1%"
+                                                                <div class="panel-heading" style = "background-color: #637390;padding: 1%"
                                                                      > <h3 
                                                                         class="panel-title">Lugar</h3
                                                                     > </div> 
@@ -128,7 +128,7 @@
                                                     <div class="form-group">
                                                         <div class="col-xs-6">
                                                             <div class="panel panel-primary">
-                                                                <div class="panel-heading" style = "padding: 1%"
+                                                                <div class="panel-heading" style = "background-color: #637390;padding: 1%"
                                                                      > <h3 
                                                                         class="panel-title">Estado Actual</h3
                                                                     > </div> 
@@ -149,7 +149,7 @@
                                                     <div class="form-group">
                                                         <div class="col-xs-6">
                                                             <div class="panel panel-primary">
-                                                                <div class="panel-heading" style = "padding: 1%"
+                                                                <div class="panel-heading" style = "background-color: #637390;padding: 1%"
                                                                      > <h3 
                                                                         class="panel-title">Fecha de relizacion</h3
                                                                     > </div> 
@@ -164,7 +164,7 @@
                                                     <div class="form-group">
                                                         <div class="col-xs-6">
                                                             <div class="panel panel-primary">
-                                                                <div class="panel-heading" style = "padding: 1%"
+                                                                <div class="panel-heading" style = "background-color: #637390;padding: 1%"
                                                                      > <h3 
                                                                         class="panel-title">Precio de entrada</h3
                                                                     > </div> 
@@ -178,7 +178,7 @@
                                                     <div class="form-group">
                                                         <div class="col-xs-6">
                                                             <div class="panel panel-primary">
-                                                                <div class="panel-heading" style = "padding: 1%"
+                                                                <div class="panel-heading" style = "background-color: #637390;padding: 1%"
                                                                      > <h3 
                                                                         class="panel-title">Monto final</h3
                                                                     > </div> 
@@ -192,7 +192,7 @@
                                                     <div class="form-group">
                                                         <div class="col-xs-6">
                                                             <div class="panel panel-primary">
-                                                                <div class="panel-heading" style = "padding: 1%"
+                                                                <div class="panel-heading" style = "background-color: #637390;padding: 1%"
                                                                      > <h3 
                                                                         class="panel-title">Monto actual</h3
                                                                     > </div> 
@@ -206,7 +206,7 @@
                                                     <div class="form-group">
                                                         <div class="col-xs-6">
                                                             <div class="panel panel-primary">
-                                                                <div class="panel-heading" style = "padding: 1%"
+                                                                <div class="panel-heading" style = "background-color: #637390;padding: 1%"
                                                                      > <h3 
                                                                         class="panel-title">Tipo de retorno</h3
                                                                     > </div> 
