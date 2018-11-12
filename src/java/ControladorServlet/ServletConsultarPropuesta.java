@@ -117,6 +117,7 @@ public class ServletConsultarPropuesta extends HttpServlet {
             DtListComentarios comentario = this.port.listarComentarios(titulo);
             request.setAttribute("comentarios", comentario.getLista2());
             List<DtConsultaPropuesta2> listColab = this.port.listarColaboradoresProp(titulo).getLista();
+            
 
             request.setAttribute("listaC", listColab);
 

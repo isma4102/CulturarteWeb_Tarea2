@@ -1,3 +1,4 @@
+
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
@@ -5914,13 +5915,13 @@ button.close {
   -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
           box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
 }
+
 .modal-backdrop {
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 1040;
   background-color: #000;
 }
 .modal-backdrop.fade {
@@ -5931,6 +5932,7 @@ button.close {
   filter: alpha(opacity=50);
   opacity: .5;
 }
+
 .modal-header {
   padding: 15px;
   border-bottom: 1px solid #e5e5e5;
