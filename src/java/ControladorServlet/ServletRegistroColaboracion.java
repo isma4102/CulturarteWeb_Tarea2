@@ -94,13 +94,7 @@ public class ServletRegistroColaboracion extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String Opcion = null;
-        if (request.getParameter("Ver") != null) {
-            String viene = request.getParameter("TituloP");
-            Opcion = new String(viene.getBytes("ISO-8859-1"), "UTF-8");
-            DtinfoPropuesta propuesta = this.port.seleccionarPropuestaR(Opcion);
-            request.setAttribute("Propuestaseleccionada", propuesta);
-            request.getRequestDispatcher("/Vistas/MostrarInfoPropuesta.jsp").forward(request, response);
-        } else if (request.getParameter("seleccionar") != null) {
+       if (request.getParameter("seleccionar") != null) {
             if (request.getParameter("Estado").compareTo(TipoE.PUBLICADA.toString()) == 0 || request.getParameter("Estado").compareTo(TipoE.EN_FINANCIACION.toString()) == 0) {
                 String viene = request.getParameter("TituloP");
                 Opcion = new String(viene.getBytes("ISO-8859-1"), "UTF-8");

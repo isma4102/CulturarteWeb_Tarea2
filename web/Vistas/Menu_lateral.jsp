@@ -66,7 +66,7 @@
                       <a style="z-index: 1;position: relative" href="#menu-toggle" id="menu-toggle" class="nav-link"><img src="Imagenes/menu-icono.png" alt="" class="menu-bar"></a>
                     </li>
                         
-        <a style="z-index: 1;margin-right: 22%;width: 25%;" href="/CulturarteWeb/ServletInicio">
+        <a style="z-index: 1;margin-right: 22%;" href="/CulturarteWeb/ServletInicio">
             <img src="Imagenes/logo.png">
         </a>
         <script>

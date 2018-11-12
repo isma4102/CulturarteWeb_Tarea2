@@ -51,7 +51,7 @@
                                                 List<DtListaPropuestasR> lista = (List<DtListaPropuestasR>) request.getAttribute("lista_propuestas");
                                                 for (int i = 0; i < lista.size(); i++) {
                                                     out.print("<tr>");
-                                                    out.print("<form class=\"form-signin\" action=\"ServletConsultarPropuesta\" method=\"POST\"> ");
+                                                    out.print("<form class=\"form-signin\" action=\"ServletRegistroColaboracion\" method=\"POST\"> ");
                                                     out.print("<td><button style=\"background:url('/CulturarteWeb/Imagenes/selecc.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px\"  type=\"input\" name=\"seleccionar\" class=\"btn btn-primary\"></button></td>");
                                                     out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"TituloP\" value=\"" + lista.get(i).getTitulo() + "\" readonly=\"readonly\"/>");
                                                     out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"Estado\" value=\"" + lista.get(i).getEstado().toString() + "\" readonly=\"readonly\"/>");
@@ -59,6 +59,9 @@
                                                     out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"Proponente\" value=\"" + lista.get(i).getProponente() + "\" readonly=\"readonly\"/>");
                                                     out.print("<td><p> " + lista.get(i).getProponente() + "</p></td>");
                                                     out.print("<td><p> " + lista.get(i).getEstado().toString() + "</p></td>");
+                                                    out.print("</form>");
+                                                    out.print("<form class=\"form-signin\" action=\"ServletConsultarPropuesta\" method=\"POST\"> ");
+                                                    out.print("<input type=\"hidden\" class=\"form-control-plaintext\" name=\"TituloP\" value=\"" + lista.get(i).getTitulo() + "\" readonly=\"readonly\"/>");
                                                     out.print("<td><button style=\"background:url('/CulturarteWeb/Imagenes/ver.png');background-position:center;background-repeat:no-repeat;width:70px; height:25px\" type=\"input\" name=\"Ver\" class=\"btn btn-primary\"></button></td>");
                                                     out.print("</form>");
                                                     out.print("</tr>");
@@ -66,19 +69,19 @@
                                             %>
                                         </tbody>
                                 </table>
-                                        <br><br>
+                                <br><br>
                                 <div style=" text-align: center;">
                                     <a href="javascript:window.history.back();" class="btn btn-primary" > &laquo; Volver</a>
                                     <a href="ServletInicio" class="btn btn-primary" > &laquo; Volver a inicio</a>
                                 </div>
-                                        <br><br>
+                                <br><br>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-                                        <br><br>
+        <br><br>
         <jsp:include page="/Vistas/footer.jsp" /> 
 
     </body>
