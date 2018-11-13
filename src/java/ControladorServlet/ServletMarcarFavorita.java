@@ -54,11 +54,11 @@ public class ServletMarcarFavorita extends HttpServlet {
         ServletContext context;
         context = request.getServletContext();
         String ruta = context.getResource("").getPath();
-        URL urlP = new URL("http://" + conf.obtenerServer("servidor", ruta) + "/servicioConsultaP");
+        URL urlP = new URL("http://" + conf.obtenerServer("servidor", ruta) + conf.leerProp("sConsultaPropuesta", ruta));
         PublicadorConsultarPropuestaService webServiceP = new PublicadorConsultarPropuestaService(urlP);
         this.portP = webServiceP.getPublicadorConsultarPropuestaPort();
 
-        URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + "/servicioConsultaU");
+        URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + conf.leerProp("sConsultaUsuario", ruta));
         PublicadorConsultarUsuarioService webService = new PublicadorConsultarUsuarioService(url);
         this.portU = webService.getPublicadorConsultarUsuarioPort();
 

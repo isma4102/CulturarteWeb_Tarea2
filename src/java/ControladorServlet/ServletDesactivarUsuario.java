@@ -82,7 +82,7 @@ public class ServletDesactivarUsuario extends HttpServlet {
         String ruta = context.getResource("").getPath();
 
         try {
-            URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + "/servicioConsultaU");
+            URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + conf.leerProp("sConsultaUsuario", ruta));
             PublicadorConsultarUsuarioService webService = new PublicadorConsultarUsuarioService(url);
             this.port = webService.getPublicadorConsultarUsuarioPort();
 

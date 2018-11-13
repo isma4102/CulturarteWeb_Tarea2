@@ -56,7 +56,7 @@ public class ServletInicio extends HttpServlet {
         context = (ServletContext) request.getServletContext();
         String ruta = context.getResource("").getPath();
         String sv  = conf.obtenerServer("servidor", ruta);
-        URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + "/servicioInicio");
+        URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + conf.leerProp("sInicio", ruta));
         PublicadorInicioService webService = new PublicadorInicioService(url);
         this.port = webService.getPublicadorInicioPort();
 

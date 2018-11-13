@@ -45,7 +45,7 @@ public class ServletExtenderFinanciacion extends HttpServlet {
         context = request.getServletContext();
         String ruta = context.getResource("").getPath();
 
-        URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + "/servicioConsultaP");
+        URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + conf.leerProp("sConsultaPropuesta", ruta));
 
         PublicadorConsultarPropuestaService webService = new PublicadorConsultarPropuestaService(url);
         this.port = webService.getPublicadorConsultarPropuestaPort();

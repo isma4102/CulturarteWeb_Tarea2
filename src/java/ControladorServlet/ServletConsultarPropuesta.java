@@ -56,7 +56,7 @@ public class ServletConsultarPropuesta extends HttpServlet {
         ServletContext context;
         context = request.getServletContext();
         String ruta = context.getResource("").getPath();
-        URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + "/servicioConsultaP");
+        URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + conf.leerProp("sConsultaPropuesta", ruta));
         PublicadorConsultarPropuestaService webService = new PublicadorConsultarPropuestaService(url);
         this.port = webService.getPublicadorConsultarPropuestaPort();
 
@@ -97,7 +97,7 @@ public class ServletConsultarPropuesta extends HttpServlet {
         ServletContext context;
         context = request.getServletContext();
         String ruta = context.getResource("").getPath();
-        URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + "/servicioConsultaP");
+        URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + conf.leerProp("sConsultaPropuesta", ruta));
         PublicadorConsultarPropuestaService webService = new PublicadorConsultarPropuestaService(url);
         this.port = webService.getPublicadorConsultarPropuestaPort();
 
