@@ -6,6 +6,7 @@
 package ControladorServlet;
 
 import java.io.IOException;
+import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.URL;
 import java.util.ArrayList;
@@ -61,7 +62,12 @@ public class SeguirUsuario extends HttpServlet {
             List<DtUsuario> lista = this.port.listarUsuarios().getLista();
             request.setAttribute("usuarios", lista);
             String browserDetails = request.getHeader("User-Agent");
-            String IP = InetAddress.getLocalHost().getHostAddress();
+            String IP;  
+            try(final DatagramSocket socket = new DatagramSocket()){
+              socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
+              IP = socket.getLocalAddress().getHostAddress();
+            }
+             
             String URL = "http://" + RS.obtenerIP() + "/CulturarteWeb/ServletConsultarUsuario";
             RS.ObtenerRegistro(browserDetails, IP, URL);
             request.getRequestDispatcher("Vistas/SeguirUsuario.jsp").forward(request, response);
