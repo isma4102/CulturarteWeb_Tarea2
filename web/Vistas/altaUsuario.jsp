@@ -5,8 +5,10 @@
     <head>
         <title>Culturarte</title>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">`
-        <script src="script/altaUserJS.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript" src="/CulturarteWeb/js/jquery.min.js"></script>
+        <script type="text/javascript" src="/CulturarteWeb/js/jquery.js"></script>
+        
         <link  rel="stylesheet" type="text/css" href="css/AltaUsuarioCSS.css">
         <link  rel="stylesheet" type="text/css" href="css/RegistrarColaboracion.css">
 
@@ -45,7 +47,9 @@
                                     <form action="altaUsuarioServlet" method="post" enctype="multipart/form-data">
                                         <div>
                                             <label for="name">Nombre de usuario:</label>
-                                            <input name="nick" class="form-control"placeholder="Escribe tu nombre de usuario" type="text" required/>
+                                            <img id="check" style="display: none" src="/CulturarteWeb/Imagenes/check.png"></img>
+                                            <img id="checkout" style="display: none" src="/CulturarteWeb/Imagenes/checkout.png"></img>
+                                            <input id="nick" name="nick" onkeyup="verificarNombre()" class="form-control"placeholder="Escribe tu nombre de usuario" type="text" required/>
                                         </div>
                                         <br>
                                         <div>
@@ -60,7 +64,9 @@
                                         <br>
                                         <div>
                                             <label for="mail">E-mail:</label>
-                                            <input name="correo" class="form-control" placeholder="Escribe tu correo electrónico" type="email" required/>
+                                            <img id="checkE" style="display: none" src="/CulturarteWeb/Imagenes/check.png"></img>
+                                            <img id="checkoutE" style="display: none" src="/CulturarteWeb/Imagenes/checkout.png"></img>
+                                            <input id="correo" onkeyup="verificarCorreo()" name="correo" class="form-control" placeholder="Escribe tu correo electrónico" type="email" required/>
                                         </div>
                                         <br>
                                         <div>
@@ -112,6 +118,7 @@
             </div>
         </div>
         <br><br><br><br>
+        <script src="script/altaUserJS.js"></script>
           <jsp:include page="/Vistas/footer.jsp" />
     </body>
 </html>
