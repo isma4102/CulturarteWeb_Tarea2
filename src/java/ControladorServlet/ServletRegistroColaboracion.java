@@ -44,7 +44,7 @@ public class ServletRegistroColaboracion extends HttpServlet {
         ServletContext context;
         context = request.getServletContext();
         String ruta = context.getResource("").getPath();
-        URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + "/servicioRegistrarC");
+        URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + conf.leerProp("sRegistrarColaboracion", ruta));
 
         PublicadorRegistrarColaboracionService webService = new PublicadorRegistrarColaboracionService(url);
         this.port = webService.getPublicadorRegistrarColaboracionPort();

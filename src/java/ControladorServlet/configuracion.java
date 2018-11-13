@@ -37,7 +37,23 @@ public class configuracion {
         String rutaLarga = prop.getProperty("Ip")+":"+prop.getProperty("Porth");
         return rutaLarga;
     }
+public String leerProp(String caso,String ruta){
+        Properties prop = new Properties();
+        InputStream archivo;
+        ruta = ruta.replace("%", " ");
+        ruta = ruta.replace("20", "");
+        ruta = this.recortarRuta(ruta);
 
+        ruta = ruta + "config.properties";
+        try {
+            archivo = new FileInputStream(ruta);
+            prop.load(archivo);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        String resultado = prop.getProperty(caso);
+        return resultado;
+    }
     public String recortarRuta(String ruta) {
         String recortada = null;
         String[] partes;

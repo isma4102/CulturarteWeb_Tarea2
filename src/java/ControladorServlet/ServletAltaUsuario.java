@@ -101,7 +101,11 @@ public class ServletAltaUsuario extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        URL url = new URL("http://127.0.0.1:8280/servicioConsultaU");
+        ServletContext context;
+        context = request.getServletContext();
+        String ruta = context.getResource("").getPath();
+        DtUsuario usuLogeado = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
+        URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + conf.leerProp("sConsultaUsuario", ruta));
         PublicadorConsultarUsuarioService webService = new PublicadorConsultarUsuarioService(url);
         PublicadorConsultarUsuario portCU = webService.getPublicadorConsultarUsuarioPort();
         codificador a = new codificador();

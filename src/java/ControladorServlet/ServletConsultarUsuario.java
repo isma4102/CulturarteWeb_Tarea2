@@ -20,7 +20,10 @@ import servicios.DtinfoPropuesta;
 import servicios.PublicadorConsultarUsuario;
 import servicios.PublicadorConsultarUsuarioService;
 import java.net.InetAddress;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletContext;
+import servicios.Exception_Exception;
 import servicios.PublicadorInicio;
 
 /**
@@ -30,7 +33,7 @@ import servicios.PublicadorInicio;
 @WebServlet("/ServletConsultarUsuario")
 public class ServletConsultarUsuario extends HttpServlet {
 
-    private PublicadorConsultarUsuario port;
+    private PublicadorConsultarUsuario port = null;
     private PublicadorInicio port2;
     private RegistroSitio RS = new RegistroSitio();
     configuracion conf = new configuracion();
@@ -52,13 +55,10 @@ public class ServletConsultarUsuario extends HttpServlet {
         ServletContext context;
         context = request.getServletContext();
         String ruta = context.getResource("").getPath();
-
-        URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + "/servicioConsultaU");
+        URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + conf.leerProp("sConsultaUsuario", ruta));
         PublicadorConsultarUsuarioService webService = new PublicadorConsultarUsuarioService(url);
         this.port = webService.getPublicadorConsultarUsuarioPort();
-
         response.setContentType("text/html;charset=UTF-8");
-
         if (port.listarUsuarios().getLista().isEmpty()) {
             request.setAttribute("mensaje", "No existen usuarios en el sistema");
             request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
@@ -102,11 +102,51 @@ public class ServletConsultarUsuario extends HttpServlet {
         ServletContext context;
         context = request.getServletContext();
         String ruta = context.getResource("").getPath();
+        String accion = (String) request.getParameter("accion");
 
-        URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + "/servicioConsultaU");
+        URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + conf.leerProp("sConsultaUsuario", ruta));
         PublicadorConsultarUsuarioService webService = new PublicadorConsultarUsuarioService(url);
         this.port = webService.getPublicadorConsultarUsuarioPort();
-
+        //****************************************************************
+        if (accion != null) {
+            String nombre = (String) request.getParameter("nombre");
+            String correo = (String) request.getParameter("correo");
+            try {
+                System.out.print(nombre);
+                if (nombre != null) {
+                   nombre =  nombre.replace(" ","");
+                    boolean esta = port.existeNombreUser(nombre);
+                    if (esta) {
+                        response.setContentType("text/plain");
+                        response.setCharacterEncoding("UTF-8");
+                        response.getWriter().write("esta");
+                        return;
+                    } else {
+                        response.setContentType("text/plain");
+                        response.setCharacterEncoding("UTF-8");
+                        response.getWriter().write("noesta");
+                        return;
+                    }
+                } else if (correo != null) {
+                    correo = correo.replace(" ", "");
+                    boolean esta = port.existeCorreoUser(correo);
+                    if (esta) {
+                        response.setContentType("text/plain");
+                        response.setCharacterEncoding("UTF-8");
+                        response.getWriter().write("esta");
+                        return;
+                    } else {
+                        response.setContentType("text/plain");
+                        response.setCharacterEncoding("UTF-8");
+                        response.getWriter().write("noesta");
+                        return;
+                    }
+                }
+            } catch (Exception_Exception ex) {
+                Logger.getLogger(ServletConsultarUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        //****************************************************************
         try {
             String nickname = request.getParameter("nick");
 

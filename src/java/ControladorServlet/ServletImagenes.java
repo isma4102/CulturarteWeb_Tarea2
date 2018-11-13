@@ -49,34 +49,7 @@ public class ServletImagenes extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception_Exception {
         response.setContentType("text/html;charset=UTF-8");
-        ServletContext context;
-        context = request.getServletContext();
-        String ruta = context.getResource("").getPath();
 
-        URL url = new URL("http://"+conf.obtenerServer("servidor", ruta)+"/servicioConsultaU");
-        URL url1 = new URL("http://"+conf.obtenerServer("servidor", ruta)+"/servicioConsultaP");
-        PublicadorConsultarUsuarioService webService = new PublicadorConsultarUsuarioService(url);
-        PublicadorConsultarPropuestaService webService2 = new PublicadorConsultarPropuestaService(url1);
-        this.port = webService.getPublicadorConsultarUsuarioPort();
-        this.port1 = webService2.getPublicadorConsultarPropuestaPort();
-
-        if (request.getParameter("TituloP") != null) {
-            String titulo = request.getParameter("TituloP");
-            titulo=titulo.replace("%20", " ");
-            BufferedImage bi = null;
-            byte[] arreglo = port1.retornarImagen(titulo);
-            BufferedImage bi1 = this.createImageFromBytes(arreglo);
-            OutputStream out1 = response.getOutputStream();
-            ImageIO.write((RenderedImage) bi1, "png", out1);
-            out1.close();
-        } else if (request.getParameter("nickname") != null) {
-            String nick = request.getParameter("nickname");
-            byte[] arreglo = port.retornarImagen(nick);
-            BufferedImage bi = this.createImageFromBytes(arreglo);
-            OutputStream out = response.getOutputStream();
-            ImageIO.write((RenderedImage) bi, "png", out);
-            out.close();
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -92,7 +65,34 @@ public class ServletImagenes extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            processRequest(request, response);
+            ServletContext context;
+            context = request.getServletContext();
+            String ruta = context.getResource("").getPath();
+
+            URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + conf.leerProp("sConsultaUsuario", ruta));
+            URL url1 = new URL("http://" + conf.obtenerServer("servidor", ruta) + conf.leerProp("sConsultaPropuesta", ruta));
+            PublicadorConsultarUsuarioService webService = new PublicadorConsultarUsuarioService(url);
+            PublicadorConsultarPropuestaService webService2 = new PublicadorConsultarPropuestaService(url1);
+            this.port = webService.getPublicadorConsultarUsuarioPort();
+            this.port1 = webService2.getPublicadorConsultarPropuestaPort();
+
+            if (request.getParameter("TituloP") != null) {
+                String titulo = request.getParameter("TituloP");
+                titulo = titulo.replace("%20", " ");
+                BufferedImage bi = null;
+                byte[] arreglo = port1.retornarImagen(titulo);
+                BufferedImage bi1 = this.createImageFromBytes(arreglo);
+                OutputStream out1 = response.getOutputStream();
+                ImageIO.write((RenderedImage) bi1, "png", out1);
+                out1.close();
+            } else if (request.getParameter("nickname") != null) {
+                String nick = request.getParameter("nickname");
+                byte[] arreglo = port.retornarImagen(nick);
+                BufferedImage bi = this.createImageFromBytes(arreglo);
+                OutputStream out = response.getOutputStream();
+                ImageIO.write((RenderedImage) bi, "png", out);
+                out.close();
+            }
         } catch (Exception_Exception ex) {
             Logger.getLogger(ServletImagenes.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -52,7 +52,8 @@ public class servletBuscador extends HttpServlet {
         ServletContext context;
         context = request.getServletContext();
         String ruta = context.getResource("").getPath();
-        URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + "/servicioConsultaP");
+                URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + conf.leerProp("sConsultaPropuesta", ruta));
+
         //URL url = new URL("http://"+conf.leerPropiedades("servidor")+"/servicioConsultaP");
         webService = new PublicadorConsultarPropuestaService(url);
         this.port = webService.getPublicadorConsultarPropuestaPort();
@@ -64,7 +65,7 @@ public class servletBuscador extends HttpServlet {
             ServletContext context;
             context = request.getServletContext();
             String ruta = context.getResource("").getPath();
-            URL url1 = new URL("http://" + conf.obtenerServer("servidor", ruta) + "/servicioConsultaP");
+            URL url1 = new URL("http://" + conf.obtenerServer("servidor", ruta) + conf.leerProp("sConsultaPropuesta", ruta));
             
             webService1 = new PublicadorConsultarPropuestaService(url1);
             this.port = webService1.getPublicadorConsultarPropuestaPort();
