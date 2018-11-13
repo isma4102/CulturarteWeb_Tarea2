@@ -19,17 +19,9 @@
     <system systemId="http://192.168.20.202:8280/servicioInicio?xsd=1" uri="src/conf/xml-resources/web-service-references/servicioInicio/wsdl/192.168.20.202_8280/servicioInicio.xsd_1.xsd"/>
     <system systemId="http://192.168.20.202:8280/servicioRegistrarC?wsdl" uri="src/conf/xml-resources/web-service-references/servicioRegistrarC/wsdl/192.168.20.202_8280/servicioRegistrarC.wsdl"/>
     <system systemId="http://192.168.20.202:8280/servicioRegistrarC?xsd=1" uri="src/conf/xml-resources/web-service-references/servicioRegistrarC/wsdl/192.168.20.202_8280/servicioRegistrarC.xsd_1.xsd"/>
-    <system systemId="http://127.0.0.1:8280/servicioInicio?wsdl" uri="src/conf/xml-resources/web-service-references/servicioInicio/wsdl/127.0.0.1_8280/servicioInicio.wsdl"/>
-    <system systemId="http://127.0.0.1:8280/servicioInicio?xsd=1" uri="src/conf/xml-resources/web-service-references/servicioInicio/wsdl/127.0.0.1_8280/servicioInicio.xsd_1.xsd"/>
-    <system systemId="http://127.0.0.1:8280/servicioInicio?wsdl" uri="src/conf/xml-resources/web-service-references/servicioInicio/wsdl/127.0.0.1_8280/servicioInicio.wsdl"/>
-    <system systemId="http://127.0.0.1:8280/servicioInicio?xsd=1" uri="src/conf/xml-resources/web-service-references/servicioInicio/wsdl/127.0.0.1_8280/servicioInicio.xsd_1.xsd"/>
-    <system systemId="http://127.0.0.1:8280/servicioInicio?wsdl" uri="src/conf/xml-resources/web-service-references/servicioInicio/wsdl/127.0.0.1_8280/servicioInicio.wsdl"/>
-    <system systemId="http://127.0.0.1:8280/servicioInicio?xsd=1" uri="src/conf/xml-resources/web-service-references/servicioInicio/wsdl/127.0.0.1_8280/servicioInicio.xsd_1.xsd"/>
     <system systemId="http://127.0.0.1:8280/servicioConsultaU?wsdl" uri="src/conf/xml-resources/web-service-references/servicioConsultaU/wsdl/127.0.0.1_8280/servicioConsultaU.wsdl"/>
     <system systemId="http://127.0.0.1:8280/servicioConsultaU?xsd=1" uri="src/conf/xml-resources/web-service-references/servicioConsultaU/wsdl/127.0.0.1_8280/servicioConsultaU.xsd_1.xsd"/>
     <system systemId="http://127.0.0.1:8280/servicioAltaUsuario?wsdl" uri="src/conf/xml-resources/web-service-references/servicioAltaUsuario/wsdl/127.0.0.1_8280/servicioAltaUsuario.wsdl"/>
-    <system systemId="http://127.0.0.1:8280/servicioInicio?wsdl" uri="src/conf/xml-resources/web-service-references/servicioInicio/wsdl/127.0.0.1_8280/servicioInicio.wsdl"/>
-    <system systemId="http://127.0.0.1:8280/servicioInicio?xsd=1" uri="src/conf/xml-resources/web-service-references/servicioInicio/wsdl/127.0.0.1_8280/servicioInicio.xsd_1.xsd"/>
     <system systemId="http://127.0.0.1:8280/servicioConsultaU?wsdl" uri="src/conf/xml-resources/web-service-references/servicioConsultaU/wsdl/127.0.0.1_8280/servicioConsultaU.wsdl"/>
     <system systemId="http://127.0.0.1:8280/servicioConsultaU?xsd=1" uri="src/conf/xml-resources/web-service-references/servicioConsultaU/wsdl/127.0.0.1_8280/servicioConsultaU.xsd_1.xsd"/>
     <system systemId="http://127.0.0.1:8280/servicioRegistrarC?wsdl" uri="src/conf/xml-resources/web-service-references/servicioRegistrarC/wsdl/127.0.0.1_8280/servicioRegistrarC.wsdl"/>
@@ -49,12 +41,20 @@
     <system systemId="http://127.0.0.1:8280/servicioAltaUsuario?wsdl" uri="src/conf/xml-resources/web-service-references/servicioAltaUsuario/wsdl/127.0.0.1_8280/servicioAltaUsuario.wsdl"/>
     <system systemId="http://127.0.0.1:8280/servicioConsultaU?wsdl" uri="src/conf/xml-resources/web-service-references/servicioConsultaU/wsdl/127.0.0.1_8280/servicioConsultaU.wsdl"/>
     <system systemId="http://127.0.0.1:8280/servicioConsultaU?xsd=1" uri="src/conf/xml-resources/web-service-references/servicioConsultaU/wsdl/127.0.0.1_8280/servicioConsultaU.xsd_1.xsd"/>
-    <system systemId="http://127.0.0.1:8280/servicioInicio?wsdl" uri="src/conf/xml-resources/web-service-references/servicioInicio/wsdl/127.0.0.1_8280/servicioInicio.wsdl"/>
-    <system systemId="http://127.0.0.1:8280/servicioInicio?xsd=1" uri="src/conf/xml-resources/web-service-references/servicioInicio/wsdl/127.0.0.1_8280/servicioInicio.xsd_1.xsd"/>
     <system systemId="http://127.0.0.1:8280/servicioRegistrarC?wsdl" uri="src/conf/xml-resources/web-service-references/servicioRegistrarC/wsdl/127.0.0.1_8280/servicioRegistrarC.wsdl"/>
     <system systemId="http://127.0.0.1:8280/servicioRegistrarC?xsd=1" uri="src/conf/xml-resources/web-service-references/servicioRegistrarC/wsdl/127.0.0.1_8280/servicioRegistrarC.xsd_1.xsd"/>
     <system systemId="http://127.0.0.1:8280/servicioAltaUsuario?wsdl" uri="src/conf/xml-resources/web-service-references/servicioAltaUsuario/wsdl/127.0.0.1_8280/servicioAltaUsuario.wsdl"/>
     <system systemId="http://127.0.0.1:8280/servicioAltaUsuario?wsdl" uri="src/conf/xml-resources/web-service-references/servicioAltaUsuario/wsdl/127.0.0.1_8280/servicioAltaUsuario.wsdl"/>
+    <system systemId="http://127.0.0.1:8280/servicioInicio?wsdl" uri="src/conf/xml-resources/web-service-references/servicioInicio/wsdl/127.0.0.1_8280/servicioInicio.wsdl"/>
+    <system systemId="http://127.0.0.1:8280/servicioInicio?xsd=1" uri="src/conf/xml-resources/web-service-references/servicioInicio/wsdl/127.0.0.1_8280/servicioInicio.xsd_1.xsd"/>
+    <system systemId="http://127.0.0.1:8280/servicioInicio?wsdl" uri="src/conf/xml-resources/web-service-references/servicioInicio/wsdl/127.0.0.1_8280/servicioInicio.wsdl"/>
+    <system systemId="http://127.0.0.1:8280/servicioInicio?xsd=1" uri="src/conf/xml-resources/web-service-references/servicioInicio/wsdl/127.0.0.1_8280/servicioInicio.xsd_1.xsd"/>
+    <system systemId="http://127.0.0.1:8280/servicioInicio?wsdl" uri="src/conf/xml-resources/web-service-references/servicioInicio/wsdl/127.0.0.1_8280/servicioInicio.wsdl"/>
+    <system systemId="http://127.0.0.1:8280/servicioInicio?xsd=1" uri="src/conf/xml-resources/web-service-references/servicioInicio/wsdl/127.0.0.1_8280/servicioInicio.xsd_1.xsd"/>
+    <system systemId="http://127.0.0.1:8280/servicioInicio?wsdl" uri="src/conf/xml-resources/web-service-references/servicioInicio/wsdl/127.0.0.1_8280/servicioInicio.wsdl"/>
+    <system systemId="http://127.0.0.1:8280/servicioInicio?xsd=1" uri="src/conf/xml-resources/web-service-references/servicioInicio/wsdl/127.0.0.1_8280/servicioInicio.xsd_1.xsd"/>
+    <system systemId="http://127.0.0.1:8280/servicioInicio?wsdl" uri="src/conf/xml-resources/web-service-references/servicioInicio/wsdl/127.0.0.1_8280/servicioInicio.wsdl"/>
+    <system systemId="http://127.0.0.1:8280/servicioInicio?xsd=1" uri="src/conf/xml-resources/web-service-references/servicioInicio/wsdl/127.0.0.1_8280/servicioInicio.xsd_1.xsd"/>
     <system systemId="http://127.0.0.1:8280/servicioInicio?wsdl" uri="src/conf/xml-resources/web-service-references/servicioInicio/wsdl/127.0.0.1_8280/servicioInicio.wsdl"/>
     <system systemId="http://127.0.0.1:8280/servicioInicio?xsd=1" uri="src/conf/xml-resources/web-service-references/servicioInicio/wsdl/127.0.0.1_8280/servicioInicio.xsd_1.xsd"/>
     <system systemId="http://127.0.0.1:8280/servicioConsultaP?wsdl" uri="src/conf/xml-resources/web-service-references/servicioConsultaP/wsdl/127.0.0.1_8280/servicioConsultaP.wsdl"/>

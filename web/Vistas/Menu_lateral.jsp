@@ -38,6 +38,7 @@
                                         out.print("<a style=\"color: white\" href=\"/CulturarteWeb/ServletCancelarPropuesta\">Cancelar Propuesta</a>");
                                     } else {
                                         out.print("<a style=\"color: white\" href=\"/CulturarteWeb/ServletComentarPropuesta\">Agregar comentario a propuesta</a>");
+                                        out.print("<a style=\"color: white\" href=\"/CulturarteWeb/ServletRecomendacionProp\">Propuestas Recomendadas</a>");
                                     }
                                     out.print("<a style=\"color: white\" href=\"ServletMarcarFavorita\">Marcar propuestas como favoritas</a>");
                                 }%>
@@ -62,35 +63,35 @@
 
 
         </div>
-         <li class="nav-item">
-                      <a style="z-index: 1;position: relative" href="#menu-toggle" id="menu-toggle" class="nav-link"><img src="Imagenes/menu-icono.png" alt="" class="menu-bar"></a>
-                    </li>
-                        
-        <a style="z-index: 1;margin-right: 22%;" href="/CulturarteWeb/ServletInicio">
-            <img src="Imagenes/logo.png">
-        </a>
-        <script>
-            $("#menu-toggle").click(function (e) {
-                e.preventDefault();
-                $("#wrapper").toggleClass("toggled");
+    <li class="nav-item">
+        <a style="z-index: 1;position: relative" href="#menu-toggle" id="menu-toggle" class="nav-link"><img src="Imagenes/menu-icono.png" alt="" class="menu-bar"></a>
+    </li>
+
+    <a style="z-index: 1;margin-right: 22%;" href="/CulturarteWeb/ServletInicio">
+        <img src="Imagenes/logo.png">
+    </a>
+    <script>
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+
+        var dropdown = document.getElementsByClassName("dropdown-btn");
+        var i;
+
+        for (i = 0; i < dropdown.length; i++) {
+            dropdown[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var dropdownContent = this.nextElementSibling;
+                if (dropdownContent.style.display === "block") {
+                    dropdownContent.style.display = "none";
+                } else {
+                    dropdownContent.style.display = "block";
+                }
             });
-
-            var dropdown = document.getElementsByClassName("dropdown-btn");
-            var i;
-
-            for (i = 0; i < dropdown.length; i++) {
-                dropdown[i].addEventListener("click", function () {
-                    this.classList.toggle("active");
-                    var dropdownContent = this.nextElementSibling;
-                    if (dropdownContent.style.display === "block") {
-                        dropdownContent.style.display = "none";
-                    } else {
-                        dropdownContent.style.display = "block";
-                    }
-                });
-            }
-        </script>
+        }
+    </script>
 
 
-    </body>
+</body>
 </html>
