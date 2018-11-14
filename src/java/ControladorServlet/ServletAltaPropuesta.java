@@ -65,7 +65,7 @@ public class ServletAltaPropuesta extends HttpServlet {
         context = request.getServletContext();
         String ruta = context.getResource("").getPath();
 
-        URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + conf.leerProp("sConsultaPropuesta", ruta));
+        URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + conf.leerProp("sAltaPropuesta", ruta));
         PublicadorAltaPropuestaService webService = new PublicadorAltaPropuestaService(url);
         this.port = webService.getPublicadorAltaPropuestaPort();
 

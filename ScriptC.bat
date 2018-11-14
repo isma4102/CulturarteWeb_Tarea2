@@ -38,7 +38,7 @@ wsimport -keep -Xnocompile -p servicios http://%lin2%:%lin1%/servicio%lin8%?wsdl
 cd ..\..\
 javac -cp "lib\*" -d .\build\web\WEB-INF\classes\ .\src\java\clases\*.java .\src\java\ControladorServlet\*.java .\build\generated-sources\servicios\*.java
 
-xcopy ../../configW.properties web\
+xcopy ../../config.properties web\
 cd build\web
 jar cvf ..\..\CulturarteWeb.war .
 

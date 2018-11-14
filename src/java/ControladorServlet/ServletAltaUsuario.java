@@ -20,7 +20,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletContext;
@@ -36,7 +38,7 @@ import servicios.PublicadorConsultarUsuarioService;
 public class ServletAltaUsuario extends HttpServlet {
 
     private PublicadorAltaUsuario port;
-    private RegistroSitio RS= new RegistroSitio();
+    private RegistroSitio RS = new RegistroSitio();
     configuracion conf = new configuracion();
 
     /**
@@ -50,7 +52,7 @@ public class ServletAltaUsuario extends HttpServlet {
      */
     @Override
     public void init() throws ServletException {
-      
+
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -127,6 +129,17 @@ public class ServletAltaUsuario extends HttpServlet {
             request.getRequestDispatcher("/Vistas/altaUsuario.jsp").forward(request, response);
             return;
         }
+        SimpleDateFormat d = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            Date date = d.parse(fecha.toString());
+            int edad = edad(date.toString());
+            if (edad < 18) {
+                request.setAttribute("menor", edad);
+                request.getRequestDispatcher("/Vistas/altaUsuario.jsp").forward(request, response);
+            }
+        } catch (ParseException ex) {
+            Logger.getLogger(ServletAltaUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         String hash = a.sha1(pass);
         byte[] bytes = null;
@@ -189,15 +202,24 @@ public class ServletAltaUsuario extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    public Date ParseFecha(String fecha) {
+    public int edad(String fecha_nac) {     //fecha_nac debe tener el formato dd/MM/yyyy
+
+        Date fechaActual = new Date();
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        Date fechaDate = new Date();
-        try {
-            fechaDate = formato.parse(fecha);
-        } catch (ParseException ex) {
-            System.out.println(ex);
+        String hoy = formato.format(fechaActual);
+        String[] dat1 = fecha_nac.split("/");
+        String[] dat2 = hoy.split("/");
+        int anos = Integer.parseInt(dat2[2]) - Integer.parseInt(dat1[2]);
+        int mes = Integer.parseInt(dat2[1]) - Integer.parseInt(dat1[1]);
+        if (mes < 0) {
+            anos = anos - 1;
+        } else if (mes == 0) {
+            int dia = Integer.parseInt(dat2[0]) - Integer.parseInt(dat1[0]);
+            if (dia > 0) {
+                anos = anos - 1;
+            }
         }
-        return fechaDate;
+        return anos;
     }
 
 }
