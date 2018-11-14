@@ -434,17 +434,18 @@
 
                                         <tr>
                                             <th>Titulo</th>
-
-                                            <%if (dtu.getNickname().equals(nick.getNickname())) {%>
+                                            <th>Descripción:</th>
+                                                <%if (dtu.getNickname().equals(nick.getNickname())) {%>
                                             <th>Fecha de colaboracion:</th>
                                             <th>Monto</th>  
                                             <th>Pagos</th>
                                                 <% }%>
                                         </tr>
 
-                                        <% for (DtColaboraciones dtp : dtc) {%>ZZZZ
+                                        <% for (DtColaboraciones dtp : dtc) {%>
                                         <tr>
-                                            <td><p><%=dtp.getPropuesta()%></p></td>&nbsp;&nbsp;&nbsp;                                       
+                                            <td><p><%=dtp.getPropuesta()%></p></td>&nbsp;&nbsp;&nbsp;     
+                                            <td><p><%=dtp.getDesc()%></p></td>&nbsp;&nbsp;&nbsp;       
                                             <%if (dtu.getNickname().equals(nick.getNickname())) {
                                                     Calendar calen = dtp.getFechaRealiz().toGregorianCalendar();
                                                     int dia2 = calen.get(Calendar.DAY_OF_MONTH);
@@ -459,7 +460,7 @@
                                                     Ver
                                                 </button>
                                             </td>
-                                                
+                                            <%}%>
                                         </tr>
                                         <div class="modal fade" id="Pagos" tabindex="-1" role="dialog" aria-labelledby="Pagos" aria-hidden="true">
                                             <div style="margin-bottom: -45%;" class="modal-dialog modal-dialog-centered" role="document">
@@ -471,17 +472,17 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <% if (dtp.getPago().getTipo().equals("tarjeta")) {%>
+                                                        <% if (dtp.getPago() != null && dtp.getPago().getTipo().equals("tarjeta")) {%>
                                                         Numero de tarjeta: <%= dtp.getPago().getTarjetaBANCO()%>  <br>
                                                         Numero de cuenta: <%= dtp.getPago().getNumeroCUENTA()%>  <br>
                                                         CVC: <%= String.valueOf(dtp.getPago().getCvc())%>  <br>
                                                         Fecha de vencimiento: <%= dtp.getPago().getFechaV()%>  <br>
                                                         Titular: <%= dtp.getPago().getTitular()%>  <br>
-                                                        <% } else if (dtp.getPago().getTipo().equals("paypal")) {%>
+                                                        <% } else if (dtp.getPago() != null && dtp.getPago().getTipo().equals("paypal")) {%>
                                                         Numero de cuenta: <%= dtp.getPago().getNumeroCUENTA()%>  <br>
                                                         Titular: <%= dtp.getPago().getTitular()%>  <br>
 
-                                                        <% } else {%>
+                                                        <% } else if(dtp.getPago() != null){%>
                                                         Banco: <%= dtp.getPago().getTarjetaBANCO()%><br>  
                                                         Nombre de cuenta: <%= dtp.getPago().getNumeroCUENTA()%>  <br>
                                                         Titular: <%= dtp.getPago().getTitular()%>  <br>
@@ -493,7 +494,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <%}%><%}%>
+                                        <%}%>
                                     </table>
                                     <% } else {%>
                                     <h3>No posee colaboraciones</h3>
