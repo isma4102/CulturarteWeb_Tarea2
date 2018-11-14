@@ -7,6 +7,8 @@ package ControladorServlet;
  */
 import clases.EstadoSesion;
 import java.io.IOException;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Level;
@@ -33,6 +35,7 @@ public class Login extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     private PublicadorConsultarUsuario port;
+    private RegistroSitio RS=new RegistroSitio();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -59,13 +62,20 @@ public class Login extends HttpServlet {
         context = request.getServletContext();
         String ruta = context.getResource("").getPath();
 
-                URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + conf.leerProp("sConsultaUsuario", ruta));
+        URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + conf.leerProp("sConsultaUsuario", ruta));
         PublicadorConsultarUsuarioService webService = new PublicadorConsultarUsuarioService(url);
         this.port = webService.getPublicadorConsultarUsuarioPort();
-
+        String browserDetails = request.getHeader("User-Agent");
+        String IP;
+        try (final DatagramSocket socket = new DatagramSocket()) {
+            socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
+            IP = socket.getLocalAddress().getHostAddress();
+        }
+        String URL = "http://" + RS.obtenerIP() + "/CulturarteWeb/Login";
+        RS.ObtenerRegistro(browserDetails, IP, URL);
         DtUsuario usuLogeado = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
         if (usuLogeado == null) {
-             request.getSession().setAttribute("estado_sesion", null);
+            request.getSession().setAttribute("estado_sesion", null);
             response.setContentType("text/html;charset=UTF-8");
             RequestDispatcher dispatcher = request.getRequestDispatcher("/Vistas/iniciarSesion.jsp");
             dispatcher.forward(request, response);
@@ -131,7 +141,7 @@ public class Login extends HttpServlet {
                     request.getSession().setAttribute("usuario_logueado", usrCorreo);// setea el usuario logueado
                     if (recordarme) {
                         Cookie cookieSesion = new Cookie("cookieSesion", usrCorreo.getNickname());
-                        cookieSesion.setMaxAge(60*60*24);
+                        cookieSesion.setMaxAge(60 * 60 * 24);
                         cookieSesion.setPath("/");
                         response.addCookie(cookieSesion);
                     }
@@ -156,7 +166,7 @@ public class Login extends HttpServlet {
                 objSesion.setAttribute("estado_sesion", nuevoEstado);
                 if (recordarme) {
                     Cookie cookieSesion = new Cookie("cookieSesion", usrNick.getNickname());
-                    cookieSesion.setMaxAge(60*60*24);
+                    cookieSesion.setMaxAge(60 * 60 * 24);
                     cookieSesion.setPath("/");
                     response.addCookie(cookieSesion);
                 }

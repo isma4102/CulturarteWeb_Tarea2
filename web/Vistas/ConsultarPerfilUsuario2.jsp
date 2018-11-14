@@ -442,7 +442,7 @@
                                                 <% }%>
                                         </tr>
 
-                                        <% for (DtColaboraciones dtp : dtc) {%>
+                                        <% for (DtColaboraciones dtp : dtc) {%>ZZZZ
                                         <tr>
                                             <td><p><%=dtp.getPropuesta()%></p></td>&nbsp;&nbsp;&nbsp;                                       
                                             <%if (dtu.getNickname().equals(nick.getNickname())) {
@@ -459,7 +459,7 @@
                                                     Ver
                                                 </button>
                                             </td>
-                                                <%}%>
+                                                
                                         </tr>
                                         <div class="modal fade" id="Pagos" tabindex="-1" role="dialog" aria-labelledby="Pagos" aria-hidden="true">
                                             <div style="margin-bottom: -45%;" class="modal-dialog modal-dialog-centered" role="document">
@@ -493,7 +493,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <%}%>
+                                        <%}%><%}%>
                                     </table>
                                     <% } else {%>
                                     <h3>No posee colaboraciones</h3>

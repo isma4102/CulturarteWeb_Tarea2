@@ -8,6 +8,8 @@ package ControladorServlet;
 import clases.EstadoSesion;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/CerrarSesion")
 public class CerrarSesion extends HttpServlet {
-
+private RegistroSitio RS=new RegistroSitio();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -41,18 +43,26 @@ public class CerrarSesion extends HttpServlet {
         } else {
             Cookie[] cookies = request.getCookies();
             if (cookies != null) {
-            	for (int i = 0; i < cookies.length; i++) {
-        			if (cookies[i].getName().equals("cookieSesion")) {
-        				response.setContentType("text/html");
-        				cookies[i].setValue("");
-        				cookies[i].setPath("/");
-        				cookies[i].setMaxAge(0);
-        				response.addCookie(cookies[i]);
-        			}
-        		}
+                for (int i = 0; i < cookies.length; i++) {
+                    if (cookies[i].getName().equals("cookieSesion")) {
+                        response.setContentType("text/html");
+                        cookies[i].setValue("");
+                        cookies[i].setPath("/");
+                        cookies[i].setMaxAge(0);
+                        response.addCookie(cookies[i]);
+                    }
+                }
             }
             request.getSession().setAttribute("estado_sesion", null);
             request.getSession().setAttribute("usuario_logueado", null);
+            String browserDetails = request.getHeader("User-Agent");
+            String IP;
+            try (final DatagramSocket socket = new DatagramSocket()) {
+                socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
+                IP = socket.getLocalAddress().getHostAddress();
+            }
+            String URL = "http://" + RS.obtenerIP() + "/CulturarteWeb/CerrarSesion";
+            RS.ObtenerRegistro(browserDetails, IP, URL);
             RequestDispatcher dispatcher = request.getRequestDispatcher("ServletInicio");
             dispatcher.forward(request, response);
         }

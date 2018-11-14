@@ -6,6 +6,7 @@ package ControladorServlet;
  * and open the template in the editor.
  */
 import java.io.IOException;
+import java.net.DatagramSocket;
 import java.net.URL;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -66,7 +67,11 @@ public class ServletConsultarUsuario extends HttpServlet {
         List<DtUsuario> usuarios = this.port.listarUsuarios().getLista();
         request.setAttribute("Usuarios", usuarios);
         String browserDetails = request.getHeader("User-Agent");
-        String IP = InetAddress.getLocalHost().getHostAddress();
+        String IP;
+        try (final DatagramSocket socket = new DatagramSocket()) {
+            socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
+            IP = socket.getLocalAddress().getHostAddress();
+        }
         String a = RS.obtenerIP();
         String URL = "http://" + RS.obtenerIP() + "/CulturarteWeb/ServletConsultarUsuario";
         RS.ObtenerRegistro(browserDetails, IP, URL);
@@ -114,7 +119,7 @@ public class ServletConsultarUsuario extends HttpServlet {
             try {
                 System.out.print(nombre);
                 if (nombre != null) {
-                   nombre =  nombre.replace(" ","");
+                    nombre = nombre.replace(" ", "");
                     boolean esta = port.existeNombreUser(nombre);
                     if (esta) {
                         response.setContentType("text/plain");

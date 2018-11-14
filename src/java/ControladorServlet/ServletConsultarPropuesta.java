@@ -6,6 +6,7 @@
 package ControladorServlet;
 
 import java.io.IOException;
+import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -64,7 +65,11 @@ public class ServletConsultarPropuesta extends HttpServlet {
 
         request.setAttribute("listaPropuestas", listP);
         String browserDetails = request.getHeader("User-Agent");
-        String IP = InetAddress.getLocalHost().getHostAddress();
+        String IP;
+        try (final DatagramSocket socket = new DatagramSocket()) {
+            socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
+            IP = socket.getLocalAddress().getHostAddress();
+        }
         String URL = "http://" + RS.obtenerIP() + "/CulturarteWeb/ServletConsultarPropuesta";
         RS.ObtenerRegistro(browserDetails, IP, URL);
         request.getRequestDispatcher("Vistas/ConsultarPropuesta.jsp").forward(request, response);
@@ -117,7 +122,6 @@ public class ServletConsultarPropuesta extends HttpServlet {
             DtListComentarios comentario = this.port.listarComentarios(titulo);
             request.setAttribute("comentarios", comentario.getLista2());
             List<DtConsultaPropuesta2> listColab = this.port.listarColaboradoresProp(titulo).getLista();
-            
 
             request.setAttribute("listaC", listColab);
 

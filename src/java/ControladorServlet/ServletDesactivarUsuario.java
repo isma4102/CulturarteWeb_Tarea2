@@ -6,6 +6,7 @@
 package ControladorServlet;
 
 import java.io.IOException;
+import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -29,7 +30,7 @@ import servicios.PublicadorConsultarUsuarioService;
 public class ServletDesactivarUsuario extends HttpServlet {
 
     private PublicadorConsultarUsuario port;
-    private RegistroSitio RS= new RegistroSitio();
+    private RegistroSitio RS = new RegistroSitio();
     configuracion conf = new configuracion();
 
     /**
@@ -44,11 +45,11 @@ public class ServletDesactivarUsuario extends HttpServlet {
     @Override
     public void init() throws ServletException {
         RS = new RegistroSitio();
-        
+
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -76,7 +77,7 @@ public class ServletDesactivarUsuario extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+
         ServletContext context;
         context = request.getServletContext();
         String ruta = context.getResource("").getPath();
@@ -89,10 +90,14 @@ public class ServletDesactivarUsuario extends HttpServlet {
         } catch (MalformedURLException ex) {
             Logger.getLogger(ServletCancelarPropuesta.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         String browserDetails = request.getHeader("User-Agent");
-        String IP = InetAddress.getLocalHost().getHostAddress();
-        String URL = "http://" + RS.obtenerIP() + "/CulturarteWeb/ServletConsultarUsuario";
+        String IP;
+        try (final DatagramSocket socket = new DatagramSocket()) {
+            socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
+            IP = socket.getLocalAddress().getHostAddress();
+        }
+        String URL = "http://" + RS.obtenerIP() + "/CulturarteWeb/ServletDesactivarUsuario";
         RS.ObtenerRegistro(browserDetails, IP, URL);
         DtUsuario usu = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
         if (usu != null && usu.isEsproponente()) {

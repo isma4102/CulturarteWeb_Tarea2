@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is JAX-WS RI 2.2.9-b130926.1035 svn-revision#5f6196f2b90e9460065a4c2f4e30e065b245e51e. --><xs:schema xmlns:tns="http://Servicios/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://Servicios/">
+
+<xs:element name="Exception" type="tns:Exception"></xs:element>
+
+<xs:complexType name="dtUsuario">
+<xs:sequence>
+<xs:element name="nickname" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="apellido" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="correo" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="fechaN" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="imagen" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="password" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="esproponente" type="xs:boolean"></xs:element>
+<xs:element name="biografia" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="direccion" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="sitioweb" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="seguidores" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="seguidos" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Exception">
+<xs:sequence>
+<xs:element name="message" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtListUsuario">
+<xs:sequence>
+<xs:element name="lista" type="tns:dtUsuario" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtinfoColaborador">
+<xs:sequence>
+<xs:element name="nickname" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="apellido" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="correo" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="fechaN" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="imagen" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="colaboraciones" type="tns:dtColaboraciones" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtColaboraciones">
+<xs:sequence>
+<xs:element name="UColaborador" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="montoC" type="xs:float"></xs:element>
+<xs:element name="fechaRealiz" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="Entradas" type="xs:boolean"></xs:element>
+<xs:element name="Propuesta" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="Pago" type="tns:dtPago" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtPago">
+<xs:sequence>
+<xs:element name="tipo" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="tarjetaBANCO" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="numeroCUENTA" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="fechaV" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="cvc" type="xs:int"></xs:element>
+<xs:element name="titular" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtListColaboraciones">
+<xs:sequence>
+<xs:element name="lista" type="tns:dtColaboraciones" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtListInfoPropuesta">
+<xs:sequence>
+<xs:element name="lista" type="tns:dtinfoPropuesta" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtinfoPropuesta">
+<xs:sequence>
+<xs:element name="Titulo" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="Descripcion" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="imagen" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="TipoEspec" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="Lugar" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="FechaReal" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="Precio" type="xs:float"></xs:element>
+<xs:element name="Monto" type="xs:float"></xs:element>
+<xs:element name="estado" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="tipoRetorno" type="tns:tipoRetorno" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:simpleType name="tipoRetorno">
+<xs:restriction base="xs:string">
+<xs:enumeration value="Entradas"></xs:enumeration>
+<xs:enumeration value="porGanancias"></xs:enumeration>
+<xs:enumeration value="EntGan"></xs:enumeration>
+</xs:restriction>
+</xs:simpleType>
+</xs:schema>

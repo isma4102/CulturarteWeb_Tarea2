@@ -6,6 +6,8 @@
 package ControladorServlet;
 
 import java.io.IOException;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -33,6 +35,7 @@ import servicios.TipoE;
 public class ServletRegistroColaboracion extends HttpServlet {
 
     private PublicadorRegistrarColaboracion port;
+    private RegistroSitio RS=new RegistroSitio();
     configuracion conf = new configuracion();
 
     @Override
@@ -45,7 +48,14 @@ public class ServletRegistroColaboracion extends HttpServlet {
         context = request.getServletContext();
         String ruta = context.getResource("").getPath();
         URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + conf.leerProp("sRegistrarColaboracion", ruta));
-
+        String browserDetails = request.getHeader("User-Agent");
+        String IP;
+        try (final DatagramSocket socket = new DatagramSocket()) {
+            socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
+            IP = socket.getLocalAddress().getHostAddress();
+        }
+        String URL = "http://" + RS.obtenerIP() + "/CulturarteWeb/ServletRegistroColaboracion";
+        RS.ObtenerRegistro(browserDetails, IP, URL);
         PublicadorRegistrarColaboracionService webService = new PublicadorRegistrarColaboracionService(url);
         this.port = webService.getPublicadorRegistrarColaboracionPort();
 
@@ -94,7 +104,7 @@ public class ServletRegistroColaboracion extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String Opcion = null;
-       if (request.getParameter("seleccionar") != null) {
+        if (request.getParameter("seleccionar") != null) {
             if (request.getParameter("Estado").compareTo(TipoE.PUBLICADA.toString()) == 0 || request.getParameter("Estado").compareTo(TipoE.EN_FINANCIACION.toString()) == 0) {
                 String viene = request.getParameter("TituloP");
                 Opcion = new String(viene.getBytes("ISO-8859-1"), "UTF-8");

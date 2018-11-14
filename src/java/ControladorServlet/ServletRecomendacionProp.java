@@ -7,6 +7,7 @@ package ControladorServlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.URL;
 import java.util.ArrayList;
@@ -61,8 +62,12 @@ public class ServletRecomendacionProp extends HttpServlet {
 
             request.setAttribute("listaPropuestas", listP);
             String browserDetails = request.getHeader("User-Agent");
-            String IP = InetAddress.getLocalHost().getHostAddress();
-            String URL = "http://" + RS.obtenerIP() + "/CulturarteWeb/ServletConsultarPropuesta";
+            String IP;
+            try (final DatagramSocket socket = new DatagramSocket()) {
+                socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
+                IP = socket.getLocalAddress().getHostAddress();
+            }
+            String URL = "http://" + RS.obtenerIP() + "/CulturarteWeb/ServletRecomendacionProp";
             RS.ObtenerRegistro(browserDetails, IP, URL);
             request.getRequestDispatcher("Vistas/RecomendacionPropuesta.jsp").forward(request, response);
         }

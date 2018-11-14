@@ -6,6 +6,7 @@
 package ControladorServlet;
 
 import java.io.IOException;
+import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -34,7 +35,7 @@ public class ServletMarcarFavorita extends HttpServlet {
 
     private PublicadorConsultarUsuario portU;
     private PublicadorConsultarPropuesta portP;
-    private RegistroSitio RS= new RegistroSitio();
+    private RegistroSitio RS = new RegistroSitio();
     configuracion conf = new configuracion();
 
     /**
@@ -75,7 +76,11 @@ public class ServletMarcarFavorita extends HttpServlet {
                 request.setAttribute("Propuestas", propuestas);
                 request.getRequestDispatcher("Vistas/MarcarFavorita.jsp").forward(request, response);
                 String browserDetails = request.getHeader("User-Agent");
-                String IP = InetAddress.getLocalHost().getHostAddress();
+                String IP;
+                try (final DatagramSocket socket = new DatagramSocket()) {
+                    socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
+                    IP = socket.getLocalAddress().getHostAddress();
+                }
                 String URL = "http://" + RS.obtenerIP() + "/CulturarteWeb/ServletConsultarUsuario";
                 RS.ObtenerRegistro(browserDetails, IP, URL);
             } else {

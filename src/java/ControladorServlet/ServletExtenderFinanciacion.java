@@ -7,6 +7,7 @@ package ControladorServlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -32,7 +33,7 @@ import servicios.PublicadorConsultarPropuestaService;
 public class ServletExtenderFinanciacion extends HttpServlet {
 
     private PublicadorConsultarPropuesta port;
-    private RegistroSitio RS= new RegistroSitio();
+    private RegistroSitio RS = new RegistroSitio();
     configuracion conf = new configuracion();
 
     @Override
@@ -63,8 +64,12 @@ public class ServletExtenderFinanciacion extends HttpServlet {
                 } else {
                     request.setAttribute("lista_propuestas", lista);
                     String browserDetails = request.getHeader("User-Agent");
-                    String IP = InetAddress.getLocalHost().getHostAddress();
-                    String URL = "http://" + RS.obtenerIP() + "/CulturarteWeb/ServletConsultarUsuario";
+                    String IP;
+                    try (final DatagramSocket socket = new DatagramSocket()) {
+                        socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
+                        IP = socket.getLocalAddress().getHostAddress();
+                    }
+                    String URL = "http://" + RS.obtenerIP() + "/CulturarteWeb/ServletExtenderFinanciacion";
                     RS.ObtenerRegistro(browserDetails, IP, URL);
                     request.getRequestDispatcher("/Vistas/ExtenderFinanciacion.jsp").forward(request, response);
                 }

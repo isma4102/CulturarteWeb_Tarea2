@@ -8,6 +8,7 @@ package ControladorServlet;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -81,7 +82,11 @@ public class ServletAltaPropuesta extends HttpServlet {
                 List<String> listCat = this.port.listarCategorias().getListCategoria();
                 request.setAttribute("listCat", listCat);
                 String browserDetails = request.getHeader("User-Agent");
-                String IP = InetAddress.getLocalHost().getHostAddress();
+                String IP;
+                try (final DatagramSocket socket = new DatagramSocket()) {
+                    socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
+                    IP = socket.getLocalAddress().getHostAddress();
+                }
                 String URL = "http://" + RS.obtenerIP() + "/CulturarteWeb/ServletAltaPropuesta";
                 RS.ObtenerRegistro(browserDetails, IP, URL);
                 request.getRequestDispatcher("Vistas/AltaPropuesta.jsp").forward(request, response);

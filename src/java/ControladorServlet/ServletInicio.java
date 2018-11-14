@@ -7,6 +7,7 @@ package ControladorServlet;
 
 import clases.EstadoSesion;
 import java.io.IOException;
+import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.URL;
 import java.util.List;
@@ -35,7 +36,7 @@ public class ServletInicio extends HttpServlet {
 
     private PublicadorInicio port;
     private PublicadorConsultarUsuario port1;
-    private RegistroSitio RS= new RegistroSitio();
+    private RegistroSitio RS = new RegistroSitio();
     private configuracion conf = new configuracion();
 
     /**
@@ -55,7 +56,7 @@ public class ServletInicio extends HttpServlet {
         ServletContext context;
         context = (ServletContext) request.getServletContext();
         String ruta = context.getResource("").getPath();
-        String sv  = conf.obtenerServer("servidor", ruta);
+        String sv = conf.obtenerServer("servidor", ruta);
         URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + conf.leerProp("sInicio", ruta));
         PublicadorInicioService webService = new PublicadorInicioService(url);
         this.port = webService.getPublicadorInicioPort();
@@ -119,8 +120,12 @@ public class ServletInicio extends HttpServlet {
             }
         }
         String browserDetails = request.getHeader("User-Agent");
-        String IP = InetAddress.getLocalHost().getHostAddress();
-        String URL = "http://" + RS.obtenerIP() + "/CulturarteWeb/ServletConsultarUsuario";
+        String IP;
+        try (final DatagramSocket socket = new DatagramSocket()) {
+            socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
+            IP = socket.getLocalAddress().getHostAddress();
+        }
+        String URL = "http://" + RS.obtenerIP() + "/CulturarteWeb/ServletInicio";
         RS.ObtenerRegistro(browserDetails, IP, URL);
         request.getRequestDispatcher("Vistas/Inicio.jsp").forward(request, response);
     }

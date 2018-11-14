@@ -7,6 +7,8 @@ package ControladorServlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
@@ -34,7 +36,7 @@ public class ServletPropuestaCategoria extends HttpServlet {
 
     private PublicadorConsultarPropuesta port;
     private PublicadorAltaPropuesta portCat;
-    private RegistroSitio RS= new RegistroSitio();
+    private RegistroSitio RS = new RegistroSitio();
     configuracion conf = new configuracion();
 
     /**
@@ -55,8 +57,15 @@ public class ServletPropuestaCategoria extends HttpServlet {
         context = request.getServletContext();
         String ruta = context.getResource("").getPath();
 
-        URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) +conf.leerProp("sConsultaPropuesta", ruta));
-
+        URL url = new URL("http://" + conf.obtenerServer("servidor", ruta) + conf.leerProp("sConsultaPropuesta", ruta));
+        String browserDetails = request.getHeader("User-Agent");
+        String IP;
+        try (final DatagramSocket socket = new DatagramSocket()) {
+            socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
+            IP = socket.getLocalAddress().getHostAddress();
+        }
+        String URL = "http://" + RS.obtenerIP() + "/CulturarteWeb/ServletPropuestaCategoria";
+        RS.ObtenerRegistro(browserDetails, IP, URL);
         PublicadorConsultarPropuestaService webService = new PublicadorConsultarPropuestaService(url);
         this.port = webService.getPublicadorConsultarPropuestaPort();
 

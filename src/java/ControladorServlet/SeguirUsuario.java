@@ -66,9 +66,8 @@ public class SeguirUsuario extends HttpServlet {
             try(final DatagramSocket socket = new DatagramSocket()){
               socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
               IP = socket.getLocalAddress().getHostAddress();
-            }
-             
-            String URL = "http://" + RS.obtenerIP() + "/CulturarteWeb/ServletConsultarUsuario";
+            }            
+            String URL = "http://" + RS.obtenerIP() + "/CulturarteWeb/SeguirUsuario";
             RS.ObtenerRegistro(browserDetails, IP, URL);
             request.getRequestDispatcher("Vistas/SeguirUsuario.jsp").forward(request, response);
         }
