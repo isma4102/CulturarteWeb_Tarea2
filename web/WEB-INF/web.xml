@@ -9,4 +9,8 @@
         <error-code>404</error-code>
         <location>/Vistas/error404.jsp</location>
     </error-page>
+    
+    <error-code>500</error-code>
+    <location>/Vistas/error500.jsp</location>
+</error-page>
 </web-app>
