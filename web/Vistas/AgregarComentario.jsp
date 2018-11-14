@@ -47,7 +47,7 @@
 
 
                                 <input id="buscar" style="width: 24%;margin-left: 38%;" type="text" name="Buscar" class="form-control" placeholder="Buscar" onkeyup="FiltrarTabla()" />
-                                <table id="tabla" class="table table-bordered table-hover formulario" style="margin-left: 229px;width: 70%;">
+                                <table id="tabla" class="table table-bordered table-hover formulario" style="margin-left: 229px;width: 70%;font-size: 119%;">
                                     <thead>          
 
                                     <th bgcolor="white">Titulo de Propuesta</th>
@@ -87,7 +87,9 @@
                             </div>
                                     <div style="text-align: center">
                                 <a href="javascript:window.history.back();" class="btn btn-primary"> &laquo; Volver</a>
+                                   <a href="ServletInicio" class="btn btn-primary" > &laquo; Volver a inicio</a>
                             </div>
+                                    <br>
                         </div>
                     </div>
                 </div>

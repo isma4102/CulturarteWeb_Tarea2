@@ -44,7 +44,7 @@
         <div class="formulario_ver_propuesta" style="margin-top: 7%;margin-left: 3%;">
 
             <h3 align="center">Propuestas con categoria <%=nom%></h3>
-            <table class="table table-bordered table-hover" style="margin-left: 30%; width: 35%  ">
+            <table class="table table-bordered table-hover" style="margin-left: -68%;width: 232%;">
                 <tr>
                     <th>Titulo</th>
                     <th>Descripcion</th>
