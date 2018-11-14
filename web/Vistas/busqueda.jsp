@@ -70,7 +70,6 @@
                                             <div class="Estado" style="float: left"><h5 style="color: black;font-weight: bold" ><%=p.getEstadoActual()%></h5></div>
                                         </div>
                                         <div><h3 class="Titulo"><%=p.getTitulo()%></h3></div><br><br>
-                                        <td><button style="background:url('/CulturarteWeb/Imagenes/ver.png');background-position:center center;background-repeat:no-repeat;width:70px; height:25px" type="input" name="Ver" class="btn btn-primary"></button></td>
                                         <div style="font-weight: bold;float: right" class="Lugar"><%=p.getLugar()%></div><br>
                                         <div style="font-weight: bold;float: right" class="Lugar"><%=p.getFechaR()%></div>
                                     </div>
