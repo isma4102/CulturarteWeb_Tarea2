@@ -121,11 +121,11 @@ public class ServletRegistroColaboracion extends HttpServlet {
                         request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
                     }
                     if (OK == true) {
-                        String MENSAJE = "La colaboración con la propuesta " + Opcion + " se registró correctamente";
+                        String MENSAJE = "La colaboración se registró correctamente";
                         request.setAttribute("mensaje", MENSAJE);
                         request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
                     }
-                } else if (Tipo_entrada.compareTo("Por_ganancias") == 0) {
+                } else if (Tipo_entrada.compareTo("Por ganancias") == 0) {
                     try {
                         OK = this.port.agregarColaboracion(false, monto_final);
                     } catch (Exception ex) {
@@ -134,7 +134,7 @@ public class ServletRegistroColaboracion extends HttpServlet {
                         request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
                     }
                     if (OK == true) {
-                        String MENSAJE = "La colaboración con la propuesta " + Opcion + " se registró correctamente";
+                        String MENSAJE = "La colaboración se registró correctamente";
                         request.setAttribute("mensaje", MENSAJE);
                         request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
                     }

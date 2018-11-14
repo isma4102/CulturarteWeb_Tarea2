@@ -55,7 +55,11 @@
                                             </select>
 
 
-
+  <div style="text-align: center">
+                                    <a href="javascript:window.history.back();" class="btn btn-danger"> &laquo; Volver</a>
+                                    <a href="ServletInicio" class="btn btn-primary" > &laquo; Salir a inicio</a>
+                                    <button type="input" name="Registrar" class="btn btn-primary">Registrar</button>
+                                </div>
 
 
                                         </form>
@@ -63,11 +67,7 @@
 
                                 </div>
                                             <br><br>
-                                <div style="text-align: center">
-                                    <a href="javascript:window.history.back();" class="btn btn-danger"> &laquo; Volver</a>
-                                    <a href="ServletInicio" class="btn btn-primary" > &laquo; Salir a inicio</a>
-                                    <button type="input" name="Registrar" class="btn btn-primary">Registrar</button>
-                                </div>
+                              
                                             <br><br>
                             </div>
                         </div>
